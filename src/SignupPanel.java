@@ -1,28 +1,222 @@
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SpringLayout;
-import javax.swing.SwingConstants;
+import java.awt.Image;
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class SignupPanel extends JPanel {
 
-	private static final long serialVersionUID = 1L;
-	
-	public SignupPanel(JPanel contentPane) {
-		
-		setBackground(Color.WHITE);
-		setBounds(100, 100, 414, 660);
+    private static final long serialVersionUID = 1L;
+    private JTextField firstName;
+    private JTextField lastName;
+    private JTextField txtEmailOrPhone;
+    private JPasswordField password;
+    private JLabel chooseFile;
+    private JButton questionLink;
+    private JButton signUpButton;
+    private JButton signInButton;
+
+    public SignupPanel(JPanel contentPane) {
+        setBackground(Color.WHITE);
+        setBounds(100, 100, 414, 660);
         SpringLayout layout = new SpringLayout();
         setLayout(layout);
-        
-        JLabel startupHeader2 = new JLabel("basta eto yung signup ni hanna");
-        layout.putConstraint(SpringLayout.WEST, startupHeader2, 0, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.SOUTH, startupHeader2, -305, SpringLayout.SOUTH, this);
-        layout.putConstraint(SpringLayout.EAST, startupHeader2, 0, SpringLayout.EAST, this);
-        startupHeader2.setForeground(new Color(153, 0, 0));
-        startupHeader2.setFont(new Font("Montserrat", Font.BOLD, 16));
-        startupHeader2.setHorizontalAlignment(SwingConstants.CENTER);
-        add(startupHeader2);
-	}
+
+        // Sign-up label
+        JLabel label = new JLabel("Sign Up");
+        layout.putConstraint(SpringLayout.WEST, label, 32, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, label, 163, SpringLayout.WEST, this);
+        label.setForeground(Color.BLACK);
+        label.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 24));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        add(label);
+
+        // Header title
+        JLabel headerTitle = new JLabel("POLYMART");
+        layout.putConstraint(SpringLayout.SOUTH, headerTitle, -82, SpringLayout.NORTH, label);
+        headerTitle.setForeground(new Color(0x730C0C));
+        headerTitle.setFont(new Font("Montserrat ExtraBold", Font.PLAIN, 15));
+        add(headerTitle);
+
+        // Icon next to header title
+        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_icon.png"));
+        Image scaledImage = originalImage.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
+        layout.putConstraint(SpringLayout.NORTH, label, 74, SpringLayout.SOUTH, startupImage);
+        layout.putConstraint(SpringLayout.EAST, startupImage, -364, SpringLayout.EAST, this);
+        layout.putConstraint(SpringLayout.WEST, headerTitle, 0, SpringLayout.EAST, startupImage);
+        layout.putConstraint(SpringLayout.SOUTH, startupImage, -587, SpringLayout.SOUTH, this);
+        add(startupImage);
+
+        // First name
+        firstName = new JTextField("First Name");
+        setupTextFieldPlaceholder(firstName, "First Name");
+        layout.putConstraint(SpringLayout.NORTH, firstName, 207, SpringLayout.NORTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, label, -20, SpringLayout.NORTH, firstName);
+        layout.putConstraint(SpringLayout.WEST, firstName, 85, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, firstName, -94, SpringLayout.EAST, this);
+        firstName.setFont(new Font("Montserrat", Font.PLAIN, 12));
+        firstName.setColumns(10);
+        firstName.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+        add(firstName);
+
+        // Last name
+        lastName = new JTextField("Last Name");
+        setupTextFieldPlaceholder(lastName, "Last Name");
+        layout.putConstraint(SpringLayout.SOUTH, firstName, -16, SpringLayout.NORTH, lastName);
+        layout.putConstraint(SpringLayout.NORTH, lastName, 242, SpringLayout.NORTH, this);
+        layout.putConstraint(SpringLayout.WEST, lastName, 85, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, lastName, -94, SpringLayout.EAST, this);
+        lastName.setFont(new Font("Montserrat", Font.PLAIN, 12));
+        lastName.setColumns(10);
+        lastName.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+        add(lastName);
+
+        // Email or phone
+        txtEmailOrPhone = new JTextField("Email or Phone");
+        setupTextFieldPlaceholder(txtEmailOrPhone, "Email or Phone");
+        layout.putConstraint(SpringLayout.NORTH, txtEmailOrPhone, 275, SpringLayout.NORTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, txtEmailOrPhone, -366, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, lastName, -14, SpringLayout.NORTH, txtEmailOrPhone);
+        layout.putConstraint(SpringLayout.WEST, txtEmailOrPhone, 85, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, txtEmailOrPhone, -94, SpringLayout.EAST, this);
+        txtEmailOrPhone.setFont(new Font("Montserrat", Font.PLAIN, 12));
+        txtEmailOrPhone.setColumns(10);
+        txtEmailOrPhone.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+        add(txtEmailOrPhone);
+
+        // Password
+        password = new JPasswordField("Password");
+        password.setFont(new Font("Montserrat", Font.PLAIN, 12));
+        setupPasswordFieldPlaceholder(password);
+        layout.putConstraint(SpringLayout.NORTH, password, 13, SpringLayout.SOUTH, txtEmailOrPhone);
+        layout.putConstraint(SpringLayout.WEST, password, 0, SpringLayout.WEST, firstName);
+        layout.putConstraint(SpringLayout.SOUTH, password, -334, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.EAST, password, -94, SpringLayout.EAST, this);
+        password.setColumns(10);
+        password.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+        add(password);
+
+        // Upload COR
+        JLabel uplCOR = new JLabel("Upload your Certificate of Registration (COR)");
+        layout.putConstraint(SpringLayout.NORTH, uplCOR, 22, SpringLayout.SOUTH, password);
+        layout.putConstraint(SpringLayout.WEST, uplCOR, 61, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, uplCOR, -64, SpringLayout.EAST, this);
+        uplCOR.setForeground(new Color(0x730C0C));
+        uplCOR.setFont(new Font("Montserrat Medium", Font.ITALIC, 12));
+        uplCOR.setHorizontalAlignment(SwingConstants.CENTER);
+        add(uplCOR);
+
+        // Choose file label
+        chooseFile = new JLabel("Choose file or drop here");
+        layout.putConstraint(SpringLayout.NORTH, chooseFile, 6, SpringLayout.SOUTH, uplCOR);
+        layout.putConstraint(SpringLayout.WEST, chooseFile, 82, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.SOUTH, chooseFile, -209, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.EAST, chooseFile, -75, SpringLayout.EAST, this);
+        chooseFile.setForeground(UIManager.getColor("Button.darkShadow"));
+        chooseFile.setHorizontalAlignment(SwingConstants.CENTER);
+        chooseFile.setFont(new Font("Montserrat Medium", Font.ITALIC, 14));
+        chooseFile.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, Color.LIGHT_GRAY));
+        add(chooseFile);
+
+        // Question link
+        questionLink = new JButton("Why do I need this?");
+        layout.putConstraint(SpringLayout.NORTH, questionLink, 6, SpringLayout.SOUTH, chooseFile);
+        layout.putConstraint(SpringLayout.WEST, questionLink, 151, SpringLayout.WEST, this);
+        questionLink.setForeground(UIManager.getColor("Button.darkShadow"));
+        questionLink.setFont(new Font("Montserrat Medium", Font.ITALIC, 10));
+        questionLink.setFocusPainted(false);
+        questionLink.setFocusable(false);
+        questionLink.setOpaque(false);
+        questionLink.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
+        add(questionLink);
+
+        // Checkbox for terms & conditions
+        JCheckBox chckbxTermsConditions = new JCheckBox("Agree to our Terms & Conditions and Privacy Policy");
+        layout.putConstraint(SpringLayout.NORTH, chckbxTermsConditions, 16, SpringLayout.SOUTH, questionLink);
+        layout.putConstraint(SpringLayout.WEST, chckbxTermsConditions, 0, SpringLayout.WEST, uplCOR);
+        layout.putConstraint(SpringLayout.EAST, chckbxTermsConditions, -55, SpringLayout.EAST, this);
+        chckbxTermsConditions.setHorizontalAlignment(SwingConstants.CENTER);
+        chckbxTermsConditions.setFont(new Font("Montserrat Medium", Font.PLAIN, 10));
+        add(chckbxTermsConditions);
+
+        // Sign up button
+        signUpButton = new JButton("Sign Up");
+        layout.putConstraint(SpringLayout.NORTH, signUpButton, 21, SpringLayout.SOUTH, chckbxTermsConditions);
+        layout.putConstraint(SpringLayout.WEST, signUpButton, 10, SpringLayout.WEST, uplCOR);
+        layout.putConstraint(SpringLayout.SOUTH, signUpButton, 65, SpringLayout.SOUTH, chckbxTermsConditions);
+        layout.putConstraint(SpringLayout.EAST, signUpButton, 0, SpringLayout.EAST, uplCOR);
+        signUpButton.setBackground(new Color(128, 0, 0));
+        signUpButton.setFont(new Font("Montserrat ExtraBold", Font.BOLD, 16));
+        signUpButton.setForeground(Color.WHITE);
+        signUpButton.setBorderPainted(false);
+        signUpButton.setFocusPainted(false);
+        signUpButton.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+        add(signUpButton);
+
+        // Already have account? label
+        JLabel haveAccount = new JLabel("Already have an account?");
+        layout.putConstraint(SpringLayout.NORTH, haveAccount, 6, SpringLayout.SOUTH, signUpButton);
+        layout.putConstraint(SpringLayout.WEST, haveAccount, 135, SpringLayout.WEST, this);
+        haveAccount.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
+        add(haveAccount);
+
+        // Sign in here button
+        JButton signInButton = new JButton("Sign in here");
+    	layout.putConstraint(SpringLayout.NORTH, signInButton, 6, SpringLayout.SOUTH, haveAccount);
+    	layout.putConstraint(SpringLayout.WEST, signInButton, 174, SpringLayout.WEST, this);
+    	signInButton.setForeground(new Color(0x730C0C));
+    	signInButton.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
+    	signInButton.setFocusable(false);
+    	signInButton.setOpaque(false);
+    	signInButton.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
+    	add(signInButton);
+    }
+
+    private void setupTextFieldPlaceholder(JTextField textField, String placeholder) {
+        textField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (textField.getText().equals(placeholder)) {
+                    textField.setText("");
+                    textField.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (textField.getText().isEmpty()) {
+                    textField.setForeground(Color.GRAY);
+                    textField.setText(placeholder);
+                }
+            }
+        });
+        textField.setForeground(Color.GRAY);
+    }
+
+    private void setupPasswordFieldPlaceholder(JPasswordField passwordField) {
+        passwordField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (String.valueOf(passwordField.getPassword()).equals("Password")) {
+                    passwordField.setText("");
+                    passwordField.setForeground(Color.BLACK);
+                    passwordField.setEchoChar('*');
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (String.valueOf(passwordField.getPassword()).isEmpty()) {
+                    passwordField.setForeground(Color.GRAY);
+                    passwordField.setText("Password");
+                    passwordField.setEchoChar((char) 0);
+                }
+            }
+        });
+        passwordField.setForeground(Color.GRAY);
+        passwordField.setEchoChar((char) 0);
+    }
 }
