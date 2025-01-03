@@ -15,11 +15,7 @@ import javax.swing.JButton;
 public class PolymartMain extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel StartupPanel;
-
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -42,8 +38,8 @@ public class PolymartMain extends JFrame {
         setLocationRelativeTo(null);
 
         // Icon
-        ImageIcon icon = new ImageIcon(this.getClass().getResource("/polypup_icon.png"));
-        this.setIconImage(icon.getImage());
+        ImageIcon iconImg = new ImageIcon(this.getClass().getResource("/polypup_icon.png"));
+        this.setIconImage(iconImg.getImage());
 
         JPanel contentPane = new JPanel(new CardLayout());
         setContentPane(contentPane);
@@ -56,7 +52,7 @@ public class PolymartMain extends JFrame {
         contentPane.add(signupPanel, "SignupPanel");
 
         // Show StartupPanel initially
-        CardLayout cl = (CardLayout) contentPane.getLayout();
-        cl.show(contentPane, "StartupPanel");
+        CardLayout clLayout = (CardLayout) contentPane.getLayout();
+        clLayout.show(contentPane, "StartupPanel");
     }
 }

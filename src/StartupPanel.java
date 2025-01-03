@@ -93,7 +93,7 @@ public class StartupPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // Switch to SignupPanel
-        CardLayout cl = (CardLayout) contentPane.getLayout();
-        cl.show(contentPane, "SignupPanel");
+        CardLayout clLayout = (CardLayout) contentPane.getLayout();
+        clLayout.show(contentPane, "SignupPanel");
     }
 }
