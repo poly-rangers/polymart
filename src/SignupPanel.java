@@ -279,7 +279,7 @@ public class SignupPanel extends JPanel implements ActionListener {
     
     private void saveUserInfo(String username, String firstName, String lastName, String email, String pwd) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("user_info.txt", true))) {
-        	writer.write(username + ", " + firstName + ", " + lastName + ", " + email + ", " + pwd + "\n");
+        	writer.write(username + "," + firstName + "," + lastName + "," + email + "," + pwd + "\n");
         } catch (IOException e) {
            //TO-DO
         }
