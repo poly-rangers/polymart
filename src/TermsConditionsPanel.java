@@ -4,6 +4,9 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
@@ -54,21 +57,18 @@ public class TermsConditionsPanel extends JPanel implements ActionListener{
         signUpLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(signUpLabel);
         
-        // Create a JLabel for the text content with HTML formatting
+        // Load text content from a file
+        StringBuilder contentBuilder = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader("resources/terms_and_conditions.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                contentBuilder.append(line).append(System.lineSeparator());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         JLabel contentLabel = new JLabel("<html><div style='width:260px; text-align: justify; line-height: 2;'>"
-                + "<b>Polymart: Terms</b><br><br>"
-                + "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium "
-                + "doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore "
-                + "veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam "
-                + "voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur "
-                + "magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, "
-                + "qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non "
-                + "numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat "
-                + "voluptatem. <br><br>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis "
-                + "suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum "
-                + "iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, "
-                + "vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\""
-                + "</div></html>");
+                + contentBuilder.toString() + "</div></html>");
         
         contentLabel.setFont(new Font("Montserrat", Font.PLAIN, 16));
         contentLabel.setVerticalAlignment(SwingConstants.TOP);
