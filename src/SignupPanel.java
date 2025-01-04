@@ -54,6 +54,7 @@ public class SignupPanel extends JPanel implements ActionListener {
 
         // Sign-up label
         JLabel signUpLabel = new JLabel("Sign Up");
+        panelLayout.putConstraint(SpringLayout.EAST, headerTitle, 26, SpringLayout.EAST, signUpLabel);
         panelLayout.putConstraint(SpringLayout.SOUTH, headerTitle, -49, SpringLayout.NORTH, signUpLabel);
         panelLayout.putConstraint(SpringLayout.NORTH, signUpLabel, 119, SpringLayout.NORTH, this);
         panelLayout.putConstraint(SpringLayout.WEST, signUpLabel, 35, SpringLayout.WEST, this);
@@ -126,7 +127,6 @@ public class SignupPanel extends JPanel implements ActionListener {
         // Upload COR
         JLabel uplCOR = new JLabel("Upload your Certificate of Registration (COR)");
         panelLayout.putConstraint(SpringLayout.WEST, headerTitle, 0, SpringLayout.WEST, uplCOR);
-        panelLayout.putConstraint(SpringLayout.EAST, headerTitle, 90, SpringLayout.WEST, uplCOR);
         panelLayout.putConstraint(SpringLayout.NORTH, uplCOR, 22, SpringLayout.SOUTH, password);
         panelLayout.putConstraint(SpringLayout.WEST, uplCOR, 61, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.EAST, uplCOR, -64, SpringLayout.EAST, this);
