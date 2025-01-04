@@ -2,15 +2,7 @@ import java.awt.EventQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.SpringLayout;
-import java.awt.Font;
-import java.awt.Image;
 import java.awt.CardLayout;
-import java.awt.Color;
-import javax.swing.JButton;
 
 public class PolymartMain extends JFrame {
 
@@ -47,9 +39,11 @@ public class PolymartMain extends JFrame {
         // Add panels
         StartupPanel startupPanel = new StartupPanel(contentPane);
         SignupPanel signupPanel = new SignupPanel(contentPane);
+        TermsConditionsPanel termsConditionsPanel = new TermsConditionsPanel(contentPane);
 
         contentPane.add(startupPanel, "StartupPanel");
         contentPane.add(signupPanel, "SignupPanel");
+        contentPane.add(termsConditionsPanel, "TermsConditionsPanel");
 
         // Show StartupPanel initially
         CardLayout clLayout = (CardLayout) contentPane.getLayout();
