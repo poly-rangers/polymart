@@ -262,6 +262,9 @@ public class SignupPanel extends JPanel implements ActionListener {
                 CardLayout clLayout = (CardLayout) contentPane.getLayout();
                 clLayout.show(contentPane, "TermsConditionsPanel");
             }
+        } else if (source == signInButton) {
+        	CardLayout clLayout = (CardLayout) contentPane.getLayout();
+            clLayout.show(contentPane, "SignInPanel");
         }
     }
 }

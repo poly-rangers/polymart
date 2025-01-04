@@ -40,10 +40,12 @@ public class PolymartMain extends JFrame {
         StartupPanel startupPanel = new StartupPanel(contentPane);
         SignupPanel signupPanel = new SignupPanel(contentPane);
         TermsConditionsPanel termsConditionsPanel = new TermsConditionsPanel(contentPane);
+        SignInPanel signInPanel = new SignInPanel(contentPane);
 
         contentPane.add(startupPanel, "StartupPanel");
         contentPane.add(signupPanel, "SignupPanel");
         contentPane.add(termsConditionsPanel, "TermsConditionsPanel");
+        contentPane.add(signInPanel, "SignInPanel");
 
         // Show StartupPanel initially
         CardLayout clLayout = (CardLayout) contentPane.getLayout();
