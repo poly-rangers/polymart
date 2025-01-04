@@ -32,26 +32,16 @@ public class SignInPanel extends JPanel implements ActionListener{
         SpringLayout panelLayout = new SpringLayout();
         setLayout(panelLayout);
         
-        // Header title
-        JLabel headerTitle = new JLabel("POLYMART");
-        panelLayout.putConstraint(SpringLayout.NORTH, headerTitle, 49, SpringLayout.NORTH, this);
-        headerTitle.setForeground(new Color(0x730C0C));
-        headerTitle.setFont(new Font("Montserrat ExtraBold", Font.PLAIN, 15));
-        add(headerTitle);
-
         // Icon next to header title
         ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_icon.png"));
-        Image scaledImage = originalImage.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
-        panelLayout.putConstraint(SpringLayout.WEST, headerTitle, 1, SpringLayout.EAST, startupImage);
-        panelLayout.putConstraint(SpringLayout.SOUTH, headerTitle, -8, SpringLayout.SOUTH, startupImage);
-        panelLayout.putConstraint(SpringLayout.NORTH, startupImage, 38, SpringLayout.NORTH, this);
-        panelLayout.putConstraint(SpringLayout.EAST, startupImage, -355, SpringLayout.EAST, this);
+        panelLayout.putConstraint(SpringLayout.NORTH, startupImage, 24, SpringLayout.NORTH, this);
+        panelLayout.putConstraint(SpringLayout.WEST, startupImage, 16, SpringLayout.WEST, this);
         add(startupImage);
 
         // Sign-up label
         JLabel signInLabel = new JLabel("Sign In");
-        panelLayout.putConstraint(SpringLayout.SOUTH, headerTitle, -49, SpringLayout.NORTH, signInLabel);
         panelLayout.putConstraint(SpringLayout.NORTH, signInLabel, 119, SpringLayout.NORTH, this);
         panelLayout.putConstraint(SpringLayout.WEST, signInLabel, 35, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.EAST, signInLabel, 166, SpringLayout.WEST, this);
