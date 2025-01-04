@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.*;
 import java.awt.Font;
 import javax.swing.border.MatteBorder;
@@ -16,7 +19,10 @@ public class SignInPanel extends JPanel implements ActionListener{
     private JTextField usernameField;
     private JPasswordField pwdField;
     private JCheckBox showPasswordCheckBox;
-    private JButton signUpButton; // Instance-level declaration
+    private JButton signUpButton;
+    private JButton loginButton;
+    private JLabel errorMessage;
+    private SpringLayout panelLayout;
 
     public SignInPanel(JPanel contentPane) {
         this.contentPane = contentPane;
@@ -94,6 +100,7 @@ public class SignInPanel extends JPanel implements ActionListener{
         loginButton.setBorder(new LineBorder(new Color(0, 0, 0)));
         loginButton.setBackground(new Color(128, 0, 0));
         loginButton.setForeground(new Color(255, 255, 255));
+        loginButton.addActionListener(this);
         add(loginButton);
         
         JLabel newToPolymart = new JLabel("New to Polymart?");
@@ -103,7 +110,7 @@ public class SignInPanel extends JPanel implements ActionListener{
         newToPolymart.setFont(new Font("Montserrat SemiBold", Font.BOLD, 12));
         add(newToPolymart);
         
-        signUpButton = new JButton("Sign up here");  // Correct the assignment here
+        signUpButton = new JButton("Sign up here");
         signUpButton.setOpaque(false);
         signUpButton.setFocusable(false);
         panelLayout.putConstraint(SpringLayout.NORTH, signUpButton, -1, SpringLayout.NORTH, newToPolymart);
@@ -120,15 +127,68 @@ public class SignInPanel extends JPanel implements ActionListener{
         Object source = e.getSource();
 
         if (source == showPasswordCheckBox) {
-        	if (showPasswordCheckBox.isSelected()) {
+            if (showPasswordCheckBox.isSelected()) {
                 pwdField.setEchoChar((char) 0); // Show password
             } else {
                 pwdField.setEchoChar('*'); // Hide password
             }
         } else if (source == signUpButton) {
-        	CardLayout clLayout = (CardLayout) contentPane.getLayout();
+            CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "SignupPanel");
+        } else if (source == loginButton) {
+            String username = usernameField.getText();
+            String password = new String(pwdField.getPassword());
+
+       // SOS... GUYS TULONG DI KO NA KAYA     
+        
+            // Validate the username and password with the database
+            if (validateLogin(username, password)) {
+                // Show a success message
+                JOptionPane.showMessageDialog(this, "Login Successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                
+                // After login success, switch to the Dashboard panel
+                CardLayout clLayout = (CardLayout) contentPane.getLayout();
+                clLayout.show(contentPane, "DashboardPanel"); // Assuming the panel is named "DashboardPanel"
+            } else {
+                // Show error message if login is invalid
+                if (errorMessage == null) {
+                    errorMessage = new JLabel("Invalid username or password");
+                    errorMessage.setForeground(Color.RED);
+                    panelLayout.putConstraint(SpringLayout.NORTH, errorMessage, 10, SpringLayout.SOUTH, loginButton);
+                    panelLayout.putConstraint(SpringLayout.WEST, errorMessage, 71, SpringLayout.WEST, this);
+                    add(errorMessage);
+                    revalidate(); // Refresh the panel to display the message
+                    repaint();
+                } else {
+                    errorMessage.setText("Invalid username or password");
+                    errorMessage.setForeground(Color.RED);
+                }
+            }
         }
+    }
+
+    private boolean validateLogin(String username, String password) {
+        // Specify the path to the user_info.txt file inside the databases folder
+        String filePath = "databases/user_info.txt"; 
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] userData = line.split(",");
+                if (userData.length == 5) {
+                    String storedUsername = userData[0].trim();
+                    String storedPassword = userData[4].trim();
+
+                    // Check if the username and password match
+                    if (storedUsername.equals(username) && storedPassword.equals(password)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 
     private void setupTextFieldPlaceholder(JTextField textField, String placeholder) {

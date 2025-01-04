@@ -8,6 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class SignupPanel extends JPanel implements ActionListener {
 
@@ -261,11 +265,39 @@ public class SignupPanel extends JPanel implements ActionListener {
                 // Navigate back to Terms & Conditions panel
                 CardLayout clLayout = (CardLayout) contentPane.getLayout();
                 clLayout.show(contentPane, "TermsConditionsPanel");
+            } else {
+            	saveUserInfo(
+                        txtUsername.getText(),
+                        firstName.getText(),
+                        lastName.getText(),
+                        txtEmailOrPhone.getText(),
+                        new String(password.getPassword())
+                    );
+            	JOptionPane.showMessageDialog(this, "Information Saved.", "Sign Up Success", JOptionPane.INFORMATION_MESSAGE);
+            	/* Other Scenarios: Missing input info, Account already exists, restrict characters with special characters 
+            	 * (except _), invalid Phone or email */	 
             }
         } else if (source == signInButton) {
         	CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "SignInPanel");
         }
     }
-}
     
+    private void saveUserInfo(String username, String firstName, String lastName, String email, String pwd) {
+        String folderPath = "databases";
+        
+        // Ensure the directory exists
+        File folder = new File(folderPath);
+        if (!folder.exists()) {
+            folder.mkdir();  // Create the folder if it doesn't exist
+        }
+
+        String filePath = folderPath + File.separator + "user_info.txt";
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            writer.write(username + ", " + firstName + ", " + lastName + ", " + email + ", " + pwd + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}   
