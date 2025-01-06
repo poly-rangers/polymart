@@ -1,3 +1,7 @@
+import frames.LoginSuccessful;
+import frames.NoAccountFound;
+import frames.WrongAccountInfo;
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
@@ -121,6 +125,7 @@ public class SignInPanel extends JPanel implements ActionListener{
                 pwdField.setEchoChar('*'); // Hide password
             }
         } else if (source == signUpButton) {
+        	clearTextFields();
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "SignupPanel");
         } else if (source == loginButton) {
@@ -146,20 +151,27 @@ public class SignInPanel extends JPanel implements ActionListener{
                     if(userData[0].equals(username)) {
                     	usernameFound = true;
                     	if(userData[4].equals(password)) {
-                    		JOptionPane.showMessageDialog(this, "Login Successful", "Login Success", JOptionPane.INFORMATION_MESSAGE);
+                    		JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                            new LoginSuccessful(parentFrame);
                             //Switching to DashboardPanel
                     		CardLayout clLayout = (CardLayout) contentPane.getLayout();
                             clLayout.show(contentPane, "DashboardPanel");
                     		break;
                     	} else {
-                    		JOptionPane.showMessageDialog(this, "Incorrect Password", "Login Error", JOptionPane.ERROR_MESSAGE);
+                    		JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                            new WrongAccountInfo(parentFrame);
                     		break;
                     	}
                     } 
                 } 
             }
             if(!usernameFound) {
-                	JOptionPane.showMessageDialog(this, "Username not found", "Login Error", JOptionPane.ERROR_MESSAGE);
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                new NoAccountFound(parentFrame);
+                //Switch to sign up panel
+                clearTextFields();
+                CardLayout clLayout = (CardLayout) contentPane.getLayout();
+                clLayout.show(contentPane, "SignupPanel");
             }
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -209,5 +221,15 @@ public class SignInPanel extends JPanel implements ActionListener{
         });
         passwordField.setForeground(Color.GRAY);
         passwordField.setEchoChar((char) 0);
+    }
+    
+    private void clearTextFields() {
+        // Reset text fields to their placeholder values
+        usernameField.setText("Username");
+        usernameField.setForeground(Color.GRAY);
+
+        pwdField.setText("Password");
+        pwdField.setForeground(Color.GRAY);
+        pwdField.setEchoChar((char) 0);  // Reset password echo char for the placeholder
     }
 }

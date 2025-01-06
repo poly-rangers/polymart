@@ -1,3 +1,6 @@
+import frames.SignUpQuestion;
+import frames.TermsConditionsWarning;
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -282,8 +285,8 @@ public class SignupPanel extends JPanel implements ActionListener {
         Object source = e.getSource();
 
         if (source == questionLink) {
-            CardLayout clLayout = (CardLayout) contentPane.getLayout();
-            clLayout.show(contentPane, "TermsConditionsPanel");
+        	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            new SignUpQuestion(parentFrame);
         } else if (source == termsConditionsLink || source == privacyPolicyLink){
         	CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "TermsConditionsPanel");
@@ -291,7 +294,8 @@ public class SignupPanel extends JPanel implements ActionListener {
             // Check if the terms and conditions checkbox is selected
             if (!chckbxTermsConditions.isSelected()) {
                 // Show warning dialog
-                JOptionPane.showMessageDialog(this, "You must agree to the Terms & Conditions and Privacy Policy.", "Warning", JOptionPane.WARNING_MESSAGE);
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                new TermsConditionsWarning(parentFrame);
                 // Navigate back to Terms & Conditions panel
                 CardLayout clLayout = (CardLayout) contentPane.getLayout();
                 clLayout.show(contentPane, "TermsConditionsPanel");
@@ -308,6 +312,7 @@ public class SignupPanel extends JPanel implements ActionListener {
             	 * (except _), invalid Phone or email */	 
             }
         } else if (source == signInButton) {
+        	clearTextFields();
         	CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "SignInPanel");
         }
@@ -330,4 +335,24 @@ public class SignupPanel extends JPanel implements ActionListener {
             e.printStackTrace();
         }
     }
+    
+    private void clearTextFields() {
+        // Reset text fields to their placeholder values
+        txtUsername.setText("Username");
+        txtUsername.setForeground(Color.GRAY);
+
+        firstName.setText("First Name");
+        firstName.setForeground(Color.GRAY);
+
+        lastName.setText("Last Name");
+        lastName.setForeground(Color.GRAY);
+
+        txtEmailOrPhone.setText("Email or Phone");
+        txtEmailOrPhone.setForeground(Color.GRAY);
+
+        password.setText("Password");
+        password.setForeground(Color.GRAY);
+        password.setEchoChar((char) 0);  // Reset password echo char for the placeholder
+    }
+
 }   
