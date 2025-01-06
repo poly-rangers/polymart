@@ -23,6 +23,9 @@ public class SignupPanel extends JPanel implements ActionListener {
     private JPasswordField password;
     private JLabel chooseFile;
     private JButton questionLink;
+    private JButton termsConditionsLink;
+    private JLabel andLabel;
+    private JButton privacyPolicyLink;
     private JButton signUpButton;
     private JButton signInButton;
     private JTextField txtUsername;
@@ -150,19 +153,53 @@ public class SignupPanel extends JPanel implements ActionListener {
         add(questionLink);
 
         // Checkbox for terms & conditions
-        chckbxTermsConditions = new JCheckBox("Agree to our Terms & Conditions and Privacy Policy");
-        panelLayout.putConstraint(SpringLayout.NORTH, chckbxTermsConditions, 16, SpringLayout.SOUTH, questionLink);
-        panelLayout.putConstraint(SpringLayout.WEST, chckbxTermsConditions, 0, SpringLayout.WEST, uplCOR);
-        panelLayout.putConstraint(SpringLayout.EAST, chckbxTermsConditions, -55, SpringLayout.EAST, this);
-        chckbxTermsConditions.setHorizontalAlignment(SwingConstants.CENTER);
+        chckbxTermsConditions = new JCheckBox("By signing up you agree to our");
+        panelLayout.putConstraint(SpringLayout.NORTH, chckbxTermsConditions, 18, SpringLayout.SOUTH, questionLink);
+        panelLayout.putConstraint(SpringLayout.WEST, chckbxTermsConditions, 21, SpringLayout.WEST, uplCOR);
+        panelLayout.putConstraint(SpringLayout.SOUTH, chckbxTermsConditions, -155, SpringLayout.SOUTH, this);
+        panelLayout.putConstraint(SpringLayout.EAST, chckbxTermsConditions, 0, SpringLayout.EAST, chooseFile);
+        chckbxTermsConditions.setBackground(Color.WHITE);
+        chckbxTermsConditions.setHorizontalAlignment(SwingConstants.LEFT);
         chckbxTermsConditions.setFont(new Font("Montserrat Medium", Font.PLAIN, 10));
         add(chckbxTermsConditions);
+        
+        // Terms and Conditions button
+    	termsConditionsLink = new JButton("Terms & Conditions");
+    	termsConditionsLink.setBackground(Color.WHITE);
+    	panelLayout.putConstraint(SpringLayout.NORTH, termsConditionsLink, 1, SpringLayout.SOUTH, chckbxTermsConditions);
+    	panelLayout.putConstraint(SpringLayout.WEST, termsConditionsLink, 103, SpringLayout.WEST, this);
+    	termsConditionsLink.setForeground(new Color(0x730C0C));
+    	termsConditionsLink.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
+    	termsConditionsLink.setFocusable(false);
+    	termsConditionsLink.setOpaque(false);
+    	termsConditionsLink.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
+    	termsConditionsLink.addActionListener(this);
+    	add(termsConditionsLink);
+        
+    	// "and" label
+    	andLabel = new JLabel("and");
+    	panelLayout.putConstraint(SpringLayout.NORTH, andLabel, 1, SpringLayout.NORTH, termsConditionsLink);
+    	panelLayout.putConstraint(SpringLayout.WEST, andLabel, 6, SpringLayout.EAST, termsConditionsLink);
+    	andLabel.setFont(new Font("Montserrat Medium", Font.PLAIN, 10));
+    	add(andLabel);
+        
+        // Terms and Conditions button
+    	privacyPolicyLink = new JButton("Privacy Policy");
+    	privacyPolicyLink.setBackground(Color.WHITE);
+    	panelLayout.putConstraint(SpringLayout.NORTH, privacyPolicyLink, 0, SpringLayout.NORTH, termsConditionsLink);
+    	panelLayout.putConstraint(SpringLayout.WEST, privacyPolicyLink, 6, SpringLayout.EAST, andLabel);
+    	privacyPolicyLink.setForeground(new Color(0x730C0C));
+    	privacyPolicyLink.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
+    	privacyPolicyLink.setFocusable(false);
+    	privacyPolicyLink.setOpaque(false);
+    	privacyPolicyLink.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
+    	privacyPolicyLink.addActionListener(this);
+    	add(privacyPolicyLink);
 
         // Sign up button
         signUpButton = new JButton("Sign Up");
-        panelLayout.putConstraint(SpringLayout.NORTH, signUpButton, 21, SpringLayout.SOUTH, chckbxTermsConditions);
+        panelLayout.putConstraint(SpringLayout.NORTH, signUpButton, 22, SpringLayout.SOUTH, termsConditionsLink);
         panelLayout.putConstraint(SpringLayout.WEST, signUpButton, 10, SpringLayout.WEST, uplCOR);
-        panelLayout.putConstraint(SpringLayout.SOUTH, signUpButton, 65, SpringLayout.SOUTH, chckbxTermsConditions);
         panelLayout.putConstraint(SpringLayout.EAST, signUpButton, 0, SpringLayout.EAST, uplCOR);
         signUpButton.setBackground(new Color(128, 0, 0));
         signUpButton.setFont(new Font("Montserrat ExtraBold", Font.BOLD, 16));
@@ -175,15 +212,17 @@ public class SignupPanel extends JPanel implements ActionListener {
 
         // Already have account? label
         JLabel haveAccount = new JLabel("Already have an account?");
-        panelLayout.putConstraint(SpringLayout.NORTH, haveAccount, 6, SpringLayout.SOUTH, signUpButton);
-        panelLayout.putConstraint(SpringLayout.WEST, haveAccount, 135, SpringLayout.WEST, this);
+        panelLayout.putConstraint(SpringLayout.NORTH, haveAccount, 593, SpringLayout.NORTH, this);
+        panelLayout.putConstraint(SpringLayout.SOUTH, signUpButton, -6, SpringLayout.NORTH, haveAccount);
+        panelLayout.putConstraint(SpringLayout.WEST, haveAccount, 134, SpringLayout.WEST, this);
         haveAccount.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
         add(haveAccount);
     	
     	// Sign in here button
     	signInButton = new JButton("Sign in here");
-    	panelLayout.putConstraint(SpringLayout.NORTH, signInButton, 6, SpringLayout.SOUTH, haveAccount);
-    	panelLayout.putConstraint(SpringLayout.WEST, signInButton, 174, SpringLayout.WEST, this);
+    	signInButton.setBackground(Color.WHITE);
+    	panelLayout.putConstraint(SpringLayout.NORTH, signInButton, 2, SpringLayout.SOUTH, haveAccount);
+    	panelLayout.putConstraint(SpringLayout.WEST, signInButton, 173, SpringLayout.WEST, this);
     	signInButton.setForeground(new Color(0x730C0C));
     	signInButton.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
     	signInButton.setFocusable(false);
@@ -191,7 +230,6 @@ public class SignupPanel extends JPanel implements ActionListener {
     	signInButton.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
     	signInButton.addActionListener(this);
     	add(signInButton);
-
     }
 
     private void setupTextFieldPlaceholder(JTextField textField, String placeholder) {
@@ -246,11 +284,14 @@ public class SignupPanel extends JPanel implements ActionListener {
         if (source == questionLink) {
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "TermsConditionsPanel");
+        } else if (source == termsConditionsLink || source == privacyPolicyLink){
+        	CardLayout clLayout = (CardLayout) contentPane.getLayout();
+            clLayout.show(contentPane, "TermsConditionsPanel");
         } else if (source == signUpButton) {
             // Check if the terms and conditions checkbox is selected
             if (!chckbxTermsConditions.isSelected()) {
                 // Show warning dialog
-                JOptionPane.showMessageDialog(this, "You must agree to the Terms & Conditions.", "Warning", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "You must agree to the Terms & Conditions and Privacy Policy.", "Warning", JOptionPane.WARNING_MESSAGE);
                 // Navigate back to Terms & Conditions panel
                 CardLayout clLayout = (CardLayout) contentPane.getLayout();
                 clLayout.show(contentPane, "TermsConditionsPanel");
