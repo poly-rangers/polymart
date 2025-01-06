@@ -30,7 +30,7 @@ public class PolymartMain extends JFrame {
         setLocationRelativeTo(null);
 
         // Icon
-        ImageIcon iconImg = new ImageIcon(this.getClass().getResource("/polypup_icon.png"));
+        ImageIcon iconImg = new ImageIcon(this.getClass().getResource("/polypup_frameicon.png"));
         this.setIconImage(iconImg.getImage());
 
         JPanel contentPane = new JPanel(new CardLayout());

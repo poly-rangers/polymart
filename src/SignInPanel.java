@@ -21,8 +21,6 @@ public class SignInPanel extends JPanel implements ActionListener{
     private JCheckBox showPasswordCheckBox;
     private JButton signUpButton;
     private JButton loginButton;
-    private JLabel errorMessage;
-    private SpringLayout panelLayout;
 
     public SignInPanel(JPanel contentPane) {
         this.contentPane = contentPane;
@@ -80,7 +78,7 @@ public class SignInPanel extends JPanel implements ActionListener{
         showPasswordCheckBox.addActionListener(this);
         add(showPasswordCheckBox);
         
-        JButton loginButton = new JButton("Log In");
+        loginButton = new JButton("Log In");
         panelLayout.putConstraint(SpringLayout.NORTH, loginButton, 34, SpringLayout.SOUTH, showPasswordCheckBox);
         panelLayout.putConstraint(SpringLayout.WEST, loginButton, 71, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, loginButton, 76, SpringLayout.SOUTH, showPasswordCheckBox);
@@ -128,57 +126,44 @@ public class SignInPanel extends JPanel implements ActionListener{
         } else if (source == loginButton) {
             String username = usernameField.getText();
             String password = new String(pwdField.getPassword());
-
-       // SOS... GUYS TULONG DI KO NA KAYA     
-        
-            // Validate the username and password with the database
-            if (validateLogin(username, password)) {
-                // Show a success message
-                JOptionPane.showMessageDialog(this, "Login Successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                
-                // After login success, switch to the Dashboard panel
-                CardLayout clLayout = (CardLayout) contentPane.getLayout();
-                clLayout.show(contentPane, "DashboardPanel"); // Assuming the panel is named "DashboardPanel"
-            } else {
-                // Show error message if login is invalid
-                if (errorMessage == null) {
-                    errorMessage = new JLabel("Invalid username or password");
-                    errorMessage.setForeground(Color.RED);
-                    panelLayout.putConstraint(SpringLayout.NORTH, errorMessage, 10, SpringLayout.SOUTH, loginButton);
-                    panelLayout.putConstraint(SpringLayout.WEST, errorMessage, 71, SpringLayout.WEST, this);
-                    add(errorMessage);
-                    revalidate(); // Refresh the panel to display the message
-                    repaint();
-                } else {
-                    errorMessage.setText("Invalid username or password");
-                    errorMessage.setForeground(Color.RED);
-                }
-            }
+            
+            //Call method to validate login info
+            validateLogin(username, password);   
+      
         }
     }
-
-    private boolean validateLogin(String username, String password) {
-        // Specify the path to the user_info.txt file inside the databases folder
-        String filePath = "databases/user_info.txt"; 
-        
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
+    
+    private void validateLogin(String username, String password) {
+    // Specify the path to the user_info.txt file inside the databases folder
+      String filePath = "databases/user_info.txt"; 
+      boolean usernameFound = false;
+      
+      try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+          String line;
             while ((line = reader.readLine()) != null) {
                 String[] userData = line.split(",");
                 if (userData.length == 5) {
-                    String storedUsername = userData[0].trim();
-                    String storedPassword = userData[4].trim();
-
-                    // Check if the username and password match
-                    if (storedUsername.equals(username) && storedPassword.equals(password)) {
-                        return true;
-                    }
-                }
+                    if(userData[0].equals(username)) {
+                    	usernameFound = true;
+                    	if(userData[4].equals(password)) {
+                    		JOptionPane.showMessageDialog(this, "Login Successful", "Login Success", JOptionPane.INFORMATION_MESSAGE);
+                            //Switching to DashboardPanel
+                    		CardLayout clLayout = (CardLayout) contentPane.getLayout();
+                            clLayout.show(contentPane, "DashboardPanel");
+                    		break;
+                    	} else {
+                    		JOptionPane.showMessageDialog(this, "Incorrect Password", "Login Error", JOptionPane.ERROR_MESSAGE);
+                    		break;
+                    	}
+                    } 
+                } 
+            }
+            if(!usernameFound) {
+                	JOptionPane.showMessageDialog(this, "Username not found", "Login Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return false;
     }
 
     private void setupTextFieldPlaceholder(JTextField textField, String placeholder) {

@@ -284,7 +284,7 @@ public class SignupPanel extends JPanel implements ActionListener {
         String filePath = folderPath + File.separator + "user_info.txt";
         
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            writer.write(username + ", " + firstName + ", " + lastName + ", " + email + ", " + pwd + "\n");
+            writer.write(username + "," + firstName + "," + lastName + "," + email + "," + pwd + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
