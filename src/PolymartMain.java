@@ -2,24 +2,12 @@ import java.awt.EventQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.SpringLayout;
-import java.awt.Font;
-import java.awt.Image;
 import java.awt.CardLayout;
-import java.awt.Color;
-import javax.swing.JButton;
 
 public class PolymartMain extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel StartupPanel;
-
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -42,21 +30,29 @@ public class PolymartMain extends JFrame {
         setLocationRelativeTo(null);
 
         // Icon
-        ImageIcon icon = new ImageIcon(this.getClass().getResource("/polypup_icon.png"));
-        this.setIconImage(icon.getImage());
+        ImageIcon iconImg = new ImageIcon(this.getClass().getResource("/polypup_frameicon.png"));
+        this.setIconImage(iconImg.getImage());
 
         JPanel contentPane = new JPanel(new CardLayout());
         setContentPane(contentPane);
 
         // Add panels
+        BuyerOrSeller userRolePanel = new BuyerOrSeller(contentPane);
         StartupPanel startupPanel = new StartupPanel(contentPane);
         SignupPanel signupPanel = new SignupPanel(contentPane);
-
+        TermsConditionsPanel termsConditionsPanel = new TermsConditionsPanel(contentPane);
+        SignInPanel signInPanel = new SignInPanel(contentPane);
+        DashboardPanel dashboardPanel = new DashboardPanel(contentPane);
+        
+        contentPane.add(userRolePanel, "UserRolePanel");
         contentPane.add(startupPanel, "StartupPanel");
         contentPane.add(signupPanel, "SignupPanel");
+        contentPane.add(termsConditionsPanel, "TermsConditionsPanel");
+        contentPane.add(signInPanel, "SignInPanel");
+        contentPane.add(dashboardPanel, "DashboardPanel");
 
         // Show StartupPanel initially
-        CardLayout cl = (CardLayout) contentPane.getLayout();
-        cl.show(contentPane, "StartupPanel");
+        CardLayout clLayout = (CardLayout) contentPane.getLayout();
+        clLayout.show(contentPane, "userRolePanel");
     }
 }

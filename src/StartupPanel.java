@@ -4,6 +4,8 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -89,11 +91,23 @@ public class StartupPanel extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.WEST, startupImage, 73, SpringLayout.WEST, this);
         add(startupImage);
     }
+    
+    public class SellerPanel extends StartupPanel{
+
+		private Object startupSubheader1;
+
+		public SellerPanel(JPanel contentPane) {
+			super(contentPane);
+			// TODO Auto-generated constructor stub
+			((AbstractButton) startupSubheader1).setText("Ready ka na ba yumaman te?");
+		}
+    	
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         // Switch to SignupPanel
-        CardLayout cl = (CardLayout) contentPane.getLayout();
-        cl.show(contentPane, "SignupPanel");
+        CardLayout clLayout = (CardLayout) contentPane.getLayout();
+        clLayout.show(contentPane, "SignupPanel");
     }
 }

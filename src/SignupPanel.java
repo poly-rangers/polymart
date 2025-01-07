@@ -1,4 +1,7 @@
-import java.awt.CardLayout; 
+import frames.SignUpQuestion;
+import frames.TermsConditionsWarning;
+
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -9,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -22,6 +26,9 @@ public class SignupPanel extends JPanel implements ActionListener {
     private JPasswordField password;
     private JLabel chooseFile;
     private JButton questionLink;
+    private JButton termsConditionsLink;
+    private JLabel andLabel;
+    private JButton privacyPolicyLink;
     private JButton signUpButton;
     private JButton signInButton;
     private JTextField txtUsername;
@@ -35,25 +42,16 @@ public class SignupPanel extends JPanel implements ActionListener {
         SpringLayout panelLayout = new SpringLayout();
         setLayout(panelLayout);
 
-        // Header title
-        JLabel headerTitle = new JLabel("POLYMART");
-        panelLayout.putConstraint(SpringLayout.NORTH, headerTitle, 49, SpringLayout.NORTH, this); // Positioned at the top
-        panelLayout.putConstraint(SpringLayout.SOUTH, headerTitle, 10, SpringLayout.NORTH, this);
-        headerTitle.setForeground(new Color(0x730C0C));
-        headerTitle.setFont(new Font("Montserrat ExtraBold", Font.PLAIN, 15));
-        add(headerTitle);
-
         // Icon next to header title
         ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_icon.png"));
-        Image scaledImage = originalImage.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
-        panelLayout.putConstraint(SpringLayout.NORTH, startupImage, 38, SpringLayout.NORTH, this);
-        panelLayout.putConstraint(SpringLayout.EAST, startupImage, -355, SpringLayout.EAST, this);
+        panelLayout.putConstraint(SpringLayout.NORTH, startupImage, 24, SpringLayout.NORTH, this);
         add(startupImage);
 
         // Sign-up label
         JLabel signUpLabel = new JLabel("Sign Up");
-        panelLayout.putConstraint(SpringLayout.SOUTH, headerTitle, -49, SpringLayout.NORTH, signUpLabel);
+        panelLayout.putConstraint(SpringLayout.EAST, startupImage, 0, SpringLayout.EAST, signUpLabel);
         panelLayout.putConstraint(SpringLayout.NORTH, signUpLabel, 119, SpringLayout.NORTH, this);
         panelLayout.putConstraint(SpringLayout.WEST, signUpLabel, 35, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.EAST, signUpLabel, 166, SpringLayout.WEST, this);
@@ -124,8 +122,6 @@ public class SignupPanel extends JPanel implements ActionListener {
 
         // Upload COR
         JLabel uplCOR = new JLabel("Upload your Certificate of Registration (COR)");
-        panelLayout.putConstraint(SpringLayout.WEST, headerTitle, 0, SpringLayout.WEST, uplCOR);
-        panelLayout.putConstraint(SpringLayout.EAST, headerTitle, 131, SpringLayout.WEST, uplCOR);
         panelLayout.putConstraint(SpringLayout.NORTH, uplCOR, 22, SpringLayout.SOUTH, password);
         panelLayout.putConstraint(SpringLayout.WEST, uplCOR, 61, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.EAST, uplCOR, -64, SpringLayout.EAST, this);
@@ -160,19 +156,53 @@ public class SignupPanel extends JPanel implements ActionListener {
         add(questionLink);
 
         // Checkbox for terms & conditions
-        chckbxTermsConditions = new JCheckBox("Agree to our Terms & Conditions and Privacy Policy");
-        panelLayout.putConstraint(SpringLayout.NORTH, chckbxTermsConditions, 16, SpringLayout.SOUTH, questionLink);
-        panelLayout.putConstraint(SpringLayout.WEST, chckbxTermsConditions, 0, SpringLayout.WEST, uplCOR);
-        panelLayout.putConstraint(SpringLayout.EAST, chckbxTermsConditions, -55, SpringLayout.EAST, this);
-        chckbxTermsConditions.setHorizontalAlignment(SwingConstants.CENTER);
+        chckbxTermsConditions = new JCheckBox("By signing up you agree to our");
+        panelLayout.putConstraint(SpringLayout.NORTH, chckbxTermsConditions, 18, SpringLayout.SOUTH, questionLink);
+        panelLayout.putConstraint(SpringLayout.WEST, chckbxTermsConditions, 21, SpringLayout.WEST, uplCOR);
+        panelLayout.putConstraint(SpringLayout.SOUTH, chckbxTermsConditions, -155, SpringLayout.SOUTH, this);
+        panelLayout.putConstraint(SpringLayout.EAST, chckbxTermsConditions, 0, SpringLayout.EAST, chooseFile);
+        chckbxTermsConditions.setBackground(Color.WHITE);
+        chckbxTermsConditions.setHorizontalAlignment(SwingConstants.LEFT);
         chckbxTermsConditions.setFont(new Font("Montserrat Medium", Font.PLAIN, 10));
         add(chckbxTermsConditions);
+        
+        // Terms and Conditions button
+    	termsConditionsLink = new JButton("Terms & Conditions");
+    	termsConditionsLink.setBackground(Color.WHITE);
+    	panelLayout.putConstraint(SpringLayout.NORTH, termsConditionsLink, 1, SpringLayout.SOUTH, chckbxTermsConditions);
+    	panelLayout.putConstraint(SpringLayout.WEST, termsConditionsLink, 103, SpringLayout.WEST, this);
+    	termsConditionsLink.setForeground(new Color(0x730C0C));
+    	termsConditionsLink.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
+    	termsConditionsLink.setFocusable(false);
+    	termsConditionsLink.setOpaque(false);
+    	termsConditionsLink.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
+    	termsConditionsLink.addActionListener(this);
+    	add(termsConditionsLink);
+        
+    	// "and" label
+    	andLabel = new JLabel("and");
+    	panelLayout.putConstraint(SpringLayout.NORTH, andLabel, 1, SpringLayout.NORTH, termsConditionsLink);
+    	panelLayout.putConstraint(SpringLayout.WEST, andLabel, 6, SpringLayout.EAST, termsConditionsLink);
+    	andLabel.setFont(new Font("Montserrat Medium", Font.PLAIN, 10));
+    	add(andLabel);
+        
+        // Terms and Conditions button
+    	privacyPolicyLink = new JButton("Privacy Policy");
+    	privacyPolicyLink.setBackground(Color.WHITE);
+    	panelLayout.putConstraint(SpringLayout.NORTH, privacyPolicyLink, 0, SpringLayout.NORTH, termsConditionsLink);
+    	panelLayout.putConstraint(SpringLayout.WEST, privacyPolicyLink, 6, SpringLayout.EAST, andLabel);
+    	privacyPolicyLink.setForeground(new Color(0x730C0C));
+    	privacyPolicyLink.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
+    	privacyPolicyLink.setFocusable(false);
+    	privacyPolicyLink.setOpaque(false);
+    	privacyPolicyLink.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
+    	privacyPolicyLink.addActionListener(this);
+    	add(privacyPolicyLink);
 
         // Sign up button
         signUpButton = new JButton("Sign Up");
-        panelLayout.putConstraint(SpringLayout.NORTH, signUpButton, 21, SpringLayout.SOUTH, chckbxTermsConditions);
+        panelLayout.putConstraint(SpringLayout.NORTH, signUpButton, 22, SpringLayout.SOUTH, termsConditionsLink);
         panelLayout.putConstraint(SpringLayout.WEST, signUpButton, 10, SpringLayout.WEST, uplCOR);
-        panelLayout.putConstraint(SpringLayout.SOUTH, signUpButton, 65, SpringLayout.SOUTH, chckbxTermsConditions);
         panelLayout.putConstraint(SpringLayout.EAST, signUpButton, 0, SpringLayout.EAST, uplCOR);
         signUpButton.setBackground(new Color(128, 0, 0));
         signUpButton.setFont(new Font("Montserrat ExtraBold", Font.BOLD, 16));
@@ -185,15 +215,17 @@ public class SignupPanel extends JPanel implements ActionListener {
 
         // Already have account? label
         JLabel haveAccount = new JLabel("Already have an account?");
-        panelLayout.putConstraint(SpringLayout.NORTH, haveAccount, 6, SpringLayout.SOUTH, signUpButton);
-        panelLayout.putConstraint(SpringLayout.WEST, haveAccount, 135, SpringLayout.WEST, this);
+        panelLayout.putConstraint(SpringLayout.NORTH, haveAccount, 593, SpringLayout.NORTH, this);
+        panelLayout.putConstraint(SpringLayout.SOUTH, signUpButton, -6, SpringLayout.NORTH, haveAccount);
+        panelLayout.putConstraint(SpringLayout.WEST, haveAccount, 134, SpringLayout.WEST, this);
         haveAccount.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
         add(haveAccount);
     	
     	// Sign in here button
     	signInButton = new JButton("Sign in here");
-    	panelLayout.putConstraint(SpringLayout.NORTH, signInButton, 6, SpringLayout.SOUTH, haveAccount);
-    	panelLayout.putConstraint(SpringLayout.WEST, signInButton, 174, SpringLayout.WEST, this);
+    	signInButton.setBackground(Color.WHITE);
+    	panelLayout.putConstraint(SpringLayout.NORTH, signInButton, 2, SpringLayout.SOUTH, haveAccount);
+    	panelLayout.putConstraint(SpringLayout.WEST, signInButton, 173, SpringLayout.WEST, this);
     	signInButton.setForeground(new Color(0x730C0C));
     	signInButton.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
     	signInButton.setFocusable(false);
@@ -201,7 +233,6 @@ public class SignupPanel extends JPanel implements ActionListener {
     	signInButton.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
     	signInButton.addActionListener(this);
     	add(signInButton);
-
     }
 
     private void setupTextFieldPlaceholder(JTextField textField, String placeholder) {
@@ -249,17 +280,22 @@ public class SignupPanel extends JPanel implements ActionListener {
         passwordField.setEchoChar((char) 0);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
 
         if (source == questionLink) {
-            CardLayout clLayout = (CardLayout) contentPane.getLayout();
+        	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            new SignUpQuestion(parentFrame);
+        } else if (source == termsConditionsLink || source == privacyPolicyLink){
+        	CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "TermsConditionsPanel");
         } else if (source == signUpButton) {
             // Check if the terms and conditions checkbox is selected
             if (!chckbxTermsConditions.isSelected()) {
                 // Show warning dialog
-                JOptionPane.showMessageDialog(this, "You must agree to the Terms & Conditions.", "Warning", JOptionPane.WARNING_MESSAGE);
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                new TermsConditionsWarning(parentFrame);
                 // Navigate back to Terms & Conditions panel
                 CardLayout clLayout = (CardLayout) contentPane.getLayout();
                 clLayout.show(contentPane, "TermsConditionsPanel");
@@ -272,17 +308,51 @@ public class SignupPanel extends JPanel implements ActionListener {
                         new String(password.getPassword())
                     );
             	JOptionPane.showMessageDialog(this, "Information Saved.", "Sign Up Success", JOptionPane.INFORMATION_MESSAGE);
-            	//Other Scenarios: Missing input info, Account already exists, restrict characters with special characters (except _), invalid Phone or email
+            	/* Other Scenarios: Missing input info, Account already exists, restrict characters with special characters 
+            	 * (except _), invalid Phone or email */	 
             }
+        } else if (source == signInButton) {
+        	clearTextFields();
+        	CardLayout clLayout = (CardLayout) contentPane.getLayout();
+            clLayout.show(contentPane, "SignInPanel");
         }
     }
     
     private void saveUserInfo(String username, String firstName, String lastName, String email, String pwd) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("user_info.txt", true))) {
-        	writer.write(username + "," + firstName + "," + lastName + "," + email + "," + pwd + "\n");
+        String folderPath = "databases";
+        
+        // Ensure the directory exists
+        File folder = new File(folderPath);
+        if (!folder.exists()) {
+            folder.mkdir();  // Create the folder if it doesn't exist
+        }
+
+        String filePath = folderPath + File.separator + "user_info.txt";
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            writer.write(username + "," + firstName + "," + lastName + "," + email + "," + pwd + "\n");
         } catch (IOException e) {
-           //TO-DO
+            e.printStackTrace();
         }
     }
     
+    private void clearTextFields() {
+        // Reset text fields to their placeholder values
+        txtUsername.setText("Username");
+        txtUsername.setForeground(Color.GRAY);
+
+        firstName.setText("First Name");
+        firstName.setForeground(Color.GRAY);
+
+        lastName.setText("Last Name");
+        lastName.setForeground(Color.GRAY);
+
+        txtEmailOrPhone.setText("Email or Phone");
+        txtEmailOrPhone.setForeground(Color.GRAY);
+
+        password.setText("Password");
+        password.setForeground(Color.GRAY);
+        password.setEchoChar((char) 0);  // Reset password echo char for the placeholder
     }
+
+}   
