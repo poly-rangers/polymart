@@ -10,6 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.geom.RoundRectangle2D;
 
 public class StartupPanel extends JPanel implements ActionListener {
 
@@ -70,7 +74,7 @@ public class StartupPanel extends JPanel implements ActionListener {
         startupSubheader2.setFont(new Font("Montserrat", Font.BOLD, 18));
         add(startupSubheader2);
 
-        JButton startupStartButton = new JButton("gewwww, deserve ko 'to!");
+        StartButton startupStartButton = new StartButton("gewwww, deserve ko 'to!");
         layout.putConstraint(SpringLayout.NORTH, startupStartButton, 33, SpringLayout.SOUTH, startupSubheader2);
         layout.putConstraint(SpringLayout.WEST, startupStartButton, 69, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, startupStartButton, -66, SpringLayout.EAST, this);
@@ -82,6 +86,7 @@ public class StartupPanel extends JPanel implements ActionListener {
         startupStartButton.addActionListener(this);
         add(startupStartButton);
 
+
         ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_front.png"));
         Image scaledImage = originalImage.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
@@ -89,6 +94,38 @@ public class StartupPanel extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.WEST, startupImage, 73, SpringLayout.WEST, this);
         add(startupImage);
     }
+
+    
+    public class StartButton extends JButton {
+        public StartButton(String label) {
+            super(label);
+            setContentAreaFilled(false);
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+            if (getModel().isArmed()) {
+                g2.setColor(getBackground().darker());
+            } else {
+                g2.setColor(getBackground());
+            }
+            g2.fill(new RoundRectangle2D.Float(0, 0, getWidth(), getHeight(), 20, 20));
+
+            super.paintComponent(g);
+        }
+
+        @Override
+        protected void paintBorder(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(getForeground());
+            g2.draw(new RoundRectangle2D.Float(0, 0, getWidth() - 1, getHeight() - 1, 20, 20));
+        }
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

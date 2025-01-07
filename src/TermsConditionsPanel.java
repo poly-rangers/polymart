@@ -49,7 +49,7 @@ public class TermsConditionsPanel extends JPanel implements ActionListener{
         
         // Load text content from a file
         StringBuilder contentBuilder = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader("resources/terms_and_conditions.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("terms_and_conditions.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 contentBuilder.append(line).append(System.lineSeparator());
