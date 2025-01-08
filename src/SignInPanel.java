@@ -52,6 +52,7 @@ public class SignInPanel extends JPanel implements ActionListener{
         signInLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(signInLabel);
         
+        //Username Field
         usernameField = new JTextField("Username");
         setupTextFieldPlaceholder(usernameField, "Username");
         usernameField.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
@@ -63,6 +64,7 @@ public class SignInPanel extends JPanel implements ActionListener{
         add(usernameField);
         usernameField.setColumns(10);
         
+        //Password Field
         pwdField = new JPasswordField("Password");
         pwdField.setColumns(10);
         pwdField.setFont(new Font("Montserrat", Font.PLAIN, 12));
@@ -82,6 +84,7 @@ public class SignInPanel extends JPanel implements ActionListener{
         showPasswordCheckBox.addActionListener(this);
         add(showPasswordCheckBox);
         
+        //Log In Button
         loginButton = new JButton("Log In");
         panelLayout.putConstraint(SpringLayout.NORTH, loginButton, 34, SpringLayout.SOUTH, showPasswordCheckBox);
         panelLayout.putConstraint(SpringLayout.WEST, loginButton, 71, SpringLayout.WEST, this);
@@ -95,6 +98,7 @@ public class SignInPanel extends JPanel implements ActionListener{
         loginButton.addActionListener(this);
         add(loginButton);
         
+        //"New to Polymart?" Button
         JLabel newToPolymart = new JLabel("New to Polymart?");
         panelLayout.putConstraint(SpringLayout.NORTH, newToPolymart, 6, SpringLayout.SOUTH, loginButton);
         panelLayout.putConstraint(SpringLayout.WEST, newToPolymart, 94, SpringLayout.WEST, this);
@@ -102,6 +106,7 @@ public class SignInPanel extends JPanel implements ActionListener{
         newToPolymart.setFont(new Font("Montserrat SemiBold", Font.BOLD, 12));
         add(newToPolymart);
         
+        //Sign up here button
         signUpButton = new JButton("Sign up here");
         signUpButton.setOpaque(false);
         signUpButton.setFocusable(false);
@@ -113,7 +118,25 @@ public class SignInPanel extends JPanel implements ActionListener{
         signUpButton.addActionListener(this);
         add(signUpButton);
     }
-    
+ 
+    //Checks if the field is empty
+    private boolean checkIfEmpty() {
+        String username = usernameField.getText().trim();
+        String password = new String(pwdField.getPassword()).trim();
+
+        if (username.isEmpty() || username.equals("Username")) {
+            JOptionPane.showMessageDialog(this, "Please enter your username.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (password.isEmpty() || password.equals("Password")) {
+            JOptionPane.showMessageDialog(this, "Please enter your password.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true; // All fields are valid
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
@@ -129,11 +152,15 @@ public class SignInPanel extends JPanel implements ActionListener{
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "SignupPanel");
         } else if (source == loginButton) {
-            String username = usernameField.getText();
-            String password = new String(pwdField.getPassword());
-            
-            //Call method to validate login info
-            validateLogin(username, password);   
+        	// Check for empty fields before proceeding
+            if (checkIfEmpty()) {
+                String username = usernameField.getText().trim();
+                String password = new String(pwdField.getPassword()).trim();
+
+                //Call method to validate login info
+                validateLogin(username, password);
+            }
+               
       
         }
     }
@@ -198,7 +225,8 @@ public class SignInPanel extends JPanel implements ActionListener{
         });
         textField.setForeground(Color.GRAY);
     }
-
+    
+    //Password Field Label Placeholder
     private void setupPasswordFieldPlaceholder(JPasswordField passwordField) {
         passwordField.addFocusListener(new FocusAdapter() {
             @Override
@@ -232,4 +260,4 @@ public class SignInPanel extends JPanel implements ActionListener{
         pwdField.setForeground(Color.GRAY);
         pwdField.setEchoChar((char) 0);  // Reset password echo char for the placeholder
     }
-}
+} 

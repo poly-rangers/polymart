@@ -96,8 +96,8 @@ public class SignupPanel extends JPanel implements ActionListener {
         add(lastName);
 
         // Email or phone
-        txtEmailOrPhone = new JTextField("Email or Phone");
-        setupTextFieldPlaceholder(txtEmailOrPhone, "Email or Phone");
+        txtEmailOrPhone = new JTextField("Email");
+        setupTextFieldPlaceholder(txtEmailOrPhone, "Email");
         panelLayout.putConstraint(SpringLayout.NORTH, txtEmailOrPhone, 275, SpringLayout.NORTH, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, txtEmailOrPhone, -366, SpringLayout.SOUTH, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, lastName, -14, SpringLayout.NORTH, txtEmailOrPhone);
