@@ -2,7 +2,9 @@ package buyer;
 import frames.InformationSaved;
 import frames.SignUpQuestion;
 import frames.TermsConditionsWarning;
+import frames.FieldsInvalidAlert;
 import misc.RoundButton;
+import misc.FieldIsEmpty;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -288,40 +290,85 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
         Object source = e.getSource();
 
         if (source == questionLink) {
-        	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             new SignUpQuestion(parentFrame);
-        } else if (source == termsConditionsLink || source == privacyPolicyLink){
-        	CardLayout clLayout = (CardLayout) contentPane.getLayout();
+        } else if (source == termsConditionsLink || source == privacyPolicyLink) {
+            CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "BuyerTermsConditionsPanel");
         } else if (source == signUpButton) {
+            // Create instances of the ErrorHandler interface for each required field
+            FieldIsEmpty usernameValidation = new FieldIsEmpty(txtUsername, "Username");
+            FieldIsEmpty firstNameValidation = new FieldIsEmpty(firstName, "First Name");
+            FieldIsEmpty lastNameValidation = new FieldIsEmpty(lastName, "Last Name");
+            FieldIsEmpty emailOrPhoneValidation = new FieldIsEmpty(txtEmailOrPhone, "Email");
+            FieldIsEmpty passwordValidation = new FieldIsEmpty(password, "Password");
+
+            // Validate each field
+            if (!usernameValidation.validate()) {
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                usernameValidation.showAlert(parentFrame); 
+                return;
+            }
+            
+            //Handle username field that allows only underscore as a valid special character
+            String validUsername = txtUsername.getText().trim();
+            if (!isUsernameValid(validUsername)) {
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            	new FieldsInvalidAlert(parentFrame); // Cast to JFrame if needed
+            	return;
+            }
+
+            if (!firstNameValidation.validate()) {
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                firstNameValidation.showAlert(parentFrame); 
+                return;
+            }
+
+            if (!lastNameValidation.validate()) {
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                lastNameValidation.showAlert(parentFrame);
+                return;
+            }
+
+            if (!emailOrPhoneValidation.validate()) {
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                emailOrPhoneValidation.showAlert(parentFrame);
+                return;
+            }
+
+            if (!passwordValidation.validate()) {
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                passwordValidation.showAlert(parentFrame);
+                return;
+            }
+
+            //Validation for email format
+            String email = txtEmailOrPhone.getText().trim();
+            if (!email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z0-9]{2,7}$") && !email.matches("^\\d{10}$")) {
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            	new FieldsInvalidAlert(parentFrame); // Cast to JFrame if needed
+                return;
+            }
+
             // Check if the terms and conditions checkbox is selected
             if (!chckbxTermsConditions.isSelected()) {
-                // Show warning dialog
-            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 new TermsConditionsWarning(parentFrame);
-                // Navigate back to Terms & Conditions panel
                 CardLayout clLayout = (CardLayout) contentPane.getLayout();
                 clLayout.show(contentPane, "BuyerTermsConditionsPanel");
             } else {
-            	saveUserInfo(
-                        txtUsername.getText(),
-                        firstName.getText(),
-                        lastName.getText(),
-                        txtEmailOrPhone.getText(),
-                        new String(password.getPassword())
-                    );
-            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                saveUserInfo(txtUsername.getText().trim(), firstName.getText().trim(), lastName.getText().trim(),
+                        txtEmailOrPhone.getText().trim(), new String(password.getPassword()));
+                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 new InformationSaved(parentFrame);
-            	/* Other Scenarios: Missing input info, Account already exists, restrict characters with special characters 
-            	 * (except _), invalid Phone or email */	 
             }
         } else if (source == signInButton) {
-        	clearTextFields();
-        	CardLayout clLayout = (CardLayout) contentPane.getLayout();
+            clearTextFields();
+            CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "BuyerSignInPanel");
         }
     }
-    
+   
     private void saveUserInfo(String username, String firstName, String lastName, String email, String pwd) {
         String folderPath = "databases";
         
@@ -357,5 +404,10 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
         password.setText("Password");
         password.setForeground(Color.GRAY);
         password.setEchoChar((char) 0);  // Reset password echo char for the placeholder
+    }
+    
+    private boolean isUsernameValid(String username) {
+        String usernameRegex =  "^[a-zA-Z0-9_]+$";
+    	return username.matches(usernameRegex);
     }
 }   

@@ -124,7 +124,7 @@ public class SellerStartupPanel extends JPanel implements ActionListener {
     	if (source == startupStartButton) {
     		// Switch to SignupPanel
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
-            clLayout.show(contentPane, "BuyerSignupPanel");
+            clLayout.show(contentPane, "SellerSignupPanel");
     	} else if (source == goBackLink) {
     		CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "BuyerOrSeller");

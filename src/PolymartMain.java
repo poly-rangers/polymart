@@ -29,7 +29,6 @@ public class PolymartMain extends JFrame {
 			}
 		});
 	}
-
 	
     public PolymartMain() {
         setTitle("Polymart");
@@ -67,7 +66,7 @@ public class PolymartMain extends JFrame {
         contentPane.add(buyerSignInPanel, "BuyerSignInPanel");
         contentPane.add(buyerDashboardPanel, "BuyerDashboardPanel");
 
-        // Add buyer panels
+        // Add seller panels
         SellerStartupPanel sellerStartupPanel = new SellerStartupPanel(contentPane);
         SellerSignupPanel sellerSignupPanel = new SellerSignupPanel(contentPane);
         SellerSignInPanel sellerSignInPanel = new SellerSignInPanel(contentPane);

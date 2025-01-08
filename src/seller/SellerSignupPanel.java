@@ -2,7 +2,9 @@ package seller;
 import frames.InformationSaved;
 import frames.SignUpQuestion;
 import frames.TermsConditionsWarning;
+import frames.FieldsInvalidAlert;
 import misc.RoundButton;
+import misc.FieldIsEmpty;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -36,7 +38,6 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
     private JButton signInButton;
     private JTextField txtUsername;
     private JCheckBox chckbxTermsConditions;
-    private JButton goBackButton;
     
     public SellerSignupPanel(JPanel contentPane) {
     	this.contentPane = contentPane;
@@ -100,8 +101,8 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
         add(lastName);
 
         // Email or phone
-        txtEmailOrPhone = new JTextField("Email or Phone");
-        setupTextFieldPlaceholder(txtEmailOrPhone, "Email or Phone");
+        txtEmailOrPhone = new JTextField("Email");
+        setupTextFieldPlaceholder(txtEmailOrPhone, "Email");
         panelLayout.putConstraint(SpringLayout.NORTH, txtEmailOrPhone, 275, SpringLayout.NORTH, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, txtEmailOrPhone, -366, SpringLayout.SOUTH, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, lastName, -14, SpringLayout.NORTH, txtEmailOrPhone);
@@ -289,43 +290,85 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
         Object source = e.getSource();
 
         if (source == questionLink) {
-        	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             new SignUpQuestion(parentFrame);
-        } else if (source == termsConditionsLink || source == privacyPolicyLink){
-        	CardLayout clLayout = (CardLayout) contentPane.getLayout();
+        } else if (source == termsConditionsLink || source == privacyPolicyLink) {
+            CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "SellerTermsConditionsPanel");
         } else if (source == signUpButton) {
+            // Create instances of the ErrorHandler interface for each required field
+            FieldIsEmpty usernameValidation = new FieldIsEmpty(txtUsername, "Username");
+            FieldIsEmpty firstNameValidation = new FieldIsEmpty(firstName, "First Name");
+            FieldIsEmpty lastNameValidation = new FieldIsEmpty(lastName, "Last Name");
+            FieldIsEmpty emailOrPhoneValidation = new FieldIsEmpty(txtEmailOrPhone, "Email");
+            FieldIsEmpty passwordValidation = new FieldIsEmpty(password, "Password");
+
+            // Validate each field
+            if (!usernameValidation.validate()) {
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                usernameValidation.showAlert(parentFrame); 
+                return;
+            }
+            
+            //Handle username field that allows only underscore as a valid special character
+            String validUsername = txtUsername.getText().trim();
+            if (!isUsernameValid(validUsername)) {
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            	new FieldsInvalidAlert(parentFrame); // Cast to JFrame if needed
+            	return;
+            }
+
+            if (!firstNameValidation.validate()) {
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                firstNameValidation.showAlert(parentFrame); 
+                return;
+            }
+
+            if (!lastNameValidation.validate()) {
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                lastNameValidation.showAlert(parentFrame);
+                return;
+            }
+
+            if (!emailOrPhoneValidation.validate()) {
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                emailOrPhoneValidation.showAlert(parentFrame);
+                return;
+            }
+
+            if (!passwordValidation.validate()) {
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                passwordValidation.showAlert(parentFrame);
+                return;
+            }
+
+            //Validation for email format
+            String email = txtEmailOrPhone.getText().trim();
+            if (!email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z0-9]{2,7}$") && !email.matches("^\\d{10}$")) {
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            	new FieldsInvalidAlert(parentFrame); // Cast to JFrame if needed
+                return;
+            }
+
             // Check if the terms and conditions checkbox is selected
             if (!chckbxTermsConditions.isSelected()) {
-                // Show warning dialog
-            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 new TermsConditionsWarning(parentFrame);
-                // Navigate back to Terms & Conditions panel
                 CardLayout clLayout = (CardLayout) contentPane.getLayout();
-                clLayout.show(contentPane, "SellerTermsConditionsPanel");
+                clLayout.show(contentPane, "BuyerTermsConditionsPanel");
             } else {
-            	saveUserInfo(
-                        txtUsername.getText(),
-                        firstName.getText(),
-                        lastName.getText(),
-                        txtEmailOrPhone.getText(),
-                        new String(password.getPassword())
-                    );
-            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                saveUserInfo(txtUsername.getText().trim(), firstName.getText().trim(), lastName.getText().trim(),
+                        txtEmailOrPhone.getText().trim(), new String(password.getPassword()));
+                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 new InformationSaved(parentFrame);
-            	/* Other Scenarios: Missing input info, Account already exists, restrict characters with special characters 
-            	 * (except _), invalid Phone or email */	 
             }
         } else if (source == signInButton) {
-        	clearTextFields();
-        	CardLayout clLayout = (CardLayout) contentPane.getLayout();
+            clearTextFields();
+            CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "SellerSignInPanel");
-        } else if (source == goBackButton) {
-        	CardLayout clLayout = (CardLayout) contentPane.getLayout();
-            clLayout.show(contentPane, "BuyerOrSeller");
         }
     }
-    
+   
     private void saveUserInfo(String username, String firstName, String lastName, String email, String pwd) {
         String folderPath = "databases";
         
@@ -355,12 +398,16 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
         lastName.setText("Last Name");
         lastName.setForeground(Color.GRAY);
 
-        txtEmailOrPhone.setText("Email or Phone");
+        txtEmailOrPhone.setText("Email");
         txtEmailOrPhone.setForeground(Color.GRAY);
 
         password.setText("Password");
         password.setForeground(Color.GRAY);
         password.setEchoChar((char) 0);  // Reset password echo char for the placeholder
     }
-
+    
+    private boolean isUsernameValid(String username) {
+        String usernameRegex =  "^[a-zA-Z0-9_]+$";
+    	return username.matches(usernameRegex);
+    }
 }   
