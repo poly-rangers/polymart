@@ -1,5 +1,8 @@
+package seller;
+import frames.InformationSaved;
 import frames.SignUpQuestion;
 import frames.TermsConditionsWarning;
+import misc.RoundButton;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -16,7 +19,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class SignupPanel extends JPanel implements ActionListener {
+public class SellerSignupPanel extends JPanel implements ActionListener {
 
 	private JPanel contentPane;
     private static final long serialVersionUID = 1L;
@@ -33,8 +36,9 @@ public class SignupPanel extends JPanel implements ActionListener {
     private JButton signInButton;
     private JTextField txtUsername;
     private JCheckBox chckbxTermsConditions;
+    private JButton goBackButton;
     
-    public SignupPanel(JPanel contentPane) {
+    public SellerSignupPanel(JPanel contentPane) {
     	this.contentPane = contentPane;
     	
         setBackground(Color.WHITE);
@@ -200,7 +204,7 @@ public class SignupPanel extends JPanel implements ActionListener {
     	add(privacyPolicyLink);
 
         // Sign up button
-        signUpButton = new JButton("Sign Up");
+        signUpButton = new RoundButton("Sign Up", 30);
         panelLayout.putConstraint(SpringLayout.NORTH, signUpButton, 22, SpringLayout.SOUTH, termsConditionsLink);
         panelLayout.putConstraint(SpringLayout.WEST, signUpButton, 10, SpringLayout.WEST, uplCOR);
         panelLayout.putConstraint(SpringLayout.EAST, signUpButton, 0, SpringLayout.EAST, uplCOR);
@@ -289,7 +293,7 @@ public class SignupPanel extends JPanel implements ActionListener {
             new SignUpQuestion(parentFrame);
         } else if (source == termsConditionsLink || source == privacyPolicyLink){
         	CardLayout clLayout = (CardLayout) contentPane.getLayout();
-            clLayout.show(contentPane, "TermsConditionsPanel");
+            clLayout.show(contentPane, "SellerTermsConditionsPanel");
         } else if (source == signUpButton) {
             // Check if the terms and conditions checkbox is selected
             if (!chckbxTermsConditions.isSelected()) {
@@ -298,7 +302,7 @@ public class SignupPanel extends JPanel implements ActionListener {
                 new TermsConditionsWarning(parentFrame);
                 // Navigate back to Terms & Conditions panel
                 CardLayout clLayout = (CardLayout) contentPane.getLayout();
-                clLayout.show(contentPane, "TermsConditionsPanel");
+                clLayout.show(contentPane, "SellerTermsConditionsPanel");
             } else {
             	saveUserInfo(
                         txtUsername.getText(),
@@ -307,14 +311,18 @@ public class SignupPanel extends JPanel implements ActionListener {
                         txtEmailOrPhone.getText(),
                         new String(password.getPassword())
                     );
-            	JOptionPane.showMessageDialog(this, "Information Saved.", "Sign Up Success", JOptionPane.INFORMATION_MESSAGE);
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                new InformationSaved(parentFrame);
             	/* Other Scenarios: Missing input info, Account already exists, restrict characters with special characters 
             	 * (except _), invalid Phone or email */	 
             }
         } else if (source == signInButton) {
         	clearTextFields();
         	CardLayout clLayout = (CardLayout) contentPane.getLayout();
-            clLayout.show(contentPane, "SignInPanel");
+            clLayout.show(contentPane, "SellerSignInPanel");
+        } else if (source == goBackButton) {
+        	CardLayout clLayout = (CardLayout) contentPane.getLayout();
+            clLayout.show(contentPane, "BuyerOrSeller");
         }
     }
     
@@ -327,7 +335,7 @@ public class SignupPanel extends JPanel implements ActionListener {
             folder.mkdir();  // Create the folder if it doesn't exist
         }
 
-        String filePath = folderPath + File.separator + "user_info.txt";
+        String filePath = folderPath + File.separator + "seller_userinfo.txt";
         
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             writer.write(username + "," + firstName + "," + lastName + "," + email + "," + pwd + "\n");

@@ -1,6 +1,8 @@
+package buyer;
 import frames.LoginSuccessful;
 import frames.NoAccountFound;
 import frames.WrongAccountInfo;
+import misc.RoundButton;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -17,7 +19,7 @@ import java.awt.Font;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.LineBorder;
 
-public class SignInPanel extends JPanel implements ActionListener{
+public class BuyerSignInPanel extends JPanel implements ActionListener{
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField usernameField;
@@ -26,7 +28,7 @@ public class SignInPanel extends JPanel implements ActionListener{
     private JButton signUpButton;
     private JButton loginButton;
 
-    public SignInPanel(JPanel contentPane) {
+    public BuyerSignInPanel(JPanel contentPane) {
         this.contentPane = contentPane;
         
         setBackground(new Color(255, 255, 255));
@@ -82,7 +84,7 @@ public class SignInPanel extends JPanel implements ActionListener{
         showPasswordCheckBox.addActionListener(this);
         add(showPasswordCheckBox);
         
-        loginButton = new JButton("Log In");
+        loginButton = new RoundButton("Log In", 30);
         panelLayout.putConstraint(SpringLayout.NORTH, loginButton, 34, SpringLayout.SOUTH, showPasswordCheckBox);
         panelLayout.putConstraint(SpringLayout.WEST, loginButton, 71, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, loginButton, 76, SpringLayout.SOUTH, showPasswordCheckBox);
@@ -127,7 +129,7 @@ public class SignInPanel extends JPanel implements ActionListener{
         } else if (source == signUpButton) {
         	clearTextFields();
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
-            clLayout.show(contentPane, "SignupPanel");
+            clLayout.show(contentPane, "BuyerSignupPanel");
         } else if (source == loginButton) {
             String username = usernameField.getText();
             String password = new String(pwdField.getPassword());
@@ -140,7 +142,7 @@ public class SignInPanel extends JPanel implements ActionListener{
     
     private void validateLogin(String username, String password) {
     // Specify the path to the user_info.txt file inside the databases folder
-      String filePath = "databases/user_info.txt"; 
+      String filePath = "databases/buyer_userinfo.txt"; 
       boolean usernameFound = false;
       
       try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -155,7 +157,7 @@ public class SignInPanel extends JPanel implements ActionListener{
                             new LoginSuccessful(parentFrame);
                             //Switching to DashboardPanel
                     		CardLayout clLayout = (CardLayout) contentPane.getLayout();
-                            clLayout.show(contentPane, "DashboardPanel");
+                            clLayout.show(contentPane, "BuyerDashboardPanel");
                     		break;
                     	} else {
                     		JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
@@ -171,7 +173,7 @@ public class SignInPanel extends JPanel implements ActionListener{
                 //Switch to sign up panel
                 clearTextFields();
                 CardLayout clLayout = (CardLayout) contentPane.getLayout();
-                clLayout.show(contentPane, "SignupPanel");
+                clLayout.show(contentPane, "BuyerSignupPanel");
             }
         } catch (IOException ex) {
             ex.printStackTrace();

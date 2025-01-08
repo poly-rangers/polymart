@@ -1,3 +1,4 @@
+package seller;
 import java.awt.Color;
 import java.awt.Image;
 
@@ -11,12 +12,12 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class DashboardPanel extends JPanel {
+public class SellerDashboardPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField txtDitoSearchBar;
 
-	public DashboardPanel(JPanel contentPane) {
+	public SellerDashboardPanel(JPanel contentPane) {
 
 		setBackground(Color.WHITE);
         setBounds(100, 100, 414, 660);
@@ -42,7 +43,7 @@ public class DashboardPanel extends JPanel {
         panelLayout.putConstraint(SpringLayout.NORTH, txtDitoSearchBar, 28, SpringLayout.SOUTH, startupImage);
         panelLayout.putConstraint(SpringLayout.WEST, txtDitoSearchBar, 63, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.EAST, txtDitoSearchBar, -86, SpringLayout.EAST, this);
-        txtDitoSearchBar.setText("dito search bar baks ahahha");
+        txtDitoSearchBar.setText("DASHBOARD NI SELLER");
         add(txtDitoSearchBar);
         txtDitoSearchBar.setColumns(10);
         

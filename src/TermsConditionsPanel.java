@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
+
+import misc.RoundButton;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,9 +23,11 @@ public class TermsConditionsPanel extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private String userRole;
 	
-	public TermsConditionsPanel(JPanel contentPane) {
+	public TermsConditionsPanel(JPanel contentPane, String userRole) {
 		this.contentPane = contentPane;
+		this.userRole = userRole;
 		
 		setBackground(Color.WHITE);
         setBounds(100, 100, 414, 660);
@@ -82,7 +87,7 @@ public class TermsConditionsPanel extends JPanel implements ActionListener{
         add(scrollPane);
 
         // Create the "I Agree" button
-        JButton agreeButton = new JButton("I Agree");
+        JButton agreeButton = new RoundButton("I Agree", 30);
         agreeButton.setFont(new Font("Montserrat", Font.BOLD, 16));
         agreeButton.setBackground(new Color(128, 0, 0));
         agreeButton.setForeground(Color.WHITE);
@@ -97,6 +102,11 @@ public class TermsConditionsPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
         CardLayout clLayout = (CardLayout) contentPane.getLayout();
-        clLayout.show(contentPane, "SignupPanel");
+
+        if ("Buyer".equalsIgnoreCase(userRole)) {
+            clLayout.show(contentPane, "BuyerSignupPanel");
+        } else if ("Seller".equalsIgnoreCase(userRole)) {
+            clLayout.show(contentPane, "SellerSignupPanel");
+        }
 	}
 }
