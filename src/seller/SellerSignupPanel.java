@@ -2,6 +2,7 @@ package seller;
 import frames.InformationSaved;
 import frames.SignUpQuestion;
 import frames.TermsConditionsWarning;
+import misc.RoundButton;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -203,7 +204,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
     	add(privacyPolicyLink);
 
         // Sign up button
-        signUpButton = new JButton("Sign Up");
+        signUpButton = new RoundButton("Sign Up", 30);
         panelLayout.putConstraint(SpringLayout.NORTH, signUpButton, 22, SpringLayout.SOUTH, termsConditionsLink);
         panelLayout.putConstraint(SpringLayout.WEST, signUpButton, 10, SpringLayout.WEST, uplCOR);
         panelLayout.putConstraint(SpringLayout.EAST, signUpButton, 0, SpringLayout.EAST, uplCOR);
@@ -236,13 +237,6 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
     	signInButton.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
     	signInButton.addActionListener(this);
     	add(signInButton);
-    	
-    	goBackButton = new JButton("go back");
-    	panelLayout.putConstraint(SpringLayout.NORTH, goBackButton, 35, SpringLayout.NORTH, this);
-    	panelLayout.putConstraint(SpringLayout.EAST, goBackButton, -40, SpringLayout.EAST, this);
-    	goBackButton.setFont(new Font("Montserrat", Font.BOLD, 11));
-    	goBackButton.addActionListener(this);
-    	add(goBackButton);
     }
 
     private void setupTextFieldPlaceholder(JTextField textField, String placeholder) {

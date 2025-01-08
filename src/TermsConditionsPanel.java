@@ -11,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
+
+import misc.RoundButton;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -84,7 +87,7 @@ public class TermsConditionsPanel extends JPanel implements ActionListener{
         add(scrollPane);
 
         // Create the "I Agree" button
-        JButton agreeButton = new JButton("I Agree");
+        JButton agreeButton = new RoundButton("I Agree", 30);
         agreeButton.setFont(new Font("Montserrat", Font.BOLD, 16));
         agreeButton.setBackground(new Color(128, 0, 0));
         agreeButton.setForeground(Color.WHITE);

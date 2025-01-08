@@ -35,7 +35,7 @@ public class InformationSaved extends JDialog {
         panel.setBackground(new Color(115, 12, 12));
         panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
-        JLabel header = new JLabel("<html><div style='width: 216px; text-align: center;'>log-in successful!</div></html>", SwingConstants.CENTER);
+        JLabel header = new JLabel("<html><div style='width: 216px; text-align: center;'>information saved!</div></html>", SwingConstants.CENTER);
         header.setForeground(Color.WHITE);
         header.setFont(new Font("Montserrat", Font.BOLD, 19));
         header.setBorder(BorderFactory.createEmptyBorder(25, 19, 0, 19)); // padding 

@@ -2,6 +2,7 @@ package seller;
 import frames.LoginSuccessful;
 import frames.NoAccountFound;
 import frames.WrongAccountInfo;
+import misc.RoundButton;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -83,7 +84,7 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
         showPasswordCheckBox.addActionListener(this);
         add(showPasswordCheckBox);
         
-        loginButton = new JButton("Log In");
+        loginButton = new RoundButton("Log In", 30);
         panelLayout.putConstraint(SpringLayout.NORTH, loginButton, 34, SpringLayout.SOUTH, showPasswordCheckBox);
         panelLayout.putConstraint(SpringLayout.WEST, loginButton, 71, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, loginButton, 76, SpringLayout.SOUTH, showPasswordCheckBox);
