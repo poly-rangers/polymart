@@ -1,3 +1,4 @@
+package buyer;
 import java.awt.Color;
 import java.awt.Image;
 
@@ -11,12 +12,12 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class DashboardPanel extends JPanel {
+public class BuyerDashboardPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField txtDitoSearchBar;
 
-	public DashboardPanel(JPanel contentPane) {
+	public BuyerDashboardPanel(JPanel contentPane) {
 
 		setBackground(Color.WHITE);
         setBounds(100, 100, 414, 660);

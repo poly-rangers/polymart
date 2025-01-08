@@ -1,3 +1,4 @@
+package seller;
 import frames.LoginSuccessful;
 import frames.NoAccountFound;
 import frames.WrongAccountInfo;
@@ -17,7 +18,7 @@ import java.awt.Font;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.LineBorder;
 
-public class SignInPanel extends JPanel implements ActionListener{
+public class SellerSignInPanel extends JPanel implements ActionListener{
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField usernameField;
@@ -26,7 +27,7 @@ public class SignInPanel extends JPanel implements ActionListener{
     private JButton signUpButton;
     private JButton loginButton;
 
-    public SignInPanel(JPanel contentPane) {
+    public SellerSignInPanel(JPanel contentPane) {
         this.contentPane = contentPane;
         
         setBackground(new Color(255, 255, 255));

@@ -1,3 +1,5 @@
+package buyer;
+import frames.InformationSaved;
 import frames.SignUpQuestion;
 import frames.TermsConditionsWarning;
 
@@ -16,7 +18,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class SignupPanel extends JPanel implements ActionListener {
+public class BuyerSignupPanel extends JPanel implements ActionListener {
 
 	private JPanel contentPane;
     private static final long serialVersionUID = 1L;
@@ -34,7 +36,7 @@ public class SignupPanel extends JPanel implements ActionListener {
     private JTextField txtUsername;
     private JCheckBox chckbxTermsConditions;
     
-    public SignupPanel(JPanel contentPane) {
+    public BuyerSignupPanel(JPanel contentPane) {
     	this.contentPane = contentPane;
     	
         setBackground(Color.WHITE);
@@ -307,7 +309,8 @@ public class SignupPanel extends JPanel implements ActionListener {
                         txtEmailOrPhone.getText(),
                         new String(password.getPassword())
                     );
-            	JOptionPane.showMessageDialog(this, "Information Saved.", "Sign Up Success", JOptionPane.INFORMATION_MESSAGE);
+            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                new InformationSaved(parentFrame);
             	/* Other Scenarios: Missing input info, Account already exists, restrict characters with special characters 
             	 * (except _), invalid Phone or email */	 
             }

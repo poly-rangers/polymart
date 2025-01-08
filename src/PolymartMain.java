@@ -2,6 +2,10 @@ import java.awt.EventQueue;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import buyer.BuyerDashboardPanel;
+import buyer.BuyerSignInPanel;
+import buyer.BuyerSignupPanel;
+
 import java.awt.CardLayout;
 
 public class PolymartMain extends JFrame {
@@ -38,13 +42,13 @@ public class PolymartMain extends JFrame {
 
         // Add panels
         StartupPanel startupPanel = new StartupPanel(contentPane);
-        SignupPanel signupPanel = new SignupPanel(contentPane);
+        BuyerSignupPanel buyerSignupPanel = new BuyerSignupPanel(contentPane);
         TermsConditionsPanel termsConditionsPanel = new TermsConditionsPanel(contentPane);
-        SignInPanel signInPanel = new SignInPanel(contentPane);
-        DashboardPanel dashboardPanel = new DashboardPanel(contentPane);
+        BuyerSignInPanel signInPanel = new BuyerSignInPanel(contentPane);
+        BuyerDashboardPanel dashboardPanel = new BuyerDashboardPanel(contentPane);
 
         contentPane.add(startupPanel, "StartupPanel");
-        contentPane.add(signupPanel, "SignupPanel");
+        contentPane.add(buyerSignupPanel, "SignupPanel");
         contentPane.add(termsConditionsPanel, "TermsConditionsPanel");
         contentPane.add(signInPanel, "SignInPanel");
         contentPane.add(dashboardPanel, "DashboardPanel");
