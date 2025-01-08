@@ -5,6 +5,11 @@ import javax.swing.JPanel;
 import buyer.BuyerDashboardPanel;
 import buyer.BuyerSignInPanel;
 import buyer.BuyerSignupPanel;
+import buyer.BuyerStartupPanel;
+import seller.SellerDashboardPanel;
+import seller.SellerSignInPanel;
+import seller.SellerSignupPanel;
+import seller.SellerStartupPanel;
 
 import java.awt.CardLayout;
 
@@ -40,21 +45,41 @@ public class PolymartMain extends JFrame {
         JPanel contentPane = new JPanel(new CardLayout());
         setContentPane(contentPane);
 
-        // Add panels
-        StartupPanel startupPanel = new StartupPanel(contentPane);
+        //Add and initialize common panels
+        BuyerOrSeller buyerOrSeller = new BuyerOrSeller(contentPane);
+        contentPane.add(buyerOrSeller, "BuyerOrSeller");
+   
+        //Add and initialize dynamic panel
+        TermsConditionsPanel buyerTermsConditionsPanel = new TermsConditionsPanel(contentPane, "Buyer");
+        TermsConditionsPanel sellerTermsConditionsPanel = new TermsConditionsPanel(contentPane, "Seller");
+
+        contentPane.add(buyerTermsConditionsPanel, "BuyerTermsConditionsPanel");
+        contentPane.add(sellerTermsConditionsPanel, "SellerTermsConditionsPanel");
+       
+        // Add buyer panels
+        BuyerStartupPanel buyerStartupPanel = new BuyerStartupPanel(contentPane);
         BuyerSignupPanel buyerSignupPanel = new BuyerSignupPanel(contentPane);
-        TermsConditionsPanel termsConditionsPanel = new TermsConditionsPanel(contentPane);
-        BuyerSignInPanel signInPanel = new BuyerSignInPanel(contentPane);
-        BuyerDashboardPanel dashboardPanel = new BuyerDashboardPanel(contentPane);
+        BuyerSignInPanel buyerSignInPanel = new BuyerSignInPanel(contentPane);
+        BuyerDashboardPanel buyerDashboardPanel = new BuyerDashboardPanel(contentPane);
 
-        contentPane.add(startupPanel, "StartupPanel");
-        contentPane.add(buyerSignupPanel, "SignupPanel");
-        contentPane.add(termsConditionsPanel, "TermsConditionsPanel");
-        contentPane.add(signInPanel, "SignInPanel");
-        contentPane.add(dashboardPanel, "DashboardPanel");
+        contentPane.add(buyerStartupPanel, "BuyerStartupPanel");
+        contentPane.add(buyerSignupPanel, "BuyerSignupPanel");
+        contentPane.add(buyerSignInPanel, "BuyerSignInPanel");
+        contentPane.add(buyerDashboardPanel, "BuyerDashboardPanel");
 
+        // Add buyer panels
+        SellerStartupPanel sellerStartupPanel = new SellerStartupPanel(contentPane);
+        SellerSignupPanel sellerSignupPanel = new SellerSignupPanel(contentPane);
+        SellerSignInPanel sellerSignInPanel = new SellerSignInPanel(contentPane);
+        SellerDashboardPanel sellerDashboardPanel = new SellerDashboardPanel(contentPane);
+
+        contentPane.add(sellerStartupPanel, "SellerStartupPanel");
+        contentPane.add(sellerSignupPanel, "SellerSignupPanel");
+        contentPane.add(sellerSignInPanel, "SellerSignInPanel");
+        contentPane.add(sellerDashboardPanel, "SellerDashboardPanel");
+        
         // Show StartupPanel initially
         CardLayout clLayout = (CardLayout) contentPane.getLayout();
-        clLayout.show(contentPane, "StartupPanel");
+        clLayout.show(contentPane, "BuyerOrSeller");
     }
 }

@@ -1,3 +1,4 @@
+package buyer;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -11,12 +12,12 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
-public class StartupPanel extends JPanel implements ActionListener {
+public class BuyerStartupPanel extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
 
-    public StartupPanel(JPanel contentPane) {
+    public BuyerStartupPanel(JPanel contentPane) {
         this.contentPane = contentPane;
 
         setBackground(Color.WHITE);
@@ -94,6 +95,6 @@ public class StartupPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // Switch to SignupPanel
         CardLayout clLayout = (CardLayout) contentPane.getLayout();
-        clLayout.show(contentPane, "SignupPanel");
+        clLayout.show(contentPane, "BuyerSignupPanel");
     }
 }

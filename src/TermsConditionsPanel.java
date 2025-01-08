@@ -1,4 +1,3 @@
-
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -21,9 +20,11 @@ public class TermsConditionsPanel extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private String userRole;
 	
-	public TermsConditionsPanel(JPanel contentPane) {
+	public TermsConditionsPanel(JPanel contentPane, String userRole) {
 		this.contentPane = contentPane;
+		this.userRole = userRole;
 		
 		setBackground(Color.WHITE);
         setBounds(100, 100, 414, 660);
@@ -98,6 +99,11 @@ public class TermsConditionsPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
         CardLayout clLayout = (CardLayout) contentPane.getLayout();
-        clLayout.show(contentPane, "SignupPanel");
+
+        if ("Buyer".equalsIgnoreCase(userRole)) {
+            clLayout.show(contentPane, "BuyerSignupPanel");
+        } else if ("Seller".equalsIgnoreCase(userRole)) {
+            clLayout.show(contentPane, "SellerSignupPanel");
+        }
 	}
 }

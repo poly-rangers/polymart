@@ -128,7 +128,7 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
         } else if (source == signUpButton) {
         	clearTextFields();
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
-            clLayout.show(contentPane, "SignupPanel");
+            clLayout.show(contentPane, "SellerSignupPanel");
         } else if (source == loginButton) {
             String username = usernameField.getText();
             String password = new String(pwdField.getPassword());
@@ -141,7 +141,7 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
     
     private void validateLogin(String username, String password) {
     // Specify the path to the user_info.txt file inside the databases folder
-      String filePath = "databases/user_info.txt"; 
+      String filePath = "databases/seller_userinfo.txt"; 
       boolean usernameFound = false;
       
       try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -156,7 +156,7 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
                             new LoginSuccessful(parentFrame);
                             //Switching to DashboardPanel
                     		CardLayout clLayout = (CardLayout) contentPane.getLayout();
-                            clLayout.show(contentPane, "DashboardPanel");
+                            clLayout.show(contentPane, "SellerDashboardPanel");
                     		break;
                     	} else {
                     		JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
@@ -172,7 +172,7 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
                 //Switch to sign up panel
                 clearTextFields();
                 CardLayout clLayout = (CardLayout) contentPane.getLayout();
-                clLayout.show(contentPane, "SignupPanel");
+                clLayout.show(contentPane, "SellerSignupPanel");
             }
         } catch (IOException ex) {
             ex.printStackTrace();

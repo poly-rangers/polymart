@@ -1,4 +1,0 @@
-helloworld,Hello,World,helloworld@gmail.com,hello
-Username,First Name,Last Name,Email or Phone,Password
-Username,First Name,Last Name,Email or Phone,Password
-asd,asd,asdasdas,asdas,d

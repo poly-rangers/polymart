@@ -35,6 +35,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
     private JButton signInButton;
     private JTextField txtUsername;
     private JCheckBox chckbxTermsConditions;
+    private JButton goBackButton;
     
     public SellerSignupPanel(JPanel contentPane) {
     	this.contentPane = contentPane;
@@ -235,6 +236,13 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
     	signInButton.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
     	signInButton.addActionListener(this);
     	add(signInButton);
+    	
+    	goBackButton = new JButton("go back");
+    	panelLayout.putConstraint(SpringLayout.NORTH, goBackButton, 35, SpringLayout.NORTH, this);
+    	panelLayout.putConstraint(SpringLayout.EAST, goBackButton, -40, SpringLayout.EAST, this);
+    	goBackButton.setFont(new Font("Montserrat", Font.BOLD, 11));
+    	goBackButton.addActionListener(this);
+    	add(goBackButton);
     }
 
     private void setupTextFieldPlaceholder(JTextField textField, String placeholder) {
@@ -291,7 +299,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
             new SignUpQuestion(parentFrame);
         } else if (source == termsConditionsLink || source == privacyPolicyLink){
         	CardLayout clLayout = (CardLayout) contentPane.getLayout();
-            clLayout.show(contentPane, "TermsConditionsPanel");
+            clLayout.show(contentPane, "SellerTermsConditionsPanel");
         } else if (source == signUpButton) {
             // Check if the terms and conditions checkbox is selected
             if (!chckbxTermsConditions.isSelected()) {
@@ -300,7 +308,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
                 new TermsConditionsWarning(parentFrame);
                 // Navigate back to Terms & Conditions panel
                 CardLayout clLayout = (CardLayout) contentPane.getLayout();
-                clLayout.show(contentPane, "TermsConditionsPanel");
+                clLayout.show(contentPane, "SellerTermsConditionsPanel");
             } else {
             	saveUserInfo(
                         txtUsername.getText(),
@@ -317,7 +325,10 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
         } else if (source == signInButton) {
         	clearTextFields();
         	CardLayout clLayout = (CardLayout) contentPane.getLayout();
-            clLayout.show(contentPane, "SignInPanel");
+            clLayout.show(contentPane, "SellerSignInPanel");
+        } else if (source == goBackButton) {
+        	CardLayout clLayout = (CardLayout) contentPane.getLayout();
+            clLayout.show(contentPane, "BuyerOrSeller");
         }
     }
     
@@ -330,7 +341,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
             folder.mkdir();  // Create the folder if it doesn't exist
         }
 
-        String filePath = folderPath + File.separator + "user_info.txt";
+        String filePath = folderPath + File.separator + "seller_userinfo.txt";
         
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             writer.write(username + "," + firstName + "," + lastName + "," + email + "," + pwd + "\n");

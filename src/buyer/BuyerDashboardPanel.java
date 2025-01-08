@@ -43,7 +43,7 @@ public class BuyerDashboardPanel extends JPanel {
         panelLayout.putConstraint(SpringLayout.NORTH, txtDitoSearchBar, 28, SpringLayout.SOUTH, startupImage);
         panelLayout.putConstraint(SpringLayout.WEST, txtDitoSearchBar, 63, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.EAST, txtDitoSearchBar, -86, SpringLayout.EAST, this);
-        txtDitoSearchBar.setText("dito search bar baks ahahha");
+        txtDitoSearchBar.setText("DASHBOARD NI BUYER");
         add(txtDitoSearchBar);
         txtDitoSearchBar.setColumns(10);
         
