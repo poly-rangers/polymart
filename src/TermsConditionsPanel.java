@@ -34,8 +34,13 @@ public class TermsConditionsPanel extends JPanel implements ActionListener{
         SpringLayout panelLayout = new SpringLayout();
         setLayout(panelLayout);
         
+        // Choose image based on userRole
+        String imagePath = userRole.equalsIgnoreCase("Buyer")
+                ? "/polypup_buyer.icon.png"
+                : "/polypup_seller.icon.png";
+        
         // Icon next to header title
-        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_icon.png"));
+        ImageIcon originalImage = new ImageIcon(this.getClass().getResource(imagePath));
         Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
         panelLayout.putConstraint(SpringLayout.NORTH, startupImage, 24, SpringLayout.NORTH, this);

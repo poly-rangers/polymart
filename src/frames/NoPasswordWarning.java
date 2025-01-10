@@ -4,12 +4,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class FieldsInvalidAlert extends JDialog {
+public class NoPasswordWarning extends JDialog {
 
 	private static final long serialVersionUID = -4807469757488186170L;
 
-	public FieldsInvalidAlert(JFrame parent) {
-        super(parent, "may hinahabol?", true); // value set to true so user can't interact with main frame.
+	public NoPasswordWarning(JFrame parent) {
+        super(parent, "???", true); // value set to true so user can't interact with main frame.
         setUndecorated(true);
         setSize(318, 168);
         setLocationRelativeTo(parent); // Center the dialog relative to parent
@@ -23,12 +23,12 @@ public class FieldsInvalidAlert extends JDialog {
         panel.setBackground(new Color(115, 12, 12));
         panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
-        JLabel header = new JLabel("<html><div style='width: 216px; text-align: center;'>nagmamadali? naghahabol?</div></html>", SwingConstants.CENTER);
+        JLabel header = new JLabel("<html><div style='width: 216px; text-align: center;'>waley kang password!</div></html>", SwingConstants.CENTER);
         header.setForeground(Color.WHITE);
-        header.setFont(new Font("Montserrat", Font.BOLD, 18));
+        header.setFont(new Font("Montserrat", Font.BOLD, 19));
         header.setBorder(BorderFactory.createEmptyBorder(25, 19, 0, 19)); // padding 
 
-        JLabel content = new JLabel("<html><div style='width: 216px; text-align: center;'>pacheck mabuti baks, pero mali yung format ng username or email mo jusko PO </div></html>", SwingConstants.CENTER);
+        JLabel content = new JLabel("<html><div style='width: 216px; text-align: center;'>nhak okay ka lang ba... di mo kasi nalagyan ng password.. di gagana ean bhe</div></html>", SwingConstants.CENTER);
         content.setForeground(Color.WHITE);
         content.setFont(new Font("Montserrat", Font.PLAIN, 17));
         content.setBorder(BorderFactory.createEmptyBorder(13, 19, 10, 19)); // padding
@@ -47,7 +47,7 @@ public class FieldsInvalidAlert extends JDialog {
         buttonPanel.setBackground(new Color(115, 12, 12));
 
         // "okay, gets!" Button
-        JButton btnGoBack = new JButton("Go Back");
+        JButton btnGoBack = new JButton("sorry po..");
         btnGoBack.setBackground(new Color(115, 12, 12));
         btnGoBack.setFont(new Font("Montserrat", Font.BOLD, 14));
         btnGoBack.setForeground(Color.WHITE);

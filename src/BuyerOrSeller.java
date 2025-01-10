@@ -70,7 +70,7 @@ public class BuyerOrSeller extends JPanel implements ActionListener {
         startupHeader3.setFont(new Font("Montserrat", Font.ITALIC, 32));
         add(startupHeader3);
 
-        buyerRoleButton = new RoundButton("BUYER", 30);
+        buyerRoleButton = new RoundButton("BUYER", 20);
         panelLayout.putConstraint(SpringLayout.NORTH, buyerRoleButton, -13, SpringLayout.SOUTH, startupSubheader1);
         panelLayout.putConstraint(SpringLayout.WEST, buyerRoleButton, 90, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, buyerRoleButton, 30, SpringLayout.SOUTH, startupSubheader1);
@@ -83,7 +83,7 @@ public class BuyerOrSeller extends JPanel implements ActionListener {
         add(buyerRoleButton);
 
         
-        sellerRoleButton = new RoundButton("SELLER", 30);
+        sellerRoleButton = new RoundButton("SELLER", 20);
         panelLayout.putConstraint(SpringLayout.NORTH, sellerRoleButton, 16, SpringLayout.SOUTH, buyerRoleButton);
         panelLayout.putConstraint(SpringLayout.WEST, sellerRoleButton, 90, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, sellerRoleButton, -112, SpringLayout.SOUTH, this);

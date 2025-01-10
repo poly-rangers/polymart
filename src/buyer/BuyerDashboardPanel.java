@@ -25,7 +25,7 @@ public class BuyerDashboardPanel extends JPanel {
         setLayout(panelLayout);
         
         // Icon + title
-        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_icon.png"));
+        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_buyer.icon.png"));
         Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
         panelLayout.putConstraint(SpringLayout.NORTH, startupImage, 24, SpringLayout.NORTH, this);

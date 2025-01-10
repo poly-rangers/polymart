@@ -1,6 +1,8 @@
 package seller;
 import frames.LoginSuccessful;
 import frames.NoAccountFound;
+import frames.NoPasswordWarning;
+import frames.NoUsernameWarning;
 import frames.WrongAccountInfo;
 import misc.RoundButton;
 
@@ -37,7 +39,7 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
         setLayout(panelLayout);
         
         // Icon next to header title
-        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_icon.png"));
+        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_seller.icon.png"));
         Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
         panelLayout.putConstraint(SpringLayout.NORTH, startupImage, 24, SpringLayout.NORTH, this);
@@ -116,6 +118,26 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
         add(signUpButton);
     }
     
+    //Checks if the field is empty
+    private boolean checkIfEmpty() {
+        String username = usernameField.getText().trim();
+        String password = new String(pwdField.getPassword()).trim();
+
+        if (username.isEmpty() || username.equals("Username")) {
+        	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        	new NoUsernameWarning(parentFrame);
+            return false;
+        }
+
+        if (password.isEmpty() || password.equals("Password")) {
+        	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        	new NoPasswordWarning(parentFrame);
+            return false;
+        }
+
+        return true; // All fields are valid
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
@@ -129,14 +151,16 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
         } else if (source == signUpButton) {
         	clearTextFields();
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
-            clLayout.show(contentPane, "SellerSignupPanel");
+            clLayout.show(contentPane, "BuyerSignupPanel");
         } else if (source == loginButton) {
-            String username = usernameField.getText();
-            String password = new String(pwdField.getPassword());
-            
-            //Call method to validate login info
-            validateLogin(username, password);   
-      
+        	// Check for empty fields before proceeding
+            if (checkIfEmpty()) {
+                String username = usernameField.getText().trim();
+                String password = new String(pwdField.getPassword()).trim();
+
+                //Call method to validate login info
+                validateLogin(username, password);
+            }
         }
     }
     

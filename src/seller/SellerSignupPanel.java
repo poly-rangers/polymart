@@ -48,7 +48,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
         setLayout(panelLayout);
 
         // Icon next to header title
-        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_icon.png"));
+        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_seller.icon.png"));
         Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
         panelLayout.putConstraint(SpringLayout.NORTH, startupImage, 24, SpringLayout.NORTH, this);
@@ -361,6 +361,9 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
                         txtEmailOrPhone.getText().trim(), new String(password.getPassword()));
                 JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 new InformationSaved(parentFrame);
+                //Redirect to SignInPanel 
+                CardLayout clLayout = (CardLayout) contentPane.getLayout();
+                clLayout.show(contentPane, "SellerSignInPanel");
             }
         } else if (source == signInButton) {
             clearTextFields();

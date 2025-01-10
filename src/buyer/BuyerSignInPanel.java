@@ -1,6 +1,8 @@
 package buyer;
 import frames.LoginSuccessful;
 import frames.NoAccountFound;
+import frames.NoPasswordWarning;
+import frames.NoUsernameWarning;
 import frames.WrongAccountInfo;
 import misc.RoundButton;
 
@@ -37,7 +39,7 @@ public class BuyerSignInPanel extends JPanel implements ActionListener{
         setLayout(panelLayout);
         
         // Icon next to header title
-        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_icon.png"));
+        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_buyer.icon.png"));
         Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
         panelLayout.putConstraint(SpringLayout.NORTH, startupImage, 24, SpringLayout.NORTH, this);
@@ -129,12 +131,14 @@ public class BuyerSignInPanel extends JPanel implements ActionListener{
         String password = new String(pwdField.getPassword()).trim();
 
         if (username.isEmpty() || username.equals("Username")) {
-            JOptionPane.showMessageDialog(this, "Please enter your username.", "Error", JOptionPane.ERROR_MESSAGE);
+        	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        	new NoUsernameWarning(parentFrame);
             return false;
         }
 
         if (password.isEmpty() || password.equals("Password")) {
-            JOptionPane.showMessageDialog(this, "Please enter your password.", "Error", JOptionPane.ERROR_MESSAGE);
+        	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        	new NoPasswordWarning(parentFrame);
             return false;
         }
 
@@ -164,8 +168,6 @@ public class BuyerSignInPanel extends JPanel implements ActionListener{
                 //Call method to validate login info
                 validateLogin(username, password);
             }
-               
-      
         }
     }
     

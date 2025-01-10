@@ -23,14 +23,11 @@ public class EmptyFieldAlert extends JDialog {
         panel.setBackground(new Color(115, 12, 12));
         panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
-        // Used HTML formatting for underlined and italicized texts
-        String headerText = "<html><div style='width: 216px; text-align: center;'>pauso spotted!</div></html>";
         JLabel header = new JLabel("<html><div style='width: 216px; text-align: center;'>???</div></html>", SwingConstants.CENTER);
         header.setForeground(Color.WHITE);
         header.setFont(new Font("Montserrat", Font.BOLD, 19));
         header.setBorder(BorderFactory.createEmptyBorder(25, 19, 0, 19)); // padding 
 
-        String contentText = "<html><div style='width: 216px; text-align: center;'>hindi ka pa nagreregister baks, wag kang una una jan! mag register ka muna gew</div></html>";
         JLabel content = new JLabel("<html><div style='width: 216px; text-align: center;'>nagmamadali ka ba baks? lagyan mo muna ng laman jusko PO</div></html>", SwingConstants.CENTER);
         content.setForeground(Color.WHITE);
         content.setFont(new Font("Montserrat", Font.PLAIN, 17));
