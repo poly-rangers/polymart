@@ -20,8 +20,8 @@ public class SellerStartupPanel extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JButton startupStartButton;
-    private JButton goBackLink;
+    private JButton bttnStart;
+    private JButton bttnGoBack;
 
     public SellerStartupPanel(JPanel contentPane) {
         this.contentPane = contentPane;
@@ -31,101 +31,101 @@ public class SellerStartupPanel extends JPanel implements ActionListener {
         SpringLayout panelLayout = new SpringLayout();
         setLayout(panelLayout);
 
-        JLabel startupHeader1 = new JLabel("WELCOME TO");
-        panelLayout.putConstraint(SpringLayout.WEST, startupHeader1, 10, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.SOUTH, startupHeader1, -328, SpringLayout.SOUTH, this);
-        panelLayout.putConstraint(SpringLayout.EAST, startupHeader1, -5, SpringLayout.EAST, this);
-        startupHeader1.setHorizontalAlignment(SwingConstants.CENTER);
-        startupHeader1.setForeground(new Color(153, 0, 0));
-        startupHeader1.setFont(new Font("Montserrat", Font.PLAIN, 24));
-        add(startupHeader1);
+        JLabel lblStartupHeader1 = new JLabel("WELCOME TO");
+        panelLayout.putConstraint(SpringLayout.WEST, lblStartupHeader1, 10, SpringLayout.WEST, this);
+        panelLayout.putConstraint(SpringLayout.SOUTH, lblStartupHeader1, -328, SpringLayout.SOUTH, this);
+        panelLayout.putConstraint(SpringLayout.EAST, lblStartupHeader1, -5, SpringLayout.EAST, this);
+        lblStartupHeader1.setHorizontalAlignment(SwingConstants.CENTER);
+        lblStartupHeader1.setForeground(new Color(153, 0, 0));
+        lblStartupHeader1.setFont(new Font("Montserrat", Font.PLAIN, 24));
+        add(lblStartupHeader1);
 
-        JLabel startupHeader2 = new JLabel("POLYMART,");
-        panelLayout.putConstraint(SpringLayout.WEST, startupHeader2, 10, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.EAST, startupHeader2, -5, SpringLayout.EAST, this);
-        startupHeader2.setForeground(new Color(153, 0, 0));
-        startupHeader2.setFont(new Font("Montserrat", Font.BOLD, 48));
-        startupHeader2.setHorizontalAlignment(SwingConstants.CENTER);
-        add(startupHeader2);
+        JLabel lblStartupHeader2 = new JLabel("POLYMART,");
+        panelLayout.putConstraint(SpringLayout.WEST, lblStartupHeader2, 10, SpringLayout.WEST, this);
+        panelLayout.putConstraint(SpringLayout.EAST, lblStartupHeader2, -5, SpringLayout.EAST, this);
+        lblStartupHeader2.setForeground(new Color(153, 0, 0));
+        lblStartupHeader2.setFont(new Font("Montserrat", Font.BOLD, 48));
+        lblStartupHeader2.setHorizontalAlignment(SwingConstants.CENTER);
+        add(lblStartupHeader2);
 
-        JLabel startupHeader3 = new JLabel("baks!");
-        panelLayout.putConstraint(SpringLayout.NORTH, startupHeader3, 382, SpringLayout.NORTH, this);
-        panelLayout.putConstraint(SpringLayout.WEST, startupHeader3, 20, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.EAST, startupHeader3, -5, SpringLayout.EAST, this);
-        panelLayout.putConstraint(SpringLayout.SOUTH, startupHeader2, 0, SpringLayout.NORTH, startupHeader3);
-        startupHeader3.setHorizontalAlignment(SwingConstants.CENTER);
-        startupHeader3.setForeground(new Color(153, 0, 0));
-        startupHeader3.setFont(new Font("Montserrat", Font.ITALIC, 32));
-        add(startupHeader3);
+        JLabel lblStartupHeader3 = new JLabel("baks!");
+        panelLayout.putConstraint(SpringLayout.NORTH, lblStartupHeader3, 382, SpringLayout.NORTH, this);
+        panelLayout.putConstraint(SpringLayout.WEST, lblStartupHeader3, 20, SpringLayout.WEST, this);
+        panelLayout.putConstraint(SpringLayout.EAST, lblStartupHeader3, -5, SpringLayout.EAST, this);
+        panelLayout.putConstraint(SpringLayout.SOUTH, lblStartupHeader2, 0, SpringLayout.NORTH, lblStartupHeader3);
+        lblStartupHeader3.setHorizontalAlignment(SwingConstants.CENTER);
+        lblStartupHeader3.setForeground(new Color(153, 0, 0));
+        lblStartupHeader3.setFont(new Font("Montserrat", Font.ITALIC, 32));
+        add(lblStartupHeader3);
 
-        JLabel startupSubheader1 = new JLabel("ready ka na ba yumaman, te?");
-        panelLayout.putConstraint(SpringLayout.WEST, startupSubheader1, 10, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.SOUTH, startupSubheader1, -189, SpringLayout.SOUTH, this);
-        panelLayout.putConstraint(SpringLayout.EAST, startupSubheader1, -5, SpringLayout.EAST, this);
-        panelLayout.putConstraint(SpringLayout.SOUTH, startupHeader3, -32, SpringLayout.NORTH, startupSubheader1);
-        startupSubheader1.setHorizontalAlignment(SwingConstants.CENTER);
-        startupSubheader1.setForeground(Color.BLACK);
-        startupSubheader1.setFont(new Font("Montserrat", Font.BOLD, 18));
-        add(startupSubheader1);
+        JLabel lblStartupSubheader1 = new JLabel("ready ka na ba yumaman, te?");
+        panelLayout.putConstraint(SpringLayout.WEST, lblStartupSubheader1, 10, SpringLayout.WEST, this);
+        panelLayout.putConstraint(SpringLayout.SOUTH, lblStartupSubheader1, -189, SpringLayout.SOUTH, this);
+        panelLayout.putConstraint(SpringLayout.EAST, lblStartupSubheader1, -5, SpringLayout.EAST, this);
+        panelLayout.putConstraint(SpringLayout.SOUTH, lblStartupHeader3, -32, SpringLayout.NORTH, lblStartupSubheader1);
+        lblStartupSubheader1.setHorizontalAlignment(SwingConstants.CENTER);
+        lblStartupSubheader1.setForeground(Color.BLACK);
+        lblStartupSubheader1.setFont(new Font("Montserrat", Font.BOLD, 18));
+        add(lblStartupSubheader1);
 
-        JLabel startupSubheader2 = new JLabel("mag-sign up ka muna hahah");
-        panelLayout.putConstraint(SpringLayout.NORTH, startupSubheader2, 0, SpringLayout.SOUTH, startupSubheader1);
-        panelLayout.putConstraint(SpringLayout.WEST, startupSubheader2, 10, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.EAST, startupSubheader2, -5, SpringLayout.EAST, this);
-        startupSubheader2.setHorizontalAlignment(SwingConstants.CENTER);
-        startupSubheader2.setForeground(Color.BLACK);
-        startupSubheader2.setFont(new Font("Montserrat", Font.BOLD, 18));
-        add(startupSubheader2);
+        JLabel lblStartupSubheader2 = new JLabel("mag-sign up ka muna hahah");
+        panelLayout.putConstraint(SpringLayout.NORTH, lblStartupSubheader2, 0, SpringLayout.SOUTH, lblStartupSubheader1);
+        panelLayout.putConstraint(SpringLayout.WEST, lblStartupSubheader2, 10, SpringLayout.WEST, this);
+        panelLayout.putConstraint(SpringLayout.EAST, lblStartupSubheader2, -5, SpringLayout.EAST, this);
+        lblStartupSubheader2.setHorizontalAlignment(SwingConstants.CENTER);
+        lblStartupSubheader2.setForeground(Color.BLACK);
+        lblStartupSubheader2.setFont(new Font("Montserrat", Font.BOLD, 18));
+        add(lblStartupSubheader2);
 
-        startupStartButton = new RoundButton("gewwww, deserve ko 'to!", 30);
-        panelLayout.putConstraint(SpringLayout.NORTH, startupStartButton, 33, SpringLayout.SOUTH, startupSubheader2);
-        panelLayout.putConstraint(SpringLayout.WEST, startupStartButton, 69, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.EAST, startupStartButton, -66, SpringLayout.EAST, this);
-        startupStartButton.setForeground(Color.WHITE);
-        startupStartButton.setBackground(new Color(102, 0, 0));
-        startupStartButton.setFont(new Font("Montserrat", Font.BOLD, 16));
-        startupStartButton.setBorderPainted(false);
-        startupStartButton.setFocusPainted(false);
-        startupStartButton.addActionListener(this);
-        add(startupStartButton);
+        bttnStart = new RoundButton("gewwww, deserve ko 'to!", 30);
+        panelLayout.putConstraint(SpringLayout.NORTH, bttnStart, 33, SpringLayout.SOUTH, lblStartupSubheader2);
+        panelLayout.putConstraint(SpringLayout.WEST, bttnStart, 69, SpringLayout.WEST, this);
+        panelLayout.putConstraint(SpringLayout.EAST, bttnStart, -66, SpringLayout.EAST, this);
+        bttnStart.setForeground(Color.WHITE);
+        bttnStart.setBackground(new Color(102, 0, 0));
+        bttnStart.setFont(new Font("Montserrat", Font.BOLD, 16));
+        bttnStart.setBorderPainted(false);
+        bttnStart.setFocusPainted(false);
+        bttnStart.addActionListener(this);
+        add(bttnStart);
 
-        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_front.png"));
-        Image scaledImage = originalImage.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
-        JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
-        panelLayout.putConstraint(SpringLayout.NORTH, startupImage, 69, SpringLayout.NORTH, this);
-        panelLayout.putConstraint(SpringLayout.WEST, startupImage, 73, SpringLayout.WEST, this);
-        add(startupImage);
+        ImageIcon imgIconOriginalImage = new ImageIcon(this.getClass().getResource("/polypup_front.png"));
+        Image imgScaled = imgIconOriginalImage.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+        JLabel imgStartup = new JLabel(new ImageIcon(imgScaled));
+        panelLayout.putConstraint(SpringLayout.NORTH, imgStartup, 69, SpringLayout.NORTH, this);
+        panelLayout.putConstraint(SpringLayout.WEST, imgStartup, 73, SpringLayout.WEST, this);
+        add(imgStartup);
         
         // Mali napindot mo? label
-        JLabel maliKa = new JLabel("oh mali napindot mo? hays");
-        panelLayout.putConstraint(SpringLayout.NORTH, maliKa, 6, SpringLayout.SOUTH, startupStartButton);
-        panelLayout.putConstraint(SpringLayout.EAST, maliKa, -133, SpringLayout.EAST, this);
-        maliKa.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 10));
-        add(maliKa);
+        JLabel lblStartupSubheader3 = new JLabel("oh mali napindot mo? hays");
+        panelLayout.putConstraint(SpringLayout.NORTH, lblStartupSubheader3, 6, SpringLayout.SOUTH, bttnStart);
+        panelLayout.putConstraint(SpringLayout.EAST, lblStartupSubheader3, -133, SpringLayout.EAST, this);
+        lblStartupSubheader3.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 10));
+        add(lblStartupSubheader3);
     	
     	// Sign in here button
-        goBackLink = new JButton("Go Back");
-        panelLayout.putConstraint(SpringLayout.NORTH, goBackLink, 2, SpringLayout.SOUTH, maliKa);
-        panelLayout.putConstraint(SpringLayout.EAST, goBackLink, -183, SpringLayout.EAST, this);
-        goBackLink.setBackground(Color.WHITE);
-    	goBackLink.setForeground(new Color(0x730C0C));
-    	goBackLink.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
-    	goBackLink.setFocusable(false);
-    	goBackLink.setOpaque(false);
-    	goBackLink.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
-    	goBackLink.addActionListener(this);
-    	add(goBackLink);
+        bttnGoBack = new JButton("Go Back");
+        panelLayout.putConstraint(SpringLayout.NORTH, bttnGoBack, 2, SpringLayout.SOUTH, lblStartupSubheader3);
+        panelLayout.putConstraint(SpringLayout.EAST, bttnGoBack, -183, SpringLayout.EAST, this);
+        bttnGoBack.setBackground(Color.WHITE);
+    	bttnGoBack.setForeground(new Color(0x730C0C));
+    	bttnGoBack.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
+    	bttnGoBack.setFocusable(false);
+    	bttnGoBack.setOpaque(false);
+    	bttnGoBack.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
+    	bttnGoBack.addActionListener(this);
+    	add(bttnGoBack);
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-    	Object source = e.getSource();
+    public void actionPerformed(ActionEvent actEvent) {
+    	Object objSourceEvent = actEvent.getSource();
     	
-    	if (source == startupStartButton) {
+    	if (objSourceEvent == bttnStart) {
     		// Switch to SignupPanel
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "SellerSignupPanel");
-    	} else if (source == goBackLink) {
+    	} else if (objSourceEvent == bttnGoBack) {
     		CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "BuyerOrSeller");
     	}    
