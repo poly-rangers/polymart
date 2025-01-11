@@ -1,7 +1,5 @@
 package seller;
-import frames.InformationSaved;
-import frames.SignUpQuestion;
-import frames.TermsConditionsWarning;
+import frames.CustomDialog;
 import frames.FieldsInvalidAlert;
 import misc.RoundButton;
 import misc.FieldIsEmpty;
@@ -291,8 +289,8 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
         Object source = e.getSource();
 
         if (source == bttnQuestionLink) {
-            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            new SignUpQuestion(parentFrame);
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            new CustomDialog(frame, "ganyan po ba ang tono ng mga nagtatanong maem?", "This app is exclusive to PUPians only! By uploading your Certificate of Registration, you are  <u>confirming and verifying</u> that you are an <u> official PUP student.</u> <br> <br> oh edi special ka niyan ngayon? gets na ba baks? end call ko na to.", "okay, gets");
         } else if (source == bttnTermsConditions || source == bttnPrivacyPolicy) {
             CardLayout clLayout = (CardLayout) panelContent.getLayout();
             clLayout.show(panelContent, "SellerTermsConditionsPanel");
@@ -353,15 +351,16 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
 
             // Check if the terms and conditions checkbox is selected
             if (!chckbxTermsConditions.isSelected()) {
-                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                new TermsConditionsWarning(parentFrame);
+            	 JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                 new CustomDialog(frame, "check the label ateh!", "ano nhak?! aus ausin mo naman pagdedesisyon mo! i-check mo muna ang Terms and Conditions!", "sorry po...");
+                 
                 CardLayout clLayout = (CardLayout) panelContent.getLayout();
                 clLayout.show(panelContent, "BuyerTermsConditionsPanel");
             } else {
                 saveUserInfo(txtFieldUsername.getText().trim(), txtFieldFirstName.getText().trim(), txtFieldLastName.getText().trim(),
                         txtFieldEmailOrPhone.getText().trim(), new String(pwdFieldPassword.getPassword()));
-                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                new InformationSaved(parentFrame);
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                new CustomDialog(frame, "Sign Up success", "ayarn! pasok ka na sa banga sis, pwede ka na mag log-in at mag-access sa dashboard", "Proceed");
                 //Redirect to SignInPanel 
                 CardLayout clLayout = (CardLayout) panelContent.getLayout();
                 clLayout.show(panelContent, "SellerSignInPanel");

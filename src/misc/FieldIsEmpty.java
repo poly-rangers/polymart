@@ -25,6 +25,8 @@ public class FieldIsEmpty implements ErrorHandler {
         if (parent instanceof JFrame) {
             // Pass the parent as a JFrame to EmptyFieldAlert
             new EmptyFieldAlert((JFrame) parent);
+            
+            
         } else {
             // Handle the case where parent is not a JFrame (optional)
             System.err.println("Parent is not an instance of JFrame.");
