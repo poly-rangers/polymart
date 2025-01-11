@@ -2,7 +2,8 @@ package misc;
 
 import javax.swing.JTextField;
 import javax.swing.JFrame;
-import frames.EmptyFieldAlert;
+
+import frames.CustomDialog;
 
 public class FieldIsEmpty implements ErrorHandler {
     private JTextField field;
@@ -21,10 +22,10 @@ public class FieldIsEmpty implements ErrorHandler {
     }
 
     @Override
-    public void showAlert(java.awt.Component parent) {
-        if (parent instanceof JFrame) {
+    public void showAlert(java.awt.Component parentFrame) {
+        if (parentFrame instanceof JFrame) {
             // Pass the parent as a JFrame to EmptyFieldAlert
-            new EmptyFieldAlert((JFrame) parent);
+        	new CustomDialog((JFrame) parentFrame, "kulang teh!", "nagmamadali ka ba baks? lagyan mo muna ng laman jusko PO", "sigi nhay'ed"); 
             
             
         } else {
