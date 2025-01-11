@@ -4,16 +4,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SignUpQuestion extends JDialog {
+public class CustomDialog extends JDialog {
    
 	private static final long serialVersionUID = 3165285528614856510L;
 
-	public SignUpQuestion(JFrame parent){
+	public CustomDialog(JFrame parent, String headerText, String contentText, String buttonText){
     	super(parent, "Why do I need this?", true); // value set to true so user can't interact with main frame.
       	setUndecorated(true);
-        setSize(318, 282);
-        setLocationRelativeTo(parent);
-      
+//        setSize(318, 282);
+             
         getContentPane().setBackground(new Color(115, 12, 12));
         getContentPane().setLayout(new BorderLayout(0, 0)); // Set horizontal and vertical gaps to 0
         
@@ -23,14 +22,12 @@ public class SignUpQuestion extends JDialog {
         panel.setBackground(new Color(115, 12, 12));
         panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // No border (padding) around the panel
 
-        String headerText = "<html><div style='width: 216px; text-align: center;'>ganyan po ba ang tono ng mga nagtatanong maem?</div></html>";
-        JLabel header = new JLabel(headerText, SwingConstants.CENTER);
+        JLabel header = new JLabel("<html><div style='width: 216px; text-align: center;'>" + headerText + "</div></html>", SwingConstants.CENTER);
         header.setForeground(Color.WHITE);
         header.setFont(new Font("Montserrat", Font.BOLD, 19));
         header.setBorder(BorderFactory.createEmptyBorder(25, 19, 0, 19));
 
-        String contentText = "<html><div style='width: 216px; text-align: center;'>This app is exclusive to PUPians only! By uploading your Certificate of Registration, you are  <u>confirming and verifying</u> that you are an <u> official PUP student.</u> <br> <br> oh edi special ka niyan ngayon? gets na ba baks? end call ko na to.</div></html>";
-        JLabel content = new JLabel(contentText, SwingConstants.CENTER);
+        JLabel content = new JLabel("<html><div style='width: 216px; text-align: center;'>" + contentText + "</div></html>", SwingConstants.CENTER);
         content.setForeground(Color.WHITE);
         content.setFont(new Font("Montserrat", Font.PLAIN, 14));
         content.setBorder(BorderFactory.createEmptyBorder(13, 19, 10, 19));
@@ -50,7 +47,7 @@ public class SignUpQuestion extends JDialog {
         buttonPanel.setBackground(new Color(115, 12, 12)); // Set the buttonPanel's background to match the frame color
 
         // Transparent button
-        JButton button = new JButton("okay, gets!");
+        JButton button = new JButton(buttonText);
         button.setBackground(new Color(115, 12, 12));
         button.setFont(new Font("Montserrat", Font.BOLD, 14));
         button.setForeground(Color.WHITE);
@@ -72,7 +69,9 @@ public class SignUpQuestion extends JDialog {
         getContentPane().add(panel, BorderLayout.NORTH); // First panel at the top
         getContentPane().add(separator, BorderLayout.CENTER); // Add the separator divider
         getContentPane().add(buttonPanel, BorderLayout.SOUTH); // Button panel at the bottom
-
+        
+        pack();
+        setLocationRelativeTo(parent);
         setVisible(true);
 
        

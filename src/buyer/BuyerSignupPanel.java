@@ -1,7 +1,5 @@
 package buyer;
-import frames.InformationSaved;
-import frames.SignUpQuestion;
-import frames.TermsConditionsWarning;
+import frames.CustomDialog;
 import frames.FieldsInvalidAlert;
 import misc.RoundButton;
 import misc.FieldIsEmpty;

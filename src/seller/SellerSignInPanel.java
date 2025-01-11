@@ -1,11 +1,6 @@
 package seller;
-import frames.LoginSuccessful;
-import frames.NoAccountFound;
-import frames.NoPasswordWarning;
-import frames.NoUsernameWarning;
-import frames.WrongAccountInfo;
+import frames.CustomDialog;
 import misc.RoundButton;
-
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
@@ -124,14 +119,14 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
         String password = new String(pwdField.getPassword()).trim();
 
         if (username.isEmpty() || username.equals("Username")) {
-        	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        	new NoUsernameWarning(parentFrame);
+        	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        	new CustomDialog(frame, "Username field empty", "nhak okay ka lang ba... di mo kasi nalagyan ng username... di gagana ean bhe", "sorry po..");
             return false;
         }
 
         if (password.isEmpty() || password.equals("Password")) {
-        	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        	new NoPasswordWarning(parentFrame);
+        	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        	new CustomDialog(frame, "Password field empty", "nhak okay ka lang ba... di mo kasi nalagyan ng password... di gagana ean bhe", "sorry po..");
             return false;
         }
 
@@ -177,23 +172,23 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
                     if(userData[0].equals(username)) {
                     	usernameFound = true;
                     	if(userData[4].equals(password)) {
-                    		JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                            new LoginSuccessful(parentFrame);
+                    		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                            new CustomDialog(frame, "Login success!", "Welcome to the fam, baks! We're glad to have you here on Polymart <3 Feel free to scroll and explore our dashboard ^__^", "Thank you!");
                             //Switching to DashboardPanel
                     		CardLayout clLayout = (CardLayout) contentPane.getLayout();
                             clLayout.show(contentPane, "SellerDashboardPanel");
                     		break;
                     	} else {
-                    		JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                            new WrongAccountInfo(parentFrame);
-                    		break;
+                    		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                            new CustomDialog(frame, "You're WRONG!", "mali username mo or password mo - ewan ko sau te ulitin mo yan", "Try Again");
+                      		break;          	
                     	}
                     } 
                 } 
             }
             if(!usernameFound) {
-            	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                new NoAccountFound(parentFrame);
+            	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                new CustomDialog(frame, "pauso SPOTTED!", "hindi ka pa nags-sign up baks, wag kang una una jan! mag sign up ka muna gew", "Create Account");
                 //Switch to sign up panel
                 clearTextFields();
                 CardLayout clLayout = (CardLayout) contentPane.getLayout();
