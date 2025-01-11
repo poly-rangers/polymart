@@ -1,6 +1,5 @@
 package buyer;
 import frames.CustomDialog;
-import frames.FieldsInvalidAlert;
 import misc.RoundButton;
 import misc.FieldIsEmpty;
 
@@ -289,7 +288,7 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
 
         if (source == bttnQuestionLink) {
             JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            new SignUpQuestion(parentFrame);
+            new CustomDialog(parentFrame, "ganyan po ba ang tono ng mga nagtatanong maem?", "This app is exclusive to PUPians only! By uploading your Certificate of Registration, you are  <u>confirming and verifying</u> that you are an <u> official PUP student.</u> <br> <br> oh edi special ka niyan ngayon? gets na ba baks? end call ko na to.", "okay, gets");
         } else if (source == bttnTermsConditions || source == bttnPrivacyPolicy) {
             CardLayout clLayout = (CardLayout) panelContent.getLayout();
             clLayout.show(panelContent, "BuyerTermsConditionsPanel");
@@ -312,8 +311,8 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
             String validUsername = txtFieldUsername.getText().trim();
             if (!isUsernameValid(validUsername)) {
             	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            	new FieldsInvalidAlert(parentFrame); // Cast to JFrame if needed
-            	return;
+            	new CustomDialog(parentFrame, "kulang teh!", "nagmamadali ka ba baks? lagyan mo muna ng laman jusko PO", "sigi nhay'ed"); 
+                return;
             }
 
             if (!firstNameValidation.validate()) {
@@ -344,21 +343,23 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
             String email = txtFieldEmailOrPhone.getText().trim();
             if (!email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z0-9]{2,7}$") && !email.matches("^\\d{10}$")) {
             	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            	new FieldsInvalidAlert(parentFrame); // Cast to JFrame if needed
+            	new CustomDialog(parentFrame, "nagmamadali? naghahabol?", "pacheck mabuti baks, pero mali yung format ng username or email mo jusko PO", "sorry po..."); 
                 return;
             }
 
             // Check if the terms and conditions checkbox is selected
             if (!chckbxTermsConditions.isSelected()) {
                 JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                new TermsConditionsWarning(parentFrame);
+                new CustomDialog(parentFrame, "check the label ateh!", "ano nhak?! aus ausin mo naman pagdedesisyon mo! i-check mo muna ang Terms and Conditions!", "sorry po...");
+                
                 CardLayout clLayout = (CardLayout) panelContent.getLayout();
                 clLayout.show(panelContent, "BuyerTermsConditionsPanel");
             } else {
                 saveUserInfo(txtFieldUsername.getText().trim(), txtFieldFirstName.getText().trim(), txtFieldLastName.getText().trim(),
                         txtFieldEmailOrPhone.getText().trim(), new String(pwdFieldPassword.getPassword()));
                 JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                new InformationSaved(parentFrame);
+                new CustomDialog(parentFrame, "Sign Up success", "ayarn! pasok ka na sa banga sis, pwede ka na mag log-in at mag-access sa dashboard", "Proceed");
+                
                 //Redirect to SignInPanel 
                 CardLayout clLayout = (CardLayout) panelContent.getLayout();
                 clLayout.show(panelContent, "BuyerSignInPanel");
@@ -399,7 +400,7 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
         txtFieldLastName.setText("Last Name");
         txtFieldLastName.setForeground(Color.GRAY);
 
-        txtFieldEmailOrPhone.setText("Email or Phone");
+        txtFieldEmailOrPhone.setText("Email");
         txtFieldEmailOrPhone.setForeground(Color.GRAY);
 
         pwdFieldPassword.setText("Password");
