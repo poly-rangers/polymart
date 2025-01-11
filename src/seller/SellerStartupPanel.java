@@ -77,9 +77,10 @@ public class SellerStartupPanel extends JPanel implements ActionListener {
         lblStartupSubheader2.setFont(new Font("Montserrat", Font.BOLD, 18));
         add(lblStartupSubheader2);
 
-        bttnStart = new RoundButton("gewwww, deserve ko 'to!", 30);
-        panelLayout.putConstraint(SpringLayout.NORTH, bttnStart, 33, SpringLayout.SOUTH, lblStartupSubheader2);
+        bttnStart = new RoundButton("gewwww, deserve ko 'to!", 45);
+        panelLayout.putConstraint(SpringLayout.NORTH, bttnStart, 19, SpringLayout.SOUTH, lblStartupSubheader2);
         panelLayout.putConstraint(SpringLayout.WEST, bttnStart, 69, SpringLayout.WEST, this);
+        panelLayout.putConstraint(SpringLayout.SOUTH, bttnStart, 61, SpringLayout.SOUTH, lblStartupSubheader2);
         panelLayout.putConstraint(SpringLayout.EAST, bttnStart, -66, SpringLayout.EAST, this);
         bttnStart.setForeground(Color.WHITE);
         bttnStart.setBackground(new Color(102, 0, 0));
@@ -98,14 +99,14 @@ public class SellerStartupPanel extends JPanel implements ActionListener {
         
         // Mali napindot mo? label
         JLabel lblStartupSubheader3 = new JLabel("oh mali napindot mo? hays");
-        panelLayout.putConstraint(SpringLayout.NORTH, lblStartupSubheader3, 6, SpringLayout.SOUTH, bttnStart);
         panelLayout.putConstraint(SpringLayout.EAST, lblStartupSubheader3, -133, SpringLayout.EAST, this);
         lblStartupSubheader3.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 10));
         add(lblStartupSubheader3);
     	
     	// Sign in here button
         bttnGoBack = new JButton("Go Back");
-        panelLayout.putConstraint(SpringLayout.NORTH, bttnGoBack, 2, SpringLayout.SOUTH, lblStartupSubheader3);
+        panelLayout.putConstraint(SpringLayout.NORTH, bttnGoBack, 576, SpringLayout.NORTH, this);
+        panelLayout.putConstraint(SpringLayout.SOUTH, lblStartupSubheader3, -2, SpringLayout.NORTH, bttnGoBack);
         panelLayout.putConstraint(SpringLayout.EAST, bttnGoBack, -183, SpringLayout.EAST, this);
         bttnGoBack.setBackground(Color.WHITE);
     	bttnGoBack.setForeground(new Color(0x730C0C));

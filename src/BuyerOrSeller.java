@@ -31,6 +31,7 @@ public class BuyerOrSeller extends JPanel implements ActionListener {
 
         JLabel startupHeader1 = new JLabel("WELCOME TO");
         panelLayout.putConstraint(SpringLayout.NORTH, startupHeader1, 270, SpringLayout.NORTH, this);
+        panelLayout.putConstraint(SpringLayout.WEST, startupHeader1, 10, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.EAST, startupHeader1, -5, SpringLayout.EAST, this);
         startupHeader1.setHorizontalAlignment(SwingConstants.CENTER);
         startupHeader1.setForeground(new Color(153, 0, 0));
@@ -39,8 +40,9 @@ public class BuyerOrSeller extends JPanel implements ActionListener {
 
         JLabel startupHeader2 = new JLabel("POLYMART,");
         panelLayout.putConstraint(SpringLayout.NORTH, startupHeader2, 8, SpringLayout.SOUTH, startupHeader1);
+        panelLayout.putConstraint(SpringLayout.WEST, startupHeader2, 10, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, startupHeader2, -310, SpringLayout.SOUTH, this);
-        panelLayout.putConstraint(SpringLayout.EAST, startupHeader2, 0, SpringLayout.EAST, startupHeader1);
+        panelLayout.putConstraint(SpringLayout.EAST, startupHeader2, -5, SpringLayout.EAST, this);
         startupHeader2.setForeground(new Color(153, 0, 0));
         startupHeader2.setFont(new Font("Montserrat", Font.BOLD, 48));
         startupHeader2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -50,9 +52,7 @@ public class BuyerOrSeller extends JPanel implements ActionListener {
         JLabel startupSubheader1 = new JLabel("o bago ang lahat, ano ka jan?");
         //startupSubheader1.setBackground(new Color(255, 255, 255));
         panelLayout.putConstraint(SpringLayout.NORTH, startupSubheader1, 400, SpringLayout.NORTH, this);
-        panelLayout.putConstraint(SpringLayout.SOUTH, startupSubheader1, -200, SpringLayout.SOUTH, this);
-        panelLayout.putConstraint(SpringLayout.WEST, startupHeader2, 0, SpringLayout.WEST, startupSubheader1);
-        panelLayout.putConstraint(SpringLayout.WEST, startupHeader1, 0, SpringLayout.WEST, startupSubheader1);
+        panelLayout.putConstraint(SpringLayout.SOUTH, startupSubheader1, -218, SpringLayout.SOUTH, this);
         panelLayout.putConstraint(SpringLayout.WEST, startupSubheader1, 10, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.EAST, startupSubheader1, -5, SpringLayout.EAST, this);
         startupSubheader1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -71,9 +71,8 @@ public class BuyerOrSeller extends JPanel implements ActionListener {
         add(startupHeader3);
 
         buyerRoleButton = new RoundButton("BUYER", 45);
-        panelLayout.putConstraint(SpringLayout.NORTH, buyerRoleButton, -13, SpringLayout.SOUTH, startupSubheader1);
+        panelLayout.putConstraint(SpringLayout.NORTH, buyerRoleButton, 5, SpringLayout.SOUTH, startupSubheader1);
         panelLayout.putConstraint(SpringLayout.WEST, buyerRoleButton, 90, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.SOUTH, buyerRoleButton, 30, SpringLayout.SOUTH, startupSubheader1);
         panelLayout.putConstraint(SpringLayout.EAST, buyerRoleButton, -90, SpringLayout.EAST, this);
         buyerRoleButton.setForeground(Color.WHITE);
         buyerRoleButton.setBackground(new Color(102, 0, 0));
@@ -84,7 +83,8 @@ public class BuyerOrSeller extends JPanel implements ActionListener {
 
         
         sellerRoleButton = new RoundButton("SELLER", 45);
-        panelLayout.putConstraint(SpringLayout.NORTH, sellerRoleButton, 16, SpringLayout.SOUTH, buyerRoleButton);
+        panelLayout.putConstraint(SpringLayout.NORTH, sellerRoleButton, 506, SpringLayout.NORTH, this);
+        panelLayout.putConstraint(SpringLayout.SOUTH, buyerRoleButton, -16, SpringLayout.NORTH, sellerRoleButton);
         panelLayout.putConstraint(SpringLayout.WEST, sellerRoleButton, 90, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, sellerRoleButton, -112, SpringLayout.SOUTH, this);
         panelLayout.putConstraint(SpringLayout.EAST, sellerRoleButton, 0, SpringLayout.EAST, buyerRoleButton);
@@ -100,7 +100,7 @@ public class BuyerOrSeller extends JPanel implements ActionListener {
         Image scaledImage = originalImage.getImage().getScaledInstance(260, 260, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
         panelLayout.putConstraint(SpringLayout.NORTH, startupImage, 30, SpringLayout.NORTH, this);
-        panelLayout.putConstraint(SpringLayout.WEST, startupImage, 0, SpringLayout.WEST, startupSubheader1);
+        panelLayout.putConstraint(SpringLayout.WEST, startupImage, 10, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.EAST, startupImage, -24, SpringLayout.EAST, this);
         add(startupImage);
     }
