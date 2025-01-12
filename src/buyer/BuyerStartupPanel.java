@@ -20,8 +20,8 @@ public class BuyerStartupPanel extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JButton btnStart;
-    private JButton btnGoBack;
+    private JButton bttnStart;
+    private JButton bttnGoBack;
 
     public BuyerStartupPanel(JPanel contentPane) {
         this.contentPane = contentPane;
@@ -77,17 +77,18 @@ public class BuyerStartupPanel extends JPanel implements ActionListener {
         lblStartupSubheader2.setFont(new Font("Montserrat", Font.BOLD, 18));
         add(lblStartupSubheader2);
 
-        btnStart = new RoundButton("gewwww, deserve ko 'to!", 30);
-        panelLayout.putConstraint(SpringLayout.NORTH, btnStart, 33, SpringLayout.SOUTH, lblStartupSubheader2);
-        panelLayout.putConstraint(SpringLayout.WEST, btnStart, 69, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.EAST, btnStart, -66, SpringLayout.EAST, this);
-        btnStart.setForeground(Color.WHITE);
-        btnStart.setBackground(new Color(102, 0, 0));
-        btnStart.setFont(new Font("Montserrat", Font.BOLD, 16));
-        btnStart.setBorderPainted(false);
-        btnStart.setFocusPainted(false);
-        btnStart.addActionListener(this);
-        add(btnStart);
+        bttnStart = new RoundButton("gewwww, deserve ko 'to!", 45);
+        panelLayout.putConstraint(SpringLayout.NORTH, bttnStart, 19, SpringLayout.SOUTH, lblStartupSubheader2);
+        panelLayout.putConstraint(SpringLayout.WEST, bttnStart, 69, SpringLayout.WEST, this);
+        panelLayout.putConstraint(SpringLayout.SOUTH, bttnStart, 61, SpringLayout.SOUTH, lblStartupSubheader2);
+        panelLayout.putConstraint(SpringLayout.EAST, bttnStart, -66, SpringLayout.EAST, this);
+        bttnStart.setForeground(Color.WHITE);
+        bttnStart.setBackground(new Color(102, 0, 0));
+        bttnStart.setFont(new Font("Montserrat", Font.BOLD, 16));
+        bttnStart.setBorderPainted(false);
+        bttnStart.setFocusPainted(false);
+        bttnStart.addActionListener(this);
+        add(bttnStart);
 
         ImageIcon imgIconOriginalImage = new ImageIcon(this.getClass().getResource("/polypup_front.png"));
         Image imgScaled = imgIconOriginalImage.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
@@ -97,34 +98,37 @@ public class BuyerStartupPanel extends JPanel implements ActionListener {
         add(lblStartupImage);
         
         // Mali napindot mo? label
+
         JLabel lblStartupSubheader3 = new JLabel("oh mali napindot mo? hays");
         panelLayout.putConstraint(SpringLayout.EAST, lblStartupSubheader3, -133, SpringLayout.EAST, this);
         lblStartupSubheader3.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 10));
         add(lblStartupSubheader3);
     	
     	// Sign in here button
-        btnGoBack = new JButton("Go Back");
-        panelLayout.putConstraint(SpringLayout.NORTH, btnGoBack, 2, SpringLayout.SOUTH, lblStartupSubheader3);
-        panelLayout.putConstraint(SpringLayout.EAST, btnGoBack, -183, SpringLayout.EAST, this);
-        btnGoBack.setBackground(Color.WHITE);
-    	btnGoBack.setForeground(new Color(0x730C0C));
-    	btnGoBack.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
-    	btnGoBack.setFocusable(false);
-    	btnGoBack.setOpaque(false);
-    	btnGoBack.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
-    	btnGoBack.addActionListener(this);
-    	add(btnGoBack);    
+        bttnGoBack = new JButton("Go Back");
+        panelLayout.putConstraint(SpringLayout.NORTH, bttnGoBack, 576, SpringLayout.NORTH, this);
+        panelLayout.putConstraint(SpringLayout.SOUTH, lblStartupSubheader3, -2, SpringLayout.NORTH, bttnGoBack);
+        panelLayout.putConstraint(SpringLayout.EAST, bttnGoBack, -183, SpringLayout.EAST, this);
+        bttnGoBack.setBackground(Color.WHITE);
+    	bttnGoBack.setForeground(new Color(0x730C0C));
+    	bttnGoBack.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
+    	bttnGoBack.setFocusable(false);
+    	bttnGoBack.setOpaque(false);
+    	bttnGoBack.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
+    	bttnGoBack.addActionListener(this);
+    	add(bttnGoBack);    
+
     }
 
     @Override
     public void actionPerformed(ActionEvent actEvent) {
     	Object objSourceEvent = actEvent.getSource();
     	
-    	if (objSourceEvent == btnStart) {
+    	if (objSourceEvent == bttnStart) {
     		// Switch to SignupPanel
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "BuyerSignupPanel");
-    	} else if (objSourceEvent == btnGoBack) {
+    	} else if (objSourceEvent == bttnGoBack) {
     		CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "BuyerOrSeller");
     	}    
