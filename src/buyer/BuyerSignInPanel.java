@@ -83,10 +83,8 @@ public class BuyerSignInPanel extends JPanel implements ActionListener{
         showPasswordCheckBox.addActionListener(this);
         add(showPasswordCheckBox);
         
-        loginButton = new RoundButton("Log In", 30);
-        
         //Log In Button
-        loginButton = new JButton("Log In");
+        loginButton = new RoundButton("Log In", 45);
         panelLayout.putConstraint(SpringLayout.NORTH, loginButton, 34, SpringLayout.SOUTH, showPasswordCheckBox);
         panelLayout.putConstraint(SpringLayout.WEST, loginButton, 71, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, loginButton, 76, SpringLayout.SOUTH, showPasswordCheckBox);
