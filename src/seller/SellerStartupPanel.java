@@ -98,7 +98,6 @@ public class SellerStartupPanel extends JPanel implements ActionListener {
         
         // Mali napindot mo? label
         JLabel lblStartupSubheader3 = new JLabel("oh mali napindot mo? hays");
-        panelLayout.putConstraint(SpringLayout.NORTH, lblStartupSubheader3, 6, SpringLayout.SOUTH, btnStart);
         panelLayout.putConstraint(SpringLayout.EAST, lblStartupSubheader3, -133, SpringLayout.EAST, this);
         lblStartupSubheader3.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 10));
         add(lblStartupSubheader3);
