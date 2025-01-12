@@ -1,6 +1,6 @@
 package misc;
 
 public interface ErrorHandler {
-	boolean validate();
-	void showAlert(java.awt.Component parent);
+	boolean validateField();
+	void showAlert(java.awt.Component parentFrame);
 }

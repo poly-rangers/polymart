@@ -297,11 +297,11 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
             FieldIsEmpty usernameValidation = new FieldIsEmpty(txtFieldUsername, "Username");
             FieldIsEmpty firstNameValidation = new FieldIsEmpty(txtFieldFirstName, "First Name");
             FieldIsEmpty lastNameValidation = new FieldIsEmpty(txtFieldLastName, "Last Name");
-            FieldIsEmpty emailOrPhoneValidation = new FieldIsEmpty(txtFieldEmailOrPhone, "Email");
+            FieldIsEmpty emailValidation = new FieldIsEmpty(txtFieldEmailOrPhone, "Email");
             FieldIsEmpty passwordValidation = new FieldIsEmpty(pwdFieldPassword, "Password");
 
             // Validate each field
-            if (!usernameValidation.validate()) {
+            if (!usernameValidation.validateField()) {
             	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 usernameValidation.showAlert(parentFrame); 
                 return;
@@ -315,33 +315,33 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
                 return;
             }
 
-            if (!firstNameValidation.validate()) {
+            if (!firstNameValidation.validateField()) {
             	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 firstNameValidation.showAlert(parentFrame); 
                 return;
             }
 
-            if (!lastNameValidation.validate()) {
+            if (!lastNameValidation.validateField()) {
             	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 lastNameValidation.showAlert(parentFrame);
                 return;
             }
 
-            if (!emailOrPhoneValidation.validate()) {
+            if (!emailValidation.validateField()) {
             	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                emailOrPhoneValidation.showAlert(parentFrame);
+                emailValidation.showAlert(parentFrame);
                 return;
             }
 
-            if (!passwordValidation.validate()) {
+            if (!passwordValidation.validateField()) {
             	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 passwordValidation.showAlert(parentFrame);
                 return;
             }
 
             //Validation for email format
-            String email = txtFieldEmailOrPhone.getText().trim();
-            if (!email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z0-9]{2,7}$") && !email.matches("^\\d{10}$")) {
+            String currentEmail = txtFieldEmailOrPhone.getText().trim();
+            if (!currentEmail.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z0-9]{2,7}$") && !currentEmail.matches("^\\d{10}$")) {
             	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             	new CustomDialog(parentFrame, "nagmamadali? naghahabol?", "pacheck mabuti baks, pero mali yung format ng username or email mo jusko PO", "sorry po..."); 
                 return;

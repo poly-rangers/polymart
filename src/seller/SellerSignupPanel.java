@@ -302,7 +302,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
             FieldIsEmpty passwordValidation = new FieldIsEmpty(pwdFieldPassword, "Password");
 
             // Validate each field
-            if (!usernameValidation.validate()) {
+            if (!usernameValidation.validateField()) {
             	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 usernameValidation.showAlert(parentFrame); 
                 return;
@@ -316,25 +316,25 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
                 return;
             }
 
-            if (!firstNameValidation.validate()) {
+            if (!firstNameValidation.validateField()) {
             	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 firstNameValidation.showAlert(parentFrame); 
                 return;
             }
 
-            if (!lastNameValidation.validate()) {
+            if (!lastNameValidation.validateField()) {
             	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 lastNameValidation.showAlert(parentFrame);
                 return;
             }
 
-            if (!emailOrPhoneValidation.validate()) {
+            if (!emailOrPhoneValidation.validateField()) {
             	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 emailOrPhoneValidation.showAlert(parentFrame);
                 return;
             }
 
-            if (!passwordValidation.validate()) {
+            if (!passwordValidation.validateField()) {
             	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 passwordValidation.showAlert(parentFrame);
                 return;

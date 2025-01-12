@@ -6,19 +6,19 @@ import javax.swing.JFrame;
 import frames.CustomDialog;
 
 public class FieldIsEmpty implements ErrorHandler {
-    private JTextField field;
-    private String placeholder;
+    private JTextField txtField;
+    private String strPlaceholder;
 
-    public FieldIsEmpty(JTextField field, String placeholder) {
-        this.field = field;
-        this.placeholder = placeholder;
+    public FieldIsEmpty(JTextField txtField, String strPlaceholder) {
+        this.txtField = txtField;
+        this.strPlaceholder = strPlaceholder;
     }
     
     @Override
-    public boolean validate() {
-        // Check if the field is not empty and doesn't contain the placeholder text
-        String text = field.getText().trim();
-        return !text.isEmpty() && !text.equals(placeholder);
+    public boolean validateField() {
+        // Check if the txtField is not empty and doesn't contain the strPlaceholder 
+        String validText = txtField.getText().trim();
+        return !validText.isEmpty() && !validText.equals(strPlaceholder);
     }
 
     @Override
@@ -26,8 +26,6 @@ public class FieldIsEmpty implements ErrorHandler {
         if (parentFrame instanceof JFrame) {
             // Pass the parent as a JFrame to EmptyFieldAlert
         	new CustomDialog((JFrame) parentFrame, "kulang teh!", "nagmamadali ka ba baks? lagyan mo muna ng laman jusko PO", "sigi nhay'ed"); 
-            
-            
         } else {
             // Handle the case where parent is not a JFrame (optional)
             System.err.println("Parent is not an instance of JFrame.");
