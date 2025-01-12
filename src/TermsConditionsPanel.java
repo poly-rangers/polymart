@@ -48,14 +48,14 @@ public class TermsConditionsPanel extends JPanel implements ActionListener{
         add(lblStartupImage);
 
         // Terms & Conditions label
-        JLabel lblsignUp = new JLabel("Terms & Conditions");
-        panelLayout.putConstraint(SpringLayout.WEST, lblsignUp, 0, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.EAST, lblsignUp, 414, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.NORTH, lblsignUp, 119, SpringLayout.NORTH, this);
-        lblsignUp.setForeground(Color.BLACK);
-        lblsignUp.setFont(new Font("Montserrat Medium", Font.PLAIN, 24));
-        lblsignUp.setHorizontalAlignment(SwingConstants.CENTER);
-        add(lblsignUp);
+        JLabel lblTermsHeader = new JLabel("Terms & Conditions");
+        panelLayout.putConstraint(SpringLayout.WEST, lblTermsHeader, 0, SpringLayout.WEST, this);
+        panelLayout.putConstraint(SpringLayout.EAST, lblTermsHeader, 414, SpringLayout.WEST, this);
+        panelLayout.putConstraint(SpringLayout.NORTH, lblTermsHeader, 119, SpringLayout.NORTH, this);
+        lblTermsHeader.setForeground(Color.BLACK);
+        lblTermsHeader.setFont(new Font("Montserrat Medium", Font.PLAIN, 24));
+        lblTermsHeader.setHorizontalAlignment(SwingConstants.CENTER);
+        add(lblTermsHeader);
         
         // Load text content from a file
         StringBuilder contentBuilder = new StringBuilder();
@@ -85,23 +85,23 @@ public class TermsConditionsPanel extends JPanel implements ActionListener{
         scrollPane.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 
         // Set constraints for the scroll pane
-        panelLayout.putConstraint(SpringLayout.NORTH, scrollPane, 16, SpringLayout.SOUTH, lblsignUp);
+        panelLayout.putConstraint(SpringLayout.NORTH, scrollPane, 16, SpringLayout.SOUTH, lblTermsHeader);
         panelLayout.putConstraint(SpringLayout.WEST, scrollPane, 19, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, scrollPane, -100, SpringLayout.SOUTH, this); // Adjusted for button
         panelLayout.putConstraint(SpringLayout.EAST, scrollPane, -22, SpringLayout.EAST, this);
         add(scrollPane);
 
         // Create the "I Agree" button
-        JButton bttnAgreeButton = new RoundButton("I Agree", 30);
-        bttnAgreeButton.setFont(new Font("Montserrat", Font.BOLD, 16));
-        bttnAgreeButton.setBackground(new Color(128, 0, 0));
-        bttnAgreeButton.setForeground(Color.WHITE);
-        bttnAgreeButton.setFocusPainted(false);
-        bttnAgreeButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-        panelLayout.putConstraint(SpringLayout.NORTH, bttnAgreeButton, 10, SpringLayout.SOUTH, scrollPane);
-        panelLayout.putConstraint(SpringLayout.HORIZONTAL_CENTER, bttnAgreeButton, 0, SpringLayout.HORIZONTAL_CENTER, this);
-        bttnAgreeButton.addActionListener(this);
-        add(bttnAgreeButton);
+        JButton btnAgreeButton = new RoundButton("I Agree", 30);
+        btnAgreeButton.setFont(new Font("Montserrat", Font.BOLD, 16));
+        btnAgreeButton.setBackground(new Color(128, 0, 0));
+        btnAgreeButton.setForeground(Color.WHITE);
+        btnAgreeButton.setFocusPainted(false);
+        btnAgreeButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        panelLayout.putConstraint(SpringLayout.NORTH, btnAgreeButton, 10, SpringLayout.SOUTH, scrollPane);
+        panelLayout.putConstraint(SpringLayout.HORIZONTAL_CENTER, btnAgreeButton, 0, SpringLayout.HORIZONTAL_CENTER, this);
+        btnAgreeButton.addActionListener(this);
+        add(btnAgreeButton);
 	}
 
 	@Override

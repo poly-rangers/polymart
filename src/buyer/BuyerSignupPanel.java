@@ -27,11 +27,11 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
     private JTextField txtFieldEmailOrPhone;
     private JTextField txtFieldUsername;
     private JPasswordField pwdFieldPassword;
-    private JButton bttnQuestionLink;
-    private JButton bttnTermsConditions;
-    private JButton bttnPrivacyPolicy;
-    private JButton bttnSignUp;
-    private JButton bttnSignIn;
+    private JButton btnQuestionLink;
+    private JButton btnTermsConditions;
+    private JButton btnPrivacyPolicy;
+    private JButton btnSignUp;
+    private JButton btnSignIn;
     private JLabel labelAnd;
     private JLabel labelChooseFile;
     private JCheckBox chckbxTermsConditions;
@@ -145,21 +145,21 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
         add(labelChooseFile);
 
         // Question link
-        bttnQuestionLink = new JButton("Why do I need this?");
-        panelLayout.putConstraint(SpringLayout.NORTH, bttnQuestionLink, 6, SpringLayout.SOUTH, labelChooseFile);
-        panelLayout.putConstraint(SpringLayout.WEST, bttnQuestionLink, 151, SpringLayout.WEST, this);
-        bttnQuestionLink.setForeground(UIManager.getColor("Button.darkShadow"));
-        bttnQuestionLink.setFont(new Font("Montserrat Medium", Font.ITALIC, 10));
-        bttnQuestionLink.setFocusPainted(false);
-        bttnQuestionLink.setFocusable(false);
-        bttnQuestionLink.setOpaque(false);
-        bttnQuestionLink.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
-        bttnQuestionLink.addActionListener(this);
-        add(bttnQuestionLink);
+        btnQuestionLink = new JButton("Why do I need this?");
+        panelLayout.putConstraint(SpringLayout.NORTH, btnQuestionLink, 6, SpringLayout.SOUTH, labelChooseFile);
+        panelLayout.putConstraint(SpringLayout.WEST, btnQuestionLink, 151, SpringLayout.WEST, this);
+        btnQuestionLink.setForeground(UIManager.getColor("Button.darkShadow"));
+        btnQuestionLink.setFont(new Font("Montserrat Medium", Font.ITALIC, 10));
+        btnQuestionLink.setFocusPainted(false);
+        btnQuestionLink.setFocusable(false);
+        btnQuestionLink.setOpaque(false);
+        btnQuestionLink.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
+        btnQuestionLink.addActionListener(this);
+        add(btnQuestionLink);
 
         // Checkbox for terms & conditions
         chckbxTermsConditions = new JCheckBox("By signing up you agree to our");
-        panelLayout.putConstraint(SpringLayout.NORTH, chckbxTermsConditions, 18, SpringLayout.SOUTH, bttnQuestionLink);
+        panelLayout.putConstraint(SpringLayout.NORTH, chckbxTermsConditions, 18, SpringLayout.SOUTH, btnQuestionLink);
         panelLayout.putConstraint(SpringLayout.WEST, chckbxTermsConditions, 21, SpringLayout.WEST, labelUploadCOR);
         panelLayout.putConstraint(SpringLayout.SOUTH, chckbxTermsConditions, -155, SpringLayout.SOUTH, this);
         panelLayout.putConstraint(SpringLayout.EAST, chckbxTermsConditions, 0, SpringLayout.EAST, labelChooseFile);
@@ -169,72 +169,72 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
         add(chckbxTermsConditions);
         
         // Terms and Conditions button
-    	bttnTermsConditions = new JButton("Terms & Conditions");
-    	bttnTermsConditions.setBackground(Color.WHITE);
-    	panelLayout.putConstraint(SpringLayout.NORTH, bttnTermsConditions, 1, SpringLayout.SOUTH, chckbxTermsConditions);
-    	panelLayout.putConstraint(SpringLayout.WEST, bttnTermsConditions, 103, SpringLayout.WEST, this);
-    	bttnTermsConditions.setForeground(new Color(0x730C0C));
-    	bttnTermsConditions.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
-    	bttnTermsConditions.setFocusable(false);
-    	bttnTermsConditions.setOpaque(false);
-    	bttnTermsConditions.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
-    	bttnTermsConditions.addActionListener(this);
-    	add(bttnTermsConditions);
+    	btnTermsConditions = new JButton("Terms & Conditions");
+    	btnTermsConditions.setBackground(Color.WHITE);
+    	panelLayout.putConstraint(SpringLayout.NORTH, btnTermsConditions, 1, SpringLayout.SOUTH, chckbxTermsConditions);
+    	panelLayout.putConstraint(SpringLayout.WEST, btnTermsConditions, 103, SpringLayout.WEST, this);
+    	btnTermsConditions.setForeground(new Color(0x730C0C));
+    	btnTermsConditions.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
+    	btnTermsConditions.setFocusable(false);
+    	btnTermsConditions.setOpaque(false);
+    	btnTermsConditions.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
+    	btnTermsConditions.addActionListener(this);
+    	add(btnTermsConditions);
         
     	// "and" label
     	labelAnd = new JLabel("and");
-    	panelLayout.putConstraint(SpringLayout.NORTH, labelAnd, 1, SpringLayout.NORTH, bttnTermsConditions);
-    	panelLayout.putConstraint(SpringLayout.WEST, labelAnd, 6, SpringLayout.EAST, bttnTermsConditions);
+    	panelLayout.putConstraint(SpringLayout.NORTH, labelAnd, 1, SpringLayout.NORTH, btnTermsConditions);
+    	panelLayout.putConstraint(SpringLayout.WEST, labelAnd, 6, SpringLayout.EAST, btnTermsConditions);
     	labelAnd.setFont(new Font("Montserrat Medium", Font.PLAIN, 10));
     	add(labelAnd);
         
         // Terms and Conditions button
-    	bttnPrivacyPolicy = new JButton("Privacy Policy");
-    	bttnPrivacyPolicy.setBackground(Color.WHITE);
-    	panelLayout.putConstraint(SpringLayout.NORTH, bttnPrivacyPolicy, 0, SpringLayout.NORTH, bttnTermsConditions);
-    	panelLayout.putConstraint(SpringLayout.WEST, bttnPrivacyPolicy, 6, SpringLayout.EAST, labelAnd);
-    	bttnPrivacyPolicy.setForeground(new Color(0x730C0C));
-    	bttnPrivacyPolicy.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
-    	bttnPrivacyPolicy.setFocusable(false);
-    	bttnPrivacyPolicy.setOpaque(false);
-    	bttnPrivacyPolicy.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
-    	bttnPrivacyPolicy.addActionListener(this);
-    	add(bttnPrivacyPolicy);
+    	btnPrivacyPolicy = new JButton("Privacy Policy");
+    	btnPrivacyPolicy.setBackground(Color.WHITE);
+    	panelLayout.putConstraint(SpringLayout.NORTH, btnPrivacyPolicy, 0, SpringLayout.NORTH, btnTermsConditions);
+    	panelLayout.putConstraint(SpringLayout.WEST, btnPrivacyPolicy, 6, SpringLayout.EAST, labelAnd);
+    	btnPrivacyPolicy.setForeground(new Color(0x730C0C));
+    	btnPrivacyPolicy.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
+    	btnPrivacyPolicy.setFocusable(false);
+    	btnPrivacyPolicy.setOpaque(false);
+    	btnPrivacyPolicy.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
+    	btnPrivacyPolicy.addActionListener(this);
+    	add(btnPrivacyPolicy);
 
         // Sign up button
-        bttnSignUp = new RoundButton("Sign Up", 30);
-        panelLayout.putConstraint(SpringLayout.NORTH, bttnSignUp, 22, SpringLayout.SOUTH, bttnTermsConditions);
-        panelLayout.putConstraint(SpringLayout.WEST, bttnSignUp, 10, SpringLayout.WEST, labelUploadCOR);
-        panelLayout.putConstraint(SpringLayout.EAST, bttnSignUp, 0, SpringLayout.EAST, labelUploadCOR);
-        bttnSignUp.setBackground(new Color(128, 0, 0));
-        bttnSignUp.setFont(new Font("Montserrat ExtraBold", Font.BOLD, 16));
-        bttnSignUp.setForeground(Color.WHITE);
-        bttnSignUp.setBorderPainted(false);
-        bttnSignUp.setFocusPainted(false);
-        bttnSignUp.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-        bttnSignUp.addActionListener(this);
-        add(bttnSignUp);
+        btnSignUp = new RoundButton("Sign Up", 30);
+        panelLayout.putConstraint(SpringLayout.NORTH, btnSignUp, 22, SpringLayout.SOUTH, btnTermsConditions);
+        panelLayout.putConstraint(SpringLayout.WEST, btnSignUp, 10, SpringLayout.WEST, labelUploadCOR);
+        panelLayout.putConstraint(SpringLayout.EAST, btnSignUp, 0, SpringLayout.EAST, labelUploadCOR);
+        btnSignUp.setBackground(new Color(128, 0, 0));
+        btnSignUp.setFont(new Font("Montserrat ExtraBold", Font.BOLD, 16));
+        btnSignUp.setForeground(Color.WHITE);
+        btnSignUp.setBorderPainted(false);
+        btnSignUp.setFocusPainted(false);
+        btnSignUp.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+        btnSignUp.addActionListener(this);
+        add(btnSignUp);
 
         // Already have account? label
         JLabel labelHaveAccount = new JLabel("Already have an account?");
         panelLayout.putConstraint(SpringLayout.NORTH, labelHaveAccount, 593, SpringLayout.NORTH, this);
-        panelLayout.putConstraint(SpringLayout.SOUTH, bttnSignUp, -6, SpringLayout.NORTH, labelHaveAccount);
+        panelLayout.putConstraint(SpringLayout.SOUTH, btnSignUp, -6, SpringLayout.NORTH, labelHaveAccount);
         panelLayout.putConstraint(SpringLayout.WEST, labelHaveAccount, 134, SpringLayout.WEST, this);
         labelHaveAccount.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
         add(labelHaveAccount);
     	
     	// Sign in here button
-    	bttnSignIn = new JButton("Sign in here");
-    	bttnSignIn.setBackground(Color.WHITE);
-    	panelLayout.putConstraint(SpringLayout.NORTH, bttnSignIn, 2, SpringLayout.SOUTH, labelHaveAccount);
-    	panelLayout.putConstraint(SpringLayout.WEST, bttnSignIn, 173, SpringLayout.WEST, this);
-    	bttnSignIn.setForeground(new Color(0x730C0C));
-    	bttnSignIn.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
-    	bttnSignIn.setFocusable(false);
-    	bttnSignIn.setOpaque(false);
-    	bttnSignIn.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
-    	bttnSignIn.addActionListener(this);
-    	add(bttnSignIn);
+    	btnSignIn = new JButton("Sign in here");
+    	btnSignIn.setBackground(Color.WHITE);
+    	panelLayout.putConstraint(SpringLayout.NORTH, btnSignIn, 2, SpringLayout.SOUTH, labelHaveAccount);
+    	panelLayout.putConstraint(SpringLayout.WEST, btnSignIn, 173, SpringLayout.WEST, this);
+    	btnSignIn.setForeground(new Color(0x730C0C));
+    	btnSignIn.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
+    	btnSignIn.setFocusable(false);
+    	btnSignIn.setOpaque(false);
+    	btnSignIn.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
+    	btnSignIn.addActionListener(this);
+    	add(btnSignIn);
     }
 
     private void setupTextFieldPlaceholder(JTextField textField, String placeholder) {
@@ -286,13 +286,13 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
 
-        if (source == bttnQuestionLink) {
+        if (source == btnQuestionLink) {
             JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             new CustomDialog(parentFrame, "ganyan po ba ang tono ng mga nagtatanong maem?", "This app is exclusive to PUPians only! By uploading your Certificate of Registration, you are  <u>confirming and verifying</u> that you are an <u> official PUP student.</u> <br> <br> oh edi special ka niyan ngayon? gets na ba baks? end call ko na to.", "okay, gets");
-        } else if (source == bttnTermsConditions || source == bttnPrivacyPolicy) {
+        } else if (source == btnTermsConditions || source == btnPrivacyPolicy) {
             CardLayout clLayout = (CardLayout) panelContent.getLayout();
             clLayout.show(panelContent, "BuyerTermsConditionsPanel");
-        } else if (source == bttnSignUp) {
+        } else if (source == btnSignUp) {
             // Create instances of the ErrorHandler interface for each required field
             FieldIsEmpty usernameValidation = new FieldIsEmpty(txtFieldUsername, "Username");
             FieldIsEmpty firstNameValidation = new FieldIsEmpty(txtFieldFirstName, "First Name");
@@ -364,7 +364,7 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
                 CardLayout clLayout = (CardLayout) panelContent.getLayout();
                 clLayout.show(panelContent, "BuyerSignInPanel");
             }
-        } else if (source == bttnSignIn) {
+        } else if (source == btnSignIn) {
             clearTextFields();
             CardLayout clLayout = (CardLayout) panelContent.getLayout();
             clLayout.show(panelContent, "BuyerSignInPanel");
