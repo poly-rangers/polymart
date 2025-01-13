@@ -20,32 +20,32 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField usernameField;
-    private JPasswordField pwdField;
+    private JPasswordField passwordField;
     private JCheckBox showPasswordCheckBox;
     private JButton signUpButton;
-    private JButton loginButton;
+    private JButton logInButton;
 
     public SellerSignInPanel(JPanel contentPane) {
         this.contentPane = contentPane;
         
         setBackground(new Color(255, 255, 255));
         setBounds(100, 100, 414, 660);
-        SpringLayout panelLayout = new SpringLayout();
-        setLayout(panelLayout);
+        SpringLayout signInPanelLayout = new SpringLayout();
+        setLayout(signInPanelLayout);
         
         // Icon next to header title
         ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_seller.icon.png"));
         Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
-        panelLayout.putConstraint(SpringLayout.NORTH, startupImage, 24, SpringLayout.NORTH, this);
-        panelLayout.putConstraint(SpringLayout.WEST, startupImage, 16, SpringLayout.WEST, this);
+        signInPanelLayout.putConstraint(SpringLayout.NORTH, startupImage, 24, SpringLayout.NORTH, this);
+        signInPanelLayout.putConstraint(SpringLayout.WEST, startupImage, 16, SpringLayout.WEST, this);
         add(startupImage);
 
         // Sign-up label
         JLabel signInLabel = new JLabel("Sign In");
-        panelLayout.putConstraint(SpringLayout.NORTH, signInLabel, 119, SpringLayout.NORTH, this);
-        panelLayout.putConstraint(SpringLayout.WEST, signInLabel, 35, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.EAST, signInLabel, 166, SpringLayout.WEST, this);
+        signInPanelLayout.putConstraint(SpringLayout.NORTH, signInLabel, 119, SpringLayout.NORTH, this);
+        signInPanelLayout.putConstraint(SpringLayout.WEST, signInLabel, 35, SpringLayout.WEST, this);
+        signInPanelLayout.putConstraint(SpringLayout.EAST, signInLabel, 166, SpringLayout.WEST, this);
         signInLabel.setForeground(Color.BLACK);
         signInLabel.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 24));
         signInLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -56,56 +56,56 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
         usernameField.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
         usernameField.setForeground(new Color(192, 192, 192));
         usernameField.setFont(new Font("Montserrat", Font.PLAIN, 12));
-        panelLayout.putConstraint(SpringLayout.NORTH, usernameField, 25, SpringLayout.SOUTH, signInLabel);
-        panelLayout.putConstraint(SpringLayout.WEST, usernameField, 62, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.EAST, usernameField, -80, SpringLayout.EAST, this);
+        signInPanelLayout.putConstraint(SpringLayout.NORTH, usernameField, 25, SpringLayout.SOUTH, signInLabel);
+        signInPanelLayout.putConstraint(SpringLayout.WEST, usernameField, 62, SpringLayout.WEST, this);
+        signInPanelLayout.putConstraint(SpringLayout.EAST, usernameField, -80, SpringLayout.EAST, this);
         add(usernameField);
         usernameField.setColumns(10);
         
-        pwdField = new JPasswordField("Password");
-        pwdField.setColumns(10);
-        pwdField.setFont(new Font("Montserrat", Font.PLAIN, 12));
-        setupPasswordFieldPlaceholder(pwdField);
-        panelLayout.putConstraint(SpringLayout.NORTH, pwdField, 20, SpringLayout.SOUTH, usernameField);
-        panelLayout.putConstraint(SpringLayout.WEST, pwdField, 0, SpringLayout.WEST, usernameField);
-        panelLayout.putConstraint(SpringLayout.EAST, pwdField, 0, SpringLayout.EAST, usernameField);
-        pwdField.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
-        add(pwdField);
+        passwordField = new JPasswordField("Password");
+        passwordField.setColumns(10);
+        passwordField.setFont(new Font("Montserrat", Font.PLAIN, 12));
+        setupPasswordFieldPlaceholder(passwordField);
+        signInPanelLayout.putConstraint(SpringLayout.NORTH, passwordField, 20, SpringLayout.SOUTH, usernameField);
+        signInPanelLayout.putConstraint(SpringLayout.WEST, passwordField, 0, SpringLayout.WEST, usernameField);
+        signInPanelLayout.putConstraint(SpringLayout.EAST, passwordField, 0, SpringLayout.EAST, usernameField);
+        passwordField.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+        add(passwordField);
         
         // Add "Show Password" checkbox
         showPasswordCheckBox = new JCheckBox("Show Password");
-        panelLayout.putConstraint(SpringLayout.NORTH, showPasswordCheckBox, 6, SpringLayout.SOUTH, pwdField);
-        panelLayout.putConstraint(SpringLayout.WEST, showPasswordCheckBox, 58, SpringLayout.WEST, this);
+        signInPanelLayout.putConstraint(SpringLayout.NORTH, showPasswordCheckBox, 6, SpringLayout.SOUTH, passwordField);
+        signInPanelLayout.putConstraint(SpringLayout.WEST, showPasswordCheckBox, 58, SpringLayout.WEST, this);
         showPasswordCheckBox.setBackground(Color.WHITE);
         showPasswordCheckBox.setFont(new Font("Montserrat", Font.BOLD, 12));
         showPasswordCheckBox.addActionListener(this);
         add(showPasswordCheckBox);
         
-        loginButton = new RoundButton("Log In", 45);
-        panelLayout.putConstraint(SpringLayout.NORTH, loginButton, 34, SpringLayout.SOUTH, showPasswordCheckBox);
-        panelLayout.putConstraint(SpringLayout.WEST, loginButton, 71, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.SOUTH, loginButton, 76, SpringLayout.SOUTH, showPasswordCheckBox);
-        panelLayout.putConstraint(SpringLayout.EAST, loginButton, -8, SpringLayout.EAST, usernameField);
-        loginButton.setFont(new Font("Montserrat ExtraBold", Font.BOLD, 16));
-        loginButton.setBorderPainted(false);
-        loginButton.setBorder(new LineBorder(new Color(0, 0, 0)));
-        loginButton.setBackground(new Color(128, 0, 0));
-        loginButton.setForeground(new Color(255, 255, 255));
-        loginButton.addActionListener(this);
-        add(loginButton);
+        logInButton = new RoundButton("Log In", 45);
+        signInPanelLayout.putConstraint(SpringLayout.NORTH, logInButton, 34, SpringLayout.SOUTH, showPasswordCheckBox);
+        signInPanelLayout.putConstraint(SpringLayout.WEST, logInButton, 71, SpringLayout.WEST, this);
+        signInPanelLayout.putConstraint(SpringLayout.SOUTH, logInButton, 76, SpringLayout.SOUTH, showPasswordCheckBox);
+        signInPanelLayout.putConstraint(SpringLayout.EAST, logInButton, -8, SpringLayout.EAST, usernameField);
+        logInButton.setFont(new Font("Montserrat ExtraBold", Font.BOLD, 16));
+        logInButton.setBorderPainted(false);
+        logInButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+        logInButton.setBackground(new Color(128, 0, 0));
+        logInButton.setForeground(new Color(255, 255, 255));
+        logInButton.addActionListener(this);
+        add(logInButton);
         
-        JLabel newToPolymart = new JLabel("New to Polymart?");
-        panelLayout.putConstraint(SpringLayout.NORTH, newToPolymart, 6, SpringLayout.SOUTH, loginButton);
-        panelLayout.putConstraint(SpringLayout.WEST, newToPolymart, 94, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.EAST, newToPolymart, -202, SpringLayout.EAST, this);
-        newToPolymart.setFont(new Font("Montserrat SemiBold", Font.BOLD, 12));
-        add(newToPolymart);
+        JLabel newToPolymartLabel = new JLabel("New to Polymart?");
+        signInPanelLayout.putConstraint(SpringLayout.NORTH, newToPolymartLabel, 6, SpringLayout.SOUTH, logInButton);
+        signInPanelLayout.putConstraint(SpringLayout.WEST, newToPolymartLabel, 94, SpringLayout.WEST, this);
+        signInPanelLayout.putConstraint(SpringLayout.EAST, newToPolymartLabel, -202, SpringLayout.EAST, this);
+        newToPolymartLabel.setFont(new Font("Montserrat SemiBold", Font.BOLD, 12));
+        add(newToPolymartLabel);
         
         signUpButton = new JButton("Sign up here");
         signUpButton.setOpaque(false);
         signUpButton.setFocusable(false);
-        panelLayout.putConstraint(SpringLayout.NORTH, signUpButton, -1, SpringLayout.NORTH, newToPolymart);
-        panelLayout.putConstraint(SpringLayout.WEST, signUpButton, 6, SpringLayout.EAST, newToPolymart);
+        signInPanelLayout.putConstraint(SpringLayout.NORTH, signUpButton, -1, SpringLayout.NORTH, newToPolymartLabel);
+        signInPanelLayout.putConstraint(SpringLayout.WEST, signUpButton, 6, SpringLayout.EAST, newToPolymartLabel);
         signUpButton.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(128, 0, 0)));
         signUpButton.setForeground(new Color(128, 0, 0));
         signUpButton.setFont(new Font("Montserrat SemiBold", Font.BOLD, 12));
@@ -116,7 +116,7 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
     //Checks if the field is empty
     private boolean checkIfEmpty() {
         String username = usernameField.getText().trim();
-        String password = new String(pwdField.getPassword()).trim();
+        String password = new String(passwordField.getPassword()).trim();
 
         if (username.isEmpty() || username.equals("Username")) {
         	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
@@ -139,19 +139,19 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
 
         if (source == showPasswordCheckBox) {
             if (showPasswordCheckBox.isSelected()) {
-                pwdField.setEchoChar((char) 0); // Show password
+                passwordField.setEchoChar((char) 0); // Show password
             } else {
-                pwdField.setEchoChar('*'); // Hide password
+                passwordField.setEchoChar('*'); // Hide password
             }
         } else if (source == signUpButton) {
         	clearTextFields();
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "BuyerSignupPanel");
-        } else if (source == loginButton) {
+        } else if (source == logInButton) {
         	// Check for empty fields before proceeding
             if (checkIfEmpty()) {
                 String username = usernameField.getText().trim();
-                String password = new String(pwdField.getPassword()).trim();
+                String password = new String(passwordField.getPassword()).trim();
 
                 //Call method to validate login info
                 validateLogin(username, password);
@@ -161,16 +161,16 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
     
     private void validateLogin(String username, String password) {
     // Specify the path to the user_info.txt file inside the databases folder
-      String filePath = "databases/seller_userinfo.txt"; 
-      boolean usernameFound = false;
+      String userInfoFilePath = "databases/seller_userinfo.txt"; 
+      boolean isUsernameFound = false;
       
-      try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+      try (BufferedReader reader = new BufferedReader(new FileReader(userInfoFilePath))) {
           String line;
             while ((line = reader.readLine()) != null) {
                 String[] userData = line.split(",");
                 if (userData.length == 5) {
                     if(userData[0].equals(username)) {
-                    	usernameFound = true;
+                    	isUsernameFound = true;
                     	if(userData[4].equals(password)) {
                     		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
                             new CustomDialog(frame, "Login success!", "Welcome to the fam, baks! We're glad to have you here on Polymart <3 Feel free to scroll and explore our dashboard ^__^", "Thank you!");
@@ -186,7 +186,7 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
                     } 
                 } 
             }
-            if(!usernameFound) {
+            if(!isUsernameFound) {
             	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 new CustomDialog(frame, "pauso SPOTTED!", "hindi ka pa nags-sign up baks, wag kang una una jan! mag sign up ka muna gew", "Create Account");
                 //Switch to sign up panel
@@ -249,8 +249,8 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
         usernameField.setText("Username");
         usernameField.setForeground(Color.GRAY);
 
-        pwdField.setText("Password");
-        pwdField.setForeground(Color.GRAY);
-        pwdField.setEchoChar((char) 0);  // Reset password echo char for the placeholder
+        passwordField.setText("Password");
+        passwordField.setForeground(Color.GRAY);
+        passwordField.setEchoChar((char) 0);  // Reset password echo char for the placeholder
     }
 }

@@ -21,8 +21,8 @@ public class PolymartMain extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PolymartMain frame = new PolymartMain();
-					frame.setVisible(true);
+					PolymartMain frameMain = new PolymartMain();
+					frameMain.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
