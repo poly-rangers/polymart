@@ -1,6 +1,5 @@
 package buyer;
 import misc.AddProduct;
-import misc.NavigationBar;
 import misc.SearchBar;
 
 import java.awt.*;
@@ -33,6 +32,7 @@ public class BuyerDashboardPanel extends JPanel {
         add(lblNewLabel);
         
         SearchBar searchBar = new SearchBar();
+        searchBar.setupSearchPlaceholder("ang tamad tamad mo mag-scroll talaga naman...");
         panelLayout.putConstraint(SpringLayout.NORTH, searchBar, 15, SpringLayout.SOUTH, startupImage);
         panelLayout.putConstraint(SpringLayout.WEST, searchBar, 61, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, searchBar, 39, SpringLayout.SOUTH, startupImage);
@@ -62,7 +62,7 @@ public class BuyerDashboardPanel extends JPanel {
         
            
      // Create NavigationBar and position it at the bottom
-        NavigationBar navBar = new NavigationBar();
+        BuyerNavigationBar navBar = new BuyerNavigationBar();
         panelLayout.putConstraint(SpringLayout.SOUTH, scrollPane, -30, SpringLayout.NORTH, navBar);
         panelLayout.putConstraint(SpringLayout.NORTH, navBar, -50, SpringLayout.SOUTH, this);
         panelLayout.putConstraint(SpringLayout.WEST, navBar, 0, SpringLayout.WEST, this);

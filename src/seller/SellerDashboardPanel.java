@@ -1,6 +1,5 @@
 package seller;
 import misc.AddProduct;
-import misc.NavigationBar;
 import misc.SearchBar;
 
 import java.awt.*;
@@ -68,7 +67,7 @@ public class SellerDashboardPanel extends JPanel {
         
            
      // Create NavigationBar and position it at the bottom
-        NavigationBar navBar = new NavigationBar();
+        SellerNavigationBar navBar = new SellerNavigationBar();
         panelLayout.putConstraint(SpringLayout.SOUTH, scrollPane, -30, SpringLayout.NORTH, navBar);
         panelLayout.putConstraint(SpringLayout.NORTH, navBar, -50, SpringLayout.SOUTH, this);
         panelLayout.putConstraint(SpringLayout.WEST, navBar, 0, SpringLayout.WEST, this);

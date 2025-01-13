@@ -106,11 +106,7 @@ public class BuyerNavigationBar extends JPanel {
 		btnProfile.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnProfile.setHorizontalTextPosition(SwingConstants.CENTER);
 		
-		
 		setLayout(new GridLayout(0, 4, 0, 0));
-
-       
-		
 		
 		add(btnHome);
 		add(btnMap);
