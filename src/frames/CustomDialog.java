@@ -15,7 +15,7 @@ public class CustomDialog extends JDialog {
         getContentPane().setBackground(new Color(115, 12, 12));
         getContentPane().setLayout(new BorderLayout(0, 0)); // Set horizontal and vertical gaps to 0
         
-        // First panel for the header and content
+        // Panel for the header and content
         JPanel pnlMainPanel = new JPanel();
         pnlMainPanel.setLayout(new BoxLayout(pnlMainPanel, BoxLayout.Y_AXIS));
         pnlMainPanel.setBackground(new Color(115, 12, 12));

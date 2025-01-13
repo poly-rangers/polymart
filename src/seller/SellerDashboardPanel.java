@@ -1,16 +1,9 @@
 package seller;
-import java.awt.Color;
-import java.awt.Image;
+import misc.AddProduct;
+import misc.NavigationBar;
+import java.awt.*;
+import javax.swing.*;
 
-import javax.swing.JPanel;
-import javax.swing.SpringLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import java.awt.Font;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class SellerDashboardPanel extends JPanel {
 
@@ -38,69 +31,46 @@ public class SellerDashboardPanel extends JPanel {
         add(lblNewLabel);
         
         txtDitoSearchBar = new JTextField();
-        panelLayout.putConstraint(SpringLayout.NORTH, lblNewLabel, 28, SpringLayout.SOUTH, txtDitoSearchBar);
+        panelLayout.putConstraint(SpringLayout.NORTH, lblNewLabel, 17, SpringLayout.SOUTH, txtDitoSearchBar);
         panelLayout.putConstraint(SpringLayout.WEST, lblNewLabel, 0, SpringLayout.WEST, txtDitoSearchBar);
         panelLayout.putConstraint(SpringLayout.NORTH, txtDitoSearchBar, 28, SpringLayout.SOUTH, startupImage);
         panelLayout.putConstraint(SpringLayout.WEST, txtDitoSearchBar, 63, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.EAST, txtDitoSearchBar, -86, SpringLayout.EAST, this);
-        txtDitoSearchBar.setText("DASHBOARD NI SELLER");
+        txtDitoSearchBar.setText("ang tamad tamad mo mag-scroll talaga naman...");
         add(txtDitoSearchBar);
         txtDitoSearchBar.setColumns(10);
         
-        JPanel panel = new JPanel();
-        panelLayout.putConstraint(SpringLayout.NORTH, panel, 6, SpringLayout.SOUTH, lblNewLabel);
-        panelLayout.putConstraint(SpringLayout.WEST, panel, 59, SpringLayout.WEST, this);
-        add(panel);
         
-        JPanel panel_1 = new JPanel();
-        panelLayout.putConstraint(SpringLayout.WEST, panel_1, 220, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.EAST, panel_1, -39, SpringLayout.EAST, this);
-        panelLayout.putConstraint(SpringLayout.SOUTH, panel, 0, SpringLayout.SOUTH, panel_1);
-        panelLayout.putConstraint(SpringLayout.EAST, panel, -6, SpringLayout.WEST, panel_1);
-        panelLayout.putConstraint(SpringLayout.NORTH, panel_1, 58, SpringLayout.SOUTH, txtDitoSearchBar);
-        panelLayout.putConstraint(SpringLayout.SOUTH, panel_1, 198, SpringLayout.SOUTH, txtDitoSearchBar);
-        add(panel_1);
+        JScrollPane scrollPane = new JScrollPane();
+        panelLayout.putConstraint(SpringLayout.NORTH, scrollPane, 162, SpringLayout.NORTH, this);
+        scrollPane.setOpaque(false);
+        panelLayout.putConstraint(SpringLayout.WEST, scrollPane, 22, SpringLayout.WEST, this);
+        panelLayout.putConstraint(SpringLayout.EAST, scrollPane, -10, SpringLayout.EAST, this);
         
-        JPanel panel_2 = new JPanel();
-        panelLayout.putConstraint(SpringLayout.NORTH, panel_2, 6, SpringLayout.SOUTH, panel);
-        panelLayout.putConstraint(SpringLayout.WEST, panel_2, 0, SpringLayout.WEST, panel);
-        panelLayout.putConstraint(SpringLayout.SOUTH, panel_2, 146, SpringLayout.SOUTH, panel);
-        panelLayout.putConstraint(SpringLayout.EAST, panel_2, 0, SpringLayout.EAST, panel);
-        add(panel_2);
+        JPanel scrollContentPanel = new JPanel();
+        scrollContentPanel.setLayout(new GridLayout(3, 2, 10, 10));
+      
         
-        JPanel panel_3 = new JPanel();
-        panelLayout.putConstraint(SpringLayout.NORTH, panel_3, 6, SpringLayout.SOUTH, panel_1);
-        panelLayout.putConstraint(SpringLayout.WEST, panel_3, 0, SpringLayout.WEST, panel_1);
-        panelLayout.putConstraint(SpringLayout.SOUTH, panel_3, 0, SpringLayout.SOUTH, panel_2);
-        panelLayout.putConstraint(SpringLayout.EAST, panel_3, 0, SpringLayout.EAST, panel_1);
-        add(panel_3);
+        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
+        scrollContentPanel.add(new AddProduct("Pastil ulet", "P569"));
+        scrollContentPanel.add(new JPanel());
+        scrollContentPanel.add(new JPanel());
+        scrollContentPanel.add(new JPanel());
+      
+        scrollPane.getViewport().setOpaque(false);
+        scrollPane.setViewportView(scrollContentPanel);
+       
+        add(scrollPane);
         
-        JButton btnNewButton = new JButton("h0Em ni BH0kXZ");
-        btnNewButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	}
-        });
-        panelLayout.putConstraint(SpringLayout.NORTH, btnNewButton, 83, SpringLayout.SOUTH, panel_2);
-        panelLayout.putConstraint(SpringLayout.WEST, btnNewButton, 32, SpringLayout.WEST, this);
-        add(btnNewButton);
+           
+     // Create NavigationBar and position it at the bottom
+        NavigationBar navBar = new NavigationBar();
+        panelLayout.putConstraint(SpringLayout.SOUTH, scrollPane, -30, SpringLayout.NORTH, navBar);
+        panelLayout.putConstraint(SpringLayout.NORTH, navBar, -50, SpringLayout.SOUTH, this);
+        panelLayout.putConstraint(SpringLayout.WEST, navBar, 0, SpringLayout.WEST, this);
+        panelLayout.putConstraint(SpringLayout.SOUTH, navBar, 0, SpringLayout.SOUTH, this);
+        panelLayout.putConstraint(SpringLayout.EAST, navBar, 414, SpringLayout.WEST, this);
+        add(navBar);
         
-        JButton btnMphesyam = new JButton("m4P4 #HES0Yam");
-        panelLayout.putConstraint(SpringLayout.NORTH, btnMphesyam, 0, SpringLayout.NORTH, btnNewButton);
-        panelLayout.putConstraint(SpringLayout.WEST, btnMphesyam, 6, SpringLayout.EAST, btnNewButton);
-        add(btnMphesyam);
-        
-        JButton btnRcibo = new JButton("rcibo...");
-        btnRcibo.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        	}
-        });
-        panelLayout.putConstraint(SpringLayout.NORTH, btnRcibo, 6, SpringLayout.SOUTH, btnNewButton);
-        panelLayout.putConstraint(SpringLayout.WEST, btnRcibo, 0, SpringLayout.WEST, btnNewButton);
-        add(btnRcibo);
-        
-        JButton btnPropayl = new JButton("propayl");
-        panelLayout.putConstraint(SpringLayout.NORTH, btnPropayl, 6, SpringLayout.SOUTH, btnNewButton);
-        panelLayout.putConstraint(SpringLayout.WEST, btnPropayl, 6, SpringLayout.EAST, btnRcibo);
-        add(btnPropayl);
 	}
 }
