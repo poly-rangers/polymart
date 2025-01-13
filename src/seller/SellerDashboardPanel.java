@@ -1,6 +1,8 @@
 package seller;
 import misc.AddProduct;
 import misc.NavigationBar;
+import misc.SearchBar;
+
 import java.awt.*;
 import javax.swing.*;
 
@@ -8,7 +10,6 @@ import javax.swing.*;
 public class SellerDashboardPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField txtDitoSearchBar;
 
 	public SellerDashboardPanel(JPanel contentPane) {
 
@@ -27,21 +28,20 @@ public class SellerDashboardPanel extends JPanel {
         
         
         JLabel lblNewLabel = new JLabel("Products");
+        panelLayout.putConstraint(SpringLayout.WEST, lblNewLabel, 43, SpringLayout.WEST, this);
         lblNewLabel.setFont(new Font("Montserrat", Font.BOLD, 19));
         add(lblNewLabel);
         
-        txtDitoSearchBar = new JTextField();
-        panelLayout.putConstraint(SpringLayout.NORTH, lblNewLabel, 17, SpringLayout.SOUTH, txtDitoSearchBar);
-        panelLayout.putConstraint(SpringLayout.WEST, lblNewLabel, 0, SpringLayout.WEST, txtDitoSearchBar);
-        panelLayout.putConstraint(SpringLayout.NORTH, txtDitoSearchBar, 28, SpringLayout.SOUTH, startupImage);
-        panelLayout.putConstraint(SpringLayout.WEST, txtDitoSearchBar, 63, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.EAST, txtDitoSearchBar, -86, SpringLayout.EAST, this);
-        txtDitoSearchBar.setText("ang tamad tamad mo mag-scroll talaga naman...");
-        add(txtDitoSearchBar);
-        txtDitoSearchBar.setColumns(10);
-        
+        SearchBar searchBar = new SearchBar();
+        panelLayout.putConstraint(SpringLayout.NORTH, searchBar, 15, SpringLayout.SOUTH, startupImage);
+        panelLayout.putConstraint(SpringLayout.WEST, searchBar, 61, SpringLayout.WEST, this);
+        panelLayout.putConstraint(SpringLayout.SOUTH, searchBar, 39, SpringLayout.SOUTH, startupImage);
+        panelLayout.putConstraint(SpringLayout.EAST, searchBar, -62, SpringLayout.EAST, this);
+        add(searchBar);
+        searchBar.setLayout(new BoxLayout(searchBar, BoxLayout.X_AXIS));
         
         JScrollPane scrollPane = new JScrollPane();
+        panelLayout.putConstraint(SpringLayout.SOUTH, lblNewLabel, -6, SpringLayout.NORTH, scrollPane);
         panelLayout.putConstraint(SpringLayout.NORTH, scrollPane, 162, SpringLayout.NORTH, this);
         scrollPane.setOpaque(false);
         panelLayout.putConstraint(SpringLayout.WEST, scrollPane, 22, SpringLayout.WEST, this);

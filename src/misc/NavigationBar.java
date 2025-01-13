@@ -2,6 +2,8 @@ package misc;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -12,8 +14,9 @@ public class NavigationBar extends JPanel {
 
 	public NavigationBar() {
 		
-		setSize(430, 49);
+		setSize(430, 72);
 		setBackground(new Color(102, 0, 0));
+		setBorder(new EmptyBorder(0, 5, 0, 5));
 		
 		JButton btnHome = new JButton("Home");
 		
