@@ -4,6 +4,9 @@ import misc.NavigationBar;
 import misc.SearchBar;
 
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+
 import javax.swing.*;
 
 
@@ -33,6 +36,7 @@ public class SellerDashboardPanel extends JPanel {
         add(lblNewLabel);
         
         SearchBar searchBar = new SearchBar();
+        searchBar.setupSearchPlaceholder("ang tamad tamad mo mag-scroll talaga naman...");
         panelLayout.putConstraint(SpringLayout.NORTH, searchBar, 15, SpringLayout.SOUTH, startupImage);
         panelLayout.putConstraint(SpringLayout.WEST, searchBar, 61, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, searchBar, 39, SpringLayout.SOUTH, startupImage);

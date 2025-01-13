@@ -1,7 +1,8 @@
-// wala pa pero may balak ako d2,,,, - jianna
-
 package misc;
+
 import java.awt.Color;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -31,7 +32,31 @@ public class SearchBar extends JPanel {
 		
 		add(searchBar);
 		searchBar.setColumns(10);
-		
-		
 	}
+	
+	public JTextField getSearchBar() {
+        return searchBar;
+    }
+	
+	//Placeholder Text for Search Bar
+	public void setupSearchPlaceholder(String placeholder) {
+        searchBar.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (searchBar.getText().equals(placeholder)) {
+                    searchBar.setText("");
+                    searchBar.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (searchBar.getText().isEmpty()) {
+                    searchBar.setForeground(Color.GRAY);
+                    searchBar.setText(placeholder);
+                }
+            }
+        });
+        searchBar.setForeground(Color.GRAY);
+    }
 }

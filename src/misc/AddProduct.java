@@ -9,9 +9,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 public class AddProduct extends JPanel {
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 6429731752501671820L;
 
 	public AddProduct(String strProductName, String strProductPrice) {
