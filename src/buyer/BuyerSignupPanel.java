@@ -202,7 +202,7 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
     	add(btnPrivacyPolicy);
 
         // Sign up button
-        btnSignUp = new RoundButton("Sign Up", 30);
+        btnSignUp = new RoundButton("Sign Up", 45);
         panelLayout.putConstraint(SpringLayout.NORTH, btnSignUp, 22, SpringLayout.SOUTH, btnTermsConditions);
         panelLayout.putConstraint(SpringLayout.WEST, btnSignUp, 10, SpringLayout.WEST, labelUploadCOR);
         panelLayout.putConstraint(SpringLayout.EAST, btnSignUp, 0, SpringLayout.EAST, labelUploadCOR);
