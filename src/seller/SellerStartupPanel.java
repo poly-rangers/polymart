@@ -36,14 +36,14 @@ public class SellerStartupPanel extends JPanel implements ActionListener {
         pnlSellerStartup.putConstraint(SpringLayout.SOUTH, lblStartupHeader1, -328, SpringLayout.SOUTH, this);
         pnlSellerStartup.putConstraint(SpringLayout.EAST, lblStartupHeader1, -5, SpringLayout.EAST, this);
         lblStartupHeader1.setHorizontalAlignment(SwingConstants.CENTER);
-        lblStartupHeader1.setForeground(new Color(153, 0, 0));
+        lblStartupHeader1.setForeground(new Color(102, 0, 0));
         lblStartupHeader1.setFont(new Font("Montserrat", Font.PLAIN, 24));
         add(lblStartupHeader1);
 
         JLabel lblStartupHeader2 = new JLabel("POLYMART,");
         pnlSellerStartup.putConstraint(SpringLayout.WEST, lblStartupHeader2, 10, SpringLayout.WEST, this);
         pnlSellerStartup.putConstraint(SpringLayout.EAST, lblStartupHeader2, -5, SpringLayout.EAST, this);
-        lblStartupHeader2.setForeground(new Color(153, 0, 0));
+        lblStartupHeader2.setForeground(new Color(102, 0, 0));
         lblStartupHeader2.setFont(new Font("Montserrat", Font.BOLD, 48));
         lblStartupHeader2.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblStartupHeader2);
@@ -54,7 +54,7 @@ public class SellerStartupPanel extends JPanel implements ActionListener {
         pnlSellerStartup.putConstraint(SpringLayout.EAST, lblStartupHeader3, -5, SpringLayout.EAST, this);
         pnlSellerStartup.putConstraint(SpringLayout.SOUTH, lblStartupHeader2, 0, SpringLayout.NORTH, lblStartupHeader3);
         lblStartupHeader3.setHorizontalAlignment(SwingConstants.CENTER);
-        lblStartupHeader3.setForeground(new Color(153, 0, 0));
+        lblStartupHeader3.setForeground(new Color(102, 0, 0));
         lblStartupHeader3.setFont(new Font("Montserrat", Font.ITALIC, 32));
         add(lblStartupHeader3);
 

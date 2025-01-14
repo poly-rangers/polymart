@@ -28,12 +28,26 @@ public class SellerDashboardPanel extends JPanel {
         panelLayout.putConstraint(SpringLayout.WEST, startupImage, 16, SpringLayout.WEST, this);
         add(startupImage);
         
+        JPanel pnlHeader = new JPanel();
+        pnlHeader.setOpaque(true);
+        pnlHeader.setBackground(Color.WHITE);
+        pnlHeader.setLayout(new BorderLayout());
+        panelLayout.putConstraint(SpringLayout.WEST, pnlHeader, 20, SpringLayout.WEST, this);
         
-        JLabel lblNewLabel = new JLabel("Products");
-        panelLayout.putConstraint(SpringLayout.WEST, lblNewLabel, 43, SpringLayout.WEST, this);
-        lblNewLabel.setFont(new Font("Montserrat", Font.BOLD, 19));
-        add(lblNewLabel);
+        JLabel lblMyProduct = new JLabel("My Products");
+        panelLayout.putConstraint(SpringLayout.WEST, lblMyProduct, 43, SpringLayout.WEST, this);
+        lblMyProduct.setFont(new Font("Montserrat", Font.BOLD, 19));
         
+        JButton lblAddProduct = new JButton("Add a product");
+        lblAddProduct.setFont(new Font("Montserrat", Font.ITALIC, 10));
+        lblAddProduct.setFocusable(false);
+        
+        pnlHeader.add(lblMyProduct, BorderLayout.WEST);
+        pnlHeader.add(lblAddProduct, BorderLayout.EAST);
+        
+        
+        
+        // Search Bar
         SearchBar searchBar = new SearchBar();
         searchBar.setupSearchPlaceholder("ang tamad tamad mo mag-scroll talaga naman...");
         panelLayout.putConstraint(SpringLayout.NORTH, searchBar, 15, SpringLayout.SOUTH, startupImage);
@@ -44,26 +58,28 @@ public class SellerDashboardPanel extends JPanel {
         searchBar.setLayout(new BoxLayout(searchBar, BoxLayout.X_AXIS));
         
         JScrollPane scrollPane = new JScrollPane();
-        panelLayout.putConstraint(SpringLayout.SOUTH, lblNewLabel, -6, SpringLayout.NORTH, scrollPane);
+        panelLayout.putConstraint(SpringLayout.SOUTH, pnlHeader, -6, SpringLayout.NORTH, scrollPane);
+        panelLayout.putConstraint(SpringLayout.EAST, pnlHeader, 0, SpringLayout.EAST, scrollPane);
+
         panelLayout.putConstraint(SpringLayout.NORTH, scrollPane, 162, SpringLayout.NORTH, this);
         scrollPane.setOpaque(false);
         panelLayout.putConstraint(SpringLayout.WEST, scrollPane, 22, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.EAST, scrollPane, -10, SpringLayout.EAST, this);
         
         JPanel scrollContentPanel = new JPanel();
-        scrollContentPanel.setLayout(new GridLayout(3, 2, 10, 10));
-      
+        JLabel lblNoProductsListed = new JLabel("No products listed");
+        lblNoProductsListed.setFont(new Font("Montserrat", Font.ITALIC, 10));
+        lblNoProductsListed.setForeground(Color.GRAY);
+        lblNoProductsListed.setHorizontalAlignment(JLabel.CENTER);
         
-        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
-        scrollContentPanel.add(new AddProduct("Pastil ulet", "P569"));
-        scrollContentPanel.add(new JPanel());
-        scrollContentPanel.add(new JPanel());
-        scrollContentPanel.add(new JPanel());
+        scrollContentPanel.add(lblNoProductsListed);
+        
       
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setViewportView(scrollContentPanel);
        
         add(scrollPane);
+        add(pnlHeader);
         
            
      // Create NavigationBar and position it at the bottom
