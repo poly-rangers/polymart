@@ -1,10 +1,10 @@
 package seller;
-import misc.AddProduct;
+//import misc.AddProduct;
 import misc.SearchBar;
 
 import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+//import java.awt.event.FocusAdapter;
+//import java.awt.event.FocusEvent;
 
 import javax.swing.*;
 
