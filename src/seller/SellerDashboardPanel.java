@@ -1,4 +1,5 @@
 package seller;
+import misc.RoundButton;
 //import misc.AddProduct;
 import misc.SearchBar;
 
@@ -38,8 +39,10 @@ public class SellerDashboardPanel extends JPanel {
         panelLayout.putConstraint(SpringLayout.WEST, lblMyProduct, 43, SpringLayout.WEST, this);
         lblMyProduct.setFont(new Font("Montserrat", Font.BOLD, 19));
         
-        JButton lblAddProduct = new JButton("Add a product");
-        lblAddProduct.setFont(new Font("Montserrat", Font.ITALIC, 10));
+        RoundButton lblAddProduct = new RoundButton("Add a product", 10);
+        lblAddProduct.setFont(new Font("Montserrat", Font.BOLD | Font.ITALIC, 11));
+        lblAddProduct.setBackground(new Color(102, 0, 0));
+        lblAddProduct.setForeground(Color.WHITE);
         lblAddProduct.setFocusable(false);
         
         pnlHeader.add(lblMyProduct, BorderLayout.WEST);
@@ -67,14 +70,23 @@ public class SellerDashboardPanel extends JPanel {
         panelLayout.putConstraint(SpringLayout.EAST, scrollPane, -10, SpringLayout.EAST, this);
         
         JPanel scrollContentPanel = new JPanel();
-        JLabel lblNoProductsListed = new JLabel("No products listed");
-        lblNoProductsListed.setFont(new Font("Montserrat", Font.ITALIC, 10));
-        lblNoProductsListed.setForeground(Color.GRAY);
-        lblNoProductsListed.setHorizontalAlignment(JLabel.CENTER);
         
-        scrollContentPanel.add(lblNoProductsListed);
+        JPanel lblTitleBar = new JPanel();
         
-      
+        JLabel lblItemName = new JLabel("Item Name");
+        JLabel lblPrice = new JLabel("Price");
+        JLabel lblRating = new JLabel("Rating");
+        JLabel lblReview = new JLabel("Review");
+        
+        lblTitleBar.add(lblItemName);
+        lblTitleBar.add(lblPrice);
+        lblTitleBar.add(lblRating);
+        lblTitleBar.add(lblReview);
+        
+        scrollContentPanel.add(lblTitleBar);
+        
+        
+        
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setViewportView(scrollContentPanel);
        
