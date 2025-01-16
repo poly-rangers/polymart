@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -11,16 +12,16 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
-import misc.RoundButton;
+import misc.RoundedButton;  // Assuming you want to use the RoundComponent class
 
 public class BuyerOrSeller extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-	private JButton buyerRoleButton;
-	private JButton sellerRoleButton;
-	public static String userRole ="";
-	
+    private JButton buyerRoleButton;
+    private JButton sellerRoleButton;
+    public static String userRole = "";
+
     public BuyerOrSeller(JPanel contentPane) {
         this.contentPane = contentPane;
 
@@ -29,6 +30,7 @@ public class BuyerOrSeller extends JPanel implements ActionListener {
         SpringLayout panelLayout = new SpringLayout();
         setLayout(panelLayout);
 
+        // Header labels
         JLabel startupHeader1 = new JLabel("WELCOME TO");
         panelLayout.putConstraint(SpringLayout.NORTH, startupHeader1, 270, SpringLayout.NORTH, this);
         panelLayout.putConstraint(SpringLayout.WEST, startupHeader1, 10, SpringLayout.WEST, this);
@@ -41,16 +43,13 @@ public class BuyerOrSeller extends JPanel implements ActionListener {
         JLabel startupHeader2 = new JLabel("POLYMART,");
         panelLayout.putConstraint(SpringLayout.NORTH, startupHeader2, 8, SpringLayout.SOUTH, startupHeader1);
         panelLayout.putConstraint(SpringLayout.WEST, startupHeader2, 10, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.SOUTH, startupHeader2, -310, SpringLayout.SOUTH, this);
         panelLayout.putConstraint(SpringLayout.EAST, startupHeader2, -5, SpringLayout.EAST, this);
         startupHeader2.setForeground(new Color(153, 0, 0));
         startupHeader2.setFont(new Font("Montserrat", Font.BOLD, 48));
         startupHeader2.setHorizontalAlignment(SwingConstants.CENTER);
         add(startupHeader2);
 
-
         JLabel startupSubheader1 = new JLabel("o bago ang lahat, ano ka jan?");
-        //startupSubheader1.setBackground(new Color(255, 255, 255));
         panelLayout.putConstraint(SpringLayout.NORTH, startupSubheader1, 400, SpringLayout.NORTH, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, startupSubheader1, -218, SpringLayout.SOUTH, this);
         panelLayout.putConstraint(SpringLayout.WEST, startupSubheader1, 10, SpringLayout.WEST, this);
@@ -59,7 +58,8 @@ public class BuyerOrSeller extends JPanel implements ActionListener {
         startupSubheader1.setForeground(Color.BLACK);
         startupSubheader1.setFont(new Font("Montserrat", Font.ITALIC, 18));
         add(startupSubheader1);
-        
+
+        // Rounded Header
         JLabel startupHeader3 = new JLabel("baks!");
         panelLayout.putConstraint(SpringLayout.NORTH, startupHeader3, 350, SpringLayout.NORTH, this);
         panelLayout.putConstraint(SpringLayout.WEST, startupHeader3, 20, SpringLayout.WEST, this);
@@ -70,7 +70,8 @@ public class BuyerOrSeller extends JPanel implements ActionListener {
         startupHeader3.setFont(new Font("Montserrat", Font.ITALIC, 32));
         add(startupHeader3);
 
-        buyerRoleButton = new RoundButton("BUYER", 45);
+        // Buyer Button (RoundedButton)
+        buyerRoleButton = new RoundedButton("BUYER", 45);  // Using RoundComponent for rounded button
         panelLayout.putConstraint(SpringLayout.NORTH, buyerRoleButton, 5, SpringLayout.SOUTH, startupSubheader1);
         panelLayout.putConstraint(SpringLayout.WEST, buyerRoleButton, 90, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.EAST, buyerRoleButton, -90, SpringLayout.EAST, this);
@@ -81,8 +82,8 @@ public class BuyerOrSeller extends JPanel implements ActionListener {
         buyerRoleButton.addActionListener(this);
         add(buyerRoleButton);
 
-        
-        sellerRoleButton = new RoundButton("SELLER", 45);
+        // Seller Button (RoundedButton)
+        sellerRoleButton = new RoundedButton("SELLER", 45);  // Using RoundComponent for rounded button
         panelLayout.putConstraint(SpringLayout.NORTH, sellerRoleButton, 506, SpringLayout.NORTH, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, buyerRoleButton, -16, SpringLayout.NORTH, sellerRoleButton);
         panelLayout.putConstraint(SpringLayout.WEST, sellerRoleButton, 90, SpringLayout.WEST, this);
@@ -96,6 +97,7 @@ public class BuyerOrSeller extends JPanel implements ActionListener {
         sellerRoleButton.addActionListener(this);
         add(sellerRoleButton);
 
+        // Image
         ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_front.png"));
         Image scaledImage = originalImage.getImage().getScaledInstance(260, 260, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
@@ -107,17 +109,17 @@ public class BuyerOrSeller extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Switch to SignupPanel
-    	Object source = e.getSource();
-    	
-    	if(source == buyerRoleButton) {
-    		userRole = "Buyer";
-    		CardLayout clLayout = (CardLayout) contentPane.getLayout();
+        // Switch to the appropriate startup panel based on the selected role
+        Object source = e.getSource();
+
+        if (source == buyerRoleButton) {
+            userRole = "Buyer";
+            CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "BuyerStartupPanel");
-    	} else if(source == sellerRoleButton) {
-    		userRole = "Seller";
-    		CardLayout clLayout = (CardLayout) contentPane.getLayout();
+        } else if (source == sellerRoleButton) {
+            userRole = "Seller";
+            CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "SellerStartupPanel");
-    	}     
+        }
     }
 }

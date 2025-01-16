@@ -1,5 +1,5 @@
 package seller;
-import misc.RoundButton;
+import misc.RoundedButton;
 //import misc.AddProduct;
 import misc.SearchBar;
 
@@ -39,7 +39,7 @@ public class SellerDashboardPanel extends JPanel {
         panelLayout.putConstraint(SpringLayout.WEST, lblMyProduct, 43, SpringLayout.WEST, this);
         lblMyProduct.setFont(new Font("Montserrat", Font.BOLD, 19));
         
-        RoundButton lblAddProduct = new RoundButton("Add a product", 10);
+        RoundedButton lblAddProduct = new RoundedButton("Add a product", 10);
         lblAddProduct.setFont(new Font("Montserrat", Font.BOLD | Font.ITALIC, 11));
         lblAddProduct.setBackground(new Color(102, 0, 0));
         lblAddProduct.setForeground(Color.WHITE);

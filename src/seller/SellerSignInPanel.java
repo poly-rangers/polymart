@@ -1,6 +1,6 @@
 package seller;
 import frames.CustomDialog;
-import misc.RoundButton;
+import misc.RoundedButton;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
@@ -81,7 +81,7 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
         showPasswordCheckBox.addActionListener(this);
         add(showPasswordCheckBox);
         
-        logInButton = new RoundButton("Log In", 45);
+        logInButton = new RoundedButton("Log In", 45);
         signInPanelLayout.putConstraint(SpringLayout.NORTH, logInButton, 34, SpringLayout.SOUTH, showPasswordCheckBox);
         signInPanelLayout.putConstraint(SpringLayout.WEST, logInButton, 71, SpringLayout.WEST, this);
         signInPanelLayout.putConstraint(SpringLayout.SOUTH, logInButton, 76, SpringLayout.SOUTH, showPasswordCheckBox);
