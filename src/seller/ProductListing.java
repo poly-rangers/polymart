@@ -128,6 +128,31 @@ public class ProductListing extends JPanel implements ActionListener {
         String[] strVariation = {"Add Variation"};
         JComboBox<String> toggleDownVariation = new JComboBox<>(strVariation);
         
+        JLabel lblPlaceAndAvailability = new JLabel("Place & Availability");
+        lblPlaceAndAvailability.setFont(new Font("Montserrat", Font.BOLD, 14));
+        
+        String[] strPlace = {"Pin Variation"};
+        JComboBox<String> toggleDownPlace = new JComboBox<>(strPlace);
+        
+        String[] strTime = {"Add Time"};
+        JComboBox<String> toggleDownTime = new JComboBox<>(strTime);
+        
+        String[] strDate = {"Add Date"};
+        JComboBox<String> toggleDownDate = new JComboBox<>(strDate);
+       
+        
+        JLabel lblModeOfPayment = new JLabel("Mode of Payment");
+        lblModeOfPayment.setFont(new Font("Montserrat", Font.BOLD, 14));
+        
+        String[] strModeOfPayment = {"Choose"};
+        JComboBox<String> toggleDownModeOfPayment = new JComboBox<>(strModeOfPayment);
+        
+        JLabel lblSocials = new JLabel("Socials");
+        lblSocials.setFont(new Font("Montserrat", Font.BOLD, 14));
+        
+        String[] strSocials = {"Add here"};
+        JComboBox<String> toggleDownSocials = new JComboBox<>(strSocials);
+        
         
         
         
@@ -138,8 +163,21 @@ public class ProductListing extends JPanel implements ActionListener {
         pnlProductContent.add(txtfldProductName);
         pnlProductContent.add(txtfldProductDesc);
         
+        
         pnlProductContent.add(lblVariation);
         pnlProductContent.add(toggleDownVariation);
+        
+        pnlProductContent.add(lblPlaceAndAvailability);
+        pnlProductContent.add(toggleDownPlace);
+        pnlProductContent.add(toggleDownTime);
+        pnlProductContent.add(toggleDownDate);
+        
+        pnlProductContent.add(lblModeOfPayment);
+        pnlProductContent.add(toggleDownModeOfPayment);
+        
+        pnlProductContent.add(lblSocials);
+        pnlProductContent.add(toggleDownSocials);
+        
         
         scrollContentPanel.add(pnlProductContent);
         
