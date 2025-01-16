@@ -17,8 +17,11 @@ import java.awt.event.ActionEvent;
 
 
 public class ProductListing extends JPanel {
+	
+	private JPanel contentPane;
 
-	public ProductListing() {
+	public ProductListing(JPanel contentPane) {
+		this.contentPane = contentPane;
 		
 		setBackground(Color.WHITE);
         setBounds(100, 100, 414, 660);
@@ -101,7 +104,6 @@ public class ProductListing extends JPanel {
         add(scrollPane);
         add(pnlHeader);
         
-           
      // Create NavigationBar and position it at the bottom
         SellerNavigationBar navBar = new SellerNavigationBar();
         panelLayout.putConstraint(SpringLayout.SOUTH, scrollPane, -30, SpringLayout.NORTH, navBar);

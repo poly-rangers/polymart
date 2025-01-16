@@ -9,12 +9,15 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class SellerDashboardPanel extends JPanel {
+public class SellerDashboardPanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JButton btnAddProduct;
 	private String[] arrLabels = {"Item Name", "Pricing", "Rating", "Review"};
 
 	public SellerDashboardPanel(JPanel contentPane) {
+		this.contentPane = contentPane;
 
 		setBackground(Color.WHITE);
         setBounds(100, 100, 414, 660);
@@ -39,21 +42,16 @@ public class SellerDashboardPanel extends JPanel {
         panelLayout.putConstraint(SpringLayout.WEST, lblMyProduct, 43, SpringLayout.WEST, this);
         lblMyProduct.setFont(new Font("Montserrat", Font.BOLD, 19));
         
-        RoundButton lblAddProduct = new RoundButton("Add a product", 10);
-        lblAddProduct.addActionListener(new ActionListener() {
-        	
-        	public void actionPerformed(ActionEvent e) {
-        		
-        	}
-        });
+        btnAddProduct = new RoundButton("Add a product", 10);
+        btnAddProduct.addActionListener(this);
         
-        lblAddProduct.setFont(new Font("Montserrat", Font.BOLD | Font.ITALIC, 11));
-        lblAddProduct.setBackground(new Color(102, 0, 0));
-        lblAddProduct.setForeground(Color.WHITE);
-        lblAddProduct.setFocusable(false);
+        btnAddProduct.setFont(new Font("Montserrat", Font.BOLD | Font.ITALIC, 11));
+        btnAddProduct.setBackground(new Color(102, 0, 0));
+        btnAddProduct.setForeground(Color.WHITE);
+        btnAddProduct.setFocusable(true);
         
         pnlHeader.add(lblMyProduct, BorderLayout.WEST);
-        pnlHeader.add(lblAddProduct, BorderLayout.EAST);
+        pnlHeader.add(btnAddProduct, BorderLayout.EAST);
         
         // Search Bar
         SearchBar searchBar = new SearchBar();
@@ -93,7 +91,6 @@ public class SellerDashboardPanel extends JPanel {
         add(scrollPane);
         add(pnlHeader);
         
-           
      // Create NavigationBar and position it at the bottom
         SellerNavigationBar navBar = new SellerNavigationBar();
         panelLayout.putConstraint(SpringLayout.SOUTH, scrollPane, -30, SpringLayout.NORTH, navBar);
@@ -105,4 +102,14 @@ public class SellerDashboardPanel extends JPanel {
         
 	}
 	
+	@Override
+    public void actionPerformed(ActionEvent actEvent) {
+    	Object objSourceEvent = actEvent.getSource();
+    	
+    	if (objSourceEvent == btnAddProduct) {
+    		// Switch to Product Listing
+            CardLayout clLayout = (CardLayout) contentPane.getLayout();
+            clLayout.show(contentPane, "ProductListing");
+    	} 
+    }
 }

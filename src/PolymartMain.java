@@ -6,10 +6,7 @@ import buyer.BuyerDashboardPanel;
 import buyer.BuyerSignInPanel;
 import buyer.BuyerSignupPanel;
 import buyer.BuyerStartupPanel;
-import seller.SellerDashboardPanel;
-import seller.SellerSignInPanel;
-import seller.SellerSignupPanel;
-import seller.SellerStartupPanel;
+import seller.*;
 
 import java.awt.CardLayout;
 
@@ -71,11 +68,13 @@ public class PolymartMain extends JFrame {
         SellerSignupPanel sellerSignupPanel = new SellerSignupPanel(contentPane);
         SellerSignInPanel sellerSignInPanel = new SellerSignInPanel(contentPane);
         SellerDashboardPanel sellerDashboardPanel = new SellerDashboardPanel(contentPane);
+        ProductListing productListing = new ProductListing(contentPane);
 
         contentPane.add(sellerStartupPanel, "SellerStartupPanel");
         contentPane.add(sellerSignupPanel, "SellerSignupPanel");
         contentPane.add(sellerSignInPanel, "SellerSignInPanel");
         contentPane.add(sellerDashboardPanel, "SellerDashboardPanel");
+        contentPane.add(productListing, "ProductListing");
         
         // Show StartupPanel initially
         CardLayout clLayout = (CardLayout) contentPane.getLayout();
