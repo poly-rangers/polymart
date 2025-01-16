@@ -1,6 +1,7 @@
 package seller;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -17,9 +18,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
-public class ProductListing extends JPanel {
+public class ProductListing extends JPanel implements ActionListener {
 	
 	private JPanel contentPane;
+	private JButton btnGoBack;
 
 	public ProductListing(JPanel contentPane) {
 		this.contentPane = contentPane;
@@ -67,20 +69,17 @@ public class ProductListing extends JPanel {
         panelLayout.putConstraint(SpringLayout.WEST, pnlHeader, 20, SpringLayout.WEST, this);
         
         // Go Back Button
-        JButton btnGoBack = new JButton();
-        btnGoBack.addActionListener(new ActionListener() {
-        	
-        	public void actionPerformed(ActionEvent e) {
-        	}
-        });
+        btnGoBack = new JButton();
+        btnGoBack.addActionListener(this);
         
-        ImageIcon goBackIcon = new ImageIcon("backicon.png");
-        btnGoBack.setIcon(goBackIcon);
+        ImageIcon ogGoBackIcon = new ImageIcon(this.getClass().getResource("/backicon.png"));
+        Image scaledGoBackIcon = ogGoBackIcon.getImage().getScaledInstance(30, 24, Image.SCALE_SMOOTH);
+        btnGoBack.setIcon(new ImageIcon(scaledGoBackIcon));
         btnGoBack.setBackground(Color.WHITE);
         btnGoBack.setFocusPainted(false);
         btnGoBack.setBorderPainted(false);
         
-        JLabel lblMyProduct = new JLabel("   List a product");
+        JLabel lblMyProduct = new JLabel("List a product");
         panelLayout.putConstraint(SpringLayout.WEST, lblMyProduct, 43, SpringLayout.WEST, this);
         lblMyProduct.setFont(new Font("Montserrat", Font.BOLD, 19));
         
@@ -162,5 +161,16 @@ public class ProductListing extends JPanel {
         panelLayout.putConstraint(SpringLayout.EAST, navBar, 414, SpringLayout.WEST, this);
         add(navBar);
 	}
+	
+	@Override
+    public void actionPerformed(ActionEvent actEvent) {
+    	Object objSourceEvent = actEvent.getSource();
+    	
+    	if (objSourceEvent == btnGoBack) {
+    		// Switch to Product Listing
+            CardLayout clLayout = (CardLayout) contentPane.getLayout();
+            clLayout.show(contentPane, "SellerDashboardPanel");
+    	} 
+    }
 
 }
