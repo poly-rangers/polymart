@@ -99,23 +99,4 @@ public class BuyerDashboardPanel extends JPanel {
         
         
 	}
-	
-	//Prototype of product database (based dapat kasi ito sa input ng seller)
-	private void productDashboardInfo(String strID, String strName, int intPrice, String strImagePath) {
-        String folderPath = "databases";
-        
-        // Ensure the directory exists
-        File folder = new File(folderPath);
-        if (!folder.exists()) {
-            folder.mkdir();  // Create the folder if it doesn't exist
-        }
-
-        String filePath = folderPath + File.separator + "product_database.txt";
-        
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            writer.write(strID + "," + strName + "," + intPrice + "," + strImagePath + "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
