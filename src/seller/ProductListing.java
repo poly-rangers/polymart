@@ -1,22 +1,39 @@
 package seller;
-import misc.RoundButton;
-import misc.AddProduct;
-import misc.SearchBar;
-import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
+import misc.RoundButton;
+import misc.SearchBar;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class SellerDashboardPanel extends JPanel {
 
-	private static final long serialVersionUID = 1L;
-	private String[] arrLabels = {"Item Name", "Pricing", "Rating", "Review"};
+public class ProductListing extends JPanel {
 
-	public SellerDashboardPanel(JPanel contentPane) {
-
+	public ProductListing() {
+		
 		setBackground(Color.WHITE);
+        setBounds(100, 100, 414, 660);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        
+        
+//        // Icon with header
+//        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_seller.icon.png"));
+//        Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
+//        JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
+//        startupImage.setBorder(new EmptyBorder(24,16,0,0));
+//        startupImage.setAlignmentX(Component.LEFT_ALIGNMENT); 
+//        
+        
+        setBackground(Color.WHITE);
         setBounds(100, 100, 414, 660);
         SpringLayout panelLayout = new SpringLayout();
         setLayout(panelLayout);
@@ -28,33 +45,7 @@ public class SellerDashboardPanel extends JPanel {
         panelLayout.putConstraint(SpringLayout.NORTH, startupImage, 24, SpringLayout.NORTH, this);
         panelLayout.putConstraint(SpringLayout.WEST, startupImage, 16, SpringLayout.WEST, this);
         add(startupImage);
-        
-        JPanel pnlHeader = new JPanel();
-        pnlHeader.setOpaque(true);
-        pnlHeader.setBackground(Color.WHITE);
-        pnlHeader.setLayout(new BorderLayout());
-        panelLayout.putConstraint(SpringLayout.WEST, pnlHeader, 20, SpringLayout.WEST, this);
-        
-        JLabel lblMyProduct = new JLabel("My Products");
-        panelLayout.putConstraint(SpringLayout.WEST, lblMyProduct, 43, SpringLayout.WEST, this);
-        lblMyProduct.setFont(new Font("Montserrat", Font.BOLD, 19));
-        
-        RoundButton lblAddProduct = new RoundButton("Add a product", 10);
-        lblAddProduct.addActionListener(new ActionListener() {
-        	
-        	public void actionPerformed(ActionEvent e) {
-        		
-        	}
-        });
-        
-        lblAddProduct.setFont(new Font("Montserrat", Font.BOLD | Font.ITALIC, 11));
-        lblAddProduct.setBackground(new Color(102, 0, 0));
-        lblAddProduct.setForeground(Color.WHITE);
-        lblAddProduct.setFocusable(false);
-        
-        pnlHeader.add(lblMyProduct, BorderLayout.WEST);
-        pnlHeader.add(lblAddProduct, BorderLayout.EAST);
-        
+            
         // Search Bar
         SearchBar searchBar = new SearchBar();
         searchBar.setupSearchPlaceholder("ang tamad tamad mo mag-scroll talaga naman...");
@@ -64,6 +55,33 @@ public class SellerDashboardPanel extends JPanel {
         panelLayout.putConstraint(SpringLayout.EAST, searchBar, -62, SpringLayout.EAST, this);
         add(searchBar);
         searchBar.setLayout(new BoxLayout(searchBar, BoxLayout.X_AXIS));
+        
+        JPanel pnlHeader = new JPanel();
+        pnlHeader.setOpaque(true);
+        pnlHeader.setBackground(Color.WHITE);
+        pnlHeader.setLayout(new BorderLayout());
+        panelLayout.putConstraint(SpringLayout.WEST, pnlHeader, 20, SpringLayout.WEST, this);
+        
+        // Go Back Button
+        JButton btnGoBack = new JButton();
+        btnGoBack.addActionListener(new ActionListener() {
+        	
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
+        
+        ImageIcon goBackIcon = new ImageIcon("backicon.png");
+        btnGoBack.setIcon(goBackIcon);
+        btnGoBack.setBackground(Color.WHITE);
+        btnGoBack.setFocusPainted(false);
+        btnGoBack.setBorderPainted(false);
+        
+        JLabel lblMyProduct = new JLabel("   List a product");
+        panelLayout.putConstraint(SpringLayout.WEST, lblMyProduct, 43, SpringLayout.WEST, this);
+        lblMyProduct.setFont(new Font("Montserrat", Font.BOLD, 19));
+        
+        pnlHeader.add(btnGoBack, BorderLayout.WEST);
+        pnlHeader.add(lblMyProduct);
         
         JScrollPane scrollPane = new JScrollPane();
         panelLayout.putConstraint(SpringLayout.SOUTH, pnlHeader, -6, SpringLayout.NORTH, scrollPane);
@@ -76,16 +94,6 @@ public class SellerDashboardPanel extends JPanel {
         
         JPanel scrollContentPanel = new JPanel();
         
-        JPanel lblTitleBar = new JPanel();
-        lblTitleBar.setLayout(new GridLayout(1,4,10,0));
-        
-        for (String tempLabel : arrLabels) {
-            JLabel lblNames = new JLabel(tempLabel, SwingConstants.CENTER); // Center-align the text
-            lblNames.setFont(new Font("Montserrat", Font.BOLD, 14)); // Optional: Set font for the labels
-            lblTitleBar.add(lblNames);
-        }
-        
-        scrollContentPanel.add(lblTitleBar);
         
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setViewportView(scrollContentPanel);
@@ -102,7 +110,6 @@ public class SellerDashboardPanel extends JPanel {
         panelLayout.putConstraint(SpringLayout.SOUTH, navBar, 0, SpringLayout.SOUTH, this);
         panelLayout.putConstraint(SpringLayout.EAST, navBar, 414, SpringLayout.WEST, this);
         add(navBar);
-        
 	}
-	
+
 }

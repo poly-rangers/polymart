@@ -1,6 +1,7 @@
 package misc;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
@@ -18,10 +19,11 @@ public class SearchBar extends JPanel {
 		setBackground(Color.WHITE);
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		setBorder(new LineBorder(Color.GRAY));
+//		setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		searchBar = new JTextField();
 		searchBar.setText("ang tamad tamad mo mag-scroll talaga naman...");
-		searchBar.setBorder(null);
+//		searchBar.setBorder(null);
 		searchBar.setBorder(new EmptyBorder(0, 5, 0, 0));
 		
 		ImageIcon searchImage = new ImageIcon(this.getClass().getResource("/searchicon.png"));
