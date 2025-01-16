@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
 
@@ -96,6 +97,53 @@ public class ProductListing extends JPanel {
         panelLayout.putConstraint(SpringLayout.EAST, scrollPane, -10, SpringLayout.EAST, this);
         
         JPanel scrollContentPanel = new JPanel();
+        scrollContentPanel.setLayout(new BoxLayout(scrollContentPanel, BoxLayout.X_AXIS));
+        
+        JPanel pnlProductContent = new JPanel();
+        pnlProductContent.setLayout(new BoxLayout(pnlProductContent, BoxLayout.Y_AXIS));
+        pnlProductContent.setAlignmentX(Component.LEFT_ALIGNMENT);
+       
+        RoundButton btnAddImage = new RoundButton("+", 10);
+        btnAddImage.setFont(new Font("Montserrat", Font.BOLD, 14));
+        btnAddImage.setForeground(Color.WHITE);
+        btnAddImage.setBackground(new Color(102, 0, 0));
+        
+        btnAddImage.setPreferredSize(new Dimension(78, 69));
+        
+        JLabel lblProductImages = new JLabel("Product Images");
+        lblProductImages.setFont(new Font("Montserrat", Font.BOLD, 14));
+        
+        JLabel lblProductName = new JLabel("Product Details");
+        lblProductName.setFont(new Font("Montserrat", Font.BOLD, 14));
+        
+        JTextField txtfldProductName = new JTextField();
+        txtfldProductName.setText("Product Name here");
+//        txtfldProductName.setPreferredSize(new Dimension(100,50));
+        
+        JTextField txtfldProductDesc = new JTextField();
+        txtfldProductDesc.setText("Product Description here");
+        
+        JLabel lblVariation = new JLabel("Variation");
+        lblVariation.setFont(new Font("Montserrat", Font.BOLD, 14));
+        
+        String[] strVariation = {"Add Variation"};
+        JComboBox<String> toggleDownVariation = new JComboBox<>(strVariation);
+        
+        
+        
+        
+        
+        pnlProductContent.add(lblProductImages);
+        pnlProductContent.add(btnAddImage);
+        pnlProductContent.add(lblProductName);
+        pnlProductContent.add(txtfldProductName);
+        pnlProductContent.add(txtfldProductDesc);
+        
+        pnlProductContent.add(lblVariation);
+        pnlProductContent.add(toggleDownVariation);
+        
+        scrollContentPanel.add(pnlProductContent);
+        
         
         
         scrollPane.getViewport().setOpaque(false);
@@ -104,6 +152,7 @@ public class ProductListing extends JPanel {
         add(scrollPane);
         add(pnlHeader);
         
+           
      // Create NavigationBar and position it at the bottom
         SellerNavigationBar navBar = new SellerNavigationBar();
         panelLayout.putConstraint(SpringLayout.SOUTH, scrollPane, -30, SpringLayout.NORTH, navBar);
