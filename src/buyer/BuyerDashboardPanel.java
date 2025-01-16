@@ -3,7 +3,17 @@ import misc.AddProduct;
 import misc.SearchBar;
 
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javax.swing.*;
+
+import frames.CustomDialog;
 
 
 public class BuyerDashboardPanel extends JPanel {
@@ -48,13 +58,30 @@ public class BuyerDashboardPanel extends JPanel {
         panelLayout.putConstraint(SpringLayout.EAST, scrollPane, -10, SpringLayout.EAST, this);
         
         JPanel scrollContentPanel = new JPanel();
-        scrollContentPanel.setLayout(new GridLayout(3, 2, 10, 10));
-               
-        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
-        scrollContentPanel.add(new JPanel());
-        scrollContentPanel.add(new JPanel());
-        scrollContentPanel.add(new JPanel());
-      
+        
+        
+        scrollContentPanel.setLayout(new GridLayout(0, 2, 10, 10));
+        try(BufferedReader reader = new BufferedReader(new FileReader("databases/product_database.txt"))){
+			String line;
+			while((line = reader.readLine()) != null) {
+				String[] productDetails = line.split(",");
+				if(productDetails.length == 4) {
+					String strProductName = productDetails[1];
+					String strProductPrice = "P" + productDetails[2];
+					String strImagePath = productDetails[3];
+					
+					AddProduct newProduct = new AddProduct(strProductName, strProductPrice, strImagePath);
+					scrollContentPanel.add(newProduct);
+				}
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+       
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setViewportView(scrollContentPanel);
        
@@ -70,5 +97,25 @@ public class BuyerDashboardPanel extends JPanel {
         panelLayout.putConstraint(SpringLayout.EAST, navBar, 414, SpringLayout.WEST, this);
         add(navBar);
         
+        
 	}
+	
+	//Prototype of product database (based dapat kasi ito sa input ng seller)
+	private void productDashboardInfo(String strID, String strName, int intPrice, String strImagePath) {
+        String folderPath = "databases";
+        
+        // Ensure the directory exists
+        File folder = new File(folderPath);
+        if (!folder.exists()) {
+            folder.mkdir();  // Create the folder if it doesn't exist
+        }
+
+        String filePath = folderPath + File.separator + "product_database.txt";
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            writer.write(strID + "," + strName + "," + intPrice + "," + strImagePath + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,0 +1,9 @@
+
+PRD0924,Pastil,50,/pastil.png
+PRD892E,Grahan Bar,50,/pastil.png
+PRD0924,Pastil,50,/pastil.png
+PRD892E,Grahan Bar,50,/pastil.png
+PRD0924,Pastil,50,/pastil.png
+PRD892E,Grahan Bar,50,/pastil.png
+PRD0921,Ramen,89,/pastil.png
+PRD3902,Siomai,49,/pastil.png

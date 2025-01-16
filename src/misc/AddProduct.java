@@ -11,7 +11,7 @@ import javax.swing.border.LineBorder;
 public class AddProduct extends JPanel {
 	private static final long serialVersionUID = 6429731752501671820L;
 
-	public AddProduct(String strProductName, String strProductPrice) {
+	public AddProduct(String strProductName, String strProductPrice, String strImagePath) {
 		
 		// Panel properties
         setPreferredSize(new Dimension(173, 198));
@@ -25,7 +25,7 @@ public class AddProduct extends JPanel {
         JPanel pnlPicture = new JPanel();
         pnlPicture.setBorder(new EmptyBorder(5, 10, 5, 10)); 
         pnlPicture.setBackground(Color.WHITE);
-        ImageIcon productPic = new ImageIcon(this.getClass().getResource("/pastil.png"));
+        ImageIcon productPic = new ImageIcon(this.getClass().getResource(strImagePath));
         JLabel pic = new JLabel(productPic);
         pnlPicture.add(pic);
         add(pnlPicture);
