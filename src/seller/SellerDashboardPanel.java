@@ -1,18 +1,16 @@
 package seller;
 import misc.RoundButton;
-//import misc.AddProduct;
+import misc.AddProduct;
 import misc.SearchBar;
-
 import java.awt.*;
-//import java.awt.event.FocusAdapter;
-//import java.awt.event.FocusEvent;
-
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import javax.swing.*;
-
 
 public class SellerDashboardPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private String[] arrLabels = {"Item Name", "Pricing", "Rating", "Review"};
 
 	public SellerDashboardPanel(JPanel contentPane) {
 
@@ -48,8 +46,6 @@ public class SellerDashboardPanel extends JPanel {
         pnlHeader.add(lblMyProduct, BorderLayout.WEST);
         pnlHeader.add(lblAddProduct, BorderLayout.EAST);
         
-        
-        
         // Search Bar
         SearchBar searchBar = new SearchBar();
         searchBar.setupSearchPlaceholder("ang tamad tamad mo mag-scroll talaga naman...");
@@ -72,20 +68,15 @@ public class SellerDashboardPanel extends JPanel {
         JPanel scrollContentPanel = new JPanel();
         
         JPanel lblTitleBar = new JPanel();
+        lblTitleBar.setLayout(new GridLayout(1,4,10,0));
         
-        JLabel lblItemName = new JLabel("Item Name");
-        JLabel lblPrice = new JLabel("Price");
-        JLabel lblRating = new JLabel("Rating");
-        JLabel lblReview = new JLabel("Review");
-        
-        lblTitleBar.add(lblItemName);
-        lblTitleBar.add(lblPrice);
-        lblTitleBar.add(lblRating);
-        lblTitleBar.add(lblReview);
+        for (String tempLabel : arrLabels) {
+            JLabel lblNames = new JLabel(tempLabel, SwingConstants.CENTER); // Center-align the text
+            lblNames.setFont(new Font("Montserrat", Font.BOLD, 14)); // Optional: Set font for the labels
+            lblTitleBar.add(lblNames);
+        }
         
         scrollContentPanel.add(lblTitleBar);
-        
-        
         
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setViewportView(scrollContentPanel);
@@ -104,4 +95,5 @@ public class SellerDashboardPanel extends JPanel {
         add(navBar);
         
 	}
+	
 }
