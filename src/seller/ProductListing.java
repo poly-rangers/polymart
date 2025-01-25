@@ -100,7 +100,7 @@ public class ProductListing extends JPanel implements ActionListener {
         
         JPanel pnlProductContent = new JPanel();
         pnlProductContent.setLayout(new BoxLayout(pnlProductContent, BoxLayout.Y_AXIS));
-        pnlProductContent.setAlignmentX(Component.LEFT_ALIGNMENT);
+        pnlProductContent.setAlignmentX(Component.LEFT_ALIGNMENT);        
        
         RoundButton btnAddImage = new RoundButton("+", 10);
         btnAddImage.setFont(new Font("Montserrat", Font.BOLD, 14));
