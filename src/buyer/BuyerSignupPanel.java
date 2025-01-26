@@ -371,22 +371,29 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
         }
     }
    
+//    private void saveUserInfo(String username, String firstName, String lastName, String email, String pwd) {
+//        String folderPath = "databases";
+//        
+//        // Ensure the directory exists
+//        File folder = new File(folderPath);
+//        if (!folder.exists()) {
+//            folder.mkdir();  // Create the folder if it doesn't exist
+//        }
+//
+//        String filePath = folderPath + File.separator + "buyer_userinfo.txt";
+//        
+//        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+//            writer.write(username + "," + firstName + "," + lastName + "," + email + "," + pwd + "\n");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+    
     private void saveUserInfo(String username, String firstName, String lastName, String email, String pwd) {
-        String folderPath = "databases";
-        
-        // Ensure the directory exists
-        File folder = new File(folderPath);
-        if (!folder.exists()) {
-            folder.mkdir();  // Create the folder if it doesn't exist
-        }
-
-        String filePath = folderPath + File.separator + "buyer_userinfo.txt";
-        
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            writer.write(username + "," + firstName + "," + lastName + "," + email + "," + pwd + "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    	DatabaseManager.createTable();
+    	
+    	BuyerDB.addBuyer(username, firstName, lastName, email, pwd);
+  
     }
     
     private void clearTextFields() {
