@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
-import misc.RoundButton;
+import misc.RoundedButton;
 
 public class SellerStartupPanel extends JPanel implements ActionListener {
 
@@ -77,7 +77,7 @@ public class SellerStartupPanel extends JPanel implements ActionListener {
         lblStartupSubheader2.setFont(new Font("Montserrat", Font.BOLD, 18));
         add(lblStartupSubheader2);
 
-        btnStart = new RoundButton("gewwww, deserve ko 'to!", 45);
+        btnStart = new RoundedButton("gewwww, deserve ko 'to!", 45);
         pnlSellerStartup.putConstraint(SpringLayout.NORTH, btnStart, 19, SpringLayout.SOUTH, lblStartupSubheader2);
         pnlSellerStartup.putConstraint(SpringLayout.WEST, btnStart, 69, SpringLayout.WEST, this);
         pnlSellerStartup.putConstraint(SpringLayout.SOUTH, btnStart, 61, SpringLayout.SOUTH, lblStartupSubheader2);

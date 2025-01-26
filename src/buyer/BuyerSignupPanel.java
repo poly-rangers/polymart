@@ -1,6 +1,7 @@
 package buyer;
+
 import frames.CustomDialog;
-import misc.RoundButton;
+import misc.RoundedButton;
 import misc.FieldIsEmpty;
 
 import java.awt.CardLayout;
@@ -17,10 +18,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 public class BuyerSignupPanel extends JPanel implements ActionListener {
 
-	private JPanel panelContent;
+    private JPanel panelContent;
     private static final long serialVersionUID = 1L;
     private JTextField txtFieldFirstName;
     private JTextField txtFieldLastName;
@@ -35,6 +39,8 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
     private JLabel labelAnd;
     private JLabel labelChooseFile;
     private JCheckBox chckbxTermsConditions;
+    private JFileChooser fileChooser;
+    private File selectedFile;
     
     public BuyerSignupPanel(JPanel contentPane) {
     	this.panelContent = contentPane;
@@ -202,7 +208,7 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
     	add(btnPrivacyPolicy);
 
         // Sign up button
-        btnSignUp = new RoundButton("Sign Up", 45);
+        btnSignUp = new RoundedButton("Sign Up", 45);
         panelLayout.putConstraint(SpringLayout.NORTH, btnSignUp, 22, SpringLayout.SOUTH, btnTermsConditions);
         panelLayout.putConstraint(SpringLayout.WEST, btnSignUp, 10, SpringLayout.WEST, labelUploadCOR);
         panelLayout.putConstraint(SpringLayout.EAST, btnSignUp, 0, SpringLayout.EAST, labelUploadCOR);
