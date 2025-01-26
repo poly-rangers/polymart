@@ -13,7 +13,8 @@ import javax.swing.*;
 import java.awt.Font;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.LineBorder;
-import databases.UserSignIn;  // Importing the UserSignin class
+
+import databases.UserSignIn;
 
 public class BuyerSignInPanel extends JPanel implements ActionListener {
     private static final long serialVersionUID = 1L;

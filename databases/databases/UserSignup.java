@@ -56,10 +56,10 @@ public class UserSignup {
         
         // Conditional to determine which table to insert into
         if ("buyer".equalsIgnoreCase(userType)) {
-            insertSQL = "INSERT INTO buyers (first_name, last_name, email, username, password) " +
+            insertSQL = "INSERT INTO buyers (username, first_name, last_name, email, password) " +
                         "VALUES (?, ?, ?, ?, ?)";
         } else if ("seller".equalsIgnoreCase(userType)) {
-            insertSQL = "INSERT INTO sellers (first_name, last_name, email, username, password) " +
+            insertSQL = "INSERT INTO sellers (username, first_name, last_name, email, password) " +
                         "VALUES (?, ?, ?, ?, ?)";
         } else {
             System.out.println("Invalid user type.");
