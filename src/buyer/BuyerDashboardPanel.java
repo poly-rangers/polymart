@@ -14,13 +14,10 @@ import frames.SetMeetUpFrame;
 import misc.AddProduct;
 import misc.SearchBar;
 
-<<<<<<< HEAD
 import frames.CustomDialog;
 
-=======
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
->>>>>>> 9877f49688a9bc0fa588858d88590761e383a4e9
 
 public class BuyerDashboardPanel extends JPanel implements ActionListener {
 
@@ -64,7 +61,7 @@ public class BuyerDashboardPanel extends JPanel implements ActionListener {
         panelLayout.putConstraint(SpringLayout.EAST, scrollPane, -10, SpringLayout.EAST, this);
 
         JPanel scrollContentPanel = new JPanel();
-<<<<<<< HEAD
+
         
         
         scrollContentPanel.setLayout(new GridLayout(0, 2, 10, 10));
@@ -89,14 +86,13 @@ public class BuyerDashboardPanel extends JPanel implements ActionListener {
 			e.printStackTrace();
 		}
        
-=======
-        scrollContentPanel.setLayout(new GridLayout(3, 2, 10, 10));
-        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
-        scrollContentPanel.add(new JPanel());
-        scrollContentPanel.add(new JPanel());
-        scrollContentPanel.add(new JPanel());
 
->>>>>>> 9877f49688a9bc0fa588858d88590761e383a4e9
+//        scrollContentPanel.setLayout(new GridLayout(3, 2, 10, 10));
+//        scrollContentPanel.add(new AddProduct("Pastil wow", "P150", name));
+//        scrollContentPanel.add(new JPanel());
+//        scrollContentPanel.add(new JPanel());
+//        scrollContentPanel.add(new JPanel());
+
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setViewportView(scrollContentPanel);
 
@@ -110,18 +106,18 @@ public class BuyerDashboardPanel extends JPanel implements ActionListener {
         panelLayout.putConstraint(SpringLayout.SOUTH, navBar, 0, SpringLayout.SOUTH, this);
         panelLayout.putConstraint(SpringLayout.EAST, navBar, 414, SpringLayout.WEST, this);
         add(navBar);
-<<<<<<< HEAD
+
         
         
 	}
-=======
 
-        JButton btnNewButton = new JButton("test");
-        panelLayout.putConstraint(SpringLayout.WEST, btnNewButton, 77, SpringLayout.EAST, startupImage);
-        panelLayout.putConstraint(SpringLayout.SOUTH, btnNewButton, 0, SpringLayout.SOUTH, startupImage);
-        btnNewButton.addActionListener(this);
-        add(btnNewButton);
-    }
+
+//        JButton btnNewButton = new JButton("test");
+//        panelLayout.putConstraint(SpringLayout.WEST, btnNewButton, 77, SpringLayout.EAST, startupImage);
+//        panelLayout.putConstraint(SpringLayout.SOUTH, btnNewButton, 0, SpringLayout.SOUTH, startupImage);
+//        btnNewButton.addActionListener(this);
+//        add(btnNewButton);
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -129,5 +125,5 @@ public class BuyerDashboardPanel extends JPanel implements ActionListener {
         SetMeetUpFrame meetUpFrame = new SetMeetUpFrame();
         meetUpFrame.setVisible(true);
     }
->>>>>>> 9877f49688a9bc0fa588858d88590761e383a4e9
+
 }

@@ -2,6 +2,7 @@ package buyer;
 
 import frames.CustomDialog;
 import misc.RoundedButton;
+import utils.DatabaseManager;
 import misc.FieldIsEmpty;
 
 import java.awt.CardLayout;
@@ -10,6 +11,7 @@ import java.awt.Font;
 import java.awt.Image;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -21,6 +23,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+
+import utils.DatabaseManager;
 
 public class BuyerSignupPanel extends JPanel implements ActionListener {
 
@@ -396,9 +400,16 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
 //    }
     
     private void saveUserInfo(String username, String firstName, String lastName, String email, String pwd) {
-    	DatabaseManager.createTable();
     	
-    	BuyerDB.addBuyer(username, firstName, lastName, email, pwd);
+    	 try {
+    	        // Call to BuyerDB.addBuyer, if an exception occurs here, it will be caught
+    	        BuyerDB.addBuyer(username, firstName, lastName, email, pwd);
+    	        System.out.println("User info saved successfully!");
+    	    } catch (Exception e) {
+    	        // Catch any exceptions and log them
+    	        System.out.println("Error saving user info: " + e.getMessage());
+    	        e.printStackTrace();  // This will give you a full stack trace for debugging
+    	    }
   
     }
     
