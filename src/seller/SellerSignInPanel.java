@@ -8,13 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import javax.swing.*;
 import java.awt.Font;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.LineBorder;
+
+import databases.UserSignIn;
 
 public class SellerSignInPanel extends JPanel implements ActionListener{
     private static final long serialVersionUID = 1L;
@@ -24,7 +23,7 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
     private JCheckBox showPasswordCheckBox;
     private JButton signUpButton;
     private JButton logInButton;
-
+    
     public SellerSignInPanel(JPanel contentPane) {
         this.contentPane = contentPane;
         
@@ -160,43 +159,31 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
     }
     
     private void validateLogin(String username, String password) {
-    // Specify the path to the user_info.txt file inside the databases folder
-      String userInfoFilePath = "databases/seller_userinfo.txt"; 
-      boolean isUsernameFound = false;
-      
-      try (BufferedReader reader = new BufferedReader(new FileReader(userInfoFilePath))) {
-          String line;
-            while ((line = reader.readLine()) != null) {
-                String[] userData = line.split(",");
-                if (userData.length == 5) {
-                    if(userData[0].equals(username)) {
-                    	isUsernameFound = true;
-                    	if(userData[4].equals(password)) {
-                    		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                            new CustomDialog(frame, "Login success!", "Welcome to the fam, baks! We're glad to have you here on Polymart <3 Feel free to scroll and explore our dashboard ^__^", "Thank you!");
-                            //Switching to DashboardPanel
-                    		CardLayout clLayout = (CardLayout) contentPane.getLayout();
-                            clLayout.show(contentPane, "SellerDashboardPanel");
-                    		break;
-                    	} else {
-                    		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                            new CustomDialog(frame, "You're WRONG!", "mali username mo or password mo - ewan ko sau te ulitin mo yan", "Try Again");
-                      		break;          	
-                    	}
-                    } 
-                } 
-            }
-            if(!isUsernameFound) {
-            	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                new CustomDialog(frame, "pauso SPOTTED!", "hindi ka pa nags-sign up baks, wag kang una una jan! mag sign up ka muna gew", "Create Account");
-                //Switch to sign up panel
-                clearTextFields();
-                CardLayout clLayout = (CardLayout) contentPane.getLayout();
-                clLayout.show(contentPane, "SellerSignupPanel");
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        String userType = "seller";  // Assuming it's for buyer, you can change this dynamically for sellers if needed
+        UserSignIn userSignIn = new UserSignIn();
+
+        // Debugging: Print the username and password being passed
+        System.out.println("Attempting login for username: " + username);
+        System.out.println("Attempting login with password: " + password);
+
+        // Call the validateLogin method from UserSignIn class
+        boolean isValid = userSignIn.validateLogin(username, password, userType);
+
+        if (isValid) {
+            // Show success message
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            new CustomDialog(frame, "Login success!", "Welcome to the fam, baks! We're glad to have you here on Polymart <3 Feel free to scroll and explore our dashboard ^__^", "Thank you!");
+
+            // Switch to DashboardPanel
+            CardLayout clLayout = (CardLayout) contentPane.getLayout();
+            clLayout.show(contentPane, "SellerDashboardPanel");
+        } else {
+            // Show failure message
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            new CustomDialog(frame, "You're WRONG!", "mali username mo or password mo - ewan ko sau te ulitin mo yan", "Try Again");
         }
+
+        userSignIn.close();  // Don't forget to close the connection
     }
 
     private void setupTextFieldPlaceholder(JTextField textField, String placeholder) {
