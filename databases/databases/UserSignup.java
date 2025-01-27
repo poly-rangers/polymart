@@ -1,5 +1,9 @@
 package databases;
 
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,7 +16,6 @@ public class UserSignup {
     // Constructor to initialize the database connection
     public UserSignup() {
         try {
-            // Establish the connection to the database
             connection = DriverManager.getConnection(DB_URL);
             System.out.println("Connected to the polyUsers database.");
         } catch (SQLException e) {
@@ -50,33 +53,70 @@ public class UserSignup {
         }
     }
 
-    // Method to save buyer or seller details into the appropriate table
-    public void saveUser(String firstName, String lastName, String email, String username, String password, String userType) {
+    // Method to save buyer or seller details into the appropriate table and create a folder
+    public void saveUser(String username, String firstName, String lastName, String email, String password, String userType) {
         String insertSQL;
-        
-        // Conditional to determine which table to insert into
+        String folderPrefix;
+
+        // Determine the table and folder prefix based on user type
         if ("buyer".equalsIgnoreCase(userType)) {
-            insertSQL = "INSERT INTO buyers (username, first_name, last_name, email, password) " +
-                        "VALUES (?, ?, ?, ?, ?)";
+            insertSQL = "INSERT INTO buyers (username, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)";
+            folderPrefix = "B";
         } else if ("seller".equalsIgnoreCase(userType)) {
-            insertSQL = "INSERT INTO sellers (username, first_name, last_name, email, password) " +
-                        "VALUES (?, ?, ?, ?, ?)";
+            insertSQL = "INSERT INTO sellers (username, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)";
+            folderPrefix = "S";
         } else {
             System.out.println("Invalid user type.");
             return;
         }
 
         try (PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
-            pstmt.setString(1, firstName);
-            pstmt.setString(2, lastName);
-            pstmt.setString(3, email);
-            pstmt.setString(4, username);
+            // Correct parameter order
+            pstmt.setString(1, username);
+            pstmt.setString(2, firstName);
+            pstmt.setString(3, lastName);
+            pstmt.setString(4, email);
             pstmt.setString(5, password);
-            
+
             pstmt.executeUpdate();
             System.out.println(userType + " details saved successfully.");
+
+            // Generate folder name and create the folder
+            String folderName = generateFolderName(folderPrefix, email);
+            createFolder(folderName);
+
         } catch (SQLException e) {
             System.out.println("Error saving user details: " + e.getMessage());
+        }
+    }
+
+    // Method to generate a folder name with a hash
+    private String generateFolderName(String prefix, String input) {
+        try {
+            // Create SHA-256 hash of the input
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = digest.digest(input.getBytes(StandardCharsets.UTF_8));
+
+            // Convert the hash to a hexadecimal string and get the first 7 characters
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hashBytes) {
+                hexString.append(String.format("%02x", b));
+            }
+
+            return prefix + hexString.substring(0, 7);
+
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error generating folder name hash: " + e.getMessage());
+        }
+    }
+
+    // Method to create a folder
+    private void createFolder(String folderName) {
+        File folder = new File("userFolders/" + folderName);
+        if (folder.mkdirs()) {
+            System.out.println("Folder created: " + folder.getAbsolutePath());
+        } else {
+            System.out.println("Failed to create folder: " + folder.getAbsolutePath());
         }
     }
 
@@ -92,4 +132,3 @@ public class UserSignup {
         }
     }
 }
-
