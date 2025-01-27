@@ -12,8 +12,12 @@ import java.awt.event.ActionEvent;
 public class BuyerDashboardPanel extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
+    JButton btnNewButton, btnReceiptTest;
+    private JPanel contentPane;
 
     public BuyerDashboardPanel(JPanel contentPane) {
+    	this.contentPane = contentPane;
+    	
         setBackground(Color.WHITE);
         setBounds(100, 100, 414, 660);
         SpringLayout panelLayout = new SpringLayout();
@@ -71,17 +75,32 @@ public class BuyerDashboardPanel extends JPanel implements ActionListener {
         panelLayout.putConstraint(SpringLayout.EAST, navBar, 414, SpringLayout.WEST, this);
         add(navBar);
 
-        JButton btnNewButton = new JButton("test");
-        panelLayout.putConstraint(SpringLayout.WEST, btnNewButton, 77, SpringLayout.EAST, startupImage);
-        panelLayout.putConstraint(SpringLayout.SOUTH, btnNewButton, 0, SpringLayout.SOUTH, startupImage);
+        btnNewButton = new JButton("test");
+        panelLayout.putConstraint(SpringLayout.WEST, btnNewButton, 58, SpringLayout.EAST, startupImage);
+        panelLayout.putConstraint(SpringLayout.SOUTH, btnNewButton, -27, SpringLayout.NORTH, searchBar);
         btnNewButton.addActionListener(this);
         add(btnNewButton);
+        
+        btnReceiptTest = new JButton("Receipt");
+        panelLayout.putConstraint(SpringLayout.NORTH, btnReceiptTest, 0, SpringLayout.NORTH, startupImage);
+        panelLayout.putConstraint(SpringLayout.WEST, btnReceiptTest, 0, SpringLayout.WEST, btnNewButton);
+        panelLayout.putConstraint(SpringLayout.WEST, btnNewButton, 90, SpringLayout.EAST, startupImage);
+        panelLayout.putConstraint(SpringLayout.SOUTH, btnNewButton, 0, SpringLayout.SOUTH, startupImage);
+        btnNewButton.addActionListener(this);
+        add(btnReceiptTest);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         // Open the meet-up frame
-        SetMeetUpFrame meetUpFrame = new SetMeetUpFrame();
+        if(e.getSource() == btnNewButton) {SetMeetUpFrame meetUpFrame = new SetMeetUpFrame();
         meetUpFrame.setVisible(true);
+        	System.out.println("Button Clicked");
+        
+        } else if(e.getSource() == btnReceiptTest) {
+			CardLayout clLayout = (CardLayout) contentPane.getLayout();
+        	clLayout.show(contentPane, "ReceiptPanel"); // Should display the receipt panel initially
+
+        }
     }
 }

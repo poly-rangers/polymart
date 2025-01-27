@@ -1,5 +1,7 @@
 package buyer;
+import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Font;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -8,9 +10,10 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class BuyerNavigationBar extends JPanel {
+public class BuyerNavigationBar extends JPanel{
 	
 	private static final long serialVersionUID = 2021409567929036389L;
+	//JButton btnReceipt;
 
 	public BuyerNavigationBar() {
 		
@@ -19,6 +22,7 @@ public class BuyerNavigationBar extends JPanel {
 		setBorder(new EmptyBorder(0, 5, 0, 5));
 		
 		JButton btnHome = new JButton("Home");
+		
 		
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -114,4 +118,6 @@ public class BuyerNavigationBar extends JPanel {
 		add(btnProfile);
 		
 	}
+
+	
 }
