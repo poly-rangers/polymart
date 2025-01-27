@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserSignup {
@@ -27,19 +28,19 @@ public class UserSignup {
     public void createTables() {
         String createBuyersTableSQL = "CREATE TABLE IF NOT EXISTS buyers (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "username TEXT NOT NULL, " +
+                "username TEXT NOT NULL UNIQUE, " + // Ensure username is unique
                 "first_name TEXT NOT NULL, " +
                 "last_name TEXT NOT NULL, " +
-                "email TEXT NOT NULL, " +
+                "email TEXT NOT NULL UNIQUE, " +    // Ensure email is unique
                 "password TEXT NOT NULL" +
                 ");";
 
         String createSellersTableSQL = "CREATE TABLE IF NOT EXISTS sellers (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "username TEXT NOT NULL, " +
+                "username TEXT NOT NULL UNIQUE, " + // Ensure username is unique
                 "first_name TEXT NOT NULL, " +
                 "last_name TEXT NOT NULL, " +
-                "email TEXT NOT NULL, " +
+                "email TEXT NOT NULL UNIQUE, " +    // Ensure email is unique
                 "password TEXT NOT NULL" +
                 ");";
 
@@ -86,9 +87,50 @@ public class UserSignup {
             createFolder(folderName);
 
         } catch (SQLException e) {
-            System.out.println("Error saving user details: " + e.getMessage());
+            if (e.getMessage().contains("UNIQUE constraint failed")) {
+                System.out.println("Error: The username or email already exists. Please choose a unique value.");
+            } else {
+                System.out.println("Error saving user details: " + e.getMessage());
+            }
         }
     }
+    
+    public boolean uniqueCheck(String username, String email) {
+        // SQL query to check if the username or email already exists in either buyers or sellers table
+        String checkSQL = "SELECT COUNT(*) FROM buyers WHERE username = ? OR email = ? " +
+                          "UNION " +
+                          "SELECT COUNT(*) FROM sellers WHERE username = ? OR email = ?";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(checkSQL)) {
+            // Set the parameters for both username and email
+            pstmt.setString(1, username);
+            pstmt.setString(2, email);
+            pstmt.setString(3, username);
+            pstmt.setString(4, email);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                // Check if any count is greater than 0 (indicating duplicate username or email)
+                int totalCount = 0;
+                while (rs.next()) {
+                    totalCount += rs.getInt(1);  // Add the count from each table (buyers and sellers)
+                }
+
+                // If either username or email is already taken, return false
+                if (totalCount > 0) {
+                    return false;  // Either username or email is already in use
+                }
+
+                // If no duplicates found, return true indicating both are unique
+                return true;
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Error checking uniqueness: " + e.getMessage());
+            return false;  // Return false in case of an error
+        }
+    }
+
+
 
     // Method to generate a folder name with a hash
     private String generateFolderName(String prefix, String input) {

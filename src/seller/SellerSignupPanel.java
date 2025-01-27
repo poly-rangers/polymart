@@ -362,12 +362,6 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
             } else {
             	saveBuyerDetails(txtFieldUsername.getText().trim(), txtFieldFirstName.getText().trim(), txtFieldLastName.getText().trim(),
                         txtFieldEmailOrPhone.getText().trim(), new String(pwdFieldPassword.getPassword()));
-                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                new CustomDialog(parentFrame, "Sign Up success", "ayarn! pasok ka na sa banga sis, pwede ka na mag log-in at mag-access sa dashboard", "Proceed");
-                
-                //Redirect to SignInPanel 
-                CardLayout clLayout = (CardLayout) panelContent.getLayout();
-                clLayout.show(panelContent, "SellerSignInPanel");
             }
         } else if (source == btnSignIn) {
             clearTextFields();
@@ -376,8 +370,20 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
         }
     }
    
-    public void saveBuyerDetails(String firstName, String lastName, String email, String username, String password) {
-        userSignup.saveUser(firstName, lastName, email, username, password, "seller");
+    public void saveBuyerDetails(String username, String firstName, String lastName, String email, String password) {
+        if (userSignup.uniqueCheck(username, email)) {
+            userSignup.saveUser(username, firstName, lastName, email, password, "seller");
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            new CustomDialog(parentFrame, "Sign Up success", "ayarn! pasok ka na sa banga sis, pwede ka na mag log-in at mag-access sa dashboard", "Proceed");
+        
+            //Redirect to SignInPanel 
+            CardLayout clLayout = (CardLayout) panelContent.getLayout();
+            clLayout.show(panelContent, "SellerSignInPanel");
+            
+        } else {
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            new CustomDialog(parentFrame, "may iba na shea teh", "hahahahahaha bat umeepal ka pa.... may iba na sha mhie!", "sorry po...");
+        }
     }
     
     private void clearTextFields() {
