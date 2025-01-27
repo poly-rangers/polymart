@@ -42,13 +42,11 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         panelLayout.putConstraint(SpringLayout.WEST, lblMyProduct, 43, SpringLayout.WEST, this);
         lblMyProduct.setFont(new Font("Montserrat", Font.BOLD, 19));
         
-        btnAddProduct = new RoundButton("Add a product", 10);
-        btnAddProduct.addActionListener(this);
-        
-        btnAddProduct.setFont(new Font("Montserrat", Font.BOLD | Font.ITALIC, 11));
-        btnAddProduct.setBackground(new Color(102, 0, 0));
-        btnAddProduct.setForeground(Color.WHITE);
-        btnAddProduct.setFocusable(true);
+        RoundedButton lblAddProduct = new RoundedButton("Add a product", 10);
+        lblAddProduct.setFont(new Font("Montserrat", Font.BOLD | Font.ITALIC, 11));
+        lblAddProduct.setBackground(new Color(102, 0, 0));
+        lblAddProduct.setForeground(Color.WHITE);
+        lblAddProduct.setFocusable(false);
         
         pnlHeader.add(lblMyProduct, BorderLayout.WEST);
         pnlHeader.add(btnAddProduct, BorderLayout.EAST);

@@ -1,12 +1,13 @@
 package seller;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
 import javax.swing.*;
-import misc.RoundButton;
+import misc.RoundedButton;
 
 public class SellerMainPanel extends JPanel {
 	
+	private static final long serialVersionUID = 1L;
+
 	public SellerMainPanel(JPanel contentPane) {
 	
 		setBackground(Color.WHITE);
@@ -56,7 +57,7 @@ public class SellerMainPanel extends JPanel {
         add(lblContentText);
         add(lblContentText1);
         
-        RoundButton btnStart = new RoundButton("gewwww, deserve ko 'to!", 45);
+        RoundedButton btnStart = new RoundedButton("gewwww, deserve ko 'to!", 45);
         btnStart.setForeground(Color.WHITE);
         btnStart.setBackground(new Color(102, 0, 0));
         btnStart.setFont(new Font("Montserrat", Font.BOLD, 16));

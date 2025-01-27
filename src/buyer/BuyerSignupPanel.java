@@ -1,6 +1,7 @@
 package buyer;
+
 import frames.CustomDialog;
-import misc.RoundButton;
+import misc.RoundedButton;
 import misc.FieldIsEmpty;
 
 import java.awt.CardLayout;
@@ -9,18 +10,17 @@ import java.awt.Font;
 import java.awt.Image;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+
+import databases.UserSignup;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class BuyerSignupPanel extends JPanel implements ActionListener {
 
-	private JPanel panelContent;
+    private JPanel panelContent;
     private static final long serialVersionUID = 1L;
     private JTextField txtFieldFirstName;
     private JTextField txtFieldLastName;
@@ -36,6 +36,8 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
     private JLabel labelChooseFile;
     private JCheckBox chckbxTermsConditions;
     
+    private UserSignup userSignup;
+    
     public BuyerSignupPanel(JPanel contentPane) {
     	this.panelContent = contentPane;
     	
@@ -43,6 +45,9 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
         setBounds(100, 100, 414, 660);
         SpringLayout panelLayout = new SpringLayout();
         setLayout(panelLayout);
+        
+        userSignup = new UserSignup();
+        userSignup.createTables(); // Create the tables if they don't exist
 
         // Icon next to header title
         ImageIcon imgPolypupIcon = new ImageIcon(this.getClass().getResource("/polypup_buyer.icon.png"));
@@ -202,7 +207,7 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
     	add(btnPrivacyPolicy);
 
         // Sign up button
-        btnSignUp = new RoundButton("Sign Up", 45);
+        btnSignUp = new RoundedButton("Sign Up", 45);
         panelLayout.putConstraint(SpringLayout.NORTH, btnSignUp, 22, SpringLayout.SOUTH, btnTermsConditions);
         panelLayout.putConstraint(SpringLayout.WEST, btnSignUp, 10, SpringLayout.WEST, labelUploadCOR);
         panelLayout.putConstraint(SpringLayout.EAST, btnSignUp, 0, SpringLayout.EAST, labelUploadCOR);
@@ -355,7 +360,7 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
                 CardLayout clLayout = (CardLayout) panelContent.getLayout();
                 clLayout.show(panelContent, "BuyerTermsConditionsPanel");
             } else {
-                saveUserInfo(txtFieldUsername.getText().trim(), txtFieldFirstName.getText().trim(), txtFieldLastName.getText().trim(),
+            	saveBuyerDetails(txtFieldUsername.getText().trim(), txtFieldFirstName.getText().trim(), txtFieldLastName.getText().trim(),
                         txtFieldEmailOrPhone.getText().trim(), new String(pwdFieldPassword.getPassword()));
                 JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 new CustomDialog(parentFrame, "Sign Up success", "ayarn! pasok ka na sa banga sis, pwede ka na mag log-in at mag-access sa dashboard", "Proceed");
@@ -371,22 +376,12 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
         }
     }
    
-    private void saveUserInfo(String username, String firstName, String lastName, String email, String pwd) {
-        String folderPath = "databases";
-        
-        // Ensure the directory exists
-        File folder = new File(folderPath);
-        if (!folder.exists()) {
-            folder.mkdir();  // Create the folder if it doesn't exist
-        }
-
-        String filePath = folderPath + File.separator + "buyer_userinfo.txt";
-        
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            writer.write(username + "," + firstName + "," + lastName + "," + email + "," + pwd + "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void saveBuyerDetails(String username, String firstName, String lastName, String email, String password) {
+        userSignup.saveUser(username, firstName, lastName, email, password, "buyer");
+    }
+    
+    public void close() {
+        userSignup.close();
     }
     
     private void clearTextFields() {

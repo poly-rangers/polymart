@@ -6,6 +6,9 @@ import javax.swing.*;
 
 
 public class ChangePassword extends JDialog {
+
+	private static final long serialVersionUID = 1L;
+
 	public ChangePassword() {
 		
 		setUndecorated(true);

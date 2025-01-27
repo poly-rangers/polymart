@@ -1,18 +1,20 @@
 package misc;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 
-public class RoundButton extends JButton {
+public class RoundedButton extends JButton {
+    private static final long serialVersionUID = 1L;
+    private int cornerRadius;
 
-	private static final long serialVersionUID = 1L;
-	private int cornerRadius;
-
-    // Constructor with customizable label and corner radius
-    public RoundButton(String label, int cornerRadius) {
+    // Constructor with label and corner radius
+    public RoundedButton(String label, int cornerRadius) {
         super(label);
         this.cornerRadius = cornerRadius;
         setContentAreaFilled(false); // To make background transparent for custom painting
+        setFocusPainted(false); // Disable focus painting (if you don't want focus ring)
+        setBorderPainted(false); // Disable border painting (for rounded corners)
     }
 
     // Set corner radius dynamically
