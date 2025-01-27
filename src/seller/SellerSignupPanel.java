@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.Image;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import databases.UserSignup;
 
@@ -16,6 +17,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
 
 public class SellerSignupPanel extends JPanel implements ActionListener {
 
@@ -146,7 +150,27 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
         labelChooseFile.setHorizontalAlignment(SwingConstants.CENTER);
         labelChooseFile.setFont(new Font("Montserrat Medium", Font.ITALIC, 14));
         labelChooseFile.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, Color.LIGHT_GRAY));
+
+        // Add ActionListener to the label for opening a file chooser
+        labelChooseFile.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileFilter(new FileNameExtensionFilter("PDF Files", "pdf"));  // Filter for PDFs
+                int result = fileChooser.showOpenDialog(labelChooseFile);
+                
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    String filePath = selectedFile.getAbsolutePath();
+                    System.out.println("File selected: " + filePath);
+                    
+                    // Now you can handle saving the file or uploading it as needed
+                }
+            }
+        });
+
         add(labelChooseFile);
+
 
         // Question link
         btnQuestionLink = new JButton("Why do I need this?");
