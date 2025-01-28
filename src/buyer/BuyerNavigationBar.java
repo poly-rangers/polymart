@@ -5,114 +5,77 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.*;
 
-public class BuyerNavigationBar extends JPanel{
-	
-	private static final long serialVersionUID = 2021409567929036389L;
-	//JButton btnReceipt;
+public class BuyerNavigationBar extends JPanel implements ActionListener {
 
-	public BuyerNavigationBar() {
-		
-		setSize(430, 72);
-		setBackground(new Color(102, 0, 0));
-		setBorder(new EmptyBorder(0, 5, 0, 5));
-		
-		JButton btnHome = new JButton("Home");
-		
-		
-		btnHome.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		// HOME BUTTON APPEARANCE
-		btnHome.setForeground(Color.WHITE);
-		btnHome.setBackground(new Color(102, 0, 0));
-		btnHome.setFocusPainted(false);
-		btnHome.setBorderPainted(false);
-		btnHome.setFont(new Font("Montserrat", Font.PLAIN, 10));
-		btnHome.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		// HOME ICON 
-		ImageIcon homeIcon = new ImageIcon(this.getClass().getResource("/homeicon.png"));
-		btnHome.setIcon(homeIcon); 
-		btnHome.setIconTextGap(0);
-        btnHome.setVerticalTextPosition(SwingConstants.BOTTOM);
-        btnHome.setHorizontalTextPosition(SwingConstants.CENTER);
-		
-		
-		JButton btnMap = new JButton("Map");
-		btnMap.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		// MAP BUTTON APPEARANCE
-		btnMap.setForeground(Color.WHITE);
-		btnMap.setBackground(new Color(102, 0, 0));
-		btnMap.setFocusPainted(false);
-		btnMap.setBorderPainted(false);
-		btnMap.setFont(new Font("Montserrat", Font.PLAIN, 10));
-		btnMap.setHorizontalAlignment(JLabel.CENTER);
-		
-		// MAP ICON
-		ImageIcon mapIcon = new ImageIcon(this.getClass().getResource("/mapicon.png"));
-		btnMap.setIcon(mapIcon); 
-		btnMap.setIconTextGap(0);
-		btnMap.setVerticalTextPosition(SwingConstants.BOTTOM);
-		btnMap.setHorizontalTextPosition(SwingConstants.CENTER);
-		
-		
-		JButton btnReceipt = new JButton("Receipt");
-		btnReceipt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		// RECEIPT BUTTON APPEARANCE
-		btnReceipt.setForeground(Color.WHITE);
-		btnReceipt.setBackground(new Color(102, 0, 0));
-		btnReceipt.setFocusPainted(false);
-		btnReceipt.setBorderPainted(false);
-		btnReceipt.setFont(new Font("Montserrat", Font.PLAIN, 10));
-		btnReceipt.setHorizontalAlignment(JLabel.CENTER);
-		
-		// RECEIPT ICON
-		ImageIcon receiptIcon = new ImageIcon(this.getClass().getResource("/receipticon.png"));
-		btnReceipt.setIcon(receiptIcon); 
-		btnReceipt.setIconTextGap(0);
-		btnReceipt.setVerticalTextPosition(SwingConstants.BOTTOM);
-		btnReceipt.setHorizontalTextPosition(SwingConstants.CENTER);
-		
-		
-		JButton btnProfile = new JButton("Profile");
-		btnProfile.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		// PROFILE BUTTON APPEARANCE
-		btnProfile.setForeground(Color.WHITE);
-		btnProfile.setBackground(new Color(102, 0, 0));
-		btnProfile.setFocusPainted(false);
-		btnProfile.setBorderPainted(false);
-		btnProfile.setFont(new Font("Montserrat", Font.PLAIN, 10));
-		btnProfile.setHorizontalAlignment(JLabel.CENTER);
-		
-		// PROFILE ICON
-		ImageIcon profileIcon = new ImageIcon(this.getClass().getResource("/profileicon.png"));
-		btnProfile.setIcon(profileIcon); 
-		btnProfile.setIconTextGap(0);
-		btnProfile.setVerticalTextPosition(SwingConstants.BOTTOM);
-		btnProfile.setHorizontalTextPosition(SwingConstants.CENTER);
-		
-		setLayout(new GridLayout(0, 4, 0, 0));
-		
-		add(btnHome);
-		add(btnMap);
-		add(btnReceipt);
-		add(btnProfile);
-		
-	}
+    private static final long serialVersionUID = 2021409567929036389L;
+    private JButton btnHome, btnMap, btnReceipt, btnProfile;
+    private JPanel contentPane;
 
-	
+    public BuyerNavigationBar(JPanel contentPane) {
+        // Assign contentPane to the instance variable
+        this.contentPane = contentPane;
+
+        setSize(430, 72);
+        setBackground(new Color(102, 0, 0));
+        setBorder(new EmptyBorder(0, 5, 0, 5));
+
+        // Initialize and style buttons
+        btnHome = createNavButton("Home", "/homeicon.png");
+        btnMap = createNavButton("Map", "/mapicon.png");
+        btnReceipt = createNavButton("Receipt", "/receipticon.png");
+        btnProfile = createNavButton("Profile", "/profileicon.png");
+
+        setLayout(new GridLayout(0, 4, 0, 0));
+
+        // Add buttons to the panel
+        add(btnHome);
+        add(btnMap);
+        add(btnReceipt);
+        add(btnProfile);
+    }
+
+    private JButton createNavButton(String text, String iconPath) {
+        JButton button = new JButton(text);
+        button.addActionListener(this);
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(102, 0, 0));
+        button.setFocusPainted(false);
+        button.setBorderPainted(false);
+        button.setFont(new Font("Montserrat", Font.PLAIN, 10));
+        button.setHorizontalAlignment(SwingConstants.CENTER);
+        button.setVerticalTextPosition(SwingConstants.BOTTOM);
+        button.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        // Set icon
+        ImageIcon icon = new ImageIcon(this.getClass().getResource(iconPath));
+        button.setIcon(icon);
+        button.setIconTextGap(0);
+
+        return button;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent actEvent) {
+        Object objSourceEvent = actEvent.getSource();
+
+        // Navigate based on which button was clicked
+        if (objSourceEvent == btnHome) {
+            navigateTo("ProductDetails");
+        } else if (objSourceEvent == btnMap) {
+            navigateTo("Map");
+        } else if (objSourceEvent == btnReceipt) {
+            navigateTo("Receipt");
+        } else if (objSourceEvent == btnProfile) {
+            navigateTo("Profile");
+        }
+    }
+
+    private void navigateTo(String cardName) {
+        if (contentPane.getLayout() instanceof CardLayout) {
+            CardLayout clLayout = (CardLayout) contentPane.getLayout();
+            clLayout.show(contentPane, cardName);
+        } else {
+            System.err.println("Error: contentPane is not using CardLayout!");
+        }
+    }
 }

@@ -1,12 +1,22 @@
 package misc;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+
 import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
-public class AddProduct extends JPanel {
+public class AddProduct extends JPanel{
 	private static final long serialVersionUID = 6429731752501671820L;
-
 	public AddProduct(String strProductName, String strProductPrice) {
 		
 		// Panel properties
@@ -15,6 +25,7 @@ public class AddProduct extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(Color.WHITE);
         setBorder(new LineBorder(new Color(255, 255, 255), 1));
+       
 
         
         // Product picture 
@@ -57,5 +68,12 @@ public class AddProduct extends JPanel {
         pnlProductInfo.add(pnlRating, BorderLayout.SOUTH);
         
         add(pnlProductInfo);
+        
+        
+        
     }
+
+
+
+
 }

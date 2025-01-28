@@ -2,9 +2,6 @@ package buyer;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
-
-import buyer.BuyerDashboardPanel.CustomScrollBarUI;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -24,7 +21,7 @@ public class BuyerOrderPanel extends JPanel implements ActionListener {
         lblNewLabel.setFont(new Font("Montserrat", Font.BOLD, 25));
         add(lblNewLabel);
 
-        BuyerNavigationBar navBar = new BuyerNavigationBar();
+        BuyerNavigationBar navBar = new BuyerNavigationBar(contentPane);
         navBar.setBounds(0, 610, 414, 50);
         add(navBar);
 

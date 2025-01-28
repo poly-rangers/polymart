@@ -7,6 +7,8 @@ import javax.swing.*;
 
 import frames.CustomDialog;
 import misc.RoundedButton;
+import com.toedter.calendar.JDayChooser;
+import com.toedter.calendar.JDateChooser;
 
 public class SellerProductListing extends JPanel implements ActionListener{
 	
@@ -18,11 +20,11 @@ public class SellerProductListing extends JPanel implements ActionListener{
 	private JTextField productNameField, meetUpField, timeField, priceField; 
 	private JTextArea productDescArea;
 	private RoundedButton btnAddImage1, btnAddImage2, btnAddImage3, btnAddImage4;
-	private String[] strCategories = {"","Food", "Fashion", "Accessories"};
+	private String[] strCategories = {"Food", "Fashion", "Accessories"};
 	private JComboBox<String> categoryCombo;
 	private JCheckBox cbLagoon, cbWestWing, cbDome, cbEastWing, cbSouthWing, cbLinearPark, cbCharlieBuilding, 
 		cbGrandstand, cbTennisCourtside, cbSouvenirShop, cbGateExit, cbGateEntrance, cbCash, cbGCash;
-	private RoundedButton btnPost;
+	private RoundedButton btnPost, btnAddDate, btnAddTime;
 	
 	public SellerProductListing(JPanel contentPane) {
 		this.contentPane = contentPane;
@@ -81,7 +83,7 @@ public class SellerProductListing extends JPanel implements ActionListener{
         scrollContentPanel.add(lblProductImage);
         
         lblProductImageDescription = new JLabel("Add up to 4 images to showcase your product");
-        lblProductImageDescription.setBounds(5, 25, 279, 15);
+        lblProductImageDescription.setBounds(5, 25, 300, 15);
         lblProductImageDescription.setFont(new Font("Montserrat", Font.ITALIC, 12));
         lblProductImageDescription.setForeground(new Color(129, 124, 124));
         scrollContentPanel.add(lblProductImageDescription);
@@ -132,13 +134,14 @@ public class SellerProductListing extends JPanel implements ActionListener{
         
         lblProductName = new JLabel("Add a product name");
         lblProductName.setBounds(5, 155, 156, 15);
-        lblProductName.setFont(new Font("Montserrat", Font.ITALIC, 12));
+        lblProductName.setFont(new Font("Montserrat", Font.ITALIC + Font.BOLD, 12));
         lblProductName.setForeground(new Color(129, 124, 124));
         scrollContentPanel.add(lblProductName);
         
         productNameField = new JTextField(25);
         productNameField.setBounds(5, 170, 345, 20);
         productNameField.setText("Product Name");
+        setupTextFieldPlaceholder(productNameField, "Product Name");
         productNameField.setFont(new Font("Montserrat", Font.ITALIC, 12));
         productNameField.setForeground(new Color(149, 145, 145));
         productNameField.setBackground(new Color(241, 241, 241));
@@ -147,13 +150,14 @@ public class SellerProductListing extends JPanel implements ActionListener{
  
         lblProductDesc = new JLabel("Add a product description");
         lblProductDesc.setBounds(5, 200, 246, 15);
-        lblProductDesc.setFont(new Font("Montserrat", Font.ITALIC, 12));
+        lblProductDesc.setFont(new Font("Montserrat", Font.ITALIC + Font.BOLD, 12));
         lblProductDesc.setForeground(new Color(129, 124, 124));
         scrollContentPanel.add(lblProductDesc);
         
         productDescArea = new JTextArea(25, 25);
         productDescArea.setBounds(5, 215, 345, 56);
         productDescArea.setText("Product Description");
+        setupTextAreaPlaceholder(productDescArea, "Product Description");
         productDescArea.setFont(new Font("Montserrat", Font.ITALIC, 12));
         productDescArea.setForeground(new Color(149, 145, 145));
         productDescArea.setBackground(new Color(241, 241, 241));
@@ -162,13 +166,14 @@ public class SellerProductListing extends JPanel implements ActionListener{
         
         lblProductPrice = new JLabel("Add product price:");
         lblProductPrice.setBounds(5, 282, 143, 13);
-        lblProductPrice.setFont(new Font("Montserrat", Font.ITALIC, 12));
+        lblProductPrice.setFont(new Font("Montserrat", Font.BOLD | Font.ITALIC, 12));
         lblProductPrice.setForeground(new Color(129, 124, 124));
         scrollContentPanel.add(lblProductPrice);
         
         priceField = new JTextField(25);
         priceField.setBounds(5, 300, 124, 20);
-        priceField.setText("P100");
+        priceField.setText("ex. P100");
+        setupTextFieldPlaceholder(priceField, "ex. P100");
         priceField.setFont(new Font("Montserrat", Font.ITALIC, 12));
         priceField.setForeground(new Color(149, 145, 145));
         priceField.setBackground(new Color(241, 241, 241));
@@ -179,11 +184,12 @@ public class SellerProductListing extends JPanel implements ActionListener{
         
         lblProductCat = new JLabel("Select product category:");
         lblProductCat.setBounds(160, 275, 201, 26);
-        lblProductCat.setFont(new Font("Montserrat", Font.ITALIC, 12));
+        lblProductCat.setFont(new Font("Montserrat", Font.BOLD | Font.ITALIC, 12));
         lblProductCat.setForeground(new Color(129, 124, 124));
         scrollContentPanel.add(lblProductCat);
         
         categoryCombo = new JComboBox<String>(strCategories);
+        categoryCombo.setSelectedIndex(-1);
         categoryCombo.setBounds(160, 300, 124, 20);
         scrollContentPanel.add(categoryCombo);
         
@@ -323,31 +329,50 @@ public class SellerProductListing extends JPanel implements ActionListener{
         timeField.setBorder(null);
         scrollContentPanel.add(timeField);
         
-        JComboBox<String> tempCom = new JComboBox<>();
-        tempCom.setBounds(5,555, 89, 20);
-        scrollContentPanel.add(tempCom);
+        JDateChooser dateChooser = new JDateChooser();
+        dateChooser.setBounds(5, 557, 143, 20);
+        scrollContentPanel.add(dateChooser);
+    
+        btnAddDate = new RoundedButton("Add Date", 20);
+        btnAddDate.setFont(new Font("Montserrat", Font.PLAIN, 11));
+        btnAddDate.setBounds(160,557,105,20);
+        btnAddDate.setBackground(new Color(115,12,12));
+        btnAddDate.setForeground(Color.WHITE);
+        btnAddDate.setFocusPainted(false);
+        btnAddDate.setFocusable(false);
+        scrollContentPanel.add(btnAddDate);
         
-        lblMeetUpTime = new JLabel("Select available meet-up date/s:");
+  
+        lblMeetUpTime = new JLabel("Select available meet-up time:");
         lblMeetUpTime.setBackground(new Color(255, 255, 255));
-        lblMeetUpTime.setBounds(5, 580, 246, 15);
+        lblMeetUpTime.setBounds(5, 585, 246, 15);
         lblMeetUpTime.setFont(new Font("Montserrat", Font.ITALIC, 12));
         lblMeetUpTime.setForeground(new Color(129, 124, 124));
         scrollContentPanel.add(lblMeetUpTime);
         
         meetUpField = new JTextField(25);
         meetUpField.setEditable(false);
-        meetUpField.setBounds(5, 595, 345, 20);
+        meetUpField.setBounds(5, 600, 345, 20);
         meetUpField.setFont(new Font("Montserrat", Font.ITALIC, 12));
         meetUpField.setBackground(new Color(241, 241, 241));
         meetUpField.setBorder(null);
         scrollContentPanel.add(meetUpField);
         
-        JComboBox<String> tempCom1 = new JComboBox<>();
-        tempCom1.setBounds(5,620, 89, 20);
-        scrollContentPanel.add(tempCom1);
+        JComboBox<String> tempCom = new JComboBox<>();
+        tempCom.setBounds(5,630, 143, 20);
+        scrollContentPanel.add(tempCom);
         
-        btnPost = new RoundedButton("Post", 25);
-        btnPost.setBounds(136,660, 89, 20);
+        btnAddTime = new RoundedButton("Add Time", 20);
+        btnAddTime.setFont(new Font("Montserrat", Font.PLAIN, 11));
+        btnAddTime.setBounds(160,630,105,20);
+        btnAddTime.setBackground(new Color(115,12,12));
+        btnAddTime.setForeground(Color.WHITE);
+        btnAddTime.setFocusPainted(false);
+        btnAddTime.setFocusable(false);
+        scrollContentPanel.add(btnAddTime);
+
+        btnPost = new RoundedButton("Post", 15);
+        btnPost.setBounds(130, 670, 100, 30);
         btnPost.setFocusPainted(false);
         btnPost.setFont(new Font("Montserrat", Font.BOLD, 12));
         btnPost.setBackground(new Color(102, 0, 0));
@@ -358,7 +383,8 @@ public class SellerProductListing extends JPanel implements ActionListener{
         scrollPane.setBorder(null);
         scrollContentPanel.setBorder(null);        
         scrollPane.setViewportView(scrollContentPanel);
-    
+        
+        
         SellerNavigationBar navBar = new SellerNavigationBar();
         navBar.setBounds(0,610, 414,50);
         add(navBar);
@@ -373,6 +399,47 @@ public class SellerProductListing extends JPanel implements ActionListener{
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "SellerDashboardPanel");
         }
-        
+    }
+    
+    private void setupTextFieldPlaceholder(JTextField textField, String placeholder) {
+        textField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (textField.getText().equals(placeholder)) {
+                    textField.setText("");
+                    textField.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (textField.getText().isEmpty()) {
+                    textField.setForeground(Color.GRAY);
+                    textField.setText(placeholder);
+                }
+            }
+        });
+        textField.setForeground(Color.GRAY);
+    }
+    
+    private void setupTextAreaPlaceholder(JTextArea textArea, String placeholder) {
+    	textArea.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (textArea.getText().equals(placeholder)) {
+                	textArea.setText("");
+                	textArea.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (textArea.getText().isEmpty()) {
+                	textArea.setForeground(Color.GRAY);
+                	textArea.setText(placeholder);
+                }
+            }
+        });
+    	textArea.setForeground(Color.GRAY);
     }
 }
