@@ -1,18 +1,11 @@
 package seller;
+
 import frames.CustomDialog;
 import misc.RoundedButton;
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
-import java.awt.Font;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.LineBorder;
-
+import javax.swing.border.*;
 import databases.UserSignIn;
 
 public class SellerSignInPanel extends JPanel implements ActionListener{

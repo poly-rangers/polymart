@@ -1,9 +1,6 @@
 package databases;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ProductDatabase {
     private static final String DB_URL = "jdbc:sqlite:databases/products.db";

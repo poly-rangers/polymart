@@ -1,25 +1,13 @@
 package buyer;
 
 import frames.CustomDialog;
-import misc.RoundedButton;
-import misc.FieldIsEmpty;
-
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Image;
+import misc.*;
+import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 import databases.UserSignup;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.File;
 
 public class BuyerSignupPanel extends JPanel implements ActionListener {

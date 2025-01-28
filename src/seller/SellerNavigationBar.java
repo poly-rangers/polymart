@@ -1,12 +1,9 @@
 package seller;
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
-import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.border.*;
+import java.awt.event.*;
 
 public class SellerNavigationBar extends JPanel {
 	

@@ -1,8 +1,6 @@
 package misc;
 
-import javax.swing.JTextField;
-import javax.swing.JFrame;
-
+import javax.swing.*;
 import frames.CustomDialog;
 
 public class FieldIsEmpty implements ErrorHandler {

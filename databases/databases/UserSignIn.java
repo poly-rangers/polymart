@@ -1,10 +1,6 @@
 package databases;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UserSignIn {
     private static final String DB_URL = "jdbc:sqlite:databases/polyUsers.db";

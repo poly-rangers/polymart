@@ -1,23 +1,8 @@
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.SpringLayout;
-import javax.swing.SwingConstants;
-
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import javax.swing.*;
 import misc.RoundedButton;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 
 public class TermsConditionsPanel extends JPanel implements ActionListener{
 

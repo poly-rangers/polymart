@@ -1,12 +1,8 @@
 package misc;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.BorderLayout;
+import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
+import javax.swing.border.*;
 
 public class AddProduct extends JPanel {
 	private static final long serialVersionUID = 6429731752501671820L;

@@ -1,17 +1,10 @@
 package databases;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.*;
+import java.nio.charset.*;
+import java.nio.file.*;
+import java.security.*;
+import java.sql.*;
 
 public class UserSignup {
     private static final String DB_URL = "jdbc:sqlite:databases/polyUsers.db";

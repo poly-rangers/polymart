@@ -1,7 +1,5 @@
 package misc;
-import java.awt.Color;
-import java.awt.GridLayout;
-
+import java.awt.*;
 import javax.swing.*;
 
 
