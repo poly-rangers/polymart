@@ -37,11 +37,6 @@ public class SellerProductListing extends JPanel implements ActionListener{
         startupImage.setBounds(16, 24, 150, 47);
         add(startupImage);
         
-        SearchBar searchBar = new SearchBar();
-        searchBar.setupSearchPlaceholder("ang tamad tamad mo mag-scroll talaga naman...");
-        searchBar.setBounds(61,86,291,24);
-        add(searchBar);
-        
         JPanel pnlHeader = new JPanel();
         pnlHeader.setLayout(new BoxLayout(pnlHeader, BoxLayout.X_AXIS));
         pnlHeader.setOpaque(true);
@@ -81,7 +76,7 @@ public class SellerProductListing extends JPanel implements ActionListener{
         
         // ADD IMAGES
         lblProductImage = new JLabel("Add Images");
-        lblProductImage.setBounds(5, 5, 89, 18);
+        lblProductImage.setBounds(5, 5, 100, 18);
         lblProductImage.setFont(new Font("Montserrat", Font.BOLD, 14));
         scrollContentPanel.add(lblProductImage);
         
@@ -111,7 +106,7 @@ public class SellerProductListing extends JPanel implements ActionListener{
         scrollContentPanel.add(btnAddImage2);
         
         btnAddImage3 = new RoundedButton("+", 10);
-        btnAddImage3.setBounds(184,45,80,80);
+        btnAddImage3.setBounds(185,45,80,80);
         btnAddImage3.setFocusable(false);
         btnAddImage3.setFocusPainted(false);
         btnAddImage3.setFont(new Font("Montserrat", Font.BOLD, 14));

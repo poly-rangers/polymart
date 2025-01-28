@@ -88,7 +88,6 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
             lblTitleBar.add(lblNames);
         }
         
-
        
         scrollContentPanel.add(lblTitleBar);
         

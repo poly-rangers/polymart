@@ -1,11 +1,18 @@
 package seller;
-
 import frames.CustomDialog;
 import misc.RoundedButton;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import javax.swing.*;
-import javax.swing.border.*;
+import java.awt.Font;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.LineBorder;
+
 import databases.UserSignIn;
 
 public class SellerSignInPanel extends JPanel implements ActionListener{
@@ -138,7 +145,7 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
         } else if (source == signUpButton) {
         	clearTextFields();
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
-            clLayout.show(contentPane, "BuyerSignupPanel");
+            clLayout.show(contentPane, "SellerSignupPanel");
         } else if (source == logInButton) {
         	// Check for empty fields before proceeding
             if (checkIfEmpty()) {
