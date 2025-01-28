@@ -58,7 +58,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
         Image scaledImage = imgPolypupIcon.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
         panelLayout.putConstraint(SpringLayout.NORTH, startupImage, 24, SpringLayout.NORTH, this);
-        add(startupImage);
+        panelLayout.putConstraint(SpringLayout.WEST, startupImage, 16, SpringLayout.WEST, this);
         
         startupImage.addMouseListener(new MouseAdapter() {
 
