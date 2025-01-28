@@ -1,14 +1,9 @@
 package buyer;
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Font;
+
+import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
-import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
 
 public class BuyerNavigationBar extends JPanel{
 	

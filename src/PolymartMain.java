@@ -1,18 +1,8 @@
-import java.awt.EventQueue;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import buyer.BuyerDashboardPanel;
-import buyer.BuyerSignInPanel;
-import buyer.BuyerSignupPanel;
-import buyer.BuyerStartupPanel;
-import buyer.BuyerOrderPanel;
-import seller.SellerDashboardPanel;
-import seller.SellerSignInPanel;
-import seller.SellerSignupPanel;
-import seller.SellerStartupPanel;
 
-import java.awt.CardLayout;
+import java.awt.*;
+import javax.swing.*;
+import buyer.*;
+import seller.*;
 
 public class PolymartMain extends JFrame {
 
@@ -38,7 +28,6 @@ public class PolymartMain extends JFrame {
         setBounds(100, 100, 430, 700);
         setLocationRelativeTo(null);
 
-        // Icon
         ImageIcon iconImg = new ImageIcon(this.getClass().getResource("/polypup_frameicon.png"));
         this.setIconImage(iconImg.getImage());
 

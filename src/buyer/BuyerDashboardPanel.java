@@ -6,9 +6,7 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import frames.SetMeetUpFrame;
 import misc.AddProduct;
 import misc.SearchBar;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
 
 public class BuyerDashboardPanel extends JPanel implements ActionListener {
 

@@ -2,9 +2,7 @@ package frames;
 
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
-
 import javax.swing.*;
-
 import misc.RoundedButton;
 
 public class SetMeetUpFrame extends JFrame {

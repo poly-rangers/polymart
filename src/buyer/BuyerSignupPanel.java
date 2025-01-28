@@ -1,22 +1,14 @@
 package buyer;
 
 import frames.CustomDialog;
-import misc.RoundedButton;
-import misc.FieldIsEmpty;
-
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Image;
+import misc.*;
+import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-
+import javax.swing.filechooser.FileNameExtensionFilter;
 import databases.UserSignup;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.awt.event.*;
+import java.io.File;
 
 public class BuyerSignupPanel extends JPanel implements ActionListener {
 
@@ -37,6 +29,7 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
     private JCheckBox chckbxTermsConditions;
     
     private UserSignup userSignup;
+    private File selectedFile;
     
     public BuyerSignupPanel(JPanel contentPane) {
     	this.panelContent = contentPane;
@@ -54,7 +47,19 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
         Image scaledImage = imgPolypupIcon.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
         panelLayout.putConstraint(SpringLayout.NORTH, startupImage, 24, SpringLayout.NORTH, this);
+        panelLayout.putConstraint(SpringLayout.WEST, startupImage, 16, SpringLayout.WEST, this);
+        
+        startupImage.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	CardLayout clLayout = (CardLayout) panelContent.getLayout();
+                clLayout.show(panelContent, "BuyerOrSeller");
+            }
+        });
+        
         add(startupImage);
+        
 
         // Sign-up label
         JLabel labelSignUp = new JLabel("Sign Up");
@@ -147,7 +152,39 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
         labelChooseFile.setHorizontalAlignment(SwingConstants.CENTER);
         labelChooseFile.setFont(new Font("Montserrat Medium", Font.ITALIC, 14));
         labelChooseFile.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, Color.LIGHT_GRAY));
+
+        // Add MouseListener for interaction
+        labelChooseFile.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                labelChooseFile.setForeground(new Color(0x730C0C));
+                labelChooseFile.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(0x730C0C)));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                labelChooseFile.setForeground(UIManager.getColor("Button.darkShadow"));
+                labelChooseFile.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, Color.LIGHT_GRAY));
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileFilter(new FileNameExtensionFilter("PDF Files", "pdf")); // Filter for PDFs
+                int result = fileChooser.showOpenDialog(labelChooseFile);
+
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    selectedFile = fileChooser.getSelectedFile(); // Store the selected file
+                    System.out.println("File selected: " + selectedFile.getAbsolutePath());
+                } else {
+                    System.out.println("No file selected.");
+                }
+            }
+        });
+
+        // Add the label to the panel
         add(labelChooseFile);
+
 
         // Question link
         btnQuestionLink = new JButton("Why do I need this?");
@@ -362,12 +399,6 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
             } else {
             	saveBuyerDetails(txtFieldUsername.getText().trim(), txtFieldFirstName.getText().trim(), txtFieldLastName.getText().trim(),
                         txtFieldEmailOrPhone.getText().trim(), new String(pwdFieldPassword.getPassword()));
-                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                new CustomDialog(parentFrame, "Sign Up success", "ayarn! pasok ka na sa banga sis, pwede ka na mag log-in at mag-access sa dashboard", "Proceed");
-                
-                //Redirect to SignInPanel 
-                CardLayout clLayout = (CardLayout) panelContent.getLayout();
-                clLayout.show(panelContent, "BuyerSignInPanel");
             }
         } else if (source == btnSignIn) {
             clearTextFields();
@@ -377,9 +408,35 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
     }
    
     public void saveBuyerDetails(String username, String firstName, String lastName, String email, String password) {
-        userSignup.saveUser(username, firstName, lastName, email, password, "buyer");
-    }
-    
+
+    	if (userSignup.uniqueCheck(username, email)) {
+            
+        	if (selectedFile == null) {
+                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                new CustomDialog(
+                    parentFrame,
+                    "File Upload Required",
+                    "Please select your Certificate of Registration (COR) to complete the sign-up process.",
+                    "Okay, I'll upload"
+                );
+                return; // Stop the sign-up process if no file is selected
+            } else {
+            	userSignup.saveUser(username, firstName, lastName, email, password, "buyer");
+            	userSignup.saveUploadedFile(username, "buyer", selectedFile);
+            	
+                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                new CustomDialog(parentFrame, "Sign Up success", "ayarn! pasok ka na sa banga sis, pwede ka na mag log-in at mag-access sa dashboard", "Proceed");
+
+                CardLayout clLayout = (CardLayout) panelContent.getLayout();
+                clLayout.show(panelContent, "BuyerSignInPanel");
+            }
+           
+    	} else {
+    		JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            new CustomDialog(parentFrame, "may iba na shea teh", "hahahahahaha bat umeepal ka pa.... may iba na sha mhie!", "sorry po...");
+            }
+        }
+
     public void close() {
         userSignup.close();
     }
