@@ -1,8 +1,13 @@
-
-import java.awt.*;
-import javax.swing.*;
-import buyer.*;
+import java.awt.EventQueue;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import buyer.BuyerDashboardPanel;
+import buyer.BuyerSignInPanel;
+import buyer.BuyerSignupPanel;
+import buyer.BuyerStartupPanel;
 import seller.*;
+import java.awt.CardLayout;
 
 public class PolymartMain extends JFrame {
 
@@ -28,6 +33,7 @@ public class PolymartMain extends JFrame {
         setBounds(100, 100, 430, 700);
         setLocationRelativeTo(null);
 
+        // Icon
         ImageIcon iconImg = new ImageIcon(this.getClass().getResource("/polypup_frameicon.png"));
         this.setIconImage(iconImg.getImage());
 
@@ -50,27 +56,24 @@ public class PolymartMain extends JFrame {
         BuyerSignupPanel buyerSignupPanel = new BuyerSignupPanel(contentPane);
         BuyerSignInPanel buyerSignInPanel = new BuyerSignInPanel(contentPane);
         BuyerDashboardPanel buyerDashboardPanel = new BuyerDashboardPanel(contentPane);
-       // BuyerNavigationBar buyerNavigationBar = new BuyerNavigationBar(contentPane);
-        BuyerOrderPanel buyerOrderPanel = new BuyerOrderPanel(contentPane);
-        
-        
+
         contentPane.add(buyerStartupPanel, "BuyerStartupPanel");
         contentPane.add(buyerSignupPanel, "BuyerSignupPanel");
         contentPane.add(buyerSignInPanel, "BuyerSignInPanel");
         contentPane.add(buyerDashboardPanel, "BuyerDashboardPanel");
-       // contentPane.add(buyerNavigationBar, "BuyerNavigationBar");
-        contentPane.add(buyerOrderPanel, "BuyerOrderPanel");
-       
+
         // Add seller panels
         SellerStartupPanel sellerStartupPanel = new SellerStartupPanel(contentPane);
         SellerSignupPanel sellerSignupPanel = new SellerSignupPanel(contentPane);
         SellerSignInPanel sellerSignInPanel = new SellerSignInPanel(contentPane);
         SellerDashboardPanel sellerDashboardPanel = new SellerDashboardPanel(contentPane);
+        SellerProductListing sellerProductListing = new SellerProductListing(contentPane);
 
         contentPane.add(sellerStartupPanel, "SellerStartupPanel");
         contentPane.add(sellerSignupPanel, "SellerSignupPanel");
         contentPane.add(sellerSignInPanel, "SellerSignInPanel");
         contentPane.add(sellerDashboardPanel, "SellerDashboardPanel");
+        contentPane.add(sellerProductListing, "SellerProductListing");
         
         // Show StartupPanel initially
         CardLayout clLayout = (CardLayout) contentPane.getLayout();

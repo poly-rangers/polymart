@@ -6,10 +6,8 @@ public class UserSignIn {
     private static final String DB_URL = "jdbc:sqlite:databases/polyUsers.db";
     private Connection connection;
 
-    // Constructor to initialize the database connection
     public UserSignIn() {
         try {
-            // Establish the connection to the database
             connection = DriverManager.getConnection(DB_URL);
             System.out.println("Connected to the polyUsers database.");
         } catch (SQLException e) {
@@ -17,20 +15,17 @@ public class UserSignIn {
         }
     }
 
-    // Method to validate the user login credentials
     public boolean validateLogin(String username, String password, String userType) {
         String sql = "";
-        
-        // Log inputs
-        System.out.println("Validating login for: " + username + ", " + password);
 
-        // Conditional to check which table to query (buyer or seller)
-        if ("buyer".equalsIgnoreCase(userType)) {
+        userType = userType.trim().toLowerCase();
+
+        if ("buyer".equals(userType)) {
             sql = "SELECT * FROM buyers WHERE username = ? AND password = ?";
-        } else if ("seller".equalsIgnoreCase(userType)) {
+        } else if ("seller".equals(userType)) {
             sql = "SELECT * FROM sellers WHERE username = ? AND password = ?";
         } else {
-            System.out.println("Invalid user type.");
+            System.out.println("Invalid user type: " + userType);
             return false;
         }
 
@@ -38,19 +33,14 @@ public class UserSignIn {
             pstmt.setString(1, username.trim());
             pstmt.setString(2, password.trim());
 
-            // Log query before executing
             System.out.println("Executing query: " + sql);
-            System.out.println("With parameters: username = '" + username.trim() + "', password = '" + password.trim() + "'");
-
-            // Execute the query and check if a record exists
+            
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                // User found, valid login
-                System.out.println("Login successful!");
+                System.out.println(userType + " login successful for: " + username);
                 return true;
             } else {
-                // Invalid login (incorrect username or password)
-                System.out.println("Login failed: Invalid credentials.");
+                System.out.println(userType + " login failed: Invalid credentials.");
                 return false;
             }
         } catch (SQLException e) {
@@ -59,8 +49,6 @@ public class UserSignIn {
         }
     }
 
-
-    // Method to close the database connection
     public void close() {
         if (connection != null) {
             try {
