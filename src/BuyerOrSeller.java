@@ -1,16 +1,6 @@
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SpringLayout;
-import javax.swing.SwingConstants;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 import misc.RoundedButton;  // Assuming you want to use the RoundComponent class
 
@@ -109,7 +99,6 @@ public class BuyerOrSeller extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Switch to the appropriate startup panel based on the selected role
         Object source = e.getSource();
 
         if (source == buyerRoleButton) {

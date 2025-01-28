@@ -2,11 +2,12 @@ package buyer;
 
 import java.awt.*;
 import javax.swing.*;
-import frames.SetMeetUpFrame;
 import misc.AddProduct;
 import misc.SearchBar;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 public class BuyerDashboardPanel extends JPanel implements ActionListener {
@@ -56,6 +57,15 @@ public class BuyerDashboardPanel extends JPanel implements ActionListener {
         scrollContentPanel.add(new JPanel());
         scrollContentPanel.add(new JPanel());
         scrollContentPanel.add(new JPanel());
+        
+        scrollContentPanel.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		CardLayout clLayout = (CardLayout) contentPane.getLayout();
+                clLayout.show(contentPane, "ProductDetails");
+        	}
+        });
+        
 
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setViewportView(scrollContentPanel);
@@ -63,25 +73,18 @@ public class BuyerDashboardPanel extends JPanel implements ActionListener {
         add(scrollPane);
 
         // Create NavigationBar and position it at the bottom
-        BuyerNavigationBar navBar = new BuyerNavigationBar();
+        BuyerNavigationBar navBar = new BuyerNavigationBar(scrollContentPanel);
         panelLayout.putConstraint(SpringLayout.SOUTH, scrollPane, -30, SpringLayout.NORTH, navBar);
         panelLayout.putConstraint(SpringLayout.NORTH, navBar, -50, SpringLayout.SOUTH, this);
         panelLayout.putConstraint(SpringLayout.WEST, navBar, 0, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, navBar, 0, SpringLayout.SOUTH, this);
         panelLayout.putConstraint(SpringLayout.EAST, navBar, 414, SpringLayout.WEST, this);
         add(navBar);
-
-        JButton btnNewButton = new JButton("test");
-        panelLayout.putConstraint(SpringLayout.WEST, btnNewButton, 77, SpringLayout.EAST, startupImage);
-        panelLayout.putConstraint(SpringLayout.SOUTH, btnNewButton, 0, SpringLayout.SOUTH, startupImage);
-        btnNewButton.addActionListener(this);
-        add(btnNewButton);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Open the meet-up frame
-        SetMeetUpFrame meetUpFrame = new SetMeetUpFrame();
-        meetUpFrame.setVisible(true);
-    }
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }

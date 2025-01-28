@@ -1,20 +1,23 @@
 package seller;
 import misc.RoundedButton;
-//import misc.AddProduct;
+import misc.AddProduct;
 import misc.SearchBar;
-
 import java.awt.*;
-//import java.awt.event.FocusAdapter;
-//import java.awt.event.FocusEvent;
-
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-
-public class SellerDashboardPanel extends JPanel {
+public class SellerDashboardPanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JButton btnAddProduct;
+	private String[] arrLabels = {"Item Name", "Pricing", "Rating", "Review"};
 
 	public SellerDashboardPanel(JPanel contentPane) {
+		this.contentPane = contentPane;
 
 		setBackground(Color.WHITE);
         setBounds(100, 100, 414, 660);
@@ -39,16 +42,16 @@ public class SellerDashboardPanel extends JPanel {
         panelLayout.putConstraint(SpringLayout.WEST, lblMyProduct, 43, SpringLayout.WEST, this);
         lblMyProduct.setFont(new Font("Montserrat", Font.BOLD, 19));
         
-        RoundedButton lblAddProduct = new RoundedButton("Add a product", 10);
-        lblAddProduct.setFont(new Font("Montserrat", Font.BOLD | Font.ITALIC, 11));
-        lblAddProduct.setBackground(new Color(102, 0, 0));
-        lblAddProduct.setForeground(Color.WHITE);
-        lblAddProduct.setFocusable(false);
+        btnAddProduct = new RoundedButton("Add a product", 10);
+        btnAddProduct.addActionListener(this);
+        btnAddProduct.setFocusPainted(false);
+        btnAddProduct.setFont(new Font("Montserrat", Font.BOLD | Font.ITALIC, 11));
+        btnAddProduct.setBackground(new Color(102, 0, 0));
+        btnAddProduct.setForeground(Color.WHITE);
+        btnAddProduct.setFocusable(true);
         
         pnlHeader.add(lblMyProduct, BorderLayout.WEST);
-        pnlHeader.add(lblAddProduct, BorderLayout.EAST);
-        
-        
+        pnlHeader.add(btnAddProduct, BorderLayout.EAST);
         
         // Search Bar
         SearchBar searchBar = new SearchBar();
@@ -70,30 +73,32 @@ public class SellerDashboardPanel extends JPanel {
         panelLayout.putConstraint(SpringLayout.EAST, scrollPane, -10, SpringLayout.EAST, this);
         
         JPanel scrollContentPanel = new JPanel();
+        scrollContentPanel.setOpaque(true);
+        scrollContentPanel.setBackground(Color.WHITE);
+        scrollContentPanel.setFocusable(false);
+        scrollContentPanel.setBorder(null);
+        
         
         JPanel lblTitleBar = new JPanel();
+        lblTitleBar.setLayout(new GridLayout(1,4,10,0));
         
-        JLabel lblItemName = new JLabel("Item Name");
-        JLabel lblPrice = new JLabel("Price");
-        JLabel lblRating = new JLabel("Rating");
-        JLabel lblReview = new JLabel("Review");
+        for (String tempLabel : arrLabels) {
+            JLabel lblNames = new JLabel(tempLabel, SwingConstants.CENTER); // Center-align the text
+            lblNames.setFont(new Font("Montserrat", Font.BOLD, 14)); // Optional: Set font for the labels
+            lblTitleBar.add(lblNames);
+        }
         
-        lblTitleBar.add(lblItemName);
-        lblTitleBar.add(lblPrice);
-        lblTitleBar.add(lblRating);
-        lblTitleBar.add(lblReview);
-        
+       
         scrollContentPanel.add(lblTitleBar);
         
-        
-        
+
+        scrollPane.setBorder(null);
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setViewportView(scrollContentPanel);
        
         add(scrollPane);
         add(pnlHeader);
         
-           
      // Create NavigationBar and position it at the bottom
         SellerNavigationBar navBar = new SellerNavigationBar();
         panelLayout.putConstraint(SpringLayout.SOUTH, scrollPane, -30, SpringLayout.NORTH, navBar);
@@ -104,4 +109,15 @@ public class SellerDashboardPanel extends JPanel {
         add(navBar);
         
 	}
+	
+	@Override
+    public void actionPerformed(ActionEvent actEvent) {
+    	Object objSourceEvent = actEvent.getSource();
+    	
+    	if (objSourceEvent == btnAddProduct) {
+    		// Switch to Product Listing
+            CardLayout clLayout = (CardLayout) contentPane.getLayout();
+            clLayout.show(contentPane, "SellerProductListing");
+    	} 
+    }
 }

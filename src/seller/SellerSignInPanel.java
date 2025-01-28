@@ -145,7 +145,7 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
         } else if (source == signUpButton) {
         	clearTextFields();
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
-            clLayout.show(contentPane, "BuyerSignupPanel");
+            clLayout.show(contentPane, "SellerSignupPanel");
         } else if (source == logInButton) {
         	// Check for empty fields before proceeding
             if (checkIfEmpty()) {

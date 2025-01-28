@@ -1,14 +1,10 @@
 package databases;
 
-import java.io.File;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.*;
+import java.nio.charset.*;
+import java.nio.file.*;
+import java.security.*;
+import java.sql.*;
 
 public class UserSignup {
     private static final String DB_URL = "jdbc:sqlite:databases/polyUsers.db";
@@ -28,20 +24,22 @@ public class UserSignup {
     public void createTables() {
         String createBuyersTableSQL = "CREATE TABLE IF NOT EXISTS buyers (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "username TEXT NOT NULL UNIQUE, " + // Ensure username is unique
+                "username TEXT NOT NULL UNIQUE, " +
                 "first_name TEXT NOT NULL, " +
                 "last_name TEXT NOT NULL, " +
-                "email TEXT NOT NULL UNIQUE, " +    // Ensure email is unique
-                "password TEXT NOT NULL" +
+                "email TEXT NOT NULL UNIQUE, " +
+                "password TEXT NOT NULL, " +
+                "folder_path TEXT" + 
                 ");";
 
         String createSellersTableSQL = "CREATE TABLE IF NOT EXISTS sellers (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "username TEXT NOT NULL UNIQUE, " + // Ensure username is unique
+                "username TEXT NOT NULL UNIQUE, " +
                 "first_name TEXT NOT NULL, " +
                 "last_name TEXT NOT NULL, " +
-                "email TEXT NOT NULL UNIQUE, " +    // Ensure email is unique
-                "password TEXT NOT NULL" +
+                "email TEXT NOT NULL UNIQUE, " +
+                "password TEXT NOT NULL, " +
+                "folder_path TEXT" + 
                 ");";
 
         try (PreparedStatement stmt = connection.prepareStatement(createBuyersTableSQL);
@@ -54,17 +52,17 @@ public class UserSignup {
         }
     }
 
-    // Method to save buyer or seller details into the appropriate table and create a folder
+    // Method to save user details
     public void saveUser(String username, String firstName, String lastName, String email, String password, String userType) {
         String insertSQL;
         String folderPrefix;
 
         // Determine the table and folder prefix based on user type
         if ("buyer".equalsIgnoreCase(userType)) {
-            insertSQL = "INSERT INTO buyers (username, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)";
+            insertSQL = "INSERT INTO buyers (username, first_name, last_name, email, password, folder_path) VALUES (?, ?, ?, ?, ?, ?)";
             folderPrefix = "B";
         } else if ("seller".equalsIgnoreCase(userType)) {
-            insertSQL = "INSERT INTO sellers (username, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)";
+            insertSQL = "INSERT INTO sellers (username, first_name, last_name, email, password, folder_path) VALUES (?, ?, ?, ?, ?, ?)";
             folderPrefix = "S";
         } else {
             System.out.println("Invalid user type.");
@@ -72,19 +70,39 @@ public class UserSignup {
         }
 
         try (PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
-            // Correct parameter order
+            // Generate folder name
+            String folderName = generateFolderName(folderPrefix, email);
+
+            // Create 'usersFolders' directory if it doesn't exist
+            File usersFoldersDir = new File("usersFolders");
+            if (!usersFoldersDir.exists()) {
+                boolean dirCreated = usersFoldersDir.mkdirs();
+                if (!dirCreated) {
+                    System.out.println("Failed to create the 'usersFolders' directory.");
+                    return;
+                }
+            }
+
+            // Create the hashed folder inside 'usersFolders'
+            File userFolder = new File(usersFoldersDir, folderName);
+            if (!userFolder.exists()) {
+                boolean folderCreated = userFolder.mkdirs();
+                if (!folderCreated) {
+                    System.out.println("Failed to create user folder: " + userFolder.getAbsolutePath());
+                    return;
+                }
+            }
+
+            // Store the folder path in the database
             pstmt.setString(1, username);
             pstmt.setString(2, firstName);
             pstmt.setString(3, lastName);
             pstmt.setString(4, email);
             pstmt.setString(5, password);
+            pstmt.setString(6, folderName);  // Store relative path to 'usersFolders'
 
             pstmt.executeUpdate();
-            System.out.println(userType + " details saved successfully.");
-
-            // Generate folder name and create the folder
-            String folderName = generateFolderName(folderPrefix, email);
-            createFolder(folderName);
+            System.out.println(userType + " details saved successfully. Folder path: usersFolders/" + folderName);
 
         } catch (SQLException e) {
             if (e.getMessage().contains("UNIQUE constraint failed")) {
@@ -94,52 +112,38 @@ public class UserSignup {
             }
         }
     }
-    
+
+    // Method to check if the username and email are unique
     public boolean uniqueCheck(String username, String email) {
-        // SQL query to check if the username or email already exists in either buyers or sellers table
         String checkSQL = "SELECT COUNT(*) FROM buyers WHERE username = ? OR email = ? " +
                           "UNION " +
                           "SELECT COUNT(*) FROM sellers WHERE username = ? OR email = ?";
 
         try (PreparedStatement pstmt = connection.prepareStatement(checkSQL)) {
-            // Set the parameters for both username and email
             pstmt.setString(1, username);
             pstmt.setString(2, email);
             pstmt.setString(3, username);
             pstmt.setString(4, email);
 
             try (ResultSet rs = pstmt.executeQuery()) {
-                // Check if any count is greater than 0 (indicating duplicate username or email)
                 int totalCount = 0;
                 while (rs.next()) {
                     totalCount += rs.getInt(1);  // Add the count from each table (buyers and sellers)
                 }
-
-                // If either username or email is already taken, return false
-                if (totalCount > 0) {
-                    return false;  // Either username or email is already in use
-                }
-
-                // If no duplicates found, return true indicating both are unique
-                return true;
-
+                return totalCount == 0;  // No duplicates found
             }
         } catch (SQLException e) {
             System.out.println("Error checking uniqueness: " + e.getMessage());
-            return false;  // Return false in case of an error
+            return false;
         }
     }
-
-
 
     // Method to generate a folder name with a hash
     private String generateFolderName(String prefix, String input) {
         try {
-            // Create SHA-256 hash of the input
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hashBytes = digest.digest(input.getBytes(StandardCharsets.UTF_8));
 
-            // Convert the hash to a hexadecimal string and get the first 7 characters
             StringBuilder hexString = new StringBuilder();
             for (byte b : hashBytes) {
                 hexString.append(String.format("%02x", b));
@@ -152,14 +156,75 @@ public class UserSignup {
         }
     }
 
-    // Method to create a folder
-    private void createFolder(String folderName) {
-        File folder = new File("userFolders/" + folderName);
-        if (folder.mkdirs()) {
-            System.out.println("Folder created: " + folder.getAbsolutePath());
+    // Method to save uploaded file
+    public void saveUploadedFile(String username, String userType, File uploadedFile) {
+        String selectSQL;
+
+        if ("buyer".equalsIgnoreCase(userType)) {
+            selectSQL = "SELECT folder_path FROM buyers WHERE username = ?";
+        } else if ("seller".equalsIgnoreCase(userType)) {
+            selectSQL = "SELECT folder_path FROM sellers WHERE username = ?";
         } else {
-            System.out.println("Failed to create folder: " + folder.getAbsolutePath());
+            System.out.println("Invalid user type.");
+            return;
         }
+
+        try (PreparedStatement pstmt = connection.prepareStatement(selectSQL)) {
+            pstmt.setString(1, username);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    String folderPath = rs.getString("folder_path");
+
+                    File userFolder = new File("usersFolders/" + folderPath);
+                    if (!userFolder.exists()) {
+                        if (!userFolder.mkdirs()) {
+                            System.out.println("Failed to create directory: " + userFolder.getAbsolutePath());
+                            return;
+                        }
+                    }
+
+                    String newFileName = "COR_" + folderPath;
+                    String fileExtension = getFileExtension(uploadedFile);
+                    if (!fileExtension.isEmpty()) {
+                        newFileName += "." + fileExtension;
+                    }
+
+                    File destinationFile = new File(userFolder, newFileName);
+
+                    if (destinationFile.exists()) {
+                        newFileName = "COR_" + folderPath + "_new";
+                        destinationFile = new File(userFolder, newFileName + "." + fileExtension);
+                    }
+
+                    if (!destinationFile.getParentFile().canWrite()) {
+                        System.out.println("No write permission for directory: " + destinationFile.getParentFile().getAbsolutePath());
+                        return;
+                    }
+
+                    try {
+                        Files.copy(uploadedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                        System.out.println("File uploaded successfully to: " + destinationFile.getAbsolutePath());
+                    } catch (IOException e) {
+                        System.out.println("Error saving uploaded file: " + e.getMessage());
+                    }
+                } else {
+                    System.out.println("Error: User not found in the database.");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error retrieving folder path: " + e.getMessage());
+        }
+    }
+
+    // Helper to get file extension
+    private String getFileExtension(File file) {
+        String fileName = file.getName();
+        int lastDotIndex = fileName.lastIndexOf('.');
+        if (lastDotIndex > 0 && lastDotIndex < fileName.length() - 1) {
+            return fileName.substring(lastDotIndex + 1);
+        }
+        return "";
     }
 
     // Method to close the database connection
