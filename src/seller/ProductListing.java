@@ -19,7 +19,8 @@ import java.awt.event.ActionEvent;
 
 
 public class ProductListing extends JPanel implements ActionListener {
-	
+
+	private static final long serialVersionUID = -8234561357131364202L;
 	private JPanel contentPane;
 	private JButton btnGoBack;
 

@@ -11,6 +11,7 @@ import buyer.BuyerSignupPanel;
 import buyer.BuyerStartupPanel;
 import misc.ProductDetails;
 import seller.SellerDashboardPanel;
+import seller.SellerProductListing;
 import seller.SellerSignInPanel;
 import seller.SellerSignupPanel;
 import seller.SellerStartupPanel;
@@ -70,12 +71,14 @@ public class PolymartMain extends JFrame {
         SellerSignupPanel sellerSignupPanel = new SellerSignupPanel(contentPane);
         SellerSignInPanel sellerSignInPanel = new SellerSignInPanel(contentPane);
         SellerDashboardPanel sellerDashboardPanel = new SellerDashboardPanel(contentPane);
+        SellerProductListing sellerProductListing = new SellerProductListing(contentPane);
         ProductDetails productDetails = new ProductDetails(contentPane);
 
         contentPane.add(sellerStartupPanel, "SellerStartupPanel");
         contentPane.add(sellerSignupPanel, "SellerSignupPanel");
         contentPane.add(sellerSignInPanel, "SellerSignInPanel");
         contentPane.add(sellerDashboardPanel, "SellerDashboardPanel");
+        contentPane.add(sellerProductListing, "SellerProductListing");
         contentPane.add(productDetails, "ProductDetails");
 
         // Navigation bar

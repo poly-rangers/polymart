@@ -30,7 +30,7 @@ public class SellerProductListing extends JPanel implements ActionListener{
 		this.contentPane = contentPane;
 		
 		setBackground(Color.WHITE);
-        setBounds(100, 100, 414, 660);
+        setSize(414, 660);
         setLayout(null);
 		
         ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_seller.icon.png"));
@@ -42,7 +42,7 @@ public class SellerProductListing extends JPanel implements ActionListener{
         JPanel pnlHeader = new JPanel();
         pnlHeader.setLayout(new BoxLayout(pnlHeader, BoxLayout.X_AXIS));
         pnlHeader.setOpaque(true);
-        pnlHeader.setBounds(20,124,376,32);
+        pnlHeader.setBounds(20,91,376,32);
         pnlHeader.setBackground(Color.WHITE);
         
         ImageIcon ogGoBackIcon = new ImageIcon(this.getClass().getResource("/arrowbackicon.png"));
@@ -65,7 +65,7 @@ public class SellerProductListing extends JPanel implements ActionListener{
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setBounds(20, 162, 376, 417);
+        scrollPane.setBounds(20, 123, 376, 454);
         add(scrollPane);
 
         JPanel scrollContentPanel = new JPanel();
