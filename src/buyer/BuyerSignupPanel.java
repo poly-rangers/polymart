@@ -41,6 +41,7 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
     private JCheckBox chckbxTermsConditions;
     
     private UserSignup userSignup;
+    private File selectedFile;
     
     public BuyerSignupPanel(JPanel contentPane) {
     	this.panelContent = contentPane;
@@ -58,7 +59,18 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
         Image scaledImage = imgPolypupIcon.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
         panelLayout.putConstraint(SpringLayout.NORTH, startupImage, 24, SpringLayout.NORTH, this);
+        
+        startupImage.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	CardLayout clLayout = (CardLayout) panelContent.getLayout();
+                clLayout.show(panelContent, "BuyerOrSeller");
+            }
+        });
+        
         add(startupImage);
+        
 
         // Sign-up label
         JLabel labelSignUp = new JLabel("Sign Up");
@@ -152,25 +164,38 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
         labelChooseFile.setFont(new Font("Montserrat Medium", Font.ITALIC, 14));
         labelChooseFile.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, Color.LIGHT_GRAY));
 
-        // Add ActionListener to the label for opening a file chooser
+        // Add MouseListener for interaction
         labelChooseFile.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                labelChooseFile.setForeground(new Color(0x730C0C));
+                labelChooseFile.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(0x730C0C)));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                labelChooseFile.setForeground(UIManager.getColor("Button.darkShadow"));
+                labelChooseFile.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, Color.LIGHT_GRAY));
+            }
+
             @Override
             public void mouseClicked(MouseEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setFileFilter(new FileNameExtensionFilter("PDF Files", "pdf"));  // Filter for PDFs
+                fileChooser.setFileFilter(new FileNameExtensionFilter("PDF Files", "pdf")); // Filter for PDFs
                 int result = fileChooser.showOpenDialog(labelChooseFile);
-                
+
                 if (result == JFileChooser.APPROVE_OPTION) {
-                    File selectedFile = fileChooser.getSelectedFile();
-                    String filePath = selectedFile.getAbsolutePath();
-                    System.out.println("File selected: " + filePath);
-                    
-                    // Now you can handle saving the file or uploading it as needed
+                    selectedFile = fileChooser.getSelectedFile(); // Store the selected file
+                    System.out.println("File selected: " + selectedFile.getAbsolutePath());
+                } else {
+                    System.out.println("No file selected.");
                 }
             }
         });
 
+        // Add the label to the panel
         add(labelChooseFile);
+
 
         // Question link
         btnQuestionLink = new JButton("Why do I need this?");
@@ -394,20 +419,34 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
     }
    
     public void saveBuyerDetails(String username, String firstName, String lastName, String email, String password) {
-        if (userSignup.uniqueCheck(username, email)) {
-            userSignup.saveUser(username, firstName, lastName, email, password, "buyer");
-            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            new CustomDialog(parentFrame, "Sign Up success", "ayarn! pasok ka na sa banga sis, pwede ka na mag log-in at mag-access sa dashboard", "Proceed");
+
+    	if (userSignup.uniqueCheck(username, email)) {
             
-            //Redirect to SignInPanel 
-            CardLayout clLayout = (CardLayout) panelContent.getLayout();
-            clLayout.show(panelContent, "BuyerSignInPanel");
-        
-        } else {
-            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        	if (selectedFile == null) {
+                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                new CustomDialog(
+                    parentFrame,
+                    "File Upload Required",
+                    "Please select your Certificate of Registration (COR) to complete the sign-up process.",
+                    "Okay, I'll upload"
+                );
+                return; // Stop the sign-up process if no file is selected
+            } else {
+            	userSignup.saveUser(username, firstName, lastName, email, password, "buyer");
+            	userSignup.saveUploadedFile(username, "buyer", selectedFile);
+            	
+                JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                new CustomDialog(parentFrame, "Sign Up success", "ayarn! pasok ka na sa banga sis, pwede ka na mag log-in at mag-access sa dashboard", "Proceed");
+
+                CardLayout clLayout = (CardLayout) panelContent.getLayout();
+                clLayout.show(panelContent, "BuyerSignInPanel");
+            }
+           
+    	} else {
+    		JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             new CustomDialog(parentFrame, "may iba na shea teh", "hahahahahaha bat umeepal ka pa.... may iba na sha mhie!", "sorry po...");
+            }
         }
-    }
 
     public void close() {
         userSignup.close();
