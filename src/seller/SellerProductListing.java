@@ -17,6 +17,7 @@ import com.toedter.calendar.JDateChooser;
 import frames.CustomDialog;
 import databases.ProductDatabase;
 import databases.UserSession;
+import misc.CustomScrollBar;
 import misc.RoundedButton;
 import com.toedter.calendar.JDayChooser;
 import com.toedter.calendar.JDateChooser;
@@ -327,14 +328,6 @@ public class SellerProductListing extends JPanel implements ActionListener{
         timeCombo.addActionListener(this);
         scrollContentPanel.add(timeCombo);
 
-        
-        btnAddTime = new RoundedButton("Add Time", 20);
-        btnAddTime.setFont(new Font("Montserrat", Font.PLAIN, 11));
-        btnAddTime.setBounds(160,630,105,20);
-        btnAddTime.setBackground(new Color(115,12,12));
-        btnAddTime.setForeground(Color.WHITE);
-        btnAddTime.setFocusable(false);
-        scrollContentPanel.add(btnAddTime);
 
         btnPost = new RoundedButton("Post", 15);
         btnPost.setBounds(130, 670, 100, 30);
@@ -350,9 +343,6 @@ public class SellerProductListing extends JPanel implements ActionListener{
         scrollContentPanel.setBorder(null);        
         scrollPane.setViewportView(scrollContentPanel);
     
-        SellerNavigationBar navBar = new SellerNavigationBar();
-        navBar.setBounds(0,610, 414,50);
-        add(navBar);
         
     }
 
@@ -367,6 +357,9 @@ public class SellerProductListing extends JPanel implements ActionListener{
             clearFields();
         } else if (objSourceEvent == btnAddDate) {
 
+        	SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            Date selectedDate = dateChooser.getDate();
+        	
                 if (selectedDate == null) {
                 	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
                     new CustomDialog(frame, "No Date?", "ang eme ni beh, mag-add ka muna?!?! btw same : (", "k fine");
