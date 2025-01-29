@@ -21,25 +21,22 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
 
 		setBackground(Color.WHITE);
         setBounds(100, 100, 414, 660);
-        SpringLayout panelLayout = new SpringLayout();
-        setLayout(panelLayout);
         
         // Icon + title
         ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_seller.icon.png"));
         Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
+        setLayout(null);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
-        panelLayout.putConstraint(SpringLayout.NORTH, startupImage, 24, SpringLayout.NORTH, this);
-        panelLayout.putConstraint(SpringLayout.WEST, startupImage, 16, SpringLayout.WEST, this);
+        startupImage.setBounds(16, 24, 150, 47);
         add(startupImage);
         
         JPanel pnlHeader = new JPanel();
+        pnlHeader.setBounds(20, 132, 384, 24);
         pnlHeader.setOpaque(true);
         pnlHeader.setBackground(Color.WHITE);
         pnlHeader.setLayout(new BorderLayout());
-        panelLayout.putConstraint(SpringLayout.WEST, pnlHeader, 20, SpringLayout.WEST, this);
         
         JLabel lblMyProduct = new JLabel("My Products");
-        panelLayout.putConstraint(SpringLayout.WEST, lblMyProduct, 43, SpringLayout.WEST, this);
         lblMyProduct.setFont(new Font("Montserrat", Font.BOLD, 19));
         
         btnAddProduct = new RoundedButton("Add a product", 10);
@@ -55,22 +52,14 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         
         // Search Bar
         SearchBar searchBar = new SearchBar();
+        searchBar.setBounds(61, 86, 291, 24);
         searchBar.setupSearchPlaceholder("ang tamad tamad mo mag-scroll talaga naman...");
-        panelLayout.putConstraint(SpringLayout.NORTH, searchBar, 15, SpringLayout.SOUTH, startupImage);
-        panelLayout.putConstraint(SpringLayout.WEST, searchBar, 61, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.SOUTH, searchBar, 39, SpringLayout.SOUTH, startupImage);
-        panelLayout.putConstraint(SpringLayout.EAST, searchBar, -62, SpringLayout.EAST, this);
         add(searchBar);
         searchBar.setLayout(new BoxLayout(searchBar, BoxLayout.X_AXIS));
         
         JScrollPane scrollPane = new JScrollPane();
-        panelLayout.putConstraint(SpringLayout.SOUTH, pnlHeader, -6, SpringLayout.NORTH, scrollPane);
-        panelLayout.putConstraint(SpringLayout.EAST, pnlHeader, 0, SpringLayout.EAST, scrollPane);
-
-        panelLayout.putConstraint(SpringLayout.NORTH, scrollPane, 162, SpringLayout.NORTH, this);
+        scrollPane.setBounds(22, 162, 382, 418);
         scrollPane.setOpaque(false);
-        panelLayout.putConstraint(SpringLayout.WEST, scrollPane, 22, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.EAST, scrollPane, -10, SpringLayout.EAST, this);
         
         JPanel scrollContentPanel = new JPanel();
         scrollContentPanel.setOpaque(true);
@@ -101,14 +90,23 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         
      // Create NavigationBar and position it at the bottom
         SellerNavigationBar navBar = new SellerNavigationBar(scrollContentPanel);
-        panelLayout.putConstraint(SpringLayout.SOUTH, scrollPane, -30, SpringLayout.NORTH, navBar);
-        panelLayout.putConstraint(SpringLayout.NORTH, navBar, -50, SpringLayout.SOUTH, this);
-        panelLayout.putConstraint(SpringLayout.WEST, navBar, 0, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.SOUTH, navBar, 0, SpringLayout.SOUTH, this);
-        panelLayout.putConstraint(SpringLayout.EAST, navBar, 414, SpringLayout.WEST, this);
+        navBar.setBounds(0, 611, 416, 52);
         add(navBar);
         
+        navBar.btnHome.addActionListener(e -> System.out.println("Already on Dashboard Panel"));
+        navBar.btnMap.addActionListener(e -> switchPanel("SellerMap"));
+        navBar.btnOrders.addActionListener(e -> switchPanel("SellerOrderPanel"));
+        navBar.btnProfile.addActionListener(e -> switchPanel("SellerProfile"));
+        
 	}
+	
+	private void switchPanel(String panelName) {
+        if (contentPane.getLayout() instanceof CardLayout) {
+            ((CardLayout) contentPane.getLayout()).show(contentPane, panelName);
+        } else {
+            System.err.println("Error: contentPane is not using CardLayout!");
+        }
+    }
 	
 	@Override
     public void actionPerformed(ActionEvent actEvent) {
@@ -119,5 +117,7 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "SellerProductListing");
     	} 
+    	
+    	
     }
 }
