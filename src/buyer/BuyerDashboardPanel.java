@@ -68,7 +68,37 @@ public class BuyerDashboardPanel extends JPanel {
         scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
         scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
         
-        
+        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
+        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
+        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
+        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
+        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
+        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
+
+        // AddProduct components mouseListener
+        for (Component comp : scrollContentPanel.getComponents()) {
+            if (comp instanceof AddProduct) {
+                AddProduct product = (AddProduct) comp;
+                product.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        product.setBorder(BorderFactory.createLineBorder(new Color(0x730C0C), 2)); // Maroon border
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        product.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1)); // Default black border
+                    }
+                	
+                	@Override
+	            	public void mouseClicked(MouseEvent e) {
+	            		CardLayout clLayout = (CardLayout) contentPane.getLayout();
+	                    clLayout.show(contentPane, "ProductDetails");
+	            	}
+                });
+            }
+        }
+
         scrollContentPanel.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
