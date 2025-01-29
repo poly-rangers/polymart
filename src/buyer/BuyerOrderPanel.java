@@ -37,7 +37,7 @@ public class BuyerOrderPanel extends JPanel {
         add(lblNewLabel);
         
         BuyerNavigationBar navBar = new BuyerNavigationBar(contentPane);
-        navBar.setBounds(0, 610, 414, 50);
+        navBar.setBounds(0, 611, 416, 52);
         add(navBar);
         
         navBar.btnHome.addActionListener(e -> switchPanel("BuyerDashboardPanel"));
