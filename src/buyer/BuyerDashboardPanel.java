@@ -50,6 +50,7 @@ public class BuyerDashboardPanel extends JPanel {
 
         // Scrollable panel for products
         JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBorder(null);
         panelLayout.putConstraint(SpringLayout.NORTH, scrollPane, 162, SpringLayout.NORTH, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, lblNewLabel, -6, SpringLayout.NORTH, scrollPane);
         scrollPane.setOpaque(false);
@@ -57,11 +58,16 @@ public class BuyerDashboardPanel extends JPanel {
         panelLayout.putConstraint(SpringLayout.EAST, scrollPane, -10, SpringLayout.EAST, this);
 
         JPanel scrollContentPanel = new JPanel();
-        scrollContentPanel.setLayout(new GridLayout(3, 2, 10, 10));
+        scrollContentPanel.setBorder(null);
+        scrollContentPanel.setBackground(new Color(255, 255, 255));
+        scrollContentPanel.setLayout(new GridLayout(0, 2, 10, 10));
         scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
-        scrollContentPanel.add(new JPanel());
-        scrollContentPanel.add(new JPanel());
-        scrollContentPanel.add(new JPanel());
+        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
+        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
+        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
+        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
+        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
+        
         
         scrollContentPanel.addMouseListener(new MouseAdapter() {
         	@Override
