@@ -37,6 +37,7 @@ public class UserSignIn {
             
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
+            	UserSession.setLoggedInUsername(username);
                 System.out.println(userType + " login successful for: " + username);
                 return true;
             } else {
@@ -59,4 +60,20 @@ public class UserSignIn {
             }
         }
     }
+    
+    public String getSellerFolderPathByUsername(String username) {
+        String query = "SELECT folder_path FROM sellers WHERE username = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("folder_path");  // Return the seller's folder path (hash)
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // Return null if no match is found
+    }
+
 }

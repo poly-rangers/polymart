@@ -1,12 +1,22 @@
 package seller;
 
-import misc.SearchBar;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import com.toedter.calendar.JDateChooser;
 
 import frames.CustomDialog;
-import misc.CustomScrollBar;
+import databases.ProductDatabase;
+import databases.UserSession;
 import misc.RoundedButton;
 import com.toedter.calendar.JDayChooser;
 import com.toedter.calendar.JDateChooser;
@@ -15,17 +25,28 @@ public class SellerProductListing extends JPanel implements ActionListener{
 	
 	private static final long serialVersionUID = -318363178469668105L;
 	private JPanel contentPane;
-	private JButton btnGoBack;
+	private JButton btnGoBack, btnAddDate;
 	private JLabel lblProductImage, lblProductImageDescription, lblProductDetails, lblProductName, lblProductDesc, lblProductCat,
-	lblMeetUpDetails, lblMOP, lblMeetUpTime, lblProductPrice, lblMeetUpDate;
+	lblMeetUpDetails, lblMOP, lblMeetUpTime, lblProductPrice, lblMeetUpDate, lblAddImage1, lblAddImage2, lblAddImage3, lblAddImage4;
 	private JTextField productNameField, meetUpField, timeField, priceField; 
 	private JTextArea productDescArea;
-	private RoundedButton btnAddImage1, btnAddImage2, btnAddImage3, btnAddImage4;
 	private String[] strCategories = {"Food", "Fashion", "Accessories"};
-	private JComboBox<String> categoryCombo;
-	private JCheckBox cbLagoon, cbWestWing, cbDome, cbEastWing, cbSouthWing, cbLinearPark, cbCharlieBuilding, 
-		cbGrandstand, cbTennisCourtside, cbSouvenirShop, cbGateExit, cbGateEntrance, cbCash, cbGCash;
-	private RoundedButton btnPost, btnAddDate, btnAddTime;
+	private JComboBox<String> categoryCombo, timeCombo;
+	private JCheckBox[] cbLocations;
+	private JCheckBox cbGCash, cbCash;
+	private JDateChooser dateChooser;
+	private RoundedButton btnPost;
+	
+	private ProductDatabase productDatabase;
+	private File imgFile1, imgFile2, imgFile3, imgFile4;
+	
+	private String[] arrLocations = {"1. Lagoon", "2. West Wing", "3. Dome", "4. East Wing", 
+			"5. South Wing", "6. Linear Park", "7. Charlie Building", "8. Grandstand", "9. Tennis Courtside",
+			"10. Souvenir Shop", "11. Gate Exit", "12. Gate Entrance"};
+	private String[] timeSlots = {
+		    "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
+		    "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM"
+		};
 	
 	public SellerProductListing(JPanel contentPane) {
 		this.contentPane = contentPane;
@@ -33,6 +54,9 @@ public class SellerProductListing extends JPanel implements ActionListener{
 		setBackground(Color.WHITE);
         setSize(414, 660);
         setLayout(null);
+        
+        productDatabase = new ProductDatabase();
+        productDatabase.createProductsTable();
 		
         ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_seller.icon.png"));
         Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
@@ -90,43 +114,43 @@ public class SellerProductListing extends JPanel implements ActionListener{
         lblProductImageDescription.setForeground(new Color(129, 124, 124));
         scrollContentPanel.add(lblProductImageDescription);
         
-        // ADD IMAGE BUTTON
-        btnAddImage1 = new RoundedButton("+", 10);
-        btnAddImage1.setBounds(5,45,80,80);
-        btnAddImage1.setFocusable(false);
-        btnAddImage1.setFocusPainted(false);
-        btnAddImage1.setFont(new Font("Montserrat", Font.BOLD, 14));
-        btnAddImage1.setBackground(new Color(241,241,241,241));
-        btnAddImage1.setForeground(new Color(149,145,145,145));
-        scrollContentPanel.add(btnAddImage1);
+        //ADD IMAGE LABELS
+        lblAddImage1 = new JLabel("+",10);
+        lblAddImage1.setBounds(5,45,80,80);
+        lblAddImage1.setFocusable(false);
+        lblAddImage1.setFont(new Font("Montserrat", Font.BOLD, 14));
+        lblAddImage1.setBackground(new Color(241, 241, 241, 241));
+        lblAddImage1.setForeground(new Color(149,145,145,145));
+        scrollContentPanel.add(lblAddImage1);
         
-        btnAddImage2 = new RoundedButton("+", 10);
-        btnAddImage2.setBounds(94,45,80,80);
-        btnAddImage2.setFocusable(false);
-        btnAddImage2.setFocusPainted(false);
-        btnAddImage2.setFont(new Font("Montserrat", Font.BOLD, 14));
-        btnAddImage2.setBackground(new Color(241,241,241,241));
-        btnAddImage2.setForeground(new Color(149,145,145,145));
-        scrollContentPanel.add(btnAddImage2);
+        lblAddImage2 = new JLabel("+",10);
+        lblAddImage2.setBounds(94,45,80,80);
+        lblAddImage2.setFocusable(false);
+        lblAddImage2.setFont(new Font("Montserrat", Font.BOLD, 14));
+        lblAddImage2.setBackground(new Color(241, 241, 241, 241));
+        lblAddImage2.setForeground(new Color(149,145,145,145));
+        scrollContentPanel.add(lblAddImage2);
         
-        btnAddImage3 = new RoundedButton("+", 10);
-        btnAddImage3.setBounds(185,45,80,80);
-        btnAddImage3.setFocusable(false);
-        btnAddImage3.setFocusPainted(false);
-        btnAddImage3.setFont(new Font("Montserrat", Font.BOLD, 14));
-        btnAddImage3.setBackground(new Color(241,241,241,241));
-        btnAddImage3.setForeground(new Color(149,145,145,145));
-        scrollContentPanel.add(btnAddImage3);
+        lblAddImage3 = new JLabel("+",10);
+        lblAddImage3.setBounds(185,45,80,80);
+        lblAddImage3.setFocusable(false);
+        lblAddImage3.setFont(new Font("Montserrat", Font.BOLD, 14));
+        lblAddImage3.setBackground(new Color(241, 241, 241, 241));
+        lblAddImage3.setForeground(new Color(149,145,145,145));
+        scrollContentPanel.add(lblAddImage3);
         
-        btnAddImage4 = new RoundedButton("+", 10);
-        btnAddImage4.setBounds(274,45,80,80);
-        btnAddImage4.setFocusable(false);
-        btnAddImage4.setFocusPainted(false);
-        btnAddImage4.setFont(new Font("Montserrat", Font.BOLD, 14));
-        btnAddImage4.setBackground(new Color(241,241,241,241));
-        btnAddImage4.setForeground(new Color(149,145,145,145));
-        scrollContentPanel.add(btnAddImage4);
+        lblAddImage4 = new JLabel("+",10);
+        lblAddImage4.setBounds(274,45,80,80);
+        lblAddImage4.setFocusable(false);
+        lblAddImage4.setFont(new Font("Montserrat", Font.BOLD, 14));
+        lblAddImage4.setBackground(new Color(241, 241, 241, 241));
+        lblAddImage4.setForeground(new Color(149,145,145,145));
+        scrollContentPanel.add(lblAddImage4);
         
+        addMouseListenerToLabel(lblAddImage1);
+        addMouseListenerToLabel(lblAddImage2);
+        addMouseListenerToLabel(lblAddImage3);
+        addMouseListenerToLabel(lblAddImage4);
        
         // PRODUCT DETAILS
         lblProductDetails = new JLabel("Enter Product Details");
@@ -148,6 +172,7 @@ public class SellerProductListing extends JPanel implements ActionListener{
         productNameField.setForeground(new Color(149, 145, 145));
         productNameField.setBackground(new Color(241, 241, 241));
         productNameField.setBorder(null);
+        setupTextPlaceholder(productNameField, "Product Name");
         scrollContentPanel.add(productNameField);
  
         lblProductDesc = new JLabel("Add a product description");
@@ -163,8 +188,8 @@ public class SellerProductListing extends JPanel implements ActionListener{
         productDescArea.setFont(new Font("Montserrat", Font.ITALIC, 12));
         productDescArea.setForeground(new Color(149, 145, 145));
         productDescArea.setBackground(new Color(241, 241, 241));
+        setupTextPlaceholder(productDescArea, "Product Description");
         scrollContentPanel.add(productDescArea);
-        
         
         lblProductPrice = new JLabel("Add product price:");
         lblProductPrice.setBounds(5, 282, 143, 13);
@@ -180,9 +205,8 @@ public class SellerProductListing extends JPanel implements ActionListener{
         priceField.setForeground(new Color(149, 145, 145));
         priceField.setBackground(new Color(241, 241, 241));
         priceField.setBorder(null);
+        setupTextPlaceholder(priceField, "P100");
         scrollContentPanel.add(priceField);
-        
-        
         
         lblProductCat = new JLabel("Select product category:");
         lblProductCat.setBounds(160, 275, 201, 26);
@@ -193,13 +217,13 @@ public class SellerProductListing extends JPanel implements ActionListener{
         categoryCombo = new JComboBox<String>(strCategories);
         categoryCombo.setSelectedIndex(-1);
         categoryCombo.setBounds(160, 300, 124, 20);
+        categoryCombo.setSelectedIndex(-1);
         scrollContentPanel.add(categoryCombo);
         
         lblMeetUpDetails = new JLabel("Set Meet Up Details");
         lblMeetUpDetails.setBounds(5, 335, 314, 18);
         lblMeetUpDetails.setFont(new Font("Montserrat", Font.BOLD, 14));
         scrollContentPanel.add(lblMeetUpDetails);
-        
         
         // LOCATION SELECT
         lblProductDesc = new JLabel("Select available locations:");
@@ -208,93 +232,31 @@ public class SellerProductListing extends JPanel implements ActionListener{
         lblProductDesc.setForeground(new Color(129, 124, 124));
         scrollContentPanel.add(lblProductDesc);
         
-        cbLagoon = new JCheckBox("1. Lagoon");
-        cbLagoon.setBackground(new Color(255, 255, 255));
-        cbLagoon.setFocusable(false);
-        cbLagoon.setFocusPainted(false);
-        cbLagoon.setBounds(5, 375, 90, 15);
-        scrollContentPanel.add(cbLagoon);
+        JPanel pnlLocations = new JPanel(new GridLayout(6,2,0,0));
+        pnlLocations.setBorder(BorderFactory.createEmptyBorder()); 
+        pnlLocations.setBackground(Color.WHITE);
+        cbLocations = new JCheckBox[arrLocations.length];
         
-        cbWestWing = new JCheckBox("2. West Wing");
-        cbWestWing.setBackground(new Color(255, 255, 255));
-        cbWestWing.setFocusable(false);
-        cbWestWing.setFocusPainted(false);
-        cbWestWing.setBounds(5, 390, 108, 15);
-        scrollContentPanel.add(cbWestWing);
-        
-        cbDome = new JCheckBox("3. Dome");
-        cbDome.setBackground(new Color(255, 255, 255));
-        cbDome.setFocusable(false);
-        cbDome.setFocusPainted(false);
-        cbDome.setBounds(5, 405, 89, 15);
-        scrollContentPanel.add(cbDome);
-//        
-        cbEastWing = new JCheckBox("4. East Wing");
-        cbEastWing.setBackground(new Color(255, 255, 255));
-        cbEastWing.setFocusable(false);
-        cbEastWing.setFocusPainted(false);
-        cbEastWing.setBounds(5, 420, 108, 15);
-        scrollContentPanel.add(cbEastWing);
-        
-        cbSouthWing = new JCheckBox("5. South Wing");
-        cbSouthWing.setBackground(new Color(255, 255, 255));
-        cbSouthWing.setFocusable(false);
-        cbSouthWing.setFocusPainted(false);
-        cbSouthWing.setBounds(5, 435, 108, 15);
-        scrollContentPanel.add(cbSouthWing);
-        
-        cbLinearPark = new JCheckBox("6. Linear Park");
-        cbLinearPark.setBackground(new Color(255, 255, 255));
-        cbLinearPark.setFocusable(false);
-        cbLinearPark.setFocusPainted(false);
-        cbLinearPark.setBounds(5, 450, 108, 15);
-        scrollContentPanel.add(cbLinearPark);
-        
-        cbCharlieBuilding = new JCheckBox("7. Charlie Building");
-        cbCharlieBuilding.setBackground(new Color(255, 255, 255));
-        cbCharlieBuilding.setFocusable(false);
-        cbCharlieBuilding.setFocusPainted(false);
-        cbCharlieBuilding.setBounds(160, 375, 159, 15);
-        scrollContentPanel.add(cbCharlieBuilding);
-//        
-        cbGrandstand = new JCheckBox("8. Grandstand");
-        cbGrandstand.setBackground(new Color(255, 255, 255));
-        cbGrandstand.setFocusable(false);
-        cbGrandstand.setFocusPainted(false);
-        cbGrandstand.setBounds(160, 390, 159, 15);
-        scrollContentPanel.add(cbGrandstand);
-//        
-        cbTennisCourtside = new JCheckBox("9. Tennis Courtside");
-        cbTennisCourtside.setBackground(new Color(255, 255, 255));
-        cbTennisCourtside.setFocusable(false);
-        cbTennisCourtside.setFocusPainted(false);
-        cbTennisCourtside.setBounds(160, 405, 159, 15);
-        scrollContentPanel.add(cbTennisCourtside);
-//        
-        cbSouvenirShop = new JCheckBox("10. Souvenir Shop");
-        cbSouvenirShop.setBackground(new Color(255, 255, 255));
-        cbSouvenirShop.setFocusable(false);
-        cbSouvenirShop.setFocusPainted(false);
-        cbSouvenirShop.setBounds(160, 420, 159, 15);
-        scrollContentPanel.add(cbSouvenirShop);
-        
-        cbGateExit = new JCheckBox("11. Gate Exit");
-        cbGateExit.setBackground(new Color(255, 255, 255));
-        cbGateExit.setFocusable(false);
-        cbGateExit.setFocusPainted(false);
-        cbGateExit.setBounds(160, 435, 143, 15);
-        scrollContentPanel.add(cbGateExit);
-//        
-        cbGateEntrance = new JCheckBox("12. Gate Entrance");
-        cbGateEntrance.setBackground(new Color(255, 255, 255));
-        cbGateEntrance.setFocusable(false);
-        cbGateEntrance.setFocusPainted(false);
-        cbGateEntrance.setBounds(160, 450, 159, 15);
-        scrollContentPanel.add(cbGateEntrance);
+        for (int intIndex = 0; intIndex < 6; intIndex++) {
+            // Add the item for the left column (1-6)
+            cbLocations[intIndex] = new JCheckBox(arrLocations[intIndex]);
+            cbLocations[intIndex].setBackground(Color.WHITE);
+            cbLocations[intIndex].setFocusable(false);
+            pnlLocations.add(cbLocations[intIndex]);
+            
+            // Add the item for the right column (7-12)
+            cbLocations[intIndex + 6] = new JCheckBox(arrLocations[intIndex + 6]);
+            cbLocations[intIndex + 6].setBackground(Color.WHITE);
+            cbLocations[intIndex+6].setFocusable(false);
+            pnlLocations.add(cbLocations[intIndex + 6]);
+        }
+       
+        pnlLocations.setBounds(5,375,345,100);
+        scrollContentPanel.add(pnlLocations);
         
         // MDOE OF PAYMENT
         lblMOP = new JLabel("Select available modes of payment:");
-        lblMOP.setBounds(5, 475, 246, 15);
+        lblMOP.setBounds(5, 477, 246, 15);
         lblMOP.setFont(new Font("Montserrat", Font.ITALIC, 12));
         lblMOP.setForeground(new Color(129, 124, 124));
         scrollContentPanel.add(lblMOP);
@@ -315,7 +277,6 @@ public class SellerProductListing extends JPanel implements ActionListener{
         
         
         // MEET UPS
-        
         lblMeetUpDate = new JLabel("Select available meet-up date/s:");
         lblMeetUpDate.setBackground(new Color(255, 255, 255));
         lblMeetUpDate.setBounds(5, 515, 246, 15);
@@ -323,15 +284,15 @@ public class SellerProductListing extends JPanel implements ActionListener{
         lblMeetUpDate.setForeground(new Color(129, 124, 124));
         scrollContentPanel.add(lblMeetUpDate);
         
-        timeField = new JTextField(25);
-        timeField.setEditable(false);
-        timeField.setBounds(5, 530, 345, 20);
-        timeField.setFont(new Font("Montserrat", Font.ITALIC, 12));
-        timeField.setBackground(new Color(241, 241, 241));
-        timeField.setBorder(null);
-        scrollContentPanel.add(timeField);
+        meetUpField = new JTextField(25);
+        meetUpField.setEditable(false);
+        meetUpField.setBounds(5, 530, 345, 20);
+        meetUpField.setFont(new Font("Montserrat", Font.ITALIC, 12));
+        meetUpField.setBackground(new Color(241, 241, 241));
+        meetUpField.setBorder(null);
+        scrollContentPanel.add(meetUpField);
         
-        JDateChooser dateChooser = new JDateChooser();
+        dateChooser = new JDateChooser();
         dateChooser.setBounds(5, 557, 143, 20);
         scrollContentPanel.add(dateChooser);
     
@@ -342,34 +303,36 @@ public class SellerProductListing extends JPanel implements ActionListener{
         btnAddDate.setForeground(Color.WHITE);
         btnAddDate.setFocusPainted(false);
         btnAddDate.setFocusable(false);
+        btnAddDate.addActionListener(this);
         scrollContentPanel.add(btnAddDate);
         
-  
-        lblMeetUpTime = new JLabel("Select available meet-up time:");
+        lblMeetUpTime = new JLabel("Select available meet-up time/s:");
         lblMeetUpTime.setBackground(new Color(255, 255, 255));
         lblMeetUpTime.setBounds(5, 585, 246, 15);
         lblMeetUpTime.setFont(new Font("Montserrat", Font.ITALIC, 12));
         lblMeetUpTime.setForeground(new Color(129, 124, 124));
         scrollContentPanel.add(lblMeetUpTime);
         
+
         meetUpField = new JTextField(25);
         meetUpField.setEditable(false);
         meetUpField.setBounds(5, 600, 345, 20);
         meetUpField.setFont(new Font("Montserrat", Font.ITALIC, 12));
         meetUpField.setBackground(new Color(241, 241, 241));
         meetUpField.setBorder(null);
-        scrollContentPanel.add(meetUpField);
         
-        JComboBox<String> tempCom = new JComboBox<>();
-        tempCom.setBounds(5,630, 143, 20);
-        scrollContentPanel.add(tempCom);
+        timeCombo = new JComboBox<>(timeSlots);
+        timeCombo.setBounds(5,620, 89, 20);
+        timeCombo.setSelectedIndex(-1);
+        timeCombo.addActionListener(this);
+        scrollContentPanel.add(timeCombo);
+
         
         btnAddTime = new RoundedButton("Add Time", 20);
         btnAddTime.setFont(new Font("Montserrat", Font.PLAIN, 11));
         btnAddTime.setBounds(160,630,105,20);
         btnAddTime.setBackground(new Color(115,12,12));
         btnAddTime.setForeground(Color.WHITE);
-        btnAddTime.setFocusPainted(false);
         btnAddTime.setFocusable(false);
         scrollContentPanel.add(btnAddTime);
 
@@ -380,12 +343,16 @@ public class SellerProductListing extends JPanel implements ActionListener{
         btnPost.setBackground(new Color(102, 0, 0));
         btnPost.setForeground(Color.WHITE);
         btnPost.setFocusable(true);
+        btnPost.addActionListener(this);
         scrollContentPanel.add(btnPost);
         
         scrollPane.setBorder(null);
         scrollContentPanel.setBorder(null);        
         scrollPane.setViewportView(scrollContentPanel);
-        scrollPane.getVerticalScrollBar().setUI(new CustomScrollBar());
+    
+        SellerNavigationBar navBar = new SellerNavigationBar();
+        navBar.setBounds(0,610, 414,50);
+        add(navBar);
         
     }
 
@@ -397,6 +364,83 @@ public class SellerProductListing extends JPanel implements ActionListener{
             // Switch to Product Listing
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "SellerDashboardPanel");
+            clearFields();
+        } else if (objSourceEvent == btnAddDate) {
+
+                if (selectedDate == null) {
+                	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                    new CustomDialog(frame, "No Date?", "ang eme ni beh, mag-add ka muna?!?! btw same : (", "k fine");
+                    return;
+                }
+
+                // Get current date without time for proper comparison
+                Calendar today = Calendar.getInstance();
+                today.set(Calendar.HOUR_OF_DAY, 0);
+                today.set(Calendar.MINUTE, 0);
+                today.set(Calendar.SECOND, 0);
+                today.set(Calendar.MILLISECOND, 0);
+
+                Calendar selectedCal = Calendar.getInstance();
+                selectedCal.setTime(selectedDate);
+                selectedCal.set(Calendar.HOUR_OF_DAY, 0);
+                selectedCal.set(Calendar.MINUTE, 0);
+                selectedCal.set(Calendar.SECOND, 0);
+                selectedCal.set(Calendar.MILLISECOND, 0);
+
+                // Check if the selected date is in the past
+                if (selectedCal.before(today)) {
+                    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                    new CustomDialog(frame, "Time Travel??", "alam kong nagrerelapse ka pero you can't turn back the time:(", "awts gege");
+                    dateChooser.setDate(null);
+                    return;
+                }
+
+                String formattedDate = dateFormat.format(selectedDate);
+                String existingText = meetUpField.getText();
+
+                // Check for duplicate dates
+                if (existingText.contains(formattedDate)) {
+                	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                    new CustomDialog(frame, "Date is already taken", "buti pa yung date taken, e ikaw?!", "sorry na");
+                    dateChooser.setDate(null);
+                    return;
+                }
+
+                // Append new date to meetUpField (comma-separated if not empty)
+                if (!existingText.isEmpty()) {
+                    meetUpField.setText(existingText + ", " + formattedDate);
+                } else {
+                    meetUpField.setText(formattedDate);
+                }
+
+                // Clear the date chooser for the next selection
+                dateChooser.setDate(null);
+        } else if (objSourceEvent == timeCombo) {
+        	String selectedTime = (String) timeCombo.getSelectedItem();
+
+            // Check if timeField already contains the selected time
+            String currentText = timeField.getText();
+            if (currentText.contains(selectedTime)) {
+                // Show error message and prevent duplicate addition
+            	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                new CustomDialog(frame, "Opppsiee ", "taken na sha, sakin ka nalang tumesting", "ayaw");
+            } else {
+                // Append new time, handling formatting properly
+                if (!currentText.isEmpty()) {
+                    timeField.setText(currentText + ", " + selectedTime);
+                } else {
+                    timeField.setText(selectedTime);
+                }
+            }
+        } else if (objSourceEvent == btnPost) {
+        	if (validatePost()) {
+        		JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                new CustomDialog(parentFrame, "PAKIFILLUP LAHAT BEH", "baks! may kulang ka, make sure na may meron ka sa lahat", "ok");
+        	} else {
+                saveProductToDatabase();
+        		JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                new CustomDialog(parentFrame, "Posting success", "ayarn! pasok ka na sa banga sis, papaldo ka na", "Proceed");
+        	}
         }
     }
     
@@ -440,5 +484,176 @@ public class SellerProductListing extends JPanel implements ActionListener{
             }
         });
     	textArea.setForeground(Color.GRAY);
+    }
+    
+    private void addMouseListenerToLabel(JLabel lblImage) {
+        lblImage.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	lblImage.setBackground(new Color(0x730C0C));
+            	lblImage.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(0x730C0C)));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	lblImage.setBackground(new Color(241,241,241,241));
+            	lblImage.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(241,241,241,241)));
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileFilter(new FileNameExtensionFilter("JPEG/PNG files", "jpg","jpeg","png")); // Filter for PDFs
+                int result = fileChooser.showOpenDialog(lblImage);
+
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile(); // Store the selected file
+                    System.out.println("File selected: " + selectedFile.getAbsolutePath());
+                    setLabelImage(lblImage, selectedFile);
+                } else {
+                    System.out.println("No file selected.");
+                }
+            }
+        });
+    }
+    
+    private void setLabelImage(JLabel label, File file) {
+        ImageIcon originalIcon = new ImageIcon(file.getAbsolutePath());
+        Image scaledImage = originalIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        label.setIcon(new ImageIcon(scaledImage));
+
+        // Store the selected file in the corresponding variable
+        if (label == lblAddImage1) {
+            imgFile1 = file;
+        } else if (label == lblAddImage2) {
+            imgFile2 = file;
+        } else if (label == lblAddImage3) {
+            imgFile3 = file;
+        } else if (label == lblAddImage4) {
+            imgFile4 = file;
+        }
+    }
+    
+    private void setupTextPlaceholder(JTextField textField, String placeholder) {
+        textField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (textField.getText().equals(placeholder)) {
+                    textField.setText("");
+                    textField.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (textField.getText().isEmpty()) {
+                    textField.setForeground(Color.GRAY);
+                    textField.setText(placeholder);
+                }
+            }
+        });
+        textField.setForeground(Color.GRAY);
+    }
+    
+    //method overloading
+    private void setupTextPlaceholder(JTextArea textArea, String placeholder) {
+    	textArea.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (textArea.getText().equals(placeholder)) {
+                	textArea.setText("");
+                	textArea.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (textArea.getText().isEmpty()) {
+                	textArea.setForeground(Color.GRAY);
+                	textArea.setText(placeholder);
+                }
+            }
+        });
+    	textArea.setForeground(Color.GRAY);
+    }
+    
+    private void saveProductToDatabase() {
+        String productName = productNameField.getText();
+        String productDesc = productDescArea.getText();
+        double dblPrice = Double.parseDouble(priceField.getText().replace("P", "")); // Remove "P" and parse as double
+
+        // Get the logged-in seller's username
+        String currentSellerUsername = UserSession.getLoggedInUsername();
+        
+        // Get the seller's hash based on the logged-in username
+        String sellerHash = productDatabase.getSellerHashByUsername(currentSellerUsername); 
+
+        // Check if sellerHash is retrieved successfully
+        if (sellerHash != null) {
+            // Save the product to the database using the seller's hash
+            productDatabase.addProduct(sellerHash, productName, productDesc, dblPrice, "In Stock"); 
+        } else {
+            // Handle the case where the sellerHash could not be found
+        	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            new CustomDialog(parentFrame, "di ko mahanap seller baks", "may maling nangyari OMG!", "awch");        
+        }
+    }
+
+    
+    private boolean validatePost() {
+        StringBuilder strLocations = new StringBuilder();
+    	for (JCheckBox cbLocation : cbLocations) {
+            if (cbLocation.isSelected()) {
+                if (strLocations.length() > 0) {
+                    strLocations.append(", ");
+                }
+                strLocations.append(cbLocation.getText());
+            }
+        }
+    	
+    	StringBuilder paymentMethods = new StringBuilder();
+        if (cbGCash.isSelected()) {
+            if (paymentMethods.length() > 0) {
+                paymentMethods.append(", ");
+            }
+            paymentMethods.append("GCash");
+        }
+        if (cbCash.isSelected()) {
+            if (paymentMethods.length() > 0) {
+                paymentMethods.append(", ");
+            }
+            paymentMethods.append("Cash");
+        }
+        
+    	boolean isLocationSelected = strLocations.length()>0;
+    	boolean isPaymentMethodsSelected = paymentMethods.length()>0;
+    	
+    	boolean boolResult = productNameField.getText().trim().isEmpty() || productDescArea.getText().trim().isEmpty() || 
+    			priceField.getText().trim().isEmpty() || meetUpField.getText().trim().isEmpty() || timeField.getText().trim().isEmpty() ||
+    			lblAddImage1.getIcon()==null || lblAddImage2.getIcon()==null || lblAddImage3.getIcon()==null || lblAddImage4.getIcon()==null ||
+    			categoryCombo.getSelectedIndex()==-1 || !isPaymentMethodsSelected || !isLocationSelected;
+    	
+    	return boolResult;
+    }
+    
+    private void clearFields() {
+        // Reset text fields to their placeholder values
+        productNameField.setText("Product Name");
+        productNameField.setForeground(Color.GRAY);
+        
+        productDescArea.setText("Product Description");
+        productDescArea.setForeground(Color.GRAY);
+        
+        priceField.setText("P100");
+        priceField.setForeground(Color.GRAY);
+        
+        productNameField.setText("Product Name");
+        productNameField.setForeground(Color.GRAY);
+        
+        meetUpField.setText("");
+        timeField.setText("");
+        
+        categoryCombo.setSelectedIndex(-1);
+        timeCombo.setSelectedIndex(-1);
     }
 }
