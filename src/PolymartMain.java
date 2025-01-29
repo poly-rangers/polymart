@@ -1,6 +1,5 @@
 import java.awt.*;
 import javax.swing.*;
-
 import buyer.*;
 import misc.*;
 import seller.*;
@@ -69,6 +68,7 @@ public class PolymartMain extends JFrame {
         SellerProductListing sellerProductListing = new SellerProductListing(contentPane);
         ProductDetails productDetails = new ProductDetails(contentPane);
         SellerOrderPanel sellerOrderPanel = new SellerOrderPanel(contentPane);
+        SellerProductReviews sellerProductReviews = new SellerProductReviews(contentPane);
 
         contentPane.add(sellerStartupPanel, "SellerStartupPanel");
         contentPane.add(sellerSignupPanel, "SellerSignupPanel");
@@ -77,6 +77,7 @@ public class PolymartMain extends JFrame {
         contentPane.add(sellerProductListing, "SellerProductListing");
         contentPane.add(productDetails, "ProductDetails");
         contentPane.add(sellerOrderPanel, "SellerOrderPanel");
+        contentPane.add(sellerProductReviews, "SellerProductReviews");
 
         // Navigation bar
         BuyerNavigationBar buyerNavigationBar = new BuyerNavigationBar(contentPane);
