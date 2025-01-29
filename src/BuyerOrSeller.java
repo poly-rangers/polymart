@@ -22,20 +22,20 @@ public class BuyerOrSeller extends JPanel implements ActionListener {
         JLabel startupHeader1 = new JLabel("WELCOME TO");
         startupHeader1.setBounds(0, 282, 414, 30); 
         startupHeader1.setHorizontalAlignment(SwingConstants.CENTER);
-        startupHeader1.setForeground(new Color(153, 0, 0));
+        startupHeader1.setForeground(new Color(115, 12, 2));
         startupHeader1.setFont(new Font("Montserrat", Font.PLAIN, 24));
         add(startupHeader1);
 
         JLabel startupHeader2 = new JLabel("POLYMART,");
         startupHeader2.setBounds(0, 310, 414, 50);
-        startupHeader2.setForeground(new Color(153, 0, 0));
+        startupHeader2.setForeground(new Color(115, 12, 2));
         startupHeader2.setFont(new Font("Montserrat", Font.BOLD, 48));
         startupHeader2.setHorizontalAlignment(SwingConstants.CENTER);
         add(startupHeader2);
 
         JLabel startupHeader3 = new JLabel("baks!");
         startupHeader3.setBounds(0, 356, 414, 40); 
-        startupHeader3.setForeground(new Color(153, 0, 0));
+        startupHeader3.setForeground(new Color(115, 12, 2));
         startupHeader3.setFont(new Font("Montserrat", Font.ITALIC, 32));
         startupHeader3.setHorizontalAlignment(SwingConstants.CENTER);
         add(startupHeader3);
