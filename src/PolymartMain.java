@@ -37,6 +37,15 @@ public class PolymartMain extends JFrame {
         // Initialize panels
         BuyerOrSeller buyerOrSeller = new BuyerOrSeller(contentPane);
         contentPane.add(buyerOrSeller, "BuyerOrSeller");
+        
+        ProfilePanel profilePanel = new ProfilePanel(contentPane);
+        contentPane.add(profilePanel, "ProfilePanel");
+        
+        TCandPP tcAndPP = new TCandPP(contentPane);
+        contentPane.add(tcAndPP, "TCandPP");
+        
+        EditProfile editProfile = new EditProfile(contentPane);
+        contentPane.add(editProfile, "EditProfile");
 
         TermsConditionsPanel buyerTermsConditionsPanel = new TermsConditionsPanel(contentPane, "Buyer");
         TermsConditionsPanel sellerTermsConditionsPanel = new TermsConditionsPanel(contentPane, "Seller");

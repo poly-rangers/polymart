@@ -8,10 +8,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class PreferencesPanel extends RoundedPanel implements ActionListener {
+public class PreferencesPanel extends RoundedPanel {
 
 	private static final long serialVersionUID = 5160238816315863243L;
-	private JButton btnChev1, btnChev2;
+	public JButton btnPChev1, btnPChev2;
 
 	public PreferencesPanel() {
 		super(20, new Color(115, 12, 12));
@@ -64,34 +64,25 @@ public class PreferencesPanel extends RoundedPanel implements ActionListener {
 		
         ImageIcon navigateNext = new ImageIcon(this.getClass().getResource("/navigatenexticon.png"));
         
-        btnChev1 = new JButton();
-        btnChev1.addActionListener(this);
-        btnChev1.setIcon(navigateNext);
-        btnChev1.setBounds(321, 53, 24, 24);
-        btnChev1.setOpaque(true);
-        btnChev1.setBackground(new Color(115, 12, 12));
-        btnChev1.setFocusable(false);
-        btnChev1.setFocusPainted(false);
-        btnChev1.setBorderPainted(false); 
-        add(btnChev1);
+        btnPChev1 = new JButton();
+        btnPChev1.setIcon(navigateNext);
+        btnPChev1.setBounds(321, 53, 24, 24);
+        btnPChev1.setOpaque(true);
+        btnPChev1.setBackground(new Color(115, 12, 12));
+        btnPChev1.setFocusable(false);
+        btnPChev1.setFocusPainted(false);
+        btnPChev1.setBorderPainted(false); 
+        add(btnPChev1);
         
-        btnChev2 = new JButton();
-        btnChev2.addActionListener(this);
-        btnChev2.setIcon(navigateNext);
-        btnChev2.setBounds(321, 91, 24, 24);
-        btnChev2.setOpaque(true);
-        btnChev2.setBackground(new Color(115, 12, 12));
-        btnChev2.setFocusable(false);
-        btnChev2.setFocusPainted(false);
-        btnChev2.setBorderPainted(false); 
-        add(btnChev2);
+        btnPChev2 = new JButton();
+        btnPChev2.setIcon(navigateNext);
+        btnPChev2.setBounds(321, 91, 24, 24);
+        btnPChev2.setOpaque(true);
+        btnPChev2.setBackground(new Color(115, 12, 12));
+        btnPChev2.setFocusable(false);
+        btnPChev2.setFocusPainted(false);
+        btnPChev2.setBorderPainted(false); 
+        add(btnPChev2);
         
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
