@@ -314,13 +314,13 @@ public class SellerProductListing extends JPanel implements ActionListener{
         lblMeetUpTime.setForeground(new Color(129, 124, 124));
         scrollContentPanel.add(lblMeetUpTime);
         
-
-        meetUpField = new JTextField(25);
-        meetUpField.setEditable(false);
-        meetUpField.setBounds(5, 600, 345, 20);
-        meetUpField.setFont(new Font("Montserrat", Font.ITALIC, 12));
-        meetUpField.setBackground(new Color(241, 241, 241));
-        meetUpField.setBorder(null);
+        timeField = new JTextField(25);
+        timeField.setEditable(false);
+        timeField.setBounds(5, 600, 345, 20);
+        timeField.setFont(new Font("Montserrat", Font.ITALIC, 12));
+        timeField.setBackground(new Color(241, 241, 241));
+        timeField.setBorder(null);
+        scrollContentPanel.add(timeField);
         
         timeCombo = new JComboBox<>(timeSlots);
         timeCombo.setBounds(5,620, 89, 20);
