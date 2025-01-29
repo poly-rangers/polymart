@@ -24,6 +24,8 @@ public class TermsConditionsPanel extends JPanel implements ActionListener{
                 ? "/polypup_buyer.icon.png"
                 : "/polypup_seller.icon.png";
         
+        
+        
         // Icon next to header title
         ImageIcon imgIconOriginalImage = new ImageIcon(this.getClass().getResource(strImagePath));
         Image imgScaled = imgIconOriginalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
@@ -31,6 +33,8 @@ public class TermsConditionsPanel extends JPanel implements ActionListener{
         pnlTermsConditions.putConstraint(SpringLayout.NORTH, lblStartupImage, 24, SpringLayout.NORTH, this);
         pnlTermsConditions.putConstraint(SpringLayout.WEST, lblStartupImage, 16, SpringLayout.WEST, this);
         add(lblStartupImage);
+        
+        
 
         // Terms & Conditions label
         JLabel lblTermsHeader = new JLabel("Terms & Conditions");

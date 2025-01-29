@@ -8,8 +8,7 @@ public class BuyerOrSeller extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JButton buyerRoleButton;
-    private JButton sellerRoleButton;
+    private JButton buyerRoleButton, sellerRoleButton;
     public static String userRole = "";
 
     public BuyerOrSeller(JPanel contentPane) {

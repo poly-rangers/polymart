@@ -32,7 +32,7 @@ public class BuyerDashboardPanel extends JPanel {
         add(startupImage);
 
         JLabel lblNewLabel = new JLabel("Products");
-        lblNewLabel.setBounds(43, 132, 91, 24);
+        lblNewLabel.setBounds(43, 132, 134, 24);
         lblNewLabel.setFont(new Font("Montserrat", Font.BOLD, 19));
         add(lblNewLabel);
 
@@ -112,7 +112,7 @@ public class BuyerDashboardPanel extends JPanel {
         add(navBar);
         
         navBar.btnHome.addActionListener(e -> System.out.println("Already on Dashboard Panel"));
-        navBar.btnMap.addActionListener(e -> switchPanel("BuyerMap"));
+        navBar.btnMap.addActionListener(e -> switchPanel("DashboardMap"));
         navBar.btnOrders.addActionListener(e -> switchPanel("BuyerOrderPanel"));
         navBar.btnProfile.addActionListener(e -> switchPanel("BuyerProfile"));
     }

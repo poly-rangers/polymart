@@ -33,7 +33,7 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         add(startupImage);
         
         JPanel pnlHeader = new JPanel();
-        pnlHeader.setBounds(20, 132, 384, 24);
+        pnlHeader.setBounds(20, 113, 384, 24);
         pnlHeader.setOpaque(true);
         pnlHeader.setBackground(Color.WHITE);
         pnlHeader.setLayout(new BorderLayout());
@@ -54,14 +54,6 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         pnlHeader.add(lblMyProduct, BorderLayout.WEST);
         pnlHeader.add(btnAddProduct, BorderLayout.EAST);
         
-       
-        // Search Bar
-        SearchBar searchBar = new SearchBar();
-        searchBar.setBounds(61, 86, 291, 24);
-        searchBar.setupSearchPlaceholder("ang tamad tamad mo mag-scroll talaga naman...");
-        add(searchBar);
-        searchBar.setLayout(new BoxLayout(searchBar, BoxLayout.X_AXIS));
-        
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(22, 162, 382, 418);
         scrollPane.setOpaque(false);
@@ -69,25 +61,25 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         lblItemName = new JLabel("Item Name");
         lblItemName.setFont(new Font("Montserrat", Font.BOLD, 12));
         lblItemName.setForeground(new Color(0x730C0C));
-        lblItemName.setBounds(16,146,81,15);
+        lblItemName.setBounds(23,146,88,15);
         add(lblItemName);
         
         lblRating = new JLabel("Rating");
         lblRating.setFont(new Font("Montserrat", Font.BOLD, 12));
         lblRating.setForeground(new Color(0x730C0C));
-        lblRating.setBounds(128,146,52,15);
+        lblRating.setBounds(136,146,52,15);
         add(lblRating);
         
         lblReview = new JLabel("Review");
         lblReview.setFont(new Font("Montserrat", Font.BOLD, 12));
         lblReview.setForeground(new Color(0x730C0C));
-        lblReview.setBounds(220,146,60,15);
+        lblReview.setBounds(225,146,60,15);
         add(lblReview);
         
         lblStatus = new JLabel("Status");
         lblStatus.setFont(new Font("Montserrat", Font.BOLD, 12));
         lblStatus.setForeground(new Color(0x730C0C));
-        lblStatus.setBounds(320,146,60,15);
+        lblStatus.setBounds(330,146,60,15);
         add(lblStatus);
         
  
@@ -120,7 +112,7 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         add(navBar);
         
         navBar.btnHome.addActionListener(e -> System.out.println("Already on Dashboard Panel"));
-        navBar.btnMap.addActionListener(e -> switchPanel("SellerMap"));
+        navBar.btnMap.addActionListener(e -> switchPanel("SellerDashboardMap"));
         navBar.btnOrders.addActionListener(e -> switchPanel("SellerOrderPanel"));
         navBar.btnProfile.addActionListener(e -> switchPanel("SellerProfile"));
         
