@@ -13,8 +13,11 @@ public class BuyerOrderPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private JTable tblCompletedOrders;
     private CustomTableModel tableModel;
+    private JPanel contentPane;
 
     public BuyerOrderPanel(JPanel contentPane) {
+    	this.contentPane = contentPane;
+    	
         setBackground(Color.WHITE);
         setBounds(100, 100, 414, 660);
         setLayout(null);
@@ -34,8 +37,13 @@ public class BuyerOrderPanel extends JPanel {
         add(lblNewLabel);
         
         BuyerNavigationBar navBar = new BuyerNavigationBar(contentPane);
-        navBar.setBounds(0, 610, 414, 50);
+        navBar.setBounds(0, 611, 416, 52);
         add(navBar);
+        
+        navBar.btnHome.addActionListener(e -> switchPanel("BuyerDashboardPanel"));
+        navBar.btnMap.addActionListener(e -> switchPanel("BuyerMap"));
+        navBar.btnOrders.addActionListener(e -> System.out.println("Already on Orders Panel"));
+        navBar.btnProfile.addActionListener(e -> switchPanel("BuyerProfile"));
         
         JButton btnActiveOrders = new JButton("Active Orders");
         btnActiveOrders.setBounds(180, 86, 95, 21);
@@ -89,5 +97,13 @@ public class BuyerOrderPanel extends JPanel {
             completedOrdersPanel.setVisible(true);
             activeOrdersPanel.setVisible(false);
         });
+    }
+    
+    private void switchPanel(String panelName) {
+        if (contentPane.getLayout() instanceof CardLayout) {
+            ((CardLayout) contentPane.getLayout()).show(contentPane, panelName);
+        } else {
+            System.err.println("Error: contentPane is not using CardLayout!");
+        }
     }
 }

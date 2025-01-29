@@ -1,22 +1,9 @@
-import java.awt.EventQueue;
-import java.awt.CardLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.swing.*;
 
-import buyer.BuyerDashboardPanel;
-import buyer.BuyerNavigationBar;
-import buyer.BuyerOrderPanel;
-import buyer.BuyerSignInPanel;
-import buyer.BuyerSignupPanel;
-import buyer.BuyerStartupPanel;
-import misc.ProductDetails;
-import seller.SellerDashboardPanel;
-import seller.SellerProductListing;
-import seller.SellerProductReviews;
-import seller.SellerSignInPanel;
-import seller.SellerSignupPanel;
-import seller.SellerStartupPanel;
+import buyer.*;
+import misc.*;
+import seller.*;
 
 public class PolymartMain extends JFrame {
 
@@ -63,12 +50,16 @@ public class PolymartMain extends JFrame {
         BuyerSignInPanel buyerSignInPanel = new BuyerSignInPanel(contentPane);
         BuyerDashboardPanel buyerDashboardPanel = new BuyerDashboardPanel(contentPane);
         BuyerOrderPanel	buyerOrderPanel = new BuyerOrderPanel(contentPane);
+        BuyerMap buyerMap = new BuyerMap(contentPane);
+        BuyerProfile buyerProfile = new BuyerProfile(contentPane);
 
         contentPane.add(buyerStartupPanel, "BuyerStartupPanel");
         contentPane.add(buyerSignupPanel, "BuyerSignupPanel");
         contentPane.add(buyerSignInPanel, "BuyerSignInPanel");
         contentPane.add(buyerDashboardPanel, "BuyerDashboardPanel");
         contentPane.add(buyerOrderPanel, "BuyerOrderPanel");
+        contentPane.add(buyerMap, "BuyerMap");
+        contentPane.add(buyerProfile, "BuyerProfile");
 
         // Seller panels
         SellerStartupPanel sellerStartupPanel = new SellerStartupPanel(contentPane);
@@ -77,7 +68,7 @@ public class PolymartMain extends JFrame {
         SellerDashboardPanel sellerDashboardPanel = new SellerDashboardPanel(contentPane);
         SellerProductListing sellerProductListing = new SellerProductListing(contentPane);
         ProductDetails productDetails = new ProductDetails(contentPane);
-        SellerProductReviews sellerProductReviews = new SellerProductReviews(contentPane);
+        SellerOrderPanel sellerOrderPanel = new SellerOrderPanel(contentPane);
 
         contentPane.add(sellerStartupPanel, "SellerStartupPanel");
         contentPane.add(sellerSignupPanel, "SellerSignupPanel");
@@ -85,7 +76,7 @@ public class PolymartMain extends JFrame {
         contentPane.add(sellerDashboardPanel, "SellerDashboardPanel");
         contentPane.add(sellerProductListing, "SellerProductListing");
         contentPane.add(productDetails, "ProductDetails");
-        contentPane.add(sellerProductReviews, "SellerProductReviews");
+        contentPane.add(sellerOrderPanel, "SellerOrderPanel");
 
         // Navigation bar
         BuyerNavigationBar buyerNavigationBar = new BuyerNavigationBar(contentPane);

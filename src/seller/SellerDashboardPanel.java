@@ -22,25 +22,23 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
 		this.contentPane = contentPane;
 
 		setBackground(Color.WHITE);
-        setSize(414, 660);
-        setLayout(null);
+                setBounds(100, 100, 414, 660);
         
         // Icon + title
         ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_seller.icon.png"));
         Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
+        setLayout(null);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
         startupImage.setBounds(16, 24, 150, 47);
         add(startupImage);
         
         JPanel pnlHeader = new JPanel();
+        pnlHeader.setBounds(20, 132, 384, 24);
         pnlHeader.setOpaque(true);
         pnlHeader.setBackground(Color.WHITE);
         pnlHeader.setLayout(new BorderLayout());
-        pnlHeader.setBounds(16, 111, 376,24);
-  
         
         JLabel lblMyProduct = new JLabel("My Products");
-
         lblMyProduct.setFont(new Font("Montserrat", Font.BOLD, 19));
         
         btnAddProduct = new RoundedButton("Add a product", 10);
@@ -58,18 +56,15 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         
        
         // Search Bar
+        SearchBar searchBar = new SearchBar();
+        searchBar.setBounds(61, 86, 291, 24);
+        searchBar.setupSearchPlaceholder("ang tamad tamad mo mag-scroll talaga naman...");
+        add(searchBar);
+        searchBar.setLayout(new BoxLayout(searchBar, BoxLayout.X_AXIS));
         
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setBounds(16, 162, 388, 417);
-        add(scrollPane);
-
-      
-//        JPanel lblTitleBar = new JPanel();
-//        lblTitleBar.setLayout(new GridLayout(1,4,10,0));
-//        lblTitleBar.setBackground(Color.WHITE);
-//        lblTitleBar.setBounds(16,138,370,24);
+        scrollPane.setBounds(22, 162, 382, 418);
+        scrollPane.setOpaque(false);
         
         lblItemName = new JLabel("Item Name");
         lblItemName.setFont(new Font("Montserrat", Font.BOLD, 12));
@@ -121,10 +116,23 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         
         
         SellerNavigationBar navBar = new SellerNavigationBar(scrollContentPanel);
-        navBar.setBounds(0,610, 414,50);
+        navBar.setBounds(0, 611, 416, 52);
         add(navBar);
         
+        navBar.btnHome.addActionListener(e -> System.out.println("Already on Dashboard Panel"));
+        navBar.btnMap.addActionListener(e -> switchPanel("SellerMap"));
+        navBar.btnOrders.addActionListener(e -> switchPanel("SellerOrderPanel"));
+        navBar.btnProfile.addActionListener(e -> switchPanel("SellerProfile"));
+        
 	}
+	
+	private void switchPanel(String panelName) {
+        if (contentPane.getLayout() instanceof CardLayout) {
+            ((CardLayout) contentPane.getLayout()).show(contentPane, panelName);
+        } else {
+            System.err.println("Error: contentPane is not using CardLayout!");
+        }
+    }
 	
 	@Override
     public void actionPerformed(ActionEvent actEvent) {
@@ -135,7 +143,8 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "SellerProductListing");
     	} 
-    
+    	
+    	
     }
 	
 	private void showReview() {
