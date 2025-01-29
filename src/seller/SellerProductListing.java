@@ -16,6 +16,7 @@ import com.toedter.calendar.JDateChooser;
 
 import frames.CustomDialog;
 import databases.ProductDatabase;
+import databases.UserSession;
 import misc.RoundedButton;
 
 public class SellerProductListing extends JPanel implements ActionListener{
@@ -52,8 +53,8 @@ public class SellerProductListing extends JPanel implements ActionListener{
         setBounds(100, 100, 414, 660);
         setLayout(null);
         
-//        productDatabase = new ProductDatabase();
-//        productDatabase.createProductsTable();
+        productDatabase = new ProductDatabase();
+        productDatabase.createProductsTable();
 		
         ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_seller.icon.png"));
         Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
@@ -424,6 +425,7 @@ public class SellerProductListing extends JPanel implements ActionListener{
         		JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 new CustomDialog(parentFrame, "PAKIFILLUP LAHAT BEH", "baks! may kulang ka, make sure na may meron ka sa lahat", "ok");
         	} else {
+                saveProductToDatabase();
         		JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 new CustomDialog(parentFrame, "Posting success", "ayarn! pasok ka na sa banga sis, papaldo ka na", "Proceed");
         	}
@@ -460,6 +462,23 @@ public class SellerProductListing extends JPanel implements ActionListener{
                 }
             }
         });
+    }
+    
+    private void setLabelImage(JLabel label, File file) {
+        ImageIcon originalIcon = new ImageIcon(file.getAbsolutePath());
+        Image scaledImage = originalIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        label.setIcon(new ImageIcon(scaledImage));
+
+        // Store the selected file in the corresponding variable
+        if (label == lblAddImage1) {
+            imgFile1 = file;
+        } else if (label == lblAddImage2) {
+            imgFile2 = file;
+        } else if (label == lblAddImage3) {
+            imgFile3 = file;
+        } else if (label == lblAddImage4) {
+            imgFile4 = file;
+        }
     }
     
     private void setupTextPlaceholder(JTextField textField, String placeholder) {
@@ -505,26 +524,28 @@ public class SellerProductListing extends JPanel implements ActionListener{
     	textArea.setForeground(Color.GRAY);
     }
     
-    public void addProduct(String sellerId, String productName, String productDescription, double price, String productStatus) {
-        	
-    }    
-    
-    private void setLabelImage(JLabel label, File selectedFile) {
-        ImageIcon originalIcon = new ImageIcon(selectedFile.getAbsolutePath());
-        Image scaledImage = originalIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-        label.setIcon(new ImageIcon(scaledImage));
+    private void saveProductToDatabase() {
+        String productName = productNameField.getText();
+        String productDesc = productDescArea.getText();
+        double dblPrice = Double.parseDouble(priceField.getText().replace("P", "")); // Remove "P" and parse as double
 
-        // Store the selected file in the corresponding variable
-        if (label == lblAddImage1) {
-            imgFile1 = selectedFile;
-        } else if (label == lblAddImage2) {
-            imgFile2 = selectedFile;
-        } else if (label == lblAddImage3) {
-            imgFile3 = selectedFile;
-        } else if (label == lblAddImage4) {
-            imgFile4 = selectedFile;
+        // Get the logged-in seller's username
+        String currentSellerUsername = UserSession.getLoggedInUsername();
+        
+        // Get the seller's hash based on the logged-in username
+        String sellerHash = productDatabase.getSellerHashByUsername(currentSellerUsername); 
+
+        // Check if sellerHash is retrieved successfully
+        if (sellerHash != null) {
+            // Save the product to the database using the seller's hash
+            productDatabase.addProduct(sellerHash, productName, productDesc, dblPrice, "In Stock"); 
+        } else {
+            // Handle the case where the sellerHash could not be found
+        	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            new CustomDialog(parentFrame, "di ko mahanap seller baks", "may maling nangyari OMG!", "awch");        
         }
     }
+
     
     private boolean validatePost() {
         StringBuilder strLocations = new StringBuilder();

@@ -399,7 +399,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
                  new CustomDialog(parentFrame, "check the label ateh!", "ano nhak?! aus ausin mo naman pagdedesisyon mo! i-check mo muna ang Terms and Conditions!", "sorry po...");
                  
                 CardLayout clLayout = (CardLayout) panelContent.getLayout();
-                clLayout.show(panelContent, "BuyerTermsConditionsPanel");
+                clLayout.show(panelContent, "TermsConditionsPanel");
             } else {
             	saveSellerDetails(txtFieldUsername.getText().trim(), txtFieldFirstName.getText().trim(), txtFieldLastName.getText().trim(),
                         txtFieldEmailOrPhone.getText().trim(), new String(pwdFieldPassword.getPassword()));

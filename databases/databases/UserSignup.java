@@ -72,7 +72,7 @@ public class UserSignup {
         try (PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
             // Generate folder name
             String folderName = generateFolderName(folderPrefix, email);
-
+            
             // Create 'usersFolders' directory if it doesn't exist
             File usersFoldersDir = new File("usersFolders");
             if (!usersFoldersDir.exists()) {
