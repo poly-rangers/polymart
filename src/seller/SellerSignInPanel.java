@@ -76,7 +76,9 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
         signInPanelLayout.putConstraint(SpringLayout.NORTH, showPasswordCheckBox, 6, SpringLayout.SOUTH, passwordField);
         signInPanelLayout.putConstraint(SpringLayout.WEST, showPasswordCheckBox, 58, SpringLayout.WEST, this);
         showPasswordCheckBox.setBackground(Color.WHITE);
-        showPasswordCheckBox.setFont(new Font("Montserrat", Font.BOLD, 12));
+        showPasswordCheckBox.setFont(new Font("Montserrat", Font.PLAIN, 12));
+        showPasswordCheckBox.setFocusable(false);
+        showPasswordCheckBox.setFocusPainted(false);
         showPasswordCheckBox.addActionListener(this);
         add(showPasswordCheckBox);
         
@@ -100,9 +102,12 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
         newToPolymartLabel.setFont(new Font("Montserrat SemiBold", Font.BOLD, 12));
         add(newToPolymartLabel);
         
-        signUpButton = new JButton("Sign up here");
+        signUpButton = new JButton("<html><u>Sign up here</u></html>");
         signUpButton.setOpaque(false);
         signUpButton.setFocusable(false);
+        signUpButton.setFocusPainted(false);
+        signUpButton.setBorderPainted(false);
+        signUpButton.setContentAreaFilled(false);
         signInPanelLayout.putConstraint(SpringLayout.NORTH, signUpButton, -1, SpringLayout.NORTH, newToPolymartLabel);
         signInPanelLayout.putConstraint(SpringLayout.WEST, signUpButton, 6, SpringLayout.EAST, newToPolymartLabel);
         signUpButton.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(128, 0, 0)));
@@ -227,7 +232,7 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
                 }
             }
         });
-        passwordField.setForeground(Color.GRAY);
+        passwordField.setForeground(new Color(192, 192, 192));
         passwordField.setEchoChar((char) 0);
     }
     

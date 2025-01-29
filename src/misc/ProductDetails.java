@@ -233,6 +233,10 @@ public class ProductDetails extends JPanel implements ActionListener{
         scrollContentPanel.setBorder(null);        
         scrollPane.setViewportView(scrollContentPanel);
         
+        SellerNavigationBar navBar = new SellerNavigationBar(scrollContentPanel);
+        navBar.setBounds(0,611, 414,50);
+        add(navBar);
+        
     }
 	@Override
 	public void actionPerformed(ActionEvent actEvent) {

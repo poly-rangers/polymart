@@ -16,95 +16,81 @@ public class SellerStartupPanel extends JPanel implements ActionListener {
         this.contentPane = contentPane;
 
         setBackground(Color.WHITE);
-        setBounds(100, 100, 414, 660);
-        SpringLayout pnlSellerStartup = new SpringLayout();
-        setLayout(pnlSellerStartup);
+        setSize(414, 660);
+        setLayout(null);
 
         JLabel lblStartupHeader1 = new JLabel("WELCOME TO");
-        pnlSellerStartup.putConstraint(SpringLayout.WEST, lblStartupHeader1, 10, SpringLayout.WEST, this);
-        pnlSellerStartup.putConstraint(SpringLayout.SOUTH, lblStartupHeader1, -328, SpringLayout.SOUTH, this);
-        pnlSellerStartup.putConstraint(SpringLayout.EAST, lblStartupHeader1, -5, SpringLayout.EAST, this);
+        lblStartupHeader1.setBounds(0, 282, 414, 30);
         lblStartupHeader1.setHorizontalAlignment(SwingConstants.CENTER);
-        lblStartupHeader1.setForeground(new Color(102, 0, 0));
+        lblStartupHeader1.setForeground(new Color(115, 12, 12));
         lblStartupHeader1.setFont(new Font("Montserrat", Font.PLAIN, 24));
         add(lblStartupHeader1);
 
         JLabel lblStartupHeader2 = new JLabel("POLYMART,");
-        pnlSellerStartup.putConstraint(SpringLayout.WEST, lblStartupHeader2, 10, SpringLayout.WEST, this);
-        pnlSellerStartup.putConstraint(SpringLayout.EAST, lblStartupHeader2, -5, SpringLayout.EAST, this);
-        lblStartupHeader2.setForeground(new Color(102, 0, 0));
+        lblStartupHeader2.setBounds(0, 310, 414, 50);
+        lblStartupHeader2.setForeground(new Color(115, 12, 12));
         lblStartupHeader2.setFont(new Font("Montserrat", Font.BOLD, 48));
         lblStartupHeader2.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblStartupHeader2);
 
         JLabel lblStartupHeader3 = new JLabel("baks!");
-        pnlSellerStartup.putConstraint(SpringLayout.NORTH, lblStartupHeader3, 382, SpringLayout.NORTH, this);
-        pnlSellerStartup.putConstraint(SpringLayout.WEST, lblStartupHeader3, 20, SpringLayout.WEST, this);
-        pnlSellerStartup.putConstraint(SpringLayout.EAST, lblStartupHeader3, -5, SpringLayout.EAST, this);
-        pnlSellerStartup.putConstraint(SpringLayout.SOUTH, lblStartupHeader2, 0, SpringLayout.NORTH, lblStartupHeader3);
-        lblStartupHeader3.setHorizontalAlignment(SwingConstants.CENTER);
-        lblStartupHeader3.setForeground(new Color(102, 0, 0));
+        lblStartupHeader3.setBounds(0, 356, 414, 40);
+        lblStartupHeader3.setForeground(new Color(115, 12, 12));
         lblStartupHeader3.setFont(new Font("Montserrat", Font.ITALIC, 32));
+        lblStartupHeader3.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblStartupHeader3);
 
-        JLabel lblStartupSubheader1 = new JLabel("ready ka na ba yumaman, te?");
-        pnlSellerStartup.putConstraint(SpringLayout.WEST, lblStartupSubheader1, 10, SpringLayout.WEST, this);
-        pnlSellerStartup.putConstraint(SpringLayout.SOUTH, lblStartupSubheader1, -189, SpringLayout.SOUTH, this);
-        pnlSellerStartup.putConstraint(SpringLayout.EAST, lblStartupSubheader1, -5, SpringLayout.EAST, this);
-        pnlSellerStartup.putConstraint(SpringLayout.SOUTH, lblStartupHeader3, -32, SpringLayout.NORTH, lblStartupSubheader1);
+        JLabel lblStartupSubheader1 = new JLabel("ready ka na ba magwaldas, te?");
+        lblStartupSubheader1.setBounds(0, 420, 414, 30);
         lblStartupSubheader1.setHorizontalAlignment(SwingConstants.CENTER);
         lblStartupSubheader1.setForeground(Color.BLACK);
-        lblStartupSubheader1.setFont(new Font("Montserrat", Font.BOLD, 18));
+        lblStartupSubheader1.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 18));
         add(lblStartupSubheader1);
 
         JLabel lblStartupSubheader2 = new JLabel("mag-sign up ka muna hahah");
-        pnlSellerStartup.putConstraint(SpringLayout.NORTH, lblStartupSubheader2, 0, SpringLayout.SOUTH, lblStartupSubheader1);
-        pnlSellerStartup.putConstraint(SpringLayout.WEST, lblStartupSubheader2, 10, SpringLayout.WEST, this);
-        pnlSellerStartup.putConstraint(SpringLayout.EAST, lblStartupSubheader2, -5, SpringLayout.EAST, this);
+        lblStartupSubheader2.setBounds(0, 444, 414, 30);
         lblStartupSubheader2.setHorizontalAlignment(SwingConstants.CENTER);
         lblStartupSubheader2.setForeground(Color.BLACK);
         lblStartupSubheader2.setFont(new Font("Montserrat", Font.BOLD, 18));
         add(lblStartupSubheader2);
 
+        // Start button
         btnStart = new RoundedButton("gewwww, deserve ko 'to!", 45);
-        pnlSellerStartup.putConstraint(SpringLayout.NORTH, btnStart, 19, SpringLayout.SOUTH, lblStartupSubheader2);
-        pnlSellerStartup.putConstraint(SpringLayout.WEST, btnStart, 69, SpringLayout.WEST, this);
-        pnlSellerStartup.putConstraint(SpringLayout.SOUTH, btnStart, 61, SpringLayout.SOUTH, lblStartupSubheader2);
-        pnlSellerStartup.putConstraint(SpringLayout.EAST, btnStart, -66, SpringLayout.EAST, this);
+        btnStart.setBounds(77, 500, 260, 50);
         btnStart.setForeground(Color.WHITE);
-        btnStart.setBackground(new Color(102, 0, 0));
+        btnStart.setBackground(new Color(115, 12, 12));
         btnStart.setFont(new Font("Montserrat", Font.BOLD, 16));
         btnStart.setBorderPainted(false);
         btnStart.setFocusPainted(false);
         btnStart.addActionListener(this);
         add(btnStart);
 
+        // Image
         ImageIcon imgIconOriginalImage = new ImageIcon(this.getClass().getResource("/polypup_front.png"));
-        Image imgScaled = imgIconOriginalImage.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
-        JLabel imgStartup = new JLabel(new ImageIcon(imgScaled));
-        pnlSellerStartup.putConstraint(SpringLayout.NORTH, imgStartup, 69, SpringLayout.NORTH, this);
-        pnlSellerStartup.putConstraint(SpringLayout.WEST, imgStartup, 73, SpringLayout.WEST, this);
-        add(imgStartup);
-        
-        // Mali napindot mo? label
+        Image imgScaled = imgIconOriginalImage.getImage().getScaledInstance(260, 260, Image.SCALE_SMOOTH);
+        JLabel lblStartupImage = new JLabel(new ImageIcon(imgScaled));
+        lblStartupImage.setBounds(77, 30, 260, 260);
+        add(lblStartupImage);
+
+        // Go back label and button
         JLabel lblStartupSubheader3 = new JLabel("oh mali napindot mo? hays");
-        pnlSellerStartup.putConstraint(SpringLayout.EAST, lblStartupSubheader3, -133, SpringLayout.EAST, this);
-        lblStartupSubheader3.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 10));
+        lblStartupSubheader3.setBounds(130, 561, 150, 20);
+        lblStartupSubheader3.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
+        lblStartupSubheader3.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblStartupSubheader3);
-    	
-    	// Sign in here button
-        btnGoBack = new JButton("Go Back");
-        pnlSellerStartup.putConstraint(SpringLayout.NORTH, btnGoBack, 576, SpringLayout.NORTH, this);
-        pnlSellerStartup.putConstraint(SpringLayout.SOUTH, lblStartupSubheader3, -2, SpringLayout.NORTH, btnGoBack);
-        pnlSellerStartup.putConstraint(SpringLayout.EAST, btnGoBack, -183, SpringLayout.EAST, this);
+
+        btnGoBack = new JButton("<html><u>Go Back</u></html>");
+        btnGoBack.setBounds(164, 580, 86, 20);
         btnGoBack.setBackground(Color.WHITE);
-    	btnGoBack.setForeground(new Color(0x730C0C));
-    	btnGoBack.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
-    	btnGoBack.setFocusable(false);
-    	btnGoBack.setOpaque(false);
-    	btnGoBack.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
-    	btnGoBack.addActionListener(this);
-    	add(btnGoBack);
+        btnGoBack.setForeground(new Color(0x730C0C));
+        btnGoBack.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
+        btnGoBack.setFocusable(false);
+        btnGoBack.setFocusPainted(false);
+        btnGoBack.setBorderPainted(false);
+        btnGoBack.setOpaque(false);
+        btnGoBack.addActionListener(this);
+        btnGoBack.setContentAreaFilled(false);
+        add(btnGoBack);
     }
 
     @Override

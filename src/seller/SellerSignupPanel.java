@@ -62,14 +62,14 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
         add(startupImage);
         
 
-        // Sign-up label
+     // Sign-up label
         JLabel labelSignUp = new JLabel("Sign Up");
         panelLayout.putConstraint(SpringLayout.EAST, startupImage, 0, SpringLayout.EAST, labelSignUp);
         panelLayout.putConstraint(SpringLayout.NORTH, labelSignUp, 119, SpringLayout.NORTH, this);
         panelLayout.putConstraint(SpringLayout.WEST, labelSignUp, 35, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.EAST, labelSignUp, 166, SpringLayout.WEST, this);
         labelSignUp.setForeground(Color.BLACK);
-        labelSignUp.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 24));
+        labelSignUp.setFont(new Font("Montserrat SemiBold", Font.BOLD, 24));
         labelSignUp.setHorizontalAlignment(SwingConstants.CENTER);
         add(labelSignUp);
 
@@ -84,6 +84,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
         
         // First name
         txtFieldFirstName = new JTextField("First Name");
+        txtFieldFirstName.setForeground(new Color(192, 192, 192));
         panelLayout.putConstraint(SpringLayout.WEST, txtFieldUsername, 0, SpringLayout.WEST, txtFieldFirstName);
         panelLayout.putConstraint(SpringLayout.SOUTH, txtFieldUsername, -12, SpringLayout.NORTH, txtFieldFirstName);
         panelLayout.putConstraint(SpringLayout.EAST, txtFieldUsername, 0, SpringLayout.EAST, txtFieldFirstName);
@@ -98,6 +99,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
 
         // Last name
         txtFieldLastName = new JTextField("Last Name");
+        txtFieldLastName.setForeground(new Color(192, 192, 192));
         setupTextFieldPlaceholder(txtFieldLastName, "Last Name");
         panelLayout.putConstraint(SpringLayout.SOUTH, txtFieldFirstName, -16, SpringLayout.NORTH, txtFieldLastName);
         panelLayout.putConstraint(SpringLayout.NORTH, txtFieldLastName, 242, SpringLayout.NORTH, this);
@@ -110,6 +112,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
 
         // Email or phone
         txtFieldEmailOrPhone = new JTextField("Email");
+        txtFieldEmailOrPhone.setForeground(new Color(192, 192, 192));
         setupTextFieldPlaceholder(txtFieldEmailOrPhone, "Email");
         panelLayout.putConstraint(SpringLayout.NORTH, txtFieldEmailOrPhone, 275, SpringLayout.NORTH, this);
         panelLayout.putConstraint(SpringLayout.SOUTH, txtFieldEmailOrPhone, -366, SpringLayout.SOUTH, this);
@@ -190,15 +193,19 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
 
 
         // Question link
-        btnQuestionLink = new JButton("Why do I need this?");
+        btnQuestionLink = new JButton("<html><u>Why do I need this?</u></html>");
+        btnQuestionLink.setForeground(new Color(128, 128, 128));
         panelLayout.putConstraint(SpringLayout.NORTH, btnQuestionLink, 6, SpringLayout.SOUTH, labelChooseFile);
-        panelLayout.putConstraint(SpringLayout.WEST, btnQuestionLink, 151, SpringLayout.WEST, this);
-        btnQuestionLink.setForeground(UIManager.getColor("Button.darkShadow"));
+        panelLayout.putConstraint(SpringLayout.WEST, btnQuestionLink, 153, SpringLayout.WEST, this);
+        panelLayout.putConstraint(SpringLayout.EAST, btnQuestionLink, -143, SpringLayout.EAST, this);
+//        btnQuestionLink.setForeground(UIManager.getColor("Button.darkShadow"));
         btnQuestionLink.setFont(new Font("Montserrat Medium", Font.ITALIC, 10));
         btnQuestionLink.setFocusPainted(false);
         btnQuestionLink.setFocusable(false);
+        btnQuestionLink.setBorderPainted(false);
         btnQuestionLink.setOpaque(false);
-        btnQuestionLink.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
+        btnQuestionLink.setBackground(Color.WHITE);
+        btnQuestionLink.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, Color.LIGHT_GRAY));
         btnQuestionLink.addActionListener(this);
         add(btnQuestionLink);
 
@@ -206,22 +213,25 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
         chckbxTermsConditions = new JCheckBox("By signing up you agree to our");
         panelLayout.putConstraint(SpringLayout.NORTH, chckbxTermsConditions, 18, SpringLayout.SOUTH, btnQuestionLink);
         panelLayout.putConstraint(SpringLayout.WEST, chckbxTermsConditions, 21, SpringLayout.WEST, labelUploadCOR);
-        panelLayout.putConstraint(SpringLayout.SOUTH, chckbxTermsConditions, -155, SpringLayout.SOUTH, this);
         panelLayout.putConstraint(SpringLayout.EAST, chckbxTermsConditions, 0, SpringLayout.EAST, labelChooseFile);
         chckbxTermsConditions.setBackground(Color.WHITE);
+        chckbxTermsConditions.setFocusable(false);
+        chckbxTermsConditions.setFocusPainted(false);
         chckbxTermsConditions.setHorizontalAlignment(SwingConstants.LEFT);
         chckbxTermsConditions.setFont(new Font("Montserrat Medium", Font.PLAIN, 10));
         add(chckbxTermsConditions);
         
         // Terms and Conditions button
-    	btnTermsConditions = new JButton("Terms & Conditions");
+    	btnTermsConditions = new JButton("<html><u>Terms & Conditions</u></html>");
+    	panelLayout.putConstraint(SpringLayout.SOUTH, chckbxTermsConditions, -1, SpringLayout.NORTH, btnTermsConditions);
+    	panelLayout.putConstraint(SpringLayout.NORTH, btnTermsConditions, 506, SpringLayout.NORTH, this);
     	btnTermsConditions.setBackground(Color.WHITE);
-    	panelLayout.putConstraint(SpringLayout.NORTH, btnTermsConditions, 1, SpringLayout.SOUTH, chckbxTermsConditions);
     	panelLayout.putConstraint(SpringLayout.WEST, btnTermsConditions, 103, SpringLayout.WEST, this);
-    	btnTermsConditions.setForeground(new Color(0x730C0C));
+    	btnTermsConditions.setForeground(new Color(115,12,12));
     	btnTermsConditions.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
     	btnTermsConditions.setFocusable(false);
     	btnTermsConditions.setOpaque(false);
+    	btnTermsConditions.setBorderPainted(false);
     	btnTermsConditions.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
     	btnTermsConditions.addActionListener(this);
     	add(btnTermsConditions);
@@ -234,7 +244,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
     	add(labelAnd);
         
         // Terms and Conditions button
-    	btnPrivacyPolicy = new JButton("Privacy Policy");
+    	btnPrivacyPolicy = new JButton("<html><u>Privacy Policy</u></html>");
     	btnPrivacyPolicy.setBackground(Color.WHITE);
     	panelLayout.putConstraint(SpringLayout.NORTH, btnPrivacyPolicy, 0, SpringLayout.NORTH, btnTermsConditions);
     	panelLayout.putConstraint(SpringLayout.WEST, btnPrivacyPolicy, 6, SpringLayout.EAST, labelAnd);
@@ -242,6 +252,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
     	btnPrivacyPolicy.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
     	btnPrivacyPolicy.setFocusable(false);
     	btnPrivacyPolicy.setOpaque(false);
+    	btnPrivacyPolicy.setBorderPainted(false);
     	btnPrivacyPolicy.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
     	btnPrivacyPolicy.addActionListener(this);
     	add(btnPrivacyPolicy);
@@ -250,8 +261,9 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
         btnSignUp = new RoundedButton("Sign Up", 45);
         panelLayout.putConstraint(SpringLayout.NORTH, btnSignUp, 22, SpringLayout.SOUTH, btnTermsConditions);
         panelLayout.putConstraint(SpringLayout.WEST, btnSignUp, 10, SpringLayout.WEST, labelUploadCOR);
+        panelLayout.putConstraint(SpringLayout.SOUTH, btnSignUp, -73, SpringLayout.SOUTH, this);
         panelLayout.putConstraint(SpringLayout.EAST, btnSignUp, 0, SpringLayout.EAST, labelUploadCOR);
-        btnSignUp.setBackground(new Color(128, 0, 0));
+        btnSignUp.setBackground(new Color(115, 12, 12));
         btnSignUp.setFont(new Font("Montserrat ExtraBold", Font.BOLD, 16));
         btnSignUp.setForeground(Color.WHITE);
         btnSignUp.setBorderPainted(false);
@@ -262,20 +274,22 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
 
         // Already have account? label
         JLabel labelHaveAccount = new JLabel("Already have an account?");
-        panelLayout.putConstraint(SpringLayout.NORTH, labelHaveAccount, 593, SpringLayout.NORTH, this);
-        panelLayout.putConstraint(SpringLayout.SOUTH, btnSignUp, -6, SpringLayout.NORTH, labelHaveAccount);
-        panelLayout.putConstraint(SpringLayout.WEST, labelHaveAccount, 134, SpringLayout.WEST, this);
+        panelLayout.putConstraint(SpringLayout.NORTH, labelHaveAccount, 6, SpringLayout.SOUTH, btnSignUp);
+        panelLayout.putConstraint(SpringLayout.WEST, labelHaveAccount, 145, SpringLayout.WEST, this);
+        panelLayout.putConstraint(SpringLayout.EAST, labelHaveAccount, -119, SpringLayout.EAST, this);
         labelHaveAccount.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
         add(labelHaveAccount);
     	
     	// Sign in here button
-    	btnSignIn = new JButton("Sign in here");
+    	btnSignIn = new JButton("<html><u>Sign in here</u></html>");
+    	panelLayout.putConstraint(SpringLayout.NORTH, btnSignIn, 6, SpringLayout.SOUTH, labelHaveAccount);
+    	panelLayout.putConstraint(SpringLayout.WEST, btnSignIn, 169, SpringLayout.WEST, this);
+    	panelLayout.putConstraint(SpringLayout.EAST, btnSignIn, -166, SpringLayout.EAST, this);
     	btnSignIn.setBackground(Color.WHITE);
-    	panelLayout.putConstraint(SpringLayout.NORTH, btnSignIn, 2, SpringLayout.SOUTH, labelHaveAccount);
-    	panelLayout.putConstraint(SpringLayout.WEST, btnSignIn, 173, SpringLayout.WEST, this);
     	btnSignIn.setForeground(new Color(0x730C0C));
     	btnSignIn.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
     	btnSignIn.setFocusable(false);
+    	btnSignIn.setBorderPainted(false);
     	btnSignIn.setOpaque(false);
     	btnSignIn.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
     	btnSignIn.addActionListener(this);
@@ -301,7 +315,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
                 }
             }
         });
-        textField.setForeground(Color.GRAY);
+        textField.setForeground(new Color(192, 192, 192));
     }
 
     private void setupPasswordFieldPlaceholder(JPasswordField passwordField) {
@@ -324,7 +338,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
                 }
             }
         });
-        passwordField.setForeground(Color.GRAY);
+        passwordField.setForeground(new Color(192, 192, 192));
         passwordField.setEchoChar((char) 0);
     }
 
