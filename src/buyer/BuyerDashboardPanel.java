@@ -11,7 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
-public class BuyerDashboardPanel extends JPanel implements ActionListener {
+public class BuyerDashboardPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -77,12 +77,6 @@ public class BuyerDashboardPanel extends JPanel implements ActionListener {
 
         add(scrollPane);
         
-        btnReceiptTest = new JButton("Receipt");
-        panelLayout.putConstraint(SpringLayout.WEST, btnReceiptTest, 84, SpringLayout.EAST, startupImage);
-        panelLayout.putConstraint(SpringLayout.SOUTH, btnReceiptTest, -27, SpringLayout.NORTH, searchBar);
-        btnReceiptTest.addActionListener(this);
-        add(btnReceiptTest);
-        
         // Create NavigationBar and position it at the bottom
         BuyerNavigationBar navBar = new BuyerNavigationBar(scrollContentPanel);
         panelLayout.putConstraint(SpringLayout.SOUTH, scrollPane, -30, SpringLayout.NORTH, navBar);
@@ -91,14 +85,18 @@ public class BuyerDashboardPanel extends JPanel implements ActionListener {
         panelLayout.putConstraint(SpringLayout.SOUTH, navBar, 0, SpringLayout.SOUTH, this);
         panelLayout.putConstraint(SpringLayout.EAST, navBar, 414, SpringLayout.WEST, this);
         add(navBar);
+        
+        navBar.btnHome.addActionListener(e -> System.out.println("Already on Dashboard Panel"));
+        navBar.btnMap.addActionListener(e -> switchPanel("BuyerMap"));
+        navBar.btnOrders.addActionListener(e -> switchPanel("BuyerOrderPanel"));
+        navBar.btnProfile.addActionListener(e -> switchPanel("BuyerProfile"));
     }
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == btnReceiptTest) {
-			CardLayout clLayout = (CardLayout) contentPane.getLayout();
-			clLayout.show(contentPane, "BuyerOrderPanel");
-		}
-		
-	}
+    
+    private void switchPanel(String panelName) {
+        if (contentPane.getLayout() instanceof CardLayout) {
+            ((CardLayout) contentPane.getLayout()).show(contentPane, panelName);
+        } else {
+            System.err.println("Error: contentPane is not using CardLayout!");
+        }
+    }
 }
