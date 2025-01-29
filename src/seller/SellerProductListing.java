@@ -64,9 +64,10 @@ public class SellerProductListing extends JPanel implements ActionListener{
         add(pnlHeader);
         
         JScrollPane scrollPane = new JScrollPane();
+        scrollPane.getVerticalScrollBar().setUI(new CustomScrollBar());
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setBounds(20, 123, 376, 454);
+        scrollPane.setBounds(20, 123, 376, 499);
         add(scrollPane);
 
         JPanel scrollContentPanel = new JPanel();

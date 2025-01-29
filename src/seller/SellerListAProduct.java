@@ -1,5 +1,6 @@
 package seller;
 
+import misc.CustomScrollBar;
 import misc.SearchBar;
 import java.awt.*;
 import javax.swing.*;
@@ -35,11 +36,6 @@ public class SellerListAProduct extends JPanel {
         lblMyProduct.setFont(new Font("Montserrat", Font.BOLD, 19));
         
         JButton lblAddProduct = new JButton("Back"); //Will be changed to a chevron, temp only
-        lblAddProduct.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		// Card Layout ??? changing keme here
-        	}
-        });
         
         lblAddProduct.setFont(new Font("Montserrat", Font.ITALIC, 10));
         lblAddProduct.setFocusable(false);
@@ -70,24 +66,13 @@ public class SellerListAProduct extends JPanel {
         panelLayout.putConstraint(SpringLayout.EAST, scrollPane, -10, SpringLayout.EAST, this);
         
         JPanel scrollContentPanel = new JPanel();
-        
-        
-      
+        scrollPane.getVerticalScrollBar().setUI(new CustomScrollBar());
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setViewportView(scrollContentPanel);
        
         add(scrollPane);
         add(pnlHeader);
-        
-           
-     // Create NavigationBar and position it at the bottom
-        SellerNavigationBar navBar = new SellerNavigationBar(scrollContentPanel);
-        panelLayout.putConstraint(SpringLayout.SOUTH, scrollPane, -30, SpringLayout.NORTH, navBar);
-        panelLayout.putConstraint(SpringLayout.NORTH, navBar, -50, SpringLayout.SOUTH, this);
-        panelLayout.putConstraint(SpringLayout.WEST, navBar, 0, SpringLayout.WEST, this);
-        panelLayout.putConstraint(SpringLayout.SOUTH, navBar, 0, SpringLayout.SOUTH, this);
-        panelLayout.putConstraint(SpringLayout.EAST, navBar, 414, SpringLayout.WEST, this);
-        add(navBar);
+
         
 	}
 }

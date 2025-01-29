@@ -22,7 +22,7 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
 		this.contentPane = contentPane;
 
 		setBackground(Color.WHITE);
-                setBounds(100, 100, 414, 660);
+        setBounds(100, 100, 414, 660);
         
         // Icon + title
         ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_seller.icon.png"));
@@ -37,6 +37,7 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         pnlHeader.setOpaque(true);
         pnlHeader.setBackground(Color.WHITE);
         pnlHeader.setLayout(new BorderLayout());
+        pnlHeader.setBounds(16, 111, 376,24);
         
         JLabel lblMyProduct = new JLabel("My Products");
         lblMyProduct.setFont(new Font("Montserrat", Font.BOLD, 19));
@@ -54,10 +55,17 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         pnlHeader.add(lblMyProduct, BorderLayout.WEST);
         pnlHeader.add(btnAddProduct, BorderLayout.EAST);
         
+        // Search Bar
+        SearchBar searchBar = new SearchBar();
+        searchBar.setBounds(61, 86, 291, 24);
+        searchBar.setupSearchPlaceholder("ang tamad tamad mo mag-scroll talaga naman...");
+        add(searchBar);
+        searchBar.setLayout(new BoxLayout(searchBar, BoxLayout.X_AXIS));
+
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(22, 162, 382, 418);
         scrollPane.setOpaque(false);
-        
+       
         lblItemName = new JLabel("Item Name");
         lblItemName.setFont(new Font("Montserrat", Font.BOLD, 12));
         lblItemName.setForeground(new Color(0x730C0C));
@@ -106,7 +114,6 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         add(scrollPane);
         add(pnlHeader);
         
-        
         SellerNavigationBar navBar = new SellerNavigationBar(scrollContentPanel);
         navBar.setBounds(0, 611, 416, 52);
         add(navBar);
@@ -135,8 +142,6 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "SellerProductListing");
     	} 
-    	
-    	
     }
 	
 	private void showReview() {
