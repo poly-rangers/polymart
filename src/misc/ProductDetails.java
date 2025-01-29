@@ -16,7 +16,8 @@ public class ProductDetails extends JPanel implements ActionListener{
 	private JButton btnGoBack, btnSubmit, btnViewAll;
 	private JLabel lblProductName, lblShopName, lblDescription, lblCategory, lblMOP, lblMOPDesc, lblSocMed, lblSocials,
 	lblPrice, lblImage1, lblImage2, lblImage3, lblImage4, lblReviews, lblUsername;
-	private RoundedButton btnIn, btnRating, btnSetAMeet;
+	private RoundedButton btnRating, btnSetAMeet;
+	private StatusButton  btnIn;
 	private JTextArea reviewArea;
 	private JPanel contentPane;
 	RoundedPanel reviewPanel, roundedpanel1, roundedpanel2;
@@ -34,15 +35,10 @@ public class ProductDetails extends JPanel implements ActionListener{
         startupImage.setBounds(16, 24, 150, 47);
         add(startupImage);
         
-        SearchBar searchBar = new SearchBar();
-        searchBar.setupSearchPlaceholder("ang tamad tamad mo mag-scroll talaga naman...");
-        searchBar.setBounds(61,86,291,24);
-        add(searchBar);
-        
         JPanel pnlHeader = new JPanel();
         pnlHeader.setLayout(new BoxLayout(pnlHeader, BoxLayout.X_AXIS));
         pnlHeader.setOpaque(true);
-        pnlHeader.setBounds(20,124,376,32);
+        pnlHeader.setBounds(20,91,376,32);
         pnlHeader.setBackground(Color.WHITE);
         
         ImageIcon ogGoBackIcon = new ImageIcon(this.getClass().getResource("/arrowbackicon.png"));
@@ -61,7 +57,7 @@ public class ProductDetails extends JPanel implements ActionListener{
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setBounds(20, 162, 376, 380);
+        scrollPane.setBounds(20, 123, 376, 428);
         add(scrollPane);
 
         JPanel scrollContentPanel = new JPanel();
@@ -69,7 +65,7 @@ public class ProductDetails extends JPanel implements ActionListener{
         scrollContentPanel.setBackground(Color.WHITE);
         scrollContentPanel.setBorder(null);
         scrollContentPanel.setLayout(null);
-        scrollContentPanel.setPreferredSize(new Dimension(350, 600));
+        scrollContentPanel.setPreferredSize(new Dimension(350, 625));
         
         ImageIcon image1 = new ImageIcon(this.getClass().getResource("/imageplaceholder.png"));
         lblImage1 = new JLabel(image1);
@@ -107,7 +103,7 @@ public class ProductDetails extends JPanel implements ActionListener{
        lblDescription.setBounds(165,56,170,80);
        scrollContentPanel.add(lblDescription);
        
-       btnIn = new RoundedButton("In Stock", 10);
+       btnIn = new StatusButton("Status");
        btnIn.setBackground(new Color(115,12,12));
        btnIn.setForeground(Color.WHITE);
        btnIn.setBorder(null);
@@ -195,11 +191,14 @@ public class ProductDetails extends JPanel implements ActionListener{
        btnSubmit.setBounds(303, 12, 24, 24);
        reviewPanel.add(btnSubmit);
        
-       ReviewPanel panel1 = new ReviewPanel(20, new Color(217,217,217), "beWhoYouAre");
-       panel1.setBounds(10,345, 337,50);
+       ReviewPanel panel1 = new ReviewPanel(20, new Color(217,217,217), "beWhoYouAre", "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur");
+       panel1.setBounds(10,345, 337,80);
        
-       ReviewPanel panel2 = new ReviewPanel(20, new Color(217,217,217), "backburnerngbayan");
-       panel2.setBounds(10,400, 337,50);
+       ReviewPanel panel2 = new ReviewPanel(20, new Color(217,217,217), "backburnerngbayan","when every bite starts to taste like: hindi ko ‘yon deserve eh...");
+       panel2.setBounds(10,429, 337,64);
+       
+       ReviewPanel panel3 = new ReviewPanel(20, new Color(217,217,217), "SOLNO1DIONELAFAN","Hotshot running in mind nonstop, vertigo \nCurled plot, whiskey in a teapot, ethanol\nBurning like KELT-9b, bright heavenly body\nOnly music can define you, and it sounds like-, uh");
+       panel3.setBounds(10,497, 337,89);
               
        btnSetAMeet = new RoundedButton("Set a meet-up", 25);
        btnSetAMeet.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 16));
@@ -207,13 +206,22 @@ public class ProductDetails extends JPanel implements ActionListener{
        btnSetAMeet.setBackground(new Color(115,12,12));
        btnSetAMeet.setForeground(Color.WHITE);
        btnSetAMeet.addActionListener(this);
+       
        btnViewAll = new JButton("<html><u>View All</u></html>");
-       btnViewAll.setBounds(143,461,85,23);
+       btnViewAll.setBackground(Color.WHITE);
+       btnViewAll.setFont(new Font("Montserrat", Font.ITALIC, 10));
+       btnViewAll.setFocusable(false);
+       btnViewAll.setFocusPainted(false);
+       btnViewAll.setBorderPainted(false);
+       btnViewAll.setContentAreaFilled(false);
+       
+       btnViewAll.setBounds(139,592,85,23);
        
        
        scrollContentPanel.add(reviewPanel);
        scrollContentPanel.add(panel1);
        scrollContentPanel.add(panel2);
+       scrollContentPanel.add(panel3);
        scrollContentPanel.add(btnViewAll);
        add(btnSetAMeet);
      
