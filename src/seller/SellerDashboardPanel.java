@@ -14,7 +14,7 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JButton btnAddProduct;
-	private String[] arrLabels = {"Item Name", "Pricing", "Rating", "Review"};
+	private String[] arrLabels = {"Item Name", "Rating", "Review", "Status"};
 
 	public SellerDashboardPanel(JPanel contentPane) {
 		this.contentPane = contentPane;
@@ -81,6 +81,7 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         
         JPanel lblTitleBar = new JPanel();
         lblTitleBar.setLayout(new GridLayout(1,4,10,0));
+        lblTitleBar.setBackground(Color.WHITE);
         
         for (String tempLabel : arrLabels) {
             JLabel lblNames = new JLabel(tempLabel, SwingConstants.CENTER); // Center-align the text
@@ -88,8 +89,7 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
             lblTitleBar.add(lblNames);
         }
         
-       
-        scrollContentPanel.add(lblTitleBar);
+  
         
 
         scrollPane.setBorder(null);
