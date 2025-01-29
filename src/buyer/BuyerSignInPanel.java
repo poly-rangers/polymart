@@ -71,7 +71,9 @@ public class BuyerSignInPanel extends JPanel implements ActionListener {
         signInPanelLayout.putConstraint(SpringLayout.NORTH, showPasswordCheckBox, 6, SpringLayout.SOUTH, passwordField);
         signInPanelLayout.putConstraint(SpringLayout.WEST, showPasswordCheckBox, 58, SpringLayout.WEST, this);
         showPasswordCheckBox.setBackground(Color.WHITE);
-        showPasswordCheckBox.setFont(new Font("Montserrat", Font.BOLD, 12));
+        showPasswordCheckBox.setFont(new Font("Montserrat", Font.PLAIN, 12));
+        showPasswordCheckBox.setFocusable(false);
+        showPasswordCheckBox.setFocusPainted(false);
         showPasswordCheckBox.addActionListener(this);
         add(showPasswordCheckBox);
         
@@ -84,7 +86,7 @@ public class BuyerSignInPanel extends JPanel implements ActionListener {
         logInButton.setFont(new Font("Montserrat ExtraBold", Font.BOLD, 16));
         logInButton.setBorderPainted(false);
         logInButton.setBorder(new LineBorder(new Color(0, 0, 0)));
-        logInButton.setBackground(new Color(128, 0, 0));
+        logInButton.setBackground(new Color(115, 12, 12));
         logInButton.setForeground(new Color(255, 255, 255));
         logInButton.addActionListener(this);
         add(logInButton);
@@ -98,9 +100,12 @@ public class BuyerSignInPanel extends JPanel implements ActionListener {
         add(newToPolymartLabel);
         
         //Sign up here button
-        signUpButton = new JButton("Sign up here");
+        signUpButton = new JButton("<html><u>Sign up here</u></html>");
         signUpButton.setOpaque(false);
         signUpButton.setFocusable(false);
+        signUpButton.setFocusPainted(false);
+        signUpButton.setBorderPainted(false);
+        signUpButton.setContentAreaFilled(false);
         signInPanelLayout.putConstraint(SpringLayout.NORTH, signUpButton, -1, SpringLayout.NORTH, newToPolymartLabel);
         signInPanelLayout.putConstraint(SpringLayout.WEST, signUpButton, 6, SpringLayout.EAST, newToPolymartLabel);
         signUpButton.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(128, 0, 0)));
@@ -203,7 +208,7 @@ public class BuyerSignInPanel extends JPanel implements ActionListener {
                 }
             }
         });
-        textField.setForeground(Color.GRAY);
+        textField.setForeground(new Color(192, 192, 192));
     }
 
     private void setupPasswordFieldPlaceholder(JPasswordField passwordField) {
@@ -226,7 +231,7 @@ public class BuyerSignInPanel extends JPanel implements ActionListener {
                 }
             }
         });
-        passwordField.setForeground(Color.GRAY);
+        passwordField.setForeground(new Color(192, 192, 192));
         passwordField.setEchoChar((char) 0);
     }
     

@@ -120,7 +120,7 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         add(pnlHeader);
         
         
-        SellerNavigationBar navBar = new SellerNavigationBar();
+        SellerNavigationBar navBar = new SellerNavigationBar(scrollContentPanel);
         navBar.setBounds(0,610, 414,50);
         add(navBar);
         
