@@ -124,7 +124,6 @@ public class ActiveOrdersPanel extends JPanel {
         
         // Add rows to the table model
         for (OrderItem item : items) {
-        	System.out.println("Shop Name: " + item.shopName);
             Object[] row = { item.date, item.location, item.time, item.shopName, item.itemName, item.price };
             tableModel.addRow(row);
         }

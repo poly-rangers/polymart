@@ -24,13 +24,15 @@ public class AddProduct extends JPanel{
         setMinimumSize(new Dimension(173, 198));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(Color.WHITE);
-        setBorder(new LineBorder(new Color(255, 255, 255), 3, true));
+        setBorder(new LineBorder(new Color(211, 211, 211), 1, true));
        
 
         
         // Product picture 
         JPanel pnlPicture = new JPanel();
         pnlPicture.setBorder(new EmptyBorder(5, 10, 5, 10)); 
+        pnlPicture.setPreferredSize(new Dimension(173, 140)); // Adjust height as needed
+        pnlPicture.setMaximumSize(new Dimension(173, 140)); // Prevents unexpected expansion
         pnlPicture.setBackground(Color.WHITE);
         ImageIcon productPic = new ImageIcon(this.getClass().getResource("/pastil.png"));
         JLabel pic = new JLabel(productPic);
@@ -38,38 +40,42 @@ public class AddProduct extends JPanel{
         add(pnlPicture);
 
         // Product Information
-        JPanel pnlProductInfo = new JPanel(new BorderLayout());
+        JPanel pnlProductInfo = new JPanel();
         pnlProductInfo.setPreferredSize(new Dimension(173, 30));
         pnlProductInfo.setBorder(new EmptyBorder(0, 10, 0, 10)); 
         pnlProductInfo.setBackground(Color.WHITE);
         
         JLabel lblProductName = new JLabel(strProductName);
+        lblProductName.setBounds(21, 0, 102, 27);
         lblProductName.setFont(new Font("Montserrat", Font.BOLD, 15));
 
         JLabel lblProductPrice = new JLabel(strProductPrice);
+        lblProductPrice.setBounds(119, 0, 86, 27);
         lblProductPrice.setForeground(new Color(102, 0, 0));
         lblProductPrice.setFont(new Font("Montserrat", Font.BOLD, 15));
         
         JPanel pnlRating = new JPanel();
+        pnlRating.setBounds(10, 30, 151, 20);
         pnlRating.setBackground(Color.WHITE);
+        pnlRating.setLayout(null);
         
         JLabel lblRating = new JLabel("4.5");
-        pnlRating.setLayout(new BorderLayout());
+        lblRating.setHorizontalAlignment(JLabel.CENTER);
+        lblRating.setBounds(10, 0, 34, 20);
         lblRating.setForeground(Color.WHITE);
         lblRating.setFont(new Font("Montserrat", Font.BOLD, 10));
         lblRating.setOpaque(true);
         lblRating.setBackground(new Color(102, 0, 0));
         lblRating.setBorder(new EmptyBorder(5, 5, 5, 5));
         
-        pnlRating.add(lblRating, BorderLayout.WEST);
+        pnlRating.add(lblRating);
+        pnlProductInfo.setLayout(null);
             
-        pnlProductInfo.add(lblProductName, BorderLayout.WEST);
-        pnlProductInfo.add(lblProductPrice, BorderLayout.EAST);
-        pnlProductInfo.add(pnlRating, BorderLayout.SOUTH);
+        pnlProductInfo.add(lblProductName);
+        pnlProductInfo.add(lblProductPrice);
+        pnlProductInfo.add(pnlRating);
         
         add(pnlProductInfo);
-        
-        
         
     }
 
