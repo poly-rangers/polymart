@@ -1,35 +1,49 @@
 package seller;
 
-import misc.SearchBar;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.toedter.calendar.JDateChooser;
+
 import frames.CustomDialog;
+import databases.ProductDatabase;
 import misc.RoundedButton;
 
 public class SellerProductListing extends JPanel implements ActionListener{
 	
 	private static final long serialVersionUID = -318363178469668105L;
 	private JPanel contentPane;
-	private JButton btnGoBack;
+	private JButton btnGoBack, btnAddDate;
 	private JLabel lblProductImage, lblProductImageDescription, lblProductDetails, lblProductName, lblProductDesc, lblProductCat,
-	lblMeetUpDetails, lblMOP, lblMeetUpTime, lblProductPrice, lblMeetUpDate;
+	lblMeetUpDetails, lblMOP, lblMeetUpTime, lblProductPrice, lblMeetUpDate, lblAddImage1, lblAddImage2, lblAddImage3, lblAddImage4;
 	private JTextField productNameField, meetUpField, timeField, priceField; 
 	private JTextArea productDescArea;
-	private RoundedButton btnAddImage1, btnAddImage2, btnAddImage3, btnAddImage4;
 	private String[] strCategories = {"Food", "Fashion", "Accessories"};
-	private JComboBox<String> categoryCombo;
+	private JComboBox<String> categoryCombo, timeCombo;
 	private JCheckBox[] cbLocations;
 	private JCheckBox cbGCash, cbCash;
+	private JDateChooser dateChooser;
 	private RoundedButton btnPost;
+	
+	private ProductDatabase productDatabase;
+	private File imgFile1, imgFile2, imgFile3, imgFile4;
 	
 	private String[] arrLocations = {"1. Lagoon", "2. West Wing", "3. Dome", "4. East Wing", 
 			"5. South Wing", "6. Linear Park", "7. Charlie Building", "8. Grandstand", "9. Tennis Courtside",
 			"10. Souvenir Shop", "11. Gate Exit", "12. Gate Entrance"};
+	private String[] timeSlots = {
+		    "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
+		    "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM"
+		};
 	
 	public SellerProductListing(JPanel contentPane) {
 		this.contentPane = contentPane;
@@ -37,6 +51,9 @@ public class SellerProductListing extends JPanel implements ActionListener{
 		setBackground(Color.WHITE);
         setBounds(100, 100, 414, 660);
         setLayout(null);
+        
+//        productDatabase = new ProductDatabase();
+//        productDatabase.createProductsTable();
 		
         ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_seller.icon.png"));
         Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
@@ -93,47 +110,43 @@ public class SellerProductListing extends JPanel implements ActionListener{
         lblProductImageDescription.setForeground(new Color(129, 124, 124));
         scrollContentPanel.add(lblProductImageDescription);
         
-        // ADD IMAGE BUTTON
-        btnAddImage1 = new RoundedButton("+", 10);
-        btnAddImage1.setBounds(5,45,80,80);
-        btnAddImage1.setFocusable(false);
-        btnAddImage1.setFocusPainted(false);
-        btnAddImage1.setFont(new Font("Montserrat", Font.BOLD, 14));
-        btnAddImage1.setBackground(new Color(241,241,241,241));
-        btnAddImage1.setForeground(new Color(149,145,145,145));
-        scrollContentPanel.add(btnAddImage1);
+        //ADD IMAGE LABELS
+        lblAddImage1 = new JLabel("+",10);
+        lblAddImage1.setBounds(5,45,80,80);
+        lblAddImage1.setFocusable(false);
+        lblAddImage1.setFont(new Font("Montserrat", Font.BOLD, 14));
+        lblAddImage1.setBackground(new Color(241, 241, 241, 241));
+        lblAddImage1.setForeground(new Color(149,145,145,145));
+        scrollContentPanel.add(lblAddImage1);
         
-        btnAddImage2 = new RoundedButton("+", 10);
-        btnAddImage2.setBounds(94,45,80,80);
-        btnAddImage2.setFocusable(false);
-        btnAddImage2.setFocusPainted(false);
-        btnAddImage2.setFont(new Font("Montserrat", Font.BOLD, 14));
-        btnAddImage2.setBackground(new Color(241,241,241,241));
-        btnAddImage2.setForeground(new Color(149,145,145,145));
-        scrollContentPanel.add(btnAddImage2);
+        lblAddImage2 = new JLabel("+",10);
+        lblAddImage2.setBounds(94,45,80,80);
+        lblAddImage2.setFocusable(false);
+        lblAddImage2.setFont(new Font("Montserrat", Font.BOLD, 14));
+        lblAddImage2.setBackground(new Color(241, 241, 241, 241));
+        lblAddImage2.setForeground(new Color(149,145,145,145));
+        scrollContentPanel.add(lblAddImage2);
         
-        btnAddImage3 = new RoundedButton("+", 10);
-        btnAddImage3.setBounds(185,45,80,80);
-        btnAddImage3.setFocusable(false);
-        btnAddImage3.setFocusPainted(false);
-        btnAddImage3.setFont(new Font("Montserrat", Font.BOLD, 14));
-        btnAddImage3.setBackground(new Color(241,241,241,241));
-        btnAddImage3.setForeground(new Color(149,145,145,145));
-        scrollContentPanel.add(btnAddImage3);
+        lblAddImage3 = new JLabel("+",10);
+        lblAddImage3.setBounds(185,45,80,80);
+        lblAddImage3.setFocusable(false);
+        lblAddImage3.setFont(new Font("Montserrat", Font.BOLD, 14));
+        lblAddImage3.setBackground(new Color(241, 241, 241, 241));
+        lblAddImage3.setForeground(new Color(149,145,145,145));
+        scrollContentPanel.add(lblAddImage3);
         
-        btnAddImage4 = new RoundedButton("+", 10);
-        btnAddImage4.setBounds(274,45,80,80);
-        btnAddImage4.setFocusable(false);
-        btnAddImage4.setFocusPainted(false);
-        btnAddImage4.setFont(new Font("Montserrat", Font.BOLD, 14));
-        btnAddImage4.setBackground(new Color(241,241,241,241));
-        btnAddImage4.setForeground(new Color(149,145,145,145));
-        scrollContentPanel.add(btnAddImage4);
+        lblAddImage4 = new JLabel("+",10);
+        lblAddImage4.setBounds(274,45,80,80);
+        lblAddImage4.setFocusable(false);
+        lblAddImage4.setFont(new Font("Montserrat", Font.BOLD, 14));
+        lblAddImage4.setBackground(new Color(241, 241, 241, 241));
+        lblAddImage4.setForeground(new Color(149,145,145,145));
+        scrollContentPanel.add(lblAddImage4);
         
-        addMouseListenerToButton(btnAddImage1);
-        addMouseListenerToButton(btnAddImage2);
-        addMouseListenerToButton(btnAddImage3);
-        addMouseListenerToButton(btnAddImage4);
+        addMouseListenerToLabel(lblAddImage1);
+        addMouseListenerToLabel(lblAddImage2);
+        addMouseListenerToLabel(lblAddImage3);
+        addMouseListenerToLabel(lblAddImage4);
        
         // PRODUCT DETAILS
         lblProductDetails = new JLabel("Enter Product Details");
@@ -172,7 +185,6 @@ public class SellerProductListing extends JPanel implements ActionListener{
         setupTextPlaceholder(productDescArea, "Product Description");
         scrollContentPanel.add(productDescArea);
         
-        
         lblProductPrice = new JLabel("Add product price:");
         lblProductPrice.setBounds(5, 282, 143, 13);
         lblProductPrice.setFont(new Font("Montserrat", Font.ITALIC, 12));
@@ -189,7 +201,6 @@ public class SellerProductListing extends JPanel implements ActionListener{
         setupTextPlaceholder(priceField, "P100");
         scrollContentPanel.add(priceField);
         
-        
         lblProductCat = new JLabel("Select product category:");
         lblProductCat.setBounds(160, 275, 201, 26);
         lblProductCat.setFont(new Font("Montserrat", Font.ITALIC, 12));
@@ -205,7 +216,6 @@ public class SellerProductListing extends JPanel implements ActionListener{
         lblMeetUpDetails.setBounds(5, 335, 314, 18);
         lblMeetUpDetails.setFont(new Font("Montserrat", Font.BOLD, 14));
         scrollContentPanel.add(lblMeetUpDetails);
-        
         
         // LOCATION SELECT
         lblProductDesc = new JLabel("Select available locations:");
@@ -266,36 +276,48 @@ public class SellerProductListing extends JPanel implements ActionListener{
         lblMeetUpDate.setForeground(new Color(129, 124, 124));
         scrollContentPanel.add(lblMeetUpDate);
         
-        timeField = new JTextField(25);
-        timeField.setEditable(false);
-        timeField.setBounds(5, 530, 345, 20);
-        timeField.setFont(new Font("Montserrat", Font.ITALIC, 12));
-        timeField.setBackground(new Color(241, 241, 241));
-        timeField.setBorder(null);
-        scrollContentPanel.add(timeField);
+        meetUpField = new JTextField(25);
+        meetUpField.setEditable(false);
+        meetUpField.setBounds(5, 530, 345, 20);
+        meetUpField.setFont(new Font("Montserrat", Font.ITALIC, 12));
+        meetUpField.setBackground(new Color(241, 241, 241));
+        meetUpField.setBorder(null);
+        scrollContentPanel.add(meetUpField);
         
-        JComboBox<String> tempCom = new JComboBox<>();
-        tempCom.setBounds(5,555, 89, 20);
-        scrollContentPanel.add(tempCom);
+        dateChooser = new JDateChooser();
+        dateChooser.setBounds(5, 557, 143, 20);
+        scrollContentPanel.add(dateChooser);
+    
+        btnAddDate = new RoundedButton("Add Date", 20);
+        btnAddDate.setFont(new Font("Montserrat", Font.PLAIN, 11));
+        btnAddDate.setBounds(160,557,105,20);
+        btnAddDate.setBackground(new Color(115,12,12));
+        btnAddDate.setForeground(Color.WHITE);
+        btnAddDate.setFocusPainted(false);
+        btnAddDate.setFocusable(false);
+        btnAddDate.addActionListener(this);
+        scrollContentPanel.add(btnAddDate);
         
-        lblMeetUpTime = new JLabel("Select available meet-up date/s:");
+        lblMeetUpTime = new JLabel("Select available meet-up time/s:");
         lblMeetUpTime.setBackground(new Color(255, 255, 255));
         lblMeetUpTime.setBounds(5, 580, 246, 15);
         lblMeetUpTime.setFont(new Font("Montserrat", Font.ITALIC, 12));
         lblMeetUpTime.setForeground(new Color(129, 124, 124));
         scrollContentPanel.add(lblMeetUpTime);
         
-        meetUpField = new JTextField(25);
-        meetUpField.setEditable(false);
-        meetUpField.setBounds(5, 595, 345, 20);
-        meetUpField.setFont(new Font("Montserrat", Font.ITALIC, 12));
-        meetUpField.setBackground(new Color(241, 241, 241));
-        meetUpField.setBorder(null);
-        scrollContentPanel.add(meetUpField);
+        timeField = new JTextField(25);
+        timeField.setEditable(false);
+        timeField.setBounds(5, 595, 345, 20);
+        timeField.setFont(new Font("Montserrat", Font.ITALIC, 12));
+        timeField.setBackground(new Color(241, 241, 241));
+        timeField.setBorder(null);
+        scrollContentPanel.add(timeField);
         
-        JComboBox<String> tempCom1 = new JComboBox<>();
-        tempCom1.setBounds(5,620, 89, 20);
-        scrollContentPanel.add(tempCom1);
+        timeCombo = new JComboBox<>(timeSlots);
+        timeCombo.setBounds(5,620, 89, 20);
+        timeCombo.setSelectedIndex(-1);
+        timeCombo.addActionListener(this);
+        scrollContentPanel.add(timeCombo);
         
         btnPost = new RoundedButton("Post", 25);
         btnPost.setBounds(136,660, 89, 20);
@@ -304,6 +326,7 @@ public class SellerProductListing extends JPanel implements ActionListener{
         btnPost.setBackground(new Color(102, 0, 0));
         btnPost.setForeground(Color.WHITE);
         btnPost.setFocusable(true);
+        btnPost.addActionListener(this);
         scrollContentPanel.add(btnPost);
         
         scrollPane.setBorder(null);
@@ -324,33 +347,114 @@ public class SellerProductListing extends JPanel implements ActionListener{
             // Switch to Product Listing
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "SellerDashboardPanel");
+            clearFields();
+        } else if (objSourceEvent == btnAddDate) {
+        	
+            	SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                Date selectedDate = dateChooser.getDate();
+
+                if (selectedDate == null) {
+                	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                    new CustomDialog(frame, "No Date?", "ang eme ni beh, mag-add ka muna?!?! btw same : (", "k fine");
+                    dateChooser.setDate(null);
+                    return;
+                }
+
+                // Get current date without time for proper comparison
+                Calendar today = Calendar.getInstance();
+                today.set(Calendar.HOUR_OF_DAY, 0);
+                today.set(Calendar.MINUTE, 0);
+                today.set(Calendar.SECOND, 0);
+                today.set(Calendar.MILLISECOND, 0);
+
+                Calendar selectedCal = Calendar.getInstance();
+                selectedCal.setTime(selectedDate);
+                selectedCal.set(Calendar.HOUR_OF_DAY, 0);
+                selectedCal.set(Calendar.MINUTE, 0);
+                selectedCal.set(Calendar.SECOND, 0);
+                selectedCal.set(Calendar.MILLISECOND, 0);
+
+                // Check if the selected date is in the past
+                if (selectedCal.before(today)) {
+                    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                    new CustomDialog(frame, "Time Travel??", "alam kong nagrerelapse ka pero you can't turn back the time:(", "awts gege");
+                    dateChooser.setDate(null);
+                    return;
+                }
+
+                String formattedDate = dateFormat.format(selectedDate);
+                String existingText = meetUpField.getText();
+
+                // Check for duplicate dates
+                if (existingText.contains(formattedDate)) {
+                	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                    new CustomDialog(frame, "Date is already taken", "buti pa yung date taken, e ikaw?!", "sorry na");
+                    dateChooser.setDate(null);
+                    return;
+                }
+
+                // Append new date to meetUpField (comma-separated if not empty)
+                if (!existingText.isEmpty()) {
+                    meetUpField.setText(existingText + ", " + formattedDate);
+                } else {
+                    meetUpField.setText(formattedDate);
+                }
+
+                // Clear the date chooser for the next selection
+                dateChooser.setDate(null);
+        } else if (objSourceEvent == timeCombo) {
+        	String selectedTime = (String) timeCombo.getSelectedItem();
+
+            // Check if timeField already contains the selected time
+            String currentText = timeField.getText();
+            if (currentText.contains(selectedTime)) {
+                // Show error message and prevent duplicate addition
+            	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                new CustomDialog(frame, "Opppsiee ", "taken na sha, sakin ka nalang tumesting", "ayaw");
+            } else {
+                // Append new time, handling formatting properly
+                if (!currentText.isEmpty()) {
+                    timeField.setText(currentText + ", " + selectedTime);
+                } else {
+                    timeField.setText(selectedTime);
+                }
+            }
+        } else if (objSourceEvent == btnPost) {
+        	if (validatePost()) {
+        		JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                new CustomDialog(parentFrame, "PAKIFILLUP LAHAT BEH", "baks! may kulang ka, make sure na may meron ka sa lahat", "ok");
+        	} else {
+        		JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                new CustomDialog(parentFrame, "Posting success", "ayarn! pasok ka na sa banga sis, papaldo ka na", "Proceed");
+        	}
         }
         
     }
     
-    private void addMouseListenerToButton(JButton button) {
-        button.addMouseListener(new MouseAdapter() {
+    private void addMouseListenerToLabel(JLabel lblImage) {
+        lblImage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                button.setBackground(new Color(0x730C0C));
-                button.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(0x730C0C)));
+            	lblImage.setBackground(new Color(0x730C0C));
+            	lblImage.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(0x730C0C)));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                button.setBackground(new Color(241,241,241,241));
-                button.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(241,241,241,241)));
+            	lblImage.setBackground(new Color(241,241,241,241));
+            	lblImage.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(241,241,241,241)));
             }
 
             @Override
             public void mouseClicked(MouseEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setFileFilter(new FileNameExtensionFilter("JPEG/PNG files", "jpg","jpeg","png")); // Filter for PDFs
-                int result = fileChooser.showOpenDialog(button);
+                int result = fileChooser.showOpenDialog(lblImage);
 
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile(); // Store the selected file
                     System.out.println("File selected: " + selectedFile.getAbsolutePath());
+                    setLabelImage(lblImage, selectedFile);
                 } else {
                     System.out.println("No file selected.");
                 }
@@ -399,5 +503,83 @@ public class SellerProductListing extends JPanel implements ActionListener{
             }
         });
     	textArea.setForeground(Color.GRAY);
+    }
+    
+    public void addProduct(String sellerId, String productName, String productDescription, double price, String productStatus) {
+        	
+    }    
+    
+    private void setLabelImage(JLabel label, File selectedFile) {
+        ImageIcon originalIcon = new ImageIcon(selectedFile.getAbsolutePath());
+        Image scaledImage = originalIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        label.setIcon(new ImageIcon(scaledImage));
+
+        // Store the selected file in the corresponding variable
+        if (label == lblAddImage1) {
+            imgFile1 = selectedFile;
+        } else if (label == lblAddImage2) {
+            imgFile2 = selectedFile;
+        } else if (label == lblAddImage3) {
+            imgFile3 = selectedFile;
+        } else if (label == lblAddImage4) {
+            imgFile4 = selectedFile;
+        }
+    }
+    
+    private boolean validatePost() {
+        StringBuilder strLocations = new StringBuilder();
+    	for (JCheckBox cbLocation : cbLocations) {
+            if (cbLocation.isSelected()) {
+                if (strLocations.length() > 0) {
+                    strLocations.append(", ");
+                }
+                strLocations.append(cbLocation.getText());
+            }
+        }
+    	
+    	StringBuilder paymentMethods = new StringBuilder();
+        if (cbGCash.isSelected()) {
+            if (paymentMethods.length() > 0) {
+                paymentMethods.append(", ");
+            }
+            paymentMethods.append("GCash");
+        }
+        if (cbCash.isSelected()) {
+            if (paymentMethods.length() > 0) {
+                paymentMethods.append(", ");
+            }
+            paymentMethods.append("Cash");
+        }
+        
+    	boolean isLocationSelected = strLocations.length()>0;
+    	boolean isPaymentMethodsSelected = paymentMethods.length()>0;
+    	
+    	boolean boolResult = productNameField.getText().trim().isEmpty() || productDescArea.getText().trim().isEmpty() || 
+    			priceField.getText().trim().isEmpty() || meetUpField.getText().trim().isEmpty() || timeField.getText().trim().isEmpty() ||
+    			lblAddImage1.getIcon()==null || lblAddImage2.getIcon()==null || lblAddImage3.getIcon()==null || lblAddImage4.getIcon()==null ||
+    			categoryCombo.getSelectedIndex()==-1 || !isPaymentMethodsSelected || !isLocationSelected;
+    	
+    	return boolResult;
+    }
+    
+    private void clearFields() {
+        // Reset text fields to their placeholder values
+        productNameField.setText("Product Name");
+        productNameField.setForeground(Color.GRAY);
+        
+        productDescArea.setText("Product Description");
+        productDescArea.setForeground(Color.GRAY);
+        
+        priceField.setText("P100");
+        priceField.setForeground(Color.GRAY);
+        
+        productNameField.setText("Product Name");
+        productNameField.setForeground(Color.GRAY);
+        
+        meetUpField.setText("");
+        timeField.setText("");
+        
+        categoryCombo.setSelectedIndex(-1);
+        timeCombo.setSelectedIndex(-1);
     }
 }

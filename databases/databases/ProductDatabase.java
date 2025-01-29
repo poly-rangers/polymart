@@ -24,7 +24,7 @@ public class ProductDatabase {
                 "product_name TEXT NOT NULL, " +
                 "product_description TEXT, " +
                 "price REAL NOT NULL, " +
-                "quantity INTEGER NOT NULL, " +
+                "product_status TEXT NOT NULL, "+
                 "FOREIGN KEY (seller_id) REFERENCES sellers(folder_path) ON DELETE CASCADE" +
                 ");";
 
@@ -37,8 +37,8 @@ public class ProductDatabase {
     }
 
     // Method to add a product to the database
-    public void addProduct(String sellerId, String productName, String productDescription, double price, int quantity) {
-        String insertSQL = "INSERT INTO products (seller_id, product_name, product_description, price, quantity) " +
+    public void addProduct(String sellerId, String productName, String productDescription, double price, String productStatus) {
+        String insertSQL = "INSERT INTO products (seller_id, product_name, product_description, price, product_status) " +
                 "VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
@@ -46,7 +46,6 @@ public class ProductDatabase {
             pstmt.setString(2, productName);
             pstmt.setString(3, productDescription);
             pstmt.setDouble(4, price);
-            pstmt.setInt(5, quantity);
 
             pstmt.executeUpdate();
             System.out.println("Product added successfully for seller ID: " + sellerId);

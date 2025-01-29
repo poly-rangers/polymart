@@ -401,7 +401,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
                 CardLayout clLayout = (CardLayout) panelContent.getLayout();
                 clLayout.show(panelContent, "BuyerTermsConditionsPanel");
             } else {
-            	saveBuyerDetails(txtFieldUsername.getText().trim(), txtFieldFirstName.getText().trim(), txtFieldLastName.getText().trim(),
+            	saveSellerDetails(txtFieldUsername.getText().trim(), txtFieldFirstName.getText().trim(), txtFieldLastName.getText().trim(),
                         txtFieldEmailOrPhone.getText().trim(), new String(pwdFieldPassword.getPassword()));
             }
         } else if (source == btnSignIn) {
@@ -411,7 +411,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
         }
     }
    
-    public void saveBuyerDetails(String username, String firstName, String lastName, String email, String password) {
+    public void saveSellerDetails(String username, String firstName, String lastName, String email, String password) {
 
     	if (userSignup.uniqueCheck(username, email)) {
             
@@ -432,7 +432,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
                 new CustomDialog(parentFrame, "Sign Up success", "ayarn! pasok ka na sa banga sis, pwede ka na mag log-in at mag-access sa dashboard", "Proceed");
 
                 CardLayout clLayout = (CardLayout) panelContent.getLayout();
-                clLayout.show(panelContent, "BuyerSignInPanel");
+                clLayout.show(panelContent, "SellerSignInPanel");
             }
            
     	} else {
