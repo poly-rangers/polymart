@@ -88,6 +88,13 @@ public class PolymartMain extends JFrame {
         contentPane.add(sellerOrderPanel, "SellerOrderPanel");
         contentPane.add(sellerProductReviews, "SellerProductReviews");
 
+        //General panels
+        DashboardMap buyerDashboardMap = new DashboardMap(contentPane, "Buyer");
+        contentPane.add(buyerDashboardMap, "DashboardMap");
+        
+        DashboardMap sellerDashboardMap = new DashboardMap(contentPane, "Seller");
+        contentPane.add(sellerDashboardMap, "DashboardMap");
+        
         // Navigation bar
         BuyerNavigationBar buyerNavigationBar = new BuyerNavigationBar(contentPane);
         add(buyerNavigationBar, java.awt.BorderLayout.SOUTH); // Add navigation bar to bottom

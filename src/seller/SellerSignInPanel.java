@@ -90,7 +90,7 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
         logInButton.setFont(new Font("Montserrat ExtraBold", Font.BOLD, 16));
         logInButton.setBorderPainted(false);
         logInButton.setBorder(new LineBorder(new Color(0, 0, 0)));
-        logInButton.setBackground(new Color(128, 0, 0));
+        logInButton.setBackground(new Color(115, 12, 2));
         logInButton.setForeground(new Color(255, 255, 255));
         logInButton.addActionListener(this);
         add(logInButton);
