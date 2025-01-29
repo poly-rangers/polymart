@@ -3,6 +3,7 @@ package buyer;
 import java.awt.*;
 import javax.swing.*;
 import misc.AddProduct;
+import misc.CustomScrollBar;
 import misc.SearchBar;
 
 import java.awt.event.ActionListener;
@@ -13,8 +14,12 @@ import java.awt.event.ActionEvent;
 public class BuyerDashboardPanel extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JButton btnReceiptTest;
 
     public BuyerDashboardPanel(JPanel contentPane) {
+    	this.contentPane = contentPane;
+    	
         setBackground(Color.WHITE);
         setBounds(100, 100, 414, 660);
         SpringLayout panelLayout = new SpringLayout();
@@ -66,12 +71,18 @@ public class BuyerDashboardPanel extends JPanel implements ActionListener {
         	}
         });
         
-
+        scrollPane.getVerticalScrollBar().setUI(new CustomScrollBar());
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setViewportView(scrollContentPanel);
 
         add(scrollPane);
-
+        
+        btnReceiptTest = new JButton("Receipt");
+        panelLayout.putConstraint(SpringLayout.WEST, btnReceiptTest, 84, SpringLayout.EAST, startupImage);
+        panelLayout.putConstraint(SpringLayout.SOUTH, btnReceiptTest, -27, SpringLayout.NORTH, searchBar);
+        btnReceiptTest.addActionListener(this);
+        add(btnReceiptTest);
+        
         // Create NavigationBar and position it at the bottom
         BuyerNavigationBar navBar = new BuyerNavigationBar(scrollContentPanel);
         panelLayout.putConstraint(SpringLayout.SOUTH, scrollPane, -30, SpringLayout.NORTH, navBar);
@@ -84,7 +95,10 @@ public class BuyerDashboardPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource() == btnReceiptTest) {
+			CardLayout clLayout = (CardLayout) contentPane.getLayout();
+			clLayout.show(contentPane, "BuyerOrderPanel");
+		}
 		
 	}
 }

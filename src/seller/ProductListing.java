@@ -12,7 +12,7 @@ import java.awt.Image;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import misc.RoundButton;
+import misc.RoundedButton;
 import misc.SearchBar;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -103,7 +103,7 @@ public class ProductListing extends JPanel implements ActionListener {
         pnlProductContent.setLayout(new BoxLayout(pnlProductContent, BoxLayout.Y_AXIS));
         pnlProductContent.setAlignmentX(Component.LEFT_ALIGNMENT);        
        
-        RoundButton btnAddImage = new RoundButton("+", 10);
+        RoundedButton btnAddImage = new RoundedButton("+", 10);
         btnAddImage.setFont(new Font("Montserrat", Font.BOLD, 14));
         btnAddImage.setForeground(Color.WHITE);
         btnAddImage.setBackground(new Color(102, 0, 0));
@@ -192,7 +192,7 @@ public class ProductListing extends JPanel implements ActionListener {
         
            
      // Create NavigationBar and position it at the bottom
-        SellerNavigationBar navBar = new SellerNavigationBar();
+        SellerNavigationBar navBar = new SellerNavigationBar(pnlProductContent);
         panelLayout.putConstraint(SpringLayout.SOUTH, scrollPane, -30, SpringLayout.NORTH, navBar);
         panelLayout.putConstraint(SpringLayout.NORTH, navBar, -50, SpringLayout.SOUTH, this);
         panelLayout.putConstraint(SpringLayout.WEST, navBar, 0, SpringLayout.WEST, this);

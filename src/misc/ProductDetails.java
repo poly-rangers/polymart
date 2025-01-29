@@ -59,6 +59,7 @@ public class ProductDetails extends JPanel implements ActionListener{
         add(pnlHeader);
         
         JScrollPane scrollPane = new JScrollPane();
+        scrollPane.getVerticalScrollBar().setUI(new CustomScrollBar());
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setBounds(20, 162, 376, 380);
@@ -223,7 +224,7 @@ public class ProductDetails extends JPanel implements ActionListener{
         scrollContentPanel.setBorder(null);        
         scrollPane.setViewportView(scrollContentPanel);
     
-        SellerNavigationBar navBar = new SellerNavigationBar();
+        SellerNavigationBar navBar = new SellerNavigationBar(scrollContentPanel);
         navBar.setBounds(0,610, 414,50);
         add(navBar);
         

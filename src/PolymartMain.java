@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 
 import buyer.BuyerDashboardPanel;
 import buyer.BuyerNavigationBar;
+import buyer.BuyerOrderPanel;
 import buyer.BuyerSignInPanel;
 import buyer.BuyerSignupPanel;
 import buyer.BuyerStartupPanel;
@@ -60,11 +61,13 @@ public class PolymartMain extends JFrame {
         BuyerSignupPanel buyerSignupPanel = new BuyerSignupPanel(contentPane);
         BuyerSignInPanel buyerSignInPanel = new BuyerSignInPanel(contentPane);
         BuyerDashboardPanel buyerDashboardPanel = new BuyerDashboardPanel(contentPane);
+        BuyerOrderPanel	buyerOrderPanel = new BuyerOrderPanel(contentPane);
 
         contentPane.add(buyerStartupPanel, "BuyerStartupPanel");
         contentPane.add(buyerSignupPanel, "BuyerSignupPanel");
         contentPane.add(buyerSignInPanel, "BuyerSignInPanel");
         contentPane.add(buyerDashboardPanel, "BuyerDashboardPanel");
+        contentPane.add(buyerOrderPanel, "BuyerOrderPanel");
 
         // Seller panels
         SellerStartupPanel sellerStartupPanel = new SellerStartupPanel(contentPane);

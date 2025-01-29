@@ -24,7 +24,7 @@ public class AddProduct extends JPanel{
         setMinimumSize(new Dimension(173, 198));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(Color.WHITE);
-        setBorder(new LineBorder(new Color(255, 255, 255), 1));
+        setBorder(new LineBorder(new Color(255, 255, 255), 3, true));
        
 
         

@@ -81,7 +81,7 @@ public class SellerListAProduct extends JPanel {
         
            
      // Create NavigationBar and position it at the bottom
-        SellerNavigationBar navBar = new SellerNavigationBar();
+        SellerNavigationBar navBar = new SellerNavigationBar(scrollContentPanel);
         panelLayout.putConstraint(SpringLayout.SOUTH, scrollPane, -30, SpringLayout.NORTH, navBar);
         panelLayout.putConstraint(SpringLayout.NORTH, navBar, -50, SpringLayout.SOUTH, this);
         panelLayout.putConstraint(SpringLayout.WEST, navBar, 0, SpringLayout.WEST, this);

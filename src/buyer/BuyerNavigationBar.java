@@ -8,7 +8,7 @@ import java.awt.event.*;
 public class BuyerNavigationBar extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 2021409567929036389L;
-    private JButton btnHome, btnMap, btnReceipt, btnProfile;
+    private JButton btnHome, btnMap, btnOrders, btnProfile;
     private JPanel contentPane;
 
     public BuyerNavigationBar(JPanel contentPane) {
@@ -22,7 +22,7 @@ public class BuyerNavigationBar extends JPanel implements ActionListener {
         // Initialize and style buttons
         btnHome = createNavButton("Home", "/homeicon.png");
         btnMap = createNavButton("Map", "/mapicon.png");
-        btnReceipt = createNavButton("Receipt", "/receipticon.png");
+        btnOrders = createNavButton("Orders", "/receipticon.png");
         btnProfile = createNavButton("Profile", "/profileicon.png");
 
         setLayout(new GridLayout(0, 4, 0, 0));
@@ -30,7 +30,7 @@ public class BuyerNavigationBar extends JPanel implements ActionListener {
         // Add buttons to the panel
         add(btnHome);
         add(btnMap);
-        add(btnReceipt);
+        add(btnOrders);
         add(btnProfile);
     }
 
@@ -60,11 +60,11 @@ public class BuyerNavigationBar extends JPanel implements ActionListener {
 
         // Navigate based on which button was clicked
         if (objSourceEvent == btnHome) {
-            navigateTo("ProductDetails");
+            navigateTo("BuyerDashboardPanel");
         } else if (objSourceEvent == btnMap) {
             navigateTo("Map");
-        } else if (objSourceEvent == btnReceipt) {
-            navigateTo("Receipt");
+        } else if (objSourceEvent == btnOrders) {
+            navigateTo("BuyerOrderPanel");
         } else if (objSourceEvent == btnProfile) {
             navigateTo("Profile");
         }
