@@ -39,6 +39,7 @@ public class BuyerMap extends JPanel {
         
         BuyerNavigationBar navBar = new BuyerNavigationBar(contentPane);
         navBar.setBounds(0, 611, 416, 52);
+
         add(navBar);
         
         navBar.btnHome.addActionListener(e -> switchPanel("BuyerDashboardPanel"));
