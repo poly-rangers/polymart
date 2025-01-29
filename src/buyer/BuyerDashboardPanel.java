@@ -53,6 +53,7 @@ public class BuyerDashboardPanel extends JPanel {
         scrollContentPanel.setBorder(null);
         scrollContentPanel.setBackground(new Color(255, 255, 255));
         scrollContentPanel.setLayout(new GridLayout(0, 2, 10, 10));
+        
         scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
         scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
         scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
