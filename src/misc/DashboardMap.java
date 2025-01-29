@@ -1,8 +1,9 @@
-package buyer;
+package misc;
 
 import java.awt.*;
 import javax.swing.*;
-import misc.RoundedPanel;
+
+import buyer.BuyerNavigationBar;
 
 public class DashboardMap extends JPanel {
 
@@ -21,8 +22,8 @@ public class DashboardMap extends JPanel {
 		setLayout(null);
 		
 		String strImagePath = userRole.equalsIgnoreCase("Buyer")
-                ? "/polypup_seller.icon.png"
-                : "/polypup_buyer.icon.png";
+                ? "/polypup_buyer.icon.png"
+                : "/polypup_seller.icon.png";
 
         ImageIcon originalImage = new ImageIcon(this.getClass().getResource(strImagePath));
         Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);

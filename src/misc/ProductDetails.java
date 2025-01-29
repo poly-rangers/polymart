@@ -204,7 +204,7 @@ public class ProductDetails extends JPanel implements ActionListener{
               
        btnSetAMeet = new RoundedButton("Set a meet-up", 25);
        btnSetAMeet.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 16));
-       btnSetAMeet.setBounds(109,612,192,37);
+       btnSetAMeet.setBounds(107,563,192,37);
        btnSetAMeet.setBackground(new Color(115,12,12));
        btnSetAMeet.setForeground(Color.WHITE);
        btnSetAMeet.addActionListener(this);

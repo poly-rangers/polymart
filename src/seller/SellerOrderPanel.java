@@ -32,7 +32,7 @@ public class SellerOrderPanel extends JPanel {
         
         //Functionalities for Navigation Bar
         navBar.btnHome.addActionListener(e -> switchPanel("SellerDashboardPanel"));
-        navBar.btnMap.addActionListener(e -> switchPanel("SellerMap"));
+        navBar.btnMap.addActionListener(e -> switchPanel("SellerDashboardMap"));
         navBar.btnOrders.addActionListener(e -> System.out.println("Already on Orders Panel"));
         navBar.btnProfile.addActionListener(e -> switchPanel("SellerProfile"));
         
@@ -109,8 +109,6 @@ public class SellerOrderPanel extends JPanel {
     }
 
         
-        
-  
 	 private void switchPanel(String panelName) {
 	        if (contentPane.getLayout() instanceof CardLayout) {
 	            ((CardLayout) contentPane.getLayout()).show(contentPane, panelName);

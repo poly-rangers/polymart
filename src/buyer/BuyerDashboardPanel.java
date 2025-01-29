@@ -112,7 +112,7 @@ public class BuyerDashboardPanel extends JPanel {
         add(navBar);
         
         navBar.btnHome.addActionListener(e -> System.out.println("Already on Dashboard Panel"));
-        navBar.btnMap.addActionListener(e -> switchPanel("DashboardMap"));
+        navBar.btnMap.addActionListener(e -> switchPanel("BuyerDashboardMap"));
         navBar.btnOrders.addActionListener(e -> switchPanel("BuyerOrderPanel"));
         navBar.btnProfile.addActionListener(e -> switchPanel("BuyerProfile"));
     }

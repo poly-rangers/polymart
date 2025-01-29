@@ -54,15 +54,10 @@ public class SellerProductReviews extends JPanel implements ActionListener{
         pnlHeader.add(lblMyProduct);
         
         add(pnlHeader);
-        
-<<<<<<< HEAD
-        SellerNavigationBar navBar = new SellerNavigationBar(pnlHeader);
-        navBar.setBounds(0, 610, 414,50);
-=======
        
 		SellerNavigationBar navBar = new SellerNavigationBar(contentPane);
-        navBar.setBounds(0,610, 414,50);
->>>>>>> 92007b9ed62166380b725769f0c17b17a61ae661
+        navBar.setBounds(0, 611, 416, 52);
+
         add(navBar);
 	}
 

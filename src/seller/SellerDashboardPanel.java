@@ -54,13 +54,6 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         
         pnlHeader.add(lblMyProduct, BorderLayout.WEST);
         pnlHeader.add(btnAddProduct, BorderLayout.EAST);
-        
-        // Search Bar
-        SearchBar searchBar = new SearchBar();
-        searchBar.setBounds(61, 86, 291, 24);
-        searchBar.setupSearchPlaceholder("ang tamad tamad mo mag-scroll talaga naman...");
-        add(searchBar);
-        searchBar.setLayout(new BoxLayout(searchBar, BoxLayout.X_AXIS));
 
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(22, 162, 382, 418);

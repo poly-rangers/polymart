@@ -387,10 +387,6 @@ public class SellerProductListing extends JPanel implements ActionListener{
         scrollPane.setViewportView(scrollContentPanel);
         scrollPane.getVerticalScrollBar().setUI(new CustomScrollBar());
         
-        
-        SellerNavigationBar navBar = new SellerNavigationBar(scrollContentPanel);
-        navBar.setBounds(0,611, 414,50);
-        add(navBar);
     }
 
     @Override

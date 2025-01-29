@@ -58,7 +58,6 @@ public class PolymartMain extends JFrame {
         BuyerSignInPanel buyerSignInPanel = new BuyerSignInPanel(contentPane);
         BuyerDashboardPanel buyerDashboardPanel = new BuyerDashboardPanel(contentPane);
         BuyerOrderPanel	buyerOrderPanel = new BuyerOrderPanel(contentPane);
-        BuyerMap buyerMap = new BuyerMap(contentPane);
         BuyerProfile buyerProfile = new BuyerProfile(contentPane);
 
         contentPane.add(buyerStartupPanel, "BuyerStartupPanel");
@@ -66,7 +65,6 @@ public class PolymartMain extends JFrame {
         contentPane.add(buyerSignInPanel, "BuyerSignInPanel");
         contentPane.add(buyerDashboardPanel, "BuyerDashboardPanel");
         contentPane.add(buyerOrderPanel, "BuyerOrderPanel");
-        contentPane.add(buyerMap, "BuyerMap");
         contentPane.add(buyerProfile, "BuyerProfile");
 
         // Seller panels
@@ -90,10 +88,10 @@ public class PolymartMain extends JFrame {
 
         //General panels
         DashboardMap buyerDashboardMap = new DashboardMap(contentPane, "Buyer");
-        contentPane.add(buyerDashboardMap, "DashboardMap");
+        contentPane.add(buyerDashboardMap, "BuyerDashboardMap");
         
         DashboardMap sellerDashboardMap = new DashboardMap(contentPane, "Seller");
-        contentPane.add(sellerDashboardMap, "DashboardMap");
+        contentPane.add(sellerDashboardMap, "SellerDashboardMap");
         
         // Navigation bar
         BuyerNavigationBar buyerNavigationBar = new BuyerNavigationBar(contentPane);
