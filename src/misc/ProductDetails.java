@@ -7,6 +7,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import frames.CustomDialog;
+import frames.MeetupConfirmation;
 import frames.SetMeetUpFrame;
 import misc.RoundedButton;
 
@@ -62,7 +63,7 @@ public class ProductDetails extends JPanel implements ActionListener{
         scrollPane.getVerticalScrollBar().setUI(new CustomScrollBar());
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setBounds(20, 162, 376, 380);
+        scrollPane.setBounds(20, 162, 376, 439);
         add(scrollPane);
 
         JPanel scrollContentPanel = new JPanel();
@@ -204,10 +205,11 @@ public class ProductDetails extends JPanel implements ActionListener{
               
        btnSetAMeet = new RoundedButton("Set a meet-up", 25);
        btnSetAMeet.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 16));
-       btnSetAMeet.setBounds(106,562,192,37);
+       btnSetAMeet.setBounds(109,612,192,37);
        btnSetAMeet.setBackground(new Color(115,12,12));
        btnSetAMeet.setForeground(Color.WHITE);
        btnSetAMeet.addActionListener(this);
+       
        btnViewAll = new JButton("<html><u>View All</u></html>");
        btnViewAll.setBounds(143,461,85,23);
        
@@ -219,14 +221,10 @@ public class ProductDetails extends JPanel implements ActionListener{
        add(btnSetAMeet);
      
        
-        
+       	scrollPane.getVerticalScrollBar().setUI(new CustomScrollBar());
         scrollPane.setBorder(null);
         scrollContentPanel.setBorder(null);        
         scrollPane.setViewportView(scrollContentPanel);
-    
-        SellerNavigationBar navBar = new SellerNavigationBar(scrollContentPanel);
-        navBar.setBounds(0,610, 414,50);
-        add(navBar);
         
     }
 	@Override
@@ -238,8 +236,8 @@ public class ProductDetails extends JPanel implements ActionListener{
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "BuyerDashboardPanel");
     	} else if(objSourceEvent == btnSetAMeet) {
-    		SetMeetUpFrame meetUpFrame = new SetMeetUpFrame();
-            meetUpFrame.setVisible(true);
+    		MeetupConfirmation meetupConfirmation = new MeetupConfirmation();
+    		meetupConfirmation.setVisible(true);
     	}
 	}
 }

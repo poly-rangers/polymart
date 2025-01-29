@@ -88,7 +88,7 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         add(scrollPane);
         add(pnlHeader);
         
-     // Create NavigationBar and position it at the bottom
+        // Create NavigationBar and position it at the bottom
         SellerNavigationBar navBar = new SellerNavigationBar(scrollContentPanel);
         navBar.setBounds(0, 611, 416, 52);
         add(navBar);

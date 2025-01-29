@@ -6,6 +6,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import frames.CustomDialog;
+import misc.CustomScrollBar;
 import misc.RoundedButton;
 import com.toedter.calendar.JDayChooser;
 import com.toedter.calendar.JDateChooser;
@@ -63,9 +64,10 @@ public class SellerProductListing extends JPanel implements ActionListener{
         add(pnlHeader);
         
         JScrollPane scrollPane = new JScrollPane();
+        scrollPane.getVerticalScrollBar().setUI(new CustomScrollBar());
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setBounds(20, 123, 376, 454);
+        scrollPane.setBounds(20, 123, 376, 499);
         add(scrollPane);
 
         JPanel scrollContentPanel = new JPanel();
@@ -383,11 +385,7 @@ public class SellerProductListing extends JPanel implements ActionListener{
         scrollPane.setBorder(null);
         scrollContentPanel.setBorder(null);        
         scrollPane.setViewportView(scrollContentPanel);
-        
-        
-        SellerNavigationBar navBar = new SellerNavigationBar(scrollContentPanel);
-        navBar.setBounds(0,610, 414,50);
-        add(navBar);
+
     }
 
     @Override
