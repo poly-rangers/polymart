@@ -13,6 +13,7 @@ import buyer.BuyerStartupPanel;
 import misc.ProductDetails;
 import seller.SellerDashboardPanel;
 import seller.SellerProductListing;
+import seller.SellerProductReviews;
 import seller.SellerSignInPanel;
 import seller.SellerSignupPanel;
 import seller.SellerStartupPanel;
@@ -76,6 +77,7 @@ public class PolymartMain extends JFrame {
         SellerDashboardPanel sellerDashboardPanel = new SellerDashboardPanel(contentPane);
         SellerProductListing sellerProductListing = new SellerProductListing(contentPane);
         ProductDetails productDetails = new ProductDetails(contentPane);
+        SellerProductReviews sellerProductReviews = new SellerProductReviews(contentPane);
 
         contentPane.add(sellerStartupPanel, "SellerStartupPanel");
         contentPane.add(sellerSignupPanel, "SellerSignupPanel");
@@ -83,6 +85,7 @@ public class PolymartMain extends JFrame {
         contentPane.add(sellerDashboardPanel, "SellerDashboardPanel");
         contentPane.add(sellerProductListing, "SellerProductListing");
         contentPane.add(productDetails, "ProductDetails");
+        contentPane.add(sellerProductReviews, "SellerProductReviews");
 
         // Navigation bar
         BuyerNavigationBar buyerNavigationBar = new BuyerNavigationBar(contentPane);
