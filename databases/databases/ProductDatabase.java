@@ -7,7 +7,7 @@ import java.nio.file.StandardCopyOption;
 import java.sql.*;
 
 public class ProductDatabase {
-    private static final String DB_URL = "jdbc:sqlite:databases/products.db";
+    private static final String DB_URL = "jdbc:sqlite:databases/polyProducts.db";
     private static final String sellersDbUrl = "jdbc:sqlite:databases/polyUsers.db";
     private Connection connection, sellersConnection;
     
