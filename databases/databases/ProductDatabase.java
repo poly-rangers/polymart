@@ -10,12 +10,15 @@ public class ProductDatabase {
     private static final String DB_URL = "jdbc:sqlite:databases/products.db";
     private static final String sellersDbUrl = "jdbc:sqlite:databases/polyUsers.db";
     private Connection connection, sellersConnection;
+    private int imageCounter=1;
+    private String userName = "";
     
     // Constructor to initialize the database connection
     public ProductDatabase() {
         try {
             connection = DriverManager.getConnection(DB_URL);
             System.out.println("Connected to the products database.");
+            createProductsTable();
             try {
             	sellersConnection = DriverManager.getConnection(sellersDbUrl);
                 System.out.println("Connected to the sellers database.");
@@ -36,8 +39,7 @@ public class ProductDatabase {
                 "product_name TEXT NOT NULL, " +
                 "product_description TEXT, " +
                 "price REAL NOT NULL, " +
-                "product_status TEXT NOT NULL, "+
-                "FOREIGN KEY (folder_path) REFERENCES sellers(folder_path) ON DELETE CASCADE" +
+                "product_status TEXT NOT NULL"+
                 ");";
 
         try (PreparedStatement stmt = connection.prepareStatement(createTableSQL)) {
@@ -50,6 +52,12 @@ public class ProductDatabase {
 
     // Method to add a product to the database
     public void addProduct(String folderPath, String productName, String productDescription, double price, String productStatus) {
+    	// First, check if the folder_path exists in the sellers database
+        if (!isValidSeller(folderPath)) {
+            System.out.println("Error: Seller with folder path " + folderPath + " not found.");
+            return;  // Exit early if seller is invalid
+        }
+    	
         String insertSQL = "INSERT INTO products (folder_path, product_name, product_description, price, product_status) " +
                 "VALUES (?, ?, ?, ?, ?)";
 
@@ -95,7 +103,6 @@ public class ProductDatabase {
     }
 
     public void saveUploadedImageForSeller(String sellerUsername, File uploadedImage) {
-        
      // Use the correct connection here (sellersConnection)
         String query = "SELECT folder_path FROM sellers WHERE username = ?";
         try (PreparedStatement pstmt = sellersConnection.prepareStatement(query)) {
@@ -115,18 +122,22 @@ public class ProductDatabase {
                     }
 
                     // Generate the new image name based on the seller folder path and image extension
-                    String newImageName = "image";
                     String fileExtension = getFileExtension(uploadedImage);
+                    userName = UserSession.getLoggedInUsername();
+                    
+                    String newImageName = "image_"+imageCounter+"_"+userName;
                     if (!fileExtension.isEmpty()) {
                         newImageName += "." + fileExtension;
                     }
-
+                    
+                    imageCounter++;
+                    
                     // Create a destination file object
                     File destinationImage = new File(sellerFolder, newImageName);
 
-                    // If the file already exists, append "_new" to the name
+                    // If the file already exists, append "_int" to the name
                     if (destinationImage.exists()) {
-                        newImageName = "image_new";
+                        newImageName = "image_"+imageCounter;
                         destinationImage = new File(sellerFolder, newImageName + "." + fileExtension);
                     }
 
@@ -153,7 +164,6 @@ public class ProductDatabase {
 
     }
 
-
     // Helper to get file extension
     private String getFileExtension(File file) {
         String fileName = file.getName();
@@ -162,5 +172,19 @@ public class ProductDatabase {
             return fileName.substring(lastDotIndex + 1);
         }
         return "";
+    }
+    
+ // Helper method to check if the seller exists
+    private boolean isValidSeller(String folderPath) {
+        String query = "SELECT folder_path FROM sellers WHERE folder_path = ?";
+        try (PreparedStatement stmt = sellersConnection.prepareStatement(query)) {
+            stmt.setString(1, folderPath);
+            ResultSet rs = stmt.executeQuery();
+
+            return rs.next();  // If any row is returned, the seller exists
+        } catch (SQLException e) {
+            System.out.println("Error checking seller: " + e.getMessage());
+        }
+        return false;  // Seller does not exist
     }
 }
