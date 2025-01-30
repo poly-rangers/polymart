@@ -1,22 +1,12 @@
 package buyer;
 
 import javax.swing.*;
-import javax.swing.table.*;
-
-import misc.AddActiveOrder;
-import misc.CustomTableModel;
 import misc.OrderListPanel;
-
 import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-
 
 public class BuyerOrderPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
-    private JTable tblCompletedOrders;
-    private CustomTableModel tableModel;
     private JPanel contentPane;
 
     public BuyerOrderPanel(JPanel contentPane) {
@@ -36,7 +26,7 @@ public class BuyerOrderPanel extends JPanel {
         JLabel lblNewLabel = new JLabel("Your Orders");
         lblNewLabel.setHorizontalAlignment(SwingConstants.TRAILING);
         lblNewLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        lblNewLabel.setBounds(190, 40, 193, 50);
+        lblNewLabel.setBounds(211, 51, 180, 50);
         lblNewLabel.setFont(new Font("Montserrat", Font.BOLD, 25));
         add(lblNewLabel);
         
@@ -50,7 +40,7 @@ public class BuyerOrderPanel extends JPanel {
         navBar.btnProfile.addActionListener(e -> switchPanel("BuyerProfile"));
         
         JButton btnActiveOrders = new JButton("Active Orders");
-        btnActiveOrders.setBounds(180, 86, 95, 21);
+        btnActiveOrders.setBounds(186, 101, 95, 21);
         btnActiveOrders.setBackground(Color.WHITE);
         btnActiveOrders.setForeground(Color.BLACK);
         btnActiveOrders.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
@@ -61,7 +51,7 @@ public class BuyerOrderPanel extends JPanel {
 
         JButton btnCompleteOrders = new JButton("Completed Orders");
         btnCompleteOrders.setBackground(new Color(240, 240, 240));
-        btnCompleteOrders.setBounds(275, 86, 108, 21);
+        btnCompleteOrders.setBounds(283, 101, 108, 21);
         btnCompleteOrders.setForeground(Color.BLACK);
         btnCompleteOrders.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
         btnCompleteOrders.setFocusable(false);
@@ -72,7 +62,7 @@ public class BuyerOrderPanel extends JPanel {
 
         // Create JLayeredPane for Active Orders and Completed Orders
         JLayeredPane layeredPane = new JLayeredPane();
-        layeredPane.setBounds(0, 117, 414, 494);
+        layeredPane.setBounds(0, 149, 414, 462);
         add(layeredPane);
 
         

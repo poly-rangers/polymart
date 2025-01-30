@@ -6,7 +6,9 @@ import misc.AddActiveOrder;
 import misc.OrderListPanel;
 
 public class SellerActiveOrders extends OrderListPanel {
-    protected void createOrdersPanel() {
+	private static final long serialVersionUID = 1L;
+
+	protected void createOrdersPanel() {
         ordersPanel.removeAll();
         ordersPanel.setLayout(new GridLayout(0, 1, 0, 5));
         
@@ -19,7 +21,9 @@ public class SellerActiveOrders extends OrderListPanel {
 }
 
 class SellerCompletedOrders extends OrderListPanel {
-    protected void createOrdersPanel() {
+	private static final long serialVersionUID = 1L;
+
+	protected void createOrdersPanel() {
         ordersPanel.removeAll();
         ordersPanel.setLayout(new GridLayout(0, 1, 0, 5));
         ordersPanel.add(new AddActiveOrder("01/10/25", "Cooie", "Lagoon", "10:30AM", 50.0));
