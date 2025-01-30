@@ -19,6 +19,8 @@ import databases.ProductDatabase;
 import databases.UserSession;
 import misc.CustomScrollBar;
 import misc.RoundedButton;
+import misc.RoundedPanel;
+
 import com.toedter.calendar.JDayChooser;
 import com.toedter.calendar.JDateChooser;
 
@@ -40,6 +42,7 @@ public class SellerProductListing extends JPanel implements ActionListener{
 	
 	private ProductDatabase productDatabase;
 	private File imgFile1, imgFile2, imgFile3, imgFile4;
+	private RoundedPanel panelProdName, panelProdDesc, panelPrice, panelLoc, panelTime;
 	
 	private String[] arrLocations = {"1. Lagoon", "2. West Wing", "3. Dome", "4. East Wing", 
 			"5. South Wing", "6. Linear Park", "7. Charlie Building", "8. Grandstand", "9. Tennis Courtside",
@@ -48,6 +51,7 @@ public class SellerProductListing extends JPanel implements ActionListener{
 		    "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
 		    "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM"
 		};
+	
 	
 	public SellerProductListing(JPanel contentPane) {
 		this.contentPane = contentPane;
@@ -117,6 +121,8 @@ public class SellerProductListing extends JPanel implements ActionListener{
         
         //ADD IMAGE LABELS
         lblAddImage1 = new JLabel("+",10);
+        lblAddImage1.setHorizontalAlignment(JLabel.CENTER);  
+        lblAddImage1.setVerticalAlignment(JLabel.CENTER);   
         lblAddImage1.setBounds(5,45,80,80);
         lblAddImage1.setFocusable(false);
         lblAddImage1.setFont(new Font("Montserrat", Font.BOLD, 14));
@@ -125,6 +131,8 @@ public class SellerProductListing extends JPanel implements ActionListener{
         scrollContentPanel.add(lblAddImage1);
         
         lblAddImage2 = new JLabel("+",10);
+        lblAddImage2.setHorizontalAlignment(JLabel.CENTER);  
+        lblAddImage2.setVerticalAlignment(JLabel.CENTER);   
         lblAddImage2.setBounds(94,45,80,80);
         lblAddImage2.setFocusable(false);
         lblAddImage2.setFont(new Font("Montserrat", Font.BOLD, 14));
@@ -133,6 +141,8 @@ public class SellerProductListing extends JPanel implements ActionListener{
         scrollContentPanel.add(lblAddImage2);
         
         lblAddImage3 = new JLabel("+",10);
+        lblAddImage3.setHorizontalAlignment(JLabel.CENTER);  
+        lblAddImage3.setVerticalAlignment(JLabel.CENTER);   
         lblAddImage3.setBounds(185,45,80,80);
         lblAddImage3.setFocusable(false);
         lblAddImage3.setFont(new Font("Montserrat", Font.BOLD, 14));
@@ -141,6 +151,8 @@ public class SellerProductListing extends JPanel implements ActionListener{
         scrollContentPanel.add(lblAddImage3);
         
         lblAddImage4 = new JLabel("+",10);
+        lblAddImage4.setHorizontalAlignment(JLabel.CENTER);  
+        lblAddImage4.setVerticalAlignment(JLabel.CENTER);   
         lblAddImage4.setBounds(274,45,80,80);
         lblAddImage4.setFocusable(false);
         lblAddImage4.setFont(new Font("Montserrat", Font.BOLD, 14));
@@ -153,6 +165,23 @@ public class SellerProductListing extends JPanel implements ActionListener{
         addMouseListenerToLabel(lblAddImage3);
         addMouseListenerToLabel(lblAddImage4);
        
+        
+        //TEXTFIELD ROUNDED LOOK
+        panelProdName = new RoundedPanel(15, new Color(241,241,241));
+        panelProdName.setBounds(5, 170, 345, 23);
+        
+        panelProdDesc = new RoundedPanel(15, new Color(241,241,241));
+        panelProdDesc.setBounds(5, 215, 345, 59);
+        
+        panelPrice = new RoundedPanel(15, new Color(241,241,241));
+        panelPrice.setBounds(5, 300, 124, 23);
+        
+        panelLoc = new RoundedPanel(15, new Color(241,241,241));
+        panelLoc.setBounds(5, 530, 345, 23);
+        
+        panelTime = new RoundedPanel(15, new Color(241,241,241));
+        panelTime.setBounds(5, 600, 345, 23);
+        
         // PRODUCT DETAILS
         lblProductDetails = new JLabel("Enter Product Details");
         lblProductDetails.setBounds(5, 135, 314, 18);
@@ -174,7 +203,8 @@ public class SellerProductListing extends JPanel implements ActionListener{
         productNameField.setBackground(new Color(241, 241, 241));
         productNameField.setBorder(null);
         setupTextPlaceholder(productNameField, "Product Name");
-        scrollContentPanel.add(productNameField);
+        panelProdName.add(productNameField);
+        scrollContentPanel.add(panelProdName);
  
         lblProductDesc = new JLabel("Add a product description");
         lblProductDesc.setBounds(5, 200, 246, 15);
@@ -182,7 +212,7 @@ public class SellerProductListing extends JPanel implements ActionListener{
         lblProductDesc.setForeground(new Color(129, 124, 124));
         scrollContentPanel.add(lblProductDesc);
         
-        productDescArea = new JTextArea(25, 25);
+        productDescArea = new JTextArea(3, 25);
         productDescArea.setBounds(5, 215, 345, 56);
         productDescArea.setText("Product Description");
         setupTextAreaPlaceholder(productDescArea, "Product Description");
@@ -190,7 +220,8 @@ public class SellerProductListing extends JPanel implements ActionListener{
         productDescArea.setForeground(new Color(149, 145, 145));
         productDescArea.setBackground(new Color(241, 241, 241));
         setupTextPlaceholder(productDescArea, "Product Description");
-        scrollContentPanel.add(productDescArea);
+        panelProdDesc.add(productDescArea);
+        scrollContentPanel.add(panelProdDesc);
         
         lblProductPrice = new JLabel("Add product price:");
         lblProductPrice.setBounds(5, 282, 143, 13);
@@ -198,7 +229,7 @@ public class SellerProductListing extends JPanel implements ActionListener{
         lblProductPrice.setForeground(new Color(129, 124, 124));
         scrollContentPanel.add(lblProductPrice);
         
-        priceField = new JTextField(25);
+        priceField = new JTextField(9);
         priceField.setBounds(5, 300, 124, 20);
         priceField.setText("ex. P100");
         setupTextFieldPlaceholder(priceField, "ex. P100");
@@ -207,7 +238,8 @@ public class SellerProductListing extends JPanel implements ActionListener{
         priceField.setBackground(new Color(241, 241, 241));
         priceField.setBorder(null);
         setupTextPlaceholder(priceField, "P100");
-        scrollContentPanel.add(priceField);
+        panelPrice.add(priceField);
+        scrollContentPanel.add(panelPrice);
         
         lblProductCat = new JLabel("Select product category:");
         lblProductCat.setBounds(160, 275, 201, 26);
@@ -291,15 +323,16 @@ public class SellerProductListing extends JPanel implements ActionListener{
         meetUpField.setFont(new Font("Montserrat", Font.ITALIC, 12));
         meetUpField.setBackground(new Color(241, 241, 241));
         meetUpField.setBorder(null);
-        scrollContentPanel.add(meetUpField);
+        panelLoc.add(meetUpField);
+        scrollContentPanel.add(panelLoc);
         
         dateChooser = new JDateChooser();
-        dateChooser.setBounds(5, 557, 143, 20);
+        dateChooser.setBounds(15, 557, 133, 20);
         scrollContentPanel.add(dateChooser);
     
         btnAddDate = new RoundedButton("Add Date", 20);
         btnAddDate.setFont(new Font("Montserrat", Font.PLAIN, 11));
-        btnAddDate.setBounds(160,557,105,20);
+        btnAddDate.setBounds(160,557,91,20);
         btnAddDate.setBackground(new Color(115,12,12));
         btnAddDate.setForeground(Color.WHITE);
         btnAddDate.setFocusPainted(false);
@@ -320,10 +353,11 @@ public class SellerProductListing extends JPanel implements ActionListener{
         timeField.setFont(new Font("Montserrat", Font.ITALIC, 12));
         timeField.setBackground(new Color(241, 241, 241));
         timeField.setBorder(null);
-        scrollContentPanel.add(timeField);
+        panelTime.add(timeField);
+        scrollContentPanel.add(panelTime);
         
         timeCombo = new JComboBox<>(timeSlots);
-        timeCombo.setBounds(5,620, 89, 20);
+        timeCombo.setBounds(5,626, 89, 20);
         timeCombo.setSelectedIndex(-1);
         timeCombo.addActionListener(this);
         scrollContentPanel.add(timeCombo);
@@ -394,7 +428,7 @@ public class SellerProductListing extends JPanel implements ActionListener{
                 // Check for duplicate dates
                 if (existingText.contains(formattedDate)) {
                 	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                    new CustomDialog(frame, "Date is already taken", "buti pa yung date taken, e ikaw?!", "sorry na");
+                    new CustomDialog(frame, "Date is already taken", "buti pa yung date taken, e ikaw?!", "sorry ha");
                     dateChooser.setDate(null);
                     return;
                 }
@@ -444,14 +478,16 @@ public class SellerProductListing extends JPanel implements ActionListener{
                 if (textField.getText().equals(placeholder)) {
                     textField.setText("");
                     textField.setForeground(Color.BLACK);
+                    textField.setFont(new Font("Monserrat", Font.PLAIN, 12));
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 if (textField.getText().isEmpty()) {
-                    textField.setForeground(Color.GRAY);
                     textField.setText(placeholder);
+                    textField.setFont(new Font("Montserrat", Font.ITALIC, 12));
+                    textField.setForeground(new Color(149, 145, 145));
                 }
             }
         });
@@ -465,14 +501,16 @@ public class SellerProductListing extends JPanel implements ActionListener{
                 if (textArea.getText().equals(placeholder)) {
                 	textArea.setText("");
                 	textArea.setForeground(Color.BLACK);
+                	textArea.setFont(new Font("Monserrat", Font.PLAIN, 12));
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 if (textArea.getText().isEmpty()) {
-                	textArea.setForeground(Color.GRAY);
                 	textArea.setText(placeholder);
+                	textArea.setFont(new Font("Montserrat", Font.ITALIC, 12));
+                    textArea.setForeground(new Color(149, 145, 145));
                 }
             }
         });
