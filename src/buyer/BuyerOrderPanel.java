@@ -2,7 +2,11 @@ package buyer;
 
 import javax.swing.*;
 import javax.swing.table.*;
+
+import misc.AddActiveOrder;
 import misc.CustomTableModel;
+import misc.OrderListPanel;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -72,10 +76,10 @@ public class BuyerOrderPanel extends JPanel {
         add(layeredPane);
 
         
-        ActiveOrdersPanel activeOrdersPanel = new ActiveOrdersPanel();
+        OrderListPanel activeOrdersPanel = new BuyerActiveOrders();
         activeOrdersPanel.setBounds(0, -19, 414, 500);
         
-        CompletedOrdersPanel completedOrdersPanel = new CompletedOrdersPanel();
+        OrderListPanel completedOrdersPanel = new BuyerCompletedOrders();
         layeredPane.add(completedOrdersPanel, "CompletedOrdersPanel");
         layeredPane.add(activeOrdersPanel, "ActiveOrdersPanel");
 
