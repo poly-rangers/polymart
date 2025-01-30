@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Image;
 import javax.swing.*;
 
+import misc.OrderListPanel;
+
 public class SellerOrderPanel extends JPanel {
 	private JPanel contentPane;
 
@@ -69,11 +71,11 @@ public class SellerOrderPanel extends JPanel {
             
         
         // Create objects of the panels (polymorphism)
-        MeetUpsPanel activeMeetUpsPanel = new ActiveMeetUps();
+        OrderListPanel activeMeetUpsPanel = new SellerActiveOrders();
         activeMeetUpsPanel.ordersPanel.setBounds(0, 127, 434, 447);
         activeMeetUpsPanel.setBounds(0, 0, 414, 469);
         
-        MeetUpsPanel completedMeetUpsPanel = new CompletedMeetUps();
+        OrderListPanel completedMeetUpsPanel = new SellerCompletedOrders();
         completedMeetUpsPanel.setBounds(0, 0, 414, 469);
         
         // Add the panels to the layered pane
@@ -83,15 +85,15 @@ public class SellerOrderPanel extends JPanel {
         // Set initial visibility for the panels
         completedMeetUpsPanel.setVisible(false); 
         activeMeetUpsPanel.setVisible(true); 
-        btnActiveOrders.setForeground(new Color(0x730C0C)); //The active orders panel is the first shown
+        btnActiveOrders.setForeground(new Color(0x730C0C)); 
         
         // Button action for switching between the panels
         btnActiveOrders.addActionListener(e -> {
             btnCompleteOrders.setForeground(Color.BLACK);
             btnActiveOrders.setForeground(new Color(0x730C0C));
-            completedMeetUpsPanel.setVisible(false); // Hide completed meet-ups panel
-            activeMeetUpsPanel.setVisible(true); // Show active meet-ups panel
-            layeredPane.revalidate();  // Refresh the layout
+            completedMeetUpsPanel.setVisible(false); 
+            activeMeetUpsPanel.setVisible(true); 
+            layeredPane.revalidate();  
             layeredPane.repaint();
         });
 
