@@ -5,72 +5,65 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.*;
-
 import misc.OrderListPanel;
+import misc.UserBaseTemplate;
 
-public class SellerOrderPanel extends JPanel {
+public class SellerOrderPanel extends UserBaseTemplate {
+	private JButton btnActiveOrders, btnCompleteOrders;
 	private JPanel contentPane;
-
 	private static final long serialVersionUID = 1L;
+	
+	public SellerOrderPanel(JPanel contentPane, String strUserRole) {
+		super(contentPane, "seller");
+		contentPanel.setSize(416, 453);
+		contentPanel.setLocation(0, 144);
+		headerPanel.setBounds(0, 74, 416, 70);
+	}
 
-	public SellerOrderPanel(JPanel contentPane) {
+	 protected void setPanelHeader() {
+	    contentPanel.removeAll();
+		headerPanel.setLayout(null);
+			
+		btnCompleteOrders = new JButton("Completed Orders");
+		btnCompleteOrders.setBounds(298, 41, 108, 21);
+		headerPanel.add(btnCompleteOrders);
+		btnCompleteOrders.setBackground(new Color(240, 240, 240));
+		btnCompleteOrders.setForeground(Color.BLACK);
+		btnCompleteOrders.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
+		btnCompleteOrders.setFocusable(false);
+		btnCompleteOrders.setOpaque(false);
+		btnCompleteOrders.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, new Color(0x730C0C)));
+		                
+		btnActiveOrders = new JButton("Active Orders");
+		btnActiveOrders.setBounds(192, 41, 108, 21);
+		headerPanel.add(btnActiveOrders);
+		btnActiveOrders.setBackground(Color.WHITE);
+		btnActiveOrders.setForeground(Color.BLACK);
+		btnActiveOrders.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
+		btnActiveOrders.setFocusable(false);
+		btnActiveOrders.setOpaque(false);
+		btnActiveOrders.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(0x730C0C)));
+		                
+		JLabel lblMeetups = new JLabel("Meet Ups");
+		lblMeetups.setBounds(33, 21, 193, 50);
+		headerPanel.add(lblMeetups);
+		lblMeetups.setFont(new Font("Montserrat", Font.BOLD, 25));
+		        
+		revalidate();
+		repaint();
+	 }
+	 
+	public void customizeContentPanel() {
 		this.contentPane = contentPane;
-    	
-        setBackground(Color.WHITE);
-        setBounds(100, 100, 414, 660);
-        setLayout(null);
-
-        //Header Image
-        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_seller.icon.png"));
-        Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
-        JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
-        startupImage.setBounds(16, 24, 150, 47);
-        add(startupImage);
-        
-        //Navigation Bar
-        SellerNavigationBar navBar = new SellerNavigationBar(contentPane);
-        navBar.setBounds(0, 611, 416, 52);
-        add(navBar);
-        
-        //Functionalities for Navigation Bar
-        navBar.btnHome.addActionListener(e -> switchPanel("SellerDashboardPanel"));
-        navBar.btnMap.addActionListener(e -> switchPanel("SellerMap"));
-        navBar.btnOrders.addActionListener(e -> System.out.println("Already on Orders Panel"));
-        navBar.btnProfile.addActionListener(e -> switchPanel("SellerProfile"));
-        
-        JButton btnCompleteOrders = new JButton("Completed Orders");
-        btnCompleteOrders.setBounds(296, 101, 108, 21);
-        add(btnCompleteOrders);
-        btnCompleteOrders.setBackground(new Color(240, 240, 240));
-        btnCompleteOrders.setForeground(Color.BLACK);
-        btnCompleteOrders.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
-        btnCompleteOrders.setFocusable(false);
-        btnCompleteOrders.setOpaque(false);
-        btnCompleteOrders.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, new Color(0x730C0C)));
-                
-        JButton btnActiveOrders = new JButton("Active Orders");
-        btnActiveOrders.setBounds(193, 101, 108, 21);
-        add(btnActiveOrders);
-        btnActiveOrders.setBackground(Color.WHITE);
-        btnActiveOrders.setForeground(Color.BLACK);
-        btnActiveOrders.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
-        btnActiveOrders.setFocusable(false);
-        btnActiveOrders.setOpaque(false);
-        btnActiveOrders.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(0x730C0C)));
-                
-        JLabel lblMeetups = new JLabel("Meet Ups");
-        lblMeetups.setBounds(36, 81, 193, 50);
-        add(lblMeetups);
-        lblMeetups.setFont(new Font("Montserrat", Font.BOLD, 25));
-
-
+		contentPanel.removeAll();
+    
         // Create JLayeredPane to switch between Active Orders and Completed Orders
         JLayeredPane layeredPane = new JLayeredPane();
-        layeredPane.setBounds(2, 132, 414, 469);
-        add(layeredPane);
+        layeredPane.setBounds(2, 0, 414, 469);
+        contentPanel.add(layeredPane);
             
         
-        // Create objects of the panels (polymorphism)
+        // Create objects of the panels
         OrderListPanel activeMeetUpsPanel = new SellerActiveOrders();
         activeMeetUpsPanel.ordersPanel.setBounds(0, 127, 434, 447);
         activeMeetUpsPanel.setBounds(0, 0, 414, 469);
@@ -109,15 +102,4 @@ public class SellerOrderPanel extends JPanel {
         revalidate();
         repaint();
     }
-
-        
-        
-  
-	 private void switchPanel(String panelName) {
-	        if (contentPane.getLayout() instanceof CardLayout) {
-	            ((CardLayout) contentPane.getLayout()).show(contentPane, panelName);
-	        } else {
-	            System.err.println("Error: contentPane is not using CardLayout!");
-	        }
-	}
 }

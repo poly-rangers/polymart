@@ -38,8 +38,6 @@ public class OrderListPanel extends JPanel {
         add(scrollPane);
         
         // Header Panel
-        //Make a method out of this. It should pass in an array of strings
-        
         headerPanel = new JPanel(new GridLayout(1, 6));
         headerPanel.setMaximumSize(new Dimension(32767, 30));
         headerPanel.setPreferredSize(new Dimension(414, 30));

@@ -2,50 +2,42 @@ package buyer;
 
 import java.awt.*;
 import javax.swing.*;
-import misc.AddProduct;
-import misc.CustomScrollBar;
-import misc.SearchBar;
+import misc.*;
+import java.awt.event.*;
 
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionEvent;
-
-public class BuyerDashboardPanel extends JPanel {
-
-    private static final long serialVersionUID = 1L;
+public class BuyerDashboardPanel extends UserBaseTemplate {
+	private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JButton btnReceiptTest;
-
     public BuyerDashboardPanel(JPanel contentPane) {
-    	this.contentPane = contentPane;
-    	
-        setBackground(Color.WHITE);
-        setBounds(100, 100, 414, 660);
-
-        // Icon + title
-        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_buyer.icon.png"));
-        Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
-        setLayout(null);
-        JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
-        startupImage.setBounds(16, 24, 150, 47);
-        add(startupImage);
-
-        JLabel lblNewLabel = new JLabel("Products");
-        lblNewLabel.setBounds(43, 132, 91, 24);
+		super(contentPane, "buyer");
+	}
+    
+    public void setPanelHeader() {
+    	contentPanel.removeAll();
+		headerPanel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Products");
+        lblNewLabel.setBounds(43, 50, 91, 24);
         lblNewLabel.setFont(new Font("Montserrat", Font.BOLD, 19));
-        add(lblNewLabel);
-
-        // Add the search bar
+        headerPanel.add(lblNewLabel);
+        
         SearchBar searchBar = new SearchBar();
-        searchBar.setBounds(61, 86, 291, 24);
+        searchBar.setBounds(61, 10, 291, 24);
         searchBar.setupSearchPlaceholder("ang tamad tamad mo mag-scroll talaga naman...");
-        add(searchBar);
+        headerPanel.add(searchBar);
         searchBar.setLayout(new BoxLayout(searchBar, BoxLayout.X_AXIS));
+        
+        revalidate();
+        repaint();
+	}
 
+    public void customizeContentPanel() {
+    	this.contentPane = contentPane;
+    	contentPanel.removeAll();
+  
         // Scrollable panel for products
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(22, 162, 382, 418);
+        scrollPane.setBounds(23, 0, 383, 443);
         scrollPane.setBorder(null);
         scrollPane.setOpaque(false);
 
@@ -60,7 +52,6 @@ public class BuyerDashboardPanel extends JPanel {
         scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
         scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
         scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
-        
         scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
         scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
         scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
@@ -104,18 +95,12 @@ public class BuyerDashboardPanel extends JPanel {
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setViewportView(scrollContentPanel);
 
-        add(scrollPane);
-        
-        // Create NavigationBar and position it at the bottom
-        BuyerNavigationBar navBar = new BuyerNavigationBar(contentPane);
-        navBar.setBounds(0, 611, 416, 52);
-        add(navBar);
-        
-        navBar.btnHome.addActionListener(e -> System.out.println("Already on Dashboard Panel"));
-        navBar.btnMap.addActionListener(e -> switchPanel("BuyerMap"));
-        navBar.btnOrders.addActionListener(e -> switchPanel("BuyerOrderPanel"));
-        navBar.btnProfile.addActionListener(e -> switchPanel("BuyerProfile"));
+        contentPanel.add(scrollPane);
+        revalidate();
+        repaint();
     }
+    
+   
     
     private void switchPanel(String panelName) {
         if (contentPane.getLayout() instanceof CardLayout) {

@@ -45,30 +45,30 @@ public class PolymartMain extends JFrame {
         contentPane.add(sellerTermsConditionsPanel, "SellerTermsConditionsPanel");
 
         // Buyer panels
+        UserBaseTemplate buyerBaseTemplate = new UserBaseTemplate(contentPane, "userRole");
         BuyerStartupPanel buyerStartupPanel = new BuyerStartupPanel(contentPane);
         BuyerSignupPanel buyerSignupPanel = new BuyerSignupPanel(contentPane);
         BuyerSignInPanel buyerSignInPanel = new BuyerSignInPanel(contentPane);
         BuyerDashboardPanel buyerDashboardPanel = new BuyerDashboardPanel(contentPane);
         BuyerOrderPanel	buyerOrderPanel = new BuyerOrderPanel(contentPane);
-        BuyerMap buyerMap = new BuyerMap(contentPane);
         BuyerProfile buyerProfile = new BuyerProfile(contentPane);
-
+       
+        contentPane.add(buyerBaseTemplate, "BuyerBaseTemplate");
         contentPane.add(buyerStartupPanel, "BuyerStartupPanel");
         contentPane.add(buyerSignupPanel, "BuyerSignupPanel");
         contentPane.add(buyerSignInPanel, "BuyerSignInPanel");
         contentPane.add(buyerDashboardPanel, "BuyerDashboardPanel");
         contentPane.add(buyerOrderPanel, "BuyerOrderPanel");
-        contentPane.add(buyerMap, "BuyerMap");
         contentPane.add(buyerProfile, "BuyerProfile");
 
         // Seller panels
         SellerStartupPanel sellerStartupPanel = new SellerStartupPanel(contentPane);
         SellerSignupPanel sellerSignupPanel = new SellerSignupPanel(contentPane);
         SellerSignInPanel sellerSignInPanel = new SellerSignInPanel(contentPane);
-        SellerDashboardPanel sellerDashboardPanel = new SellerDashboardPanel(contentPane);
+        SellerDashboardPanel sellerDashboardPanel = new SellerDashboardPanel(contentPane, "user");
         SellerProductListing sellerProductListing = new SellerProductListing(contentPane);
         ProductDetails productDetails = new ProductDetails(contentPane);
-        SellerOrderPanel sellerOrderPanel = new SellerOrderPanel(contentPane);
+        SellerOrderPanel sellerOrderPanel = new SellerOrderPanel(contentPane, "user");
 
         contentPane.add(sellerStartupPanel, "SellerStartupPanel");
         contentPane.add(sellerSignupPanel, "SellerSignupPanel");
