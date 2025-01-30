@@ -82,7 +82,6 @@ public class PreferencesPanel extends RoundedPanel {
         btnPChev2.setFocusable(false);
         btnPChev2.setFocusPainted(false);
         btnPChev2.setBorderPainted(false); 
-        add(btnPChev2);
-        
+        add(btnPChev2);   
 	}
 }

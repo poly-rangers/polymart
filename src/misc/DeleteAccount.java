@@ -35,7 +35,6 @@ public class DeleteAccount extends JPanel implements ActionListener {
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
         startupImage.setBounds(16, 24, 150, 47);
         add(startupImage);
-    
 
         JLabel lblNewLabel = new JLabel("My Profile");
         lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -48,7 +47,6 @@ public class DeleteAccount extends JPanel implements ActionListener {
         JLabel pic = new JLabel(productPic);
         pic.setBounds(159, 117, 100, 100);
         add(pic);
-        
         
         BuyerNavigationBar navBar = new BuyerNavigationBar(contentPane);
         navBar.setBounds(0, 611, 416, 52);
@@ -169,8 +167,7 @@ public class DeleteAccount extends JPanel implements ActionListener {
         } else {
             System.err.println("Error: contentPane is not using CardLayout!");
         }
-    }
-    
+    }   
     
     private void setupTextFieldPlaceholder(JTextField textField, String placeholder) {
         textField.addFocusListener(new FocusAdapter() {

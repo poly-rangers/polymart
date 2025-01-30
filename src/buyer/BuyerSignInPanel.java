@@ -186,7 +186,7 @@ public class BuyerSignInPanel extends JPanel implements ActionListener {
             new CustomDialog(frame, "You're WRONG!", "mali username mo or password mo - ewan ko sau te ulitin mo yan", "Try Again");
         }
 
-        userSignIn.close();  // Don't forget to close the connection
+        userSignIn.close();  // Close the connection
     }
 
 

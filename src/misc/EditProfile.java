@@ -13,7 +13,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.ActionEvent;
 
-
 public class EditProfile extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
@@ -39,7 +38,6 @@ public class EditProfile extends JPanel implements ActionListener {
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
         startupImage.setBounds(16, 24, 150, 47);
         add(startupImage);
-    
 
         JLabel lblNewLabel = new JLabel("My Profile");
         lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -52,7 +50,6 @@ public class EditProfile extends JPanel implements ActionListener {
         JLabel pic = new JLabel(productPic);
         pic.setBounds(159, 117, 100, 100);
         add(pic);
-        
         
         BuyerNavigationBar navBar = new BuyerNavigationBar(contentPane);
         navBar.setBounds(0, 611, 416, 52);
@@ -164,7 +161,6 @@ public class EditProfile extends JPanel implements ActionListener {
         pnlHeader.add(btnGoBack);
 
         add(pnlHeader);
-       
     }
     
     private void switchPanel(String panelName) {
@@ -174,8 +170,7 @@ public class EditProfile extends JPanel implements ActionListener {
             System.err.println("Error: contentPane is not using CardLayout!");
         }
     }
-    
-    
+     
     private void setupTextFieldPlaceholder(JTextField textField, String placeholder) {
         textField.addFocusListener(new FocusAdapter() {
             @Override

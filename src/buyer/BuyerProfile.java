@@ -10,7 +10,6 @@ import java.awt.*;
 
 
 public class BuyerProfile extends JPanel {
-
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
 
@@ -52,7 +51,7 @@ public class BuyerProfile extends JPanel {
         ProfilePanel pnlProfile = new ProfilePanel(contentPane);
         pnlProfile.setLocation(16, 217);
         add(pnlProfile);
-        
+    
         pnlProfile.btnChev1.addActionListener(e -> switchPanel("EditProfile"));
         pnlProfile.btnChev2.addActionListener(e -> switchPanel("TCandPP"));
         pnlProfile.btnChev3.addActionListener(e -> switchPanel("TCandPP"));
@@ -69,7 +68,6 @@ public class BuyerProfile extends JPanel {
         pic.setBounds(53, 82, 100, 100);
         add(pic);
         
-        
         BuyerNavigationBar navBar = new BuyerNavigationBar(contentPane);
         navBar.setBounds(0, 611, 416, 52);
 
@@ -79,7 +77,6 @@ public class BuyerProfile extends JPanel {
         navBar.btnMap.addActionListener(e -> switchPanel("BuyerDashboardMap"));
         navBar.btnOrders.addActionListener(e -> switchPanel("BuyerOrderPanel"));
         navBar.btnProfile.addActionListener(e -> System.out.println("Already on Profile Panel"));
-       
     }
     
     private void switchPanel(String panelName) {

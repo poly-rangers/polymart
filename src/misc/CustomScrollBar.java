@@ -10,7 +10,6 @@ import javax.swing.JComponent;
 import javax.swing.JScrollBar;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
-
 	public class CustomScrollBar extends BasicScrollBarUI {
         @Override
         protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {

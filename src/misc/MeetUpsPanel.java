@@ -1,8 +1,5 @@
-package seller;
+package misc;
 import javax.swing.*;
-
-import misc.AddActiveOrder;
-import misc.CustomScrollBar;
 
 import java.awt.*;
 
@@ -62,43 +59,6 @@ public class MeetUpsPanel extends JPanel {
         ordersPanel.setLayout(new GridLayout(0, 1, 0, 5));
         ordersPanel.setBackground(Color.WHITE);
       
-        revalidate();
-        repaint();
-    }
-
-
-}
-
-class ActiveMeetUps extends MeetUpsPanel {
-    protected void createOrdersPanel() {
-        ordersPanel.removeAll();
-        ordersPanel.setLayout(new GridLayout(0, 1, 0, 5));
-        
-        // Adding sample orders
-        ordersPanel.add(new AddActiveOrder("01/10/25", "Cooie", "Lagoon", "10:30AM", 50.0));
-        ordersPanel.add(new AddActiveOrder("01/10/25", "Cooie", "Lagoon", "10:30AM", 50.0));
-        ordersPanel.add(new AddActiveOrder("01/10/25", "Cooie", "Lagoon", "10:30AM", 50.0));
-
-        // Fill empty slots to maintain layout
-        int componentCount = ordersPanel.getComponentCount();
-        for (int i = componentCount; i < 15; i++) {
-            ordersPanel.add(new JLabel(""));
-        }
-        
-        revalidate();
-        repaint();
-    }
-}
-
-class CompletedMeetUps extends MeetUpsPanel {
-    protected void createOrdersPanel() {
-        ordersPanel.removeAll();
-        ordersPanel.setLayout(new GridLayout(0, 1, 0, 5));
-        int componentCount = ordersPanel.getComponentCount();
-        for (int i = componentCount; i < 15; i++) {
-            ordersPanel.add(new JLabel(""));
-        }
-
         revalidate();
         repaint();
     }

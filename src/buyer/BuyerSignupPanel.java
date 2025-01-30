@@ -27,7 +27,6 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
     private JLabel labelAnd;
     private JLabel labelChooseFile;
     private JCheckBox chckbxTermsConditions;
-    
     private UserSignup userSignup;
     private File selectedFile;
     
@@ -59,7 +58,6 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
         });
         
         add(startupImage);
-        
 
         // Sign-up label
         JLabel labelSignUp = new JLabel("Sign Up");

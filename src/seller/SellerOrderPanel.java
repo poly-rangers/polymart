@@ -70,7 +70,7 @@ public class SellerOrderPanel extends JPanel {
         add(layeredPane);
             
         
-        // Create objects of the panels (polymorphism)
+        // Create objects for the order list panel
         OrderListPanel activeMeetUpsPanel = new SellerActiveOrders();
         activeMeetUpsPanel.ordersPanel.setBounds(0, 127, 434, 447);
         activeMeetUpsPanel.setBounds(0, 0, 414, 469);

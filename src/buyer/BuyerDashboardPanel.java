@@ -15,7 +15,6 @@ public class BuyerDashboardPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JButton btnReceiptTest;
 
     public BuyerDashboardPanel(JPanel contentPane) {
     	this.contentPane = contentPane;

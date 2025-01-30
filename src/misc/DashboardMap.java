@@ -11,7 +11,6 @@ public class DashboardMap extends JPanel {
 	
 	private JPanel contentPane;
 	private String userRole;
-//	private int cornerRadius = 30;
 	
 	public DashboardMap(JPanel contentPane, String userRole) {
 		this.contentPane = contentPane;
@@ -53,7 +52,7 @@ public class DashboardMap extends JPanel {
         pnlMain.add(lblMeetUpLoc);
 
         JLabel legendLogo = new JLabel(new ImageIcon(scaledLegend));
-        legendLogo.setBounds(30, 332, 32, 30); // Positioning the image inside the frame
+        legendLogo.setBounds(30, 332, 32, 30);
         pnlMain.add(legendLogo);
 
         JLabel lblMapLegend = new JLabel("Map Legend");
@@ -63,11 +62,11 @@ public class DashboardMap extends JPanel {
         pnlMain.add(lblMapLegend);
 
         JLabel locationLogo = new JLabel(new ImageIcon(scaledIcon));
-        locationLogo.setBounds(30, 11, 31, 42); // Positioning the image inside the frame
+        locationLogo.setBounds(30, 11, 31, 42); 
         pnlMain.add(locationLogo);
 
         JLabel mapImageIcon = new JLabel(new ImageIcon(scaledMap));
-        mapImageIcon.setBounds(30, 53, 320, 276); // Positioning the image inside the frame
+        mapImageIcon.setBounds(30, 53, 320, 276);
         pnlMain.add(mapImageIcon);
         
         RoundedPanel legendPanel = new RoundedPanel(10, Color.WHITE);
@@ -82,6 +81,7 @@ public class DashboardMap extends JPanel {
         scrollPane.getVerticalScrollBar().setUI(new CustomScrollBar());
         legendPanel.add(scrollPane);
         
+        //All Meet-up locations in PUP
         String[] arrLocations = {"1. Lagoon", "6. Linear Park",
         							"2. West Wing", "7. Charlie Building",
         							"3. Dome", "8. Grandstand",
@@ -106,15 +106,7 @@ public class DashboardMap extends JPanel {
         navBar.setBounds(0, 611, 416, 52);
         add(navBar);
         
-//        if (buyer icon)
-//            buyer-specific actions
-//       else 
-//            seller-specific actions
-        
-//        String strImagePath = userRole.equalsIgnoreCase("Buyer")
-//                ? "/polypup_buyer.icon.png"
-//                : "/polypup_seller.icon.png";
-        
+        //Specify actions of the navigation bar according to the user role
         if(strImagePath == "/polypup_buyer.icon.png") {
         	 navBar.btnHome.addActionListener(e -> switchPanel("BuyerDashboardPanel"));
              navBar.btnMap.addActionListener(e -> System.out.println("Already on Dashboard Map"));
@@ -126,8 +118,6 @@ public class DashboardMap extends JPanel {
              navBar.btnOrders.addActionListener(e -> switchPanel("SellerOrderPanel"));
              navBar.btnProfile.addActionListener(e -> switchPanel("SellerProfile"));
         }
-        
-       
     }
 	
 	private void switchPanel(String panelName) {

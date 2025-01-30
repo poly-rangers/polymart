@@ -5,13 +5,11 @@ import misc.OrderListPanel;
 import java.awt.*;
 
 public class BuyerOrderPanel extends JPanel {
-
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
 
     public BuyerOrderPanel(JPanel contentPane) {
     	this.contentPane = contentPane;
-    	
         setBackground(Color.WHITE);
         setBounds(100, 100, 414, 660);
         setLayout(null);
@@ -58,20 +56,18 @@ public class BuyerOrderPanel extends JPanel {
         btnCompleteOrders.setOpaque(false);
         btnCompleteOrders.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, new Color(0x730C0C)));
         add(btnCompleteOrders);
-    
 
         // Create JLayeredPane for Active Orders and Completed Orders
         JLayeredPane layeredPane = new JLayeredPane();
         layeredPane.setBounds(0, 149, 414, 462);
         add(layeredPane);
-
         
         OrderListPanel activeOrdersPanel = new BuyerActiveOrders();
         activeOrdersPanel.setBounds(0, -19, 414, 500);
         
         OrderListPanel completedOrdersPanel = new BuyerCompletedOrders();
-        layeredPane.add(completedOrdersPanel, "CompletedOrdersPanel");
-        layeredPane.add(activeOrdersPanel, "ActiveOrdersPanel");
+        layeredPane.add(completedOrdersPanel);
+        layeredPane.add(activeOrdersPanel);
 
         btnActiveOrders.setForeground(new Color(0x730C0C));
         completedOrdersPanel.setVisible(false);

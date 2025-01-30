@@ -58,7 +58,6 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         lblStatus.setForeground(new Color(0x730C0C));
         lblStatus.setBounds(330,146,60,15);
         add(lblStatus);
-        
  
         JPanel scrollContentPanel = new JPanel();
         scrollContentPanel.setOpaque(true);
@@ -67,14 +66,12 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         scrollContentPanel.setLayout(new BoxLayout(scrollContentPanel, BoxLayout.Y_AXIS));
         scrollContentPanel.setBackground(Color.WHITE);
 
-     // Add rows dynamically
         ListProduct listProduct = new ListProduct();
         scrollContentPanel.add(listProduct.createRow("Motivation mabuhay", "3.4", e -> showReview()));
         scrollContentPanel.add(listProduct.createRow("Pagmamahal at aruga", "4.8", e -> showReview()));
         scrollContentPanel.add(listProduct.createRow("relapse sa umaga", "4.2", e -> showReview()));
         scrollContentPanel.add(listProduct.createRow("mahal pa rin kita", "0.3", e -> showReview()));
         scrollContentPanel.add(listProduct.createRow("PLS BUMALIK KA NA", "2.3", e -> showReview()));
-
         
         scrollPane.setBorder(null);
         scrollPane.getViewport().setOpaque(false);

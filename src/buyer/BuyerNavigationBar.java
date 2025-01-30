@@ -6,7 +6,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.*;
 
 public class BuyerNavigationBar extends JPanel {
-
     private static final long serialVersionUID = 2021409567929036389L;
     public JButton btnHome, btnMap, btnOrders, btnProfile;
     private JPanel contentPane;

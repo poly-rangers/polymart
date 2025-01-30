@@ -18,7 +18,7 @@ public class BuyerStartupPanel extends JPanel implements ActionListener {
 
         setBackground(Color.WHITE);
         setSize(414,660);
-        setLayout(null); // Use null layout
+        setLayout(null);
 
         JLabel lblStartupHeader1 = new JLabel("WELCOME TO");
         lblStartupHeader1.setBounds(0, 282, 414, 30);
@@ -66,7 +66,7 @@ public class BuyerStartupPanel extends JPanel implements ActionListener {
         btnStart.addActionListener(this);
         add(btnStart);
 
-        // Image
+        // PolyPup Image
         ImageIcon imgIconOriginalImage = new ImageIcon(this.getClass().getResource("/polypup_front.png"));
         Image imgScaled = imgIconOriginalImage.getImage().getScaledInstance(260, 260, Image.SCALE_SMOOTH);
         JLabel lblStartupImage = new JLabel(new ImageIcon(imgScaled));

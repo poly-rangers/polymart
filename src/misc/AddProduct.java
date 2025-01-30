@@ -28,7 +28,6 @@ public class AddProduct extends JPanel {
         setBackground(Color.WHITE);
         setBorder(new LineBorder(new Color(211, 211, 211), 1, true));
        
-       
         // Product picture 
         JPanel pnlPicture = new JPanel();
         pnlPicture.setBorder(new EmptyBorder(5, 10, 5, 10)); 

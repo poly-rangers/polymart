@@ -39,7 +39,6 @@ public class SellerProductListing extends JPanel implements ActionListener{
 	private JCheckBox cbGCash, cbCash;
 	private JDateChooser dateChooser;
 	private RoundedButton btnPost;
-	
 	private ProductDatabase productDatabase;
 	private File imgFile1, imgFile2, imgFile3, imgFile4;
 	private RoundedPanel panelProdName, panelProdDesc, panelPrice, panelLoc, panelTime;
@@ -164,7 +163,6 @@ public class SellerProductListing extends JPanel implements ActionListener{
         addMouseListenerToLabel(lblAddImage2);
         addMouseListenerToLabel(lblAddImage3);
         addMouseListenerToLabel(lblAddImage4);
-       
         
         //TEXTFIELD ROUNDED LOOK
         panelProdName = new RoundedPanel(15, new Color(241,241,241));
@@ -376,8 +374,6 @@ public class SellerProductListing extends JPanel implements ActionListener{
         scrollPane.setBorder(null);
         scrollContentPanel.setBorder(null);        
         scrollPane.setViewportView(scrollContentPanel);
-    
-        
     }
 
     @Override

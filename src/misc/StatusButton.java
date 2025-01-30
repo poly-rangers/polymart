@@ -5,10 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;;
 
 public class StatusButton extends RoundedButton{
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8803877173922409867L;
 	
 	private boolean isClicked = false;
@@ -32,8 +28,6 @@ public class StatusButton extends RoundedButton{
 				setText(isClicked ? "In Stock" : "No Stock");
 				setForeground(isClicked ? Color.WHITE : Color.WHITE);
 			}
-			
 		});
 	}
-
 }

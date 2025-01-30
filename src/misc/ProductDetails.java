@@ -87,8 +87,7 @@ public class ProductDetails extends JPanel implements ActionListener{
         ImageIcon image4 = new ImageIcon(this.getClass().getResource("/imageplaceholdersmall.png"));
         lblImage4 = new JLabel(image4);
         lblImage4.setBounds(115,167,40,40);
-        scrollContentPanel.add(lblImage4);
-        
+        scrollContentPanel.add(lblImage4); 
         
        lblProductName = new JLabel("Cookies");
        lblProductName.setFont(new Font("Montserrat", Font.BOLD, 24));
@@ -216,9 +215,7 @@ public class ProductDetails extends JPanel implements ActionListener{
        btnViewAll.setFocusPainted(false);
        btnViewAll.setBorderPainted(false);
        btnViewAll.setContentAreaFilled(false);
-       
        btnViewAll.setBounds(139,592,85,23);
-       
        
        scrollContentPanel.add(reviewPanel);
        scrollContentPanel.add(panel1);
@@ -227,7 +224,6 @@ public class ProductDetails extends JPanel implements ActionListener{
        scrollContentPanel.add(btnViewAll);
        add(btnSetAMeet);
      
-       
        	scrollPane.getVerticalScrollBar().setUI(new CustomScrollBar());
         scrollPane.setBorder(null);
         scrollContentPanel.setBorder(null);        
@@ -236,8 +232,8 @@ public class ProductDetails extends JPanel implements ActionListener{
         SellerNavigationBar navBar = new SellerNavigationBar(scrollContentPanel);
         navBar.setBounds(0,611, 414,50);
         add(navBar);
-        
     }
+	
 	@Override
 	public void actionPerformed(ActionEvent actEvent) {
 		Object objSourceEvent = actEvent.getSource();

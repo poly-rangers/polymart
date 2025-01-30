@@ -16,7 +16,6 @@ public class OrderListPanel extends JPanel {
         setBounds(0, -19, 414, 500);
         setLayout(null);
         
-        //ordersPanel = new JPanel();
         ordersPanel.setLayout(new BoxLayout(ordersPanel, BoxLayout.Y_AXIS));
         ordersPanel.setBackground(Color.WHITE);
         
@@ -38,8 +37,6 @@ public class OrderListPanel extends JPanel {
         add(scrollPane);
         
         // Header Panel
-        //Make a method out of this. It should pass in an array of strings
-        
         headerPanel = new JPanel(new GridLayout(1, 6));
         headerPanel.setMaximumSize(new Dimension(32767, 30));
         headerPanel.setPreferredSize(new Dimension(414, 30));
@@ -106,7 +103,5 @@ public class OrderListPanel extends JPanel {
         revalidate();
         repaint();
     }
-
-
 }
 

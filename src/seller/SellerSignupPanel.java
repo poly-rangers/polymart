@@ -61,7 +61,6 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
         
         add(startupImage);
         
-
      // Sign-up label
         JLabel labelSignUp = new JLabel("Sign Up");
         panelLayout.putConstraint(SpringLayout.EAST, startupImage, 0, SpringLayout.EAST, labelSignUp);
@@ -191,14 +190,13 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
         // Add the label to the panel
         add(labelChooseFile);
 
-
         // Question link
         btnQuestionLink = new JButton("<html><u>Why do I need this?</u></html>");
         btnQuestionLink.setForeground(new Color(128, 128, 128));
         panelLayout.putConstraint(SpringLayout.NORTH, btnQuestionLink, 6, SpringLayout.SOUTH, labelChooseFile);
         panelLayout.putConstraint(SpringLayout.WEST, btnQuestionLink, 153, SpringLayout.WEST, this);
         panelLayout.putConstraint(SpringLayout.EAST, btnQuestionLink, -143, SpringLayout.EAST, this);
-//        btnQuestionLink.setForeground(UIManager.getColor("Button.darkShadow"));
+
         btnQuestionLink.setFont(new Font("Montserrat Medium", Font.ITALIC, 10));
         btnQuestionLink.setFocusPainted(false);
         btnQuestionLink.setFocusable(false);
