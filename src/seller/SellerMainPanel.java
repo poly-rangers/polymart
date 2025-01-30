@@ -3,6 +3,8 @@ package seller;
 import java.awt.*;
 import javax.swing.*;
 import misc.RoundedButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SellerMainPanel extends JPanel {
 	
@@ -73,6 +75,10 @@ public class SellerMainPanel extends JPanel {
         lblStartupSubheader3.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         JButton btnGoBack = new JButton("Go Back");
+        btnGoBack.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         btnGoBack.setBackground(Color.WHITE);
     	btnGoBack.setForeground(new Color(0x730C0C));
     	btnGoBack.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));

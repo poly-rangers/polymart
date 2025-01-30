@@ -31,6 +31,7 @@ public class MeetUpsPanel extends JPanel {
         JPanel headerPanel = new JPanel(new GridLayout(1, 6));
         headerPanel.setMaximumSize(new Dimension(32767, 30));
         headerPanel.setPreferredSize(new Dimension(414, 30));
+        headerPanel.setBorder(BorderFactory.createMatteBorder(0,  0,  1,  0,  Color.LIGHT_GRAY));
         headerPanel.setBackground(Color.WHITE);
         
         String[] headers = {"Date", "Shop", "Location", "Time", "Total", "Details"};
@@ -68,7 +69,7 @@ public class MeetUpsPanel extends JPanel {
 
 }
 
-class ActiveMeetUpPolymorphism extends MeetUpsPanel {
+class ActiveMeetUps extends MeetUpsPanel {
     protected void createOrdersPanel() {
         ordersPanel.removeAll();
         ordersPanel.setLayout(new GridLayout(0, 1, 0, 5));
@@ -89,7 +90,7 @@ class ActiveMeetUpPolymorphism extends MeetUpsPanel {
     }
 }
 
-class CompletedMeetUpPolymorphism extends MeetUpsPanel {
+class CompletedMeetUps extends MeetUpsPanel {
     protected void createOrdersPanel() {
         ordersPanel.removeAll();
         ordersPanel.setLayout(new GridLayout(0, 1, 0, 5));
