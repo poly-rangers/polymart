@@ -21,11 +21,12 @@ public class OrderListPanel extends JPanel {
         ordersPanel.setBackground(Color.WHITE);
         
         lblNoOrders = new JLabel("No Orders");
+        lblNoOrders.setBounds(100, 90, 100, 50);
         lblNoOrders.setForeground(new Color(128, 128, 128));
         lblNoOrders.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 20));
-        lblNoOrders.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNoOrders.setHorizontalAlignment(SwingConstants.CENTER); 
         lblNoOrders.setVisible(false);
-        ordersPanel.add(lblNoOrders);
+        add(lblNoOrders);
 
         scrollPane = new JScrollPane();
         scrollPane.setBounds(10, 10, 394, 463);
@@ -57,11 +58,13 @@ public class OrderListPanel extends JPanel {
         scrollPane.setViewportView(contentPanel);
 
         createOrdersPanel();
+        checkNoOrders();
         fixTableFormat(ordersPanel.getComponentCount());
         scrollPane.getVerticalScrollBar().setUI(new CustomScrollBar());
         scrollPane.getHorizontalScrollBar().setUI(new CustomScrollBar());
     }
     
+    //Create panel for the header
     protected void createHeaderPanel(String[] headerTitles){
     	 for (String header : arrHeaders) {
              JLabel lblHeaderTitle = new JLabel(header);
@@ -71,7 +74,8 @@ public class OrderListPanel extends JPanel {
              headerPanel.add(lblHeaderTitle);
          }
     }
-
+    
+    //Create panel for the list of orders
     protected void createOrdersPanel() {
         ordersPanel.removeAll();
         ordersPanel.setLayout(new GridLayout(0, 1, 0, 5));
@@ -81,10 +85,23 @@ public class OrderListPanel extends JPanel {
         repaint();
     }
     
+    //Makes sure that the rows are vertically aligned properly
     protected void fixTableFormat(int componentCount) {
     	componentCount = ordersPanel.getComponentCount();
         for (int i = componentCount; i < 15; i++) {
             ordersPanel.add(new JLabel(""));
+        }
+        revalidate();
+        repaint();
+    }
+    
+    //Display the lblNoOrders if there are no orders added 
+    protected void checkNoOrders() {
+    	if (ordersPanel.getComponentCount() == 0) {
+    		lblNoOrders.setVisible(true);
+            scrollPane.setViewportView(lblNoOrders);  
+        } else {
+            scrollPane.setViewportView(contentPanel); 
         }
         revalidate();
         repaint();
