@@ -91,7 +91,7 @@ public class PolymartMain extends JFrame {
         contentPane.add(buyerDashboardMap, "BuyerDashboardMap");
         
         DashboardMap sellerDashboardMap = new DashboardMap(contentPane, "Seller");
-        contentPane.add(sellerDashboardMap, "SellerDashboardMap");
+        contentPane.add(sellerDashboardMap, "DashboardMap"); 
         
         // Navigation bar
         BuyerNavigationBar buyerNavigationBar = new BuyerNavigationBar(contentPane);

@@ -32,7 +32,7 @@ public class SellerOrderPanel extends JPanel {
         
         //Functionalities for Navigation Bar
         navBar.btnHome.addActionListener(e -> switchPanel("SellerDashboardPanel"));
-        navBar.btnMap.addActionListener(e -> switchPanel("SellerDashboardMap"));
+        navBar.btnMap.addActionListener(e -> switchPanel("DashboardMap"));
         navBar.btnOrders.addActionListener(e -> System.out.println("Already on Orders Panel"));
         navBar.btnProfile.addActionListener(e -> switchPanel("SellerProfile"));
         
