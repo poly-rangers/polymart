@@ -53,6 +53,7 @@ public class CustomDialog extends JDialog {
         btnContainer.setForeground(Color.WHITE);
         btnContainer.setFocusPainted(false);
         btnContainer.setBorderPainted(false);
+        btnContainer.setContentAreaFilled(false);
 
         // Add ActionListener to the button to close the dialog
         btnContainer.addActionListener(new ActionListener() {

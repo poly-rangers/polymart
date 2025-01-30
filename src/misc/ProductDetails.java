@@ -69,17 +69,17 @@ public class ProductDetails extends JPanel implements ActionListener{
         scrollContentPanel.setLayout(null);
         scrollContentPanel.setPreferredSize(new Dimension(350, 625));
         
-        ImageIcon image1 = new ImageIcon(this.getClass().getResource("/imageplaceholder.png"));
+        ImageIcon image1 = new ImageIcon(this.getClass().getResource("/cookie.png"));
         lblImage1 = new JLabel(image1);
         lblImage1.setBounds(10,11,145,145);
         scrollContentPanel.add(lblImage1);
 
-        ImageIcon image2 = new ImageIcon(this.getClass().getResource("/imageplaceholdersmall.png"));
+        ImageIcon image2 = new ImageIcon(this.getClass().getResource("/cookie1.png"));
         lblImage2 = new JLabel(image2);
         lblImage2.setBounds(10,167,40,40);
         scrollContentPanel.add(lblImage2);
         
-        ImageIcon image3 = new ImageIcon(this.getClass().getResource("/imageplaceholdersmall.png"));
+        ImageIcon image3 = new ImageIcon(this.getClass().getResource("/cookie2.png"));
         lblImage3 = new JLabel(image3);
         lblImage3.setBounds(63,167,40,40);
         scrollContentPanel.add(lblImage3);
@@ -107,9 +107,9 @@ public class ProductDetails extends JPanel implements ActionListener{
        
        btnIn = new StatusButton("Status");
        btnIn.setBackground(new Color(115,12,12));
+       btnIn.setSelected(true);
        btnIn.setForeground(Color.WHITE);
        btnIn.setBorder(null);
-//       btnIn.setEnabled(false);
        btnIn.setBounds(165,141,80,15);
        scrollContentPanel.add(btnIn);
        
@@ -136,18 +136,18 @@ public class ProductDetails extends JPanel implements ActionListener{
        lblPrice.setHorizontalAlignment(SwingConstants.RIGHT); 
        scrollContentPanel.add(lblPrice);
        
-       lblSocMed = new JLabel("Follow us on Social Media:");
+       lblSocMed = new JLabel("Contact us:");
        lblSocMed.setForeground(new Color(115, 12, 12));
        lblSocMed.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 13));
        lblSocMed.setBounds(10,218,185,15);
        scrollContentPanel.add(lblSocMed);
        
-       lblSocials = new JLabel("<html>PolyMart Piamonte<br>@polymartpiamonte</html>");
+       lblSocials = new JLabel("<html>PolyMart Piamonte<br>polya@polymartpiamonte.com</html>");
        lblSocials.setFont(new Font("Montserrat", Font.PLAIN, 12));
        lblSocials.setBounds(10,233,229,30);
        scrollContentPanel.add(lblSocials);
        
-       btnRating= new RoundedButton("4.8",10);
+       btnRating = new RoundedButton("4.9",10);
        btnRating.setBounds(295,20,52,15);
        btnRating.setBackground(new Color(115,12,12));
        btnRating.setForeground(Color.WHITE);

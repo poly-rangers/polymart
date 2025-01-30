@@ -31,29 +31,6 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
         startupImage.setBounds(16, 24, 150, 47);
         add(startupImage);
-        
-        JPanel pnlHeader = new JPanel();
-        pnlHeader.setBounds(20, 113, 384, 24);
-        pnlHeader.setOpaque(true);
-        pnlHeader.setBackground(Color.WHITE);
-        pnlHeader.setLayout(new BorderLayout());
-        pnlHeader.setBounds(16, 111, 376,24);
-        
-        JLabel lblMyProduct = new JLabel("My Products");
-        lblMyProduct.setFont(new Font("Montserrat", Font.BOLD, 19));
-        
-        btnAddProduct = new RoundedButton("Add a product", 10);
-        btnAddProduct.addActionListener(this);
-        btnAddProduct.setFocusPainted(false);
-        btnAddProduct.setBorderPainted(false);
-        btnAddProduct.setFont(new Font("Montserrat", Font.BOLD | Font.ITALIC, 11));
-        btnAddProduct.setBackground(new Color(102, 0, 0));
-        btnAddProduct.setForeground(Color.WHITE);
-        btnAddProduct.setFocusable(true);
-        btnAddProduct.setMinimumSize(new Dimension(130,10));
-        
-        pnlHeader.add(lblMyProduct, BorderLayout.WEST);
-        pnlHeader.add(btnAddProduct, BorderLayout.EAST);
 
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(22, 162, 382, 418);
@@ -105,7 +82,6 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         scrollPane.setColumnHeaderView(scrollContentPanel);
         scrollPane.getVerticalScrollBar().setUI(new CustomScrollBar());
         add(scrollPane);
-        add(pnlHeader);
         
         SellerNavigationBar navBar = new SellerNavigationBar(scrollContentPanel);
         navBar.setBounds(0, 611, 416, 52);
@@ -115,6 +91,30 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         navBar.btnMap.addActionListener(e -> switchPanel("DashboardMap"));
         navBar.btnOrders.addActionListener(e -> switchPanel("SellerOrderPanel"));
         navBar.btnProfile.addActionListener(e -> switchPanel("SellerProfile"));
+        
+        JPanel pnlHeader = new JPanel();
+        pnlHeader.setBounds(23, 111, 367, 24);
+        add(pnlHeader);
+        pnlHeader.setOpaque(true);
+        pnlHeader.setBackground(Color.WHITE);
+        pnlHeader.setLayout(new BorderLayout());
+        
+        JLabel lblMyProduct = new JLabel("My Products");
+        lblMyProduct.setForeground(new Color(0, 0, 0));
+        lblMyProduct.setFont(new Font("Montserrat", Font.BOLD, 19));
+        
+        btnAddProduct = new RoundedButton("Add a product", 10);
+        btnAddProduct.addActionListener(this);
+        btnAddProduct.setFocusPainted(false);
+        btnAddProduct.setBorderPainted(false);
+        btnAddProduct.setFont(new Font("Montserrat", Font.BOLD | Font.ITALIC, 11));
+        btnAddProduct.setBackground(new Color(102, 0, 0));
+        btnAddProduct.setForeground(Color.WHITE);
+        btnAddProduct.setFocusable(true);
+        btnAddProduct.setMinimumSize(new Dimension(130,10));
+        
+        pnlHeader.add(lblMyProduct, BorderLayout.WEST);
+        pnlHeader.add(btnAddProduct, BorderLayout.EAST);
         
 	}
 	

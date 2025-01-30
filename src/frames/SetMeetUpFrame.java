@@ -7,7 +7,7 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.*;
 import misc.RoundedButton;
 
-public class SetMeetUpFrame extends JFrame implements ActionListener {
+public class SetMeetUpFrame extends JDialog implements ActionListener {
     private static final long serialVersionUID = 8247694229122275513L;
     private int cornerRadius = 30;
     private JTextField textField;
@@ -73,7 +73,7 @@ public class SetMeetUpFrame extends JFrame implements ActionListener {
         
         JLabel lblQty = new JLabel("Quantity: ");
         lblQty.setForeground(Color.WHITE);
-        lblQty.setFont(new Font("Dialog", Font.BOLD, 12));
+        lblQty.setFont(new Font("Montserrat", Font.BOLD, 12));
         lblQty.setBounds(207, 436, 74, 19);
         pnlMain.add(lblQty);
 

@@ -54,19 +54,18 @@ public class BuyerDashboardPanel extends JPanel {
         scrollContentPanel.setBackground(new Color(255, 255, 255));
         scrollContentPanel.setLayout(new GridLayout(0, 2, 10, 10));
         
-        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
-        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
-        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
-        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
-        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
-        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
-        
-        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
-        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
-        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
-        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
-        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
-        scrollContentPanel.add(new AddProduct("Pastil wow", "P150"));
+        scrollContentPanel.add(new AddProduct("Pastil wow", "P150", "/pastil.png", "4.5"));
+        scrollContentPanel.add(new AddProduct("Cookies", "P59", "/cookie.png", "4.9"));
+        scrollContentPanel.add(new AddProduct("Smorez", "P100", "/smorez.png","3.4"));
+        scrollContentPanel.add(new AddProduct("Sandwhat", "P120", "/sandwhich.png","4.8"));
+        scrollContentPanel.add(new AddProduct("Pastil wow", "P150", "/pastil.png", "4.5"));
+        scrollContentPanel.add(new AddProduct("Cookies", "P59", "/cookie.png", "4.9"));
+        scrollContentPanel.add(new AddProduct("Smorez", "P100", "/smorez.png","3.4"));
+        scrollContentPanel.add(new AddProduct("Sandwhat", "P120", "/sandwhich.png","4.8"));
+        scrollContentPanel.add(new AddProduct("Pastil wow", "P150", "/pastil.png", "4.5"));
+        scrollContentPanel.add(new AddProduct("Cookies", "P59", "/cookie.png", "4.9"));
+        scrollContentPanel.add(new AddProduct("Smorez", "P100", "/smorez.png","3.4"));
+        scrollContentPanel.add(new AddProduct("Sandwhat", "P120", "/sandwhich.png","4.8"));
 
         // AddProduct components mouseListener
         for (Component comp : scrollContentPanel.getComponents()) {
