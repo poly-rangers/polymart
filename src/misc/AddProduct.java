@@ -19,7 +19,7 @@ public class AddProduct extends JPanel {
 	private static final long serialVersionUID = 6429731752501671820L;
 	JPanel pnlPicture, pnlProductInfo, pnlRating;
 	
-	public AddProduct(String strProductName, String strProductPrice) {
+	public AddProduct(String strProductName, String strProductPrice, String strImagePath, String rating) {
 		
 		// Panel properties
         setPreferredSize(new Dimension(173, 198));
@@ -28,15 +28,15 @@ public class AddProduct extends JPanel {
         setBackground(Color.WHITE);
         setBorder(new LineBorder(new Color(211, 211, 211), 1, true));
        
-
-        
+       
         // Product picture 
         JPanel pnlPicture = new JPanel();
         pnlPicture.setBorder(new EmptyBorder(5, 10, 5, 10)); 
-        pnlPicture.setPreferredSize(new Dimension(173, 140)); // Adjust height as needed
-        pnlPicture.setMaximumSize(new Dimension(173, 140)); // Prevents unexpected expansion
+        pnlPicture.setPreferredSize(new Dimension(173, 140)); 
+        pnlPicture.setMaximumSize(new Dimension(173, 140));
         pnlPicture.setBackground(Color.WHITE);
-        ImageIcon productPic = new ImageIcon(this.getClass().getResource("/pastil.png"));
+        
+        ImageIcon productPic = new ImageIcon(this.getClass().getResource(strImagePath));
         JLabel pic = new JLabel(productPic);
         pnlPicture.add(pic);
         add(pnlPicture);
@@ -61,7 +61,7 @@ public class AddProduct extends JPanel {
         pnlRating.setBackground(Color.WHITE);
         pnlRating.setLayout(null);
         
-        JLabel lblRating = new JLabel("4.5");
+        JLabel lblRating = new JLabel(rating);
         lblRating.setHorizontalAlignment(JLabel.CENTER);
         lblRating.setBounds(10, 0, 34, 20);
         lblRating.setForeground(Color.WHITE);
