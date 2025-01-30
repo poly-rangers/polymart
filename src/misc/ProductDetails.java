@@ -247,8 +247,8 @@ public class ProductDetails extends JPanel implements ActionListener{
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "BuyerDashboardPanel");
     	} else if(objSourceEvent == btnSetAMeet) {
-    		MeetupConfirmation meetupConfirmation = new MeetupConfirmation();
-    		meetupConfirmation.setVisible(true);
+    		SetMeetUpFrame setMeetUpFrame = new SetMeetUpFrame();
+    		setMeetUpFrame.setVisible(true);
     	}
 	}
 }

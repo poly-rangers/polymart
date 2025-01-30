@@ -1,14 +1,21 @@
 package frames;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.*;
 import misc.RoundedButton;
 
-public class SetMeetUpFrame extends JFrame {
+public class SetMeetUpFrame extends JFrame implements ActionListener {
     private static final long serialVersionUID = 8247694229122275513L;
     private int cornerRadius = 30;
     private JTextField textField;
+    private RoundedButton btnClear, btnCancel, btnConfirm;
+    private JTextArea textArea;
+    private String[] strLocations = {"Select a variation", "Lagoon", "Souvenir Shop", "Linear"};
+    private String[] strTime = {"Select a variation", "Oras ko", "Oras niya ❤"};
+    private JComboBox<String> toggleDownLocation, toggleDownTime, toggleDownPayment;
 
     public SetMeetUpFrame() {
         setUndecorated(true);
@@ -46,8 +53,7 @@ public class SetMeetUpFrame extends JFrame {
         lblSetLocation.setForeground(Color.WHITE);
         pnlMain.add(lblSetLocation);
         
-        String[] strLocations = {"Select a variation", "Lagoon", "Souvenir Shop", "Linear"};
-        JComboBox<String> toggleDownLocation = new JComboBox<>(strLocations);
+        toggleDownLocation = new JComboBox<>(strLocations);
         toggleDownLocation.setBounds(28, 358, 140, 23);
         toggleDownLocation.setFont(new Font("Montserrat", Font.ITALIC, 10));
         pnlMain.add(toggleDownLocation);
@@ -59,8 +65,7 @@ public class SetMeetUpFrame extends JFrame {
         lblSetTime.setForeground(Color.WHITE);
         pnlMain.add(lblSetTime);
 
-        String[] strTime = {"Select a variation", "Oras ko", "Oras niya ❤"};
-        JComboBox<String> toggleDownTime = new JComboBox<>(strTime);
+        toggleDownTime = new JComboBox<>(strTime);
         toggleDownTime.setBounds(28, 407, 140, 23);
         toggleDownTime.setFont(new Font("Montserrat", Font.ITALIC, 10));
         pnlMain.add(toggleDownTime);
@@ -79,7 +84,7 @@ public class SetMeetUpFrame extends JFrame {
         pnlMain.add(lblSetPayment);
 
         String[] strPayment = {"Select a variation", "Cash", "GCash", "Maya"};
-        JComboBox<String> toggleDownPayment = new JComboBox<>(strPayment);
+        this.toggleDownPayment = new JComboBox<>(strPayment); // Fixed: Assign to class-level variable
         toggleDownPayment.setBounds(28, 456, 140, 23);
         toggleDownPayment.setFont(new Font("Montserrat", Font.ITALIC, 10));
         pnlMain.add(toggleDownPayment);
@@ -90,48 +95,73 @@ public class SetMeetUpFrame extends JFrame {
         lblRemarks.setFont(new Font("Montserrat", Font.BOLD, 12));
         lblRemarks.setForeground(Color.WHITE);
         pnlMain.add(lblRemarks);
-
-        RoundedButton btnConfirm = new RoundedButton("<html><u><i>Confirm</i></u></html>", 10);
-        btnConfirm.setBounds(210, 555, 121, 28);
-        btnConfirm.setForeground(new Color(115, 12, 12));
-        btnConfirm.setBackground(Color.WHITE);
-        btnConfirm.setFont(new Font("Montserrat", Font.BOLD, 12));
-        btnConfirm.setBorderPainted(false);
-        btnConfirm.setFocusPainted(false);
-        pnlMain.add(btnConfirm);
-        
-        RoundedButton btnClear = new RoundedButton("<html><i>Clear</i></html>", 10);
-        btnClear.setBackground(Color.LIGHT_GRAY);
-        btnClear.setForeground(Color.WHITE);
-        btnClear.setBorder(null);
-        btnClear.setFont(new Font("Dialog", Font.BOLD, 12));
-        btnClear.setFocusPainted(false);
-        btnClear.setContentAreaFilled(false);
-        btnClear.setBounds(47, 555, 121, 28);
-        btnClear.setFocusable(false);
-        pnlMain.add(btnClear);
         
         textField = new JTextField();
         textField.setBounds(207, 456, 142, 23);
         pnlMain.add(textField);
         textField.setColumns(10);
         
-        JTextArea textArea = new JTextArea();
+        textArea = new JTextArea();
         textArea.setBounds(28, 504, 321, 40);
         pnlMain.add(textArea);
         
-        btnClear.addActionListener(e -> {
-            textField.setText("");
-            textArea.setText("");
-            toggleDownLocation.setSelectedIndex(0);
-            toggleDownTime.setSelectedIndex(0);
-            toggleDownPayment.setSelectedIndex(0);
-        });
-
-        btnConfirm.addActionListener(e -> dispose());
+        btnClear = new RoundedButton("Clear", 10);
+        btnClear.setBackground(Color.LIGHT_GRAY);
+        btnClear.setForeground(Color.DARK_GRAY);
+        btnClear.setBorder(null);
+        btnClear.setFont(new Font("Dialog", Font.BOLD, 12));
+        btnClear.setFocusPainted(false);
+        btnClear.setContentAreaFilled(false);
+        btnClear.setBounds(28, 555, 90, 28);
+        btnClear.setFocusable(false);
+        btnClear.addActionListener(this);
+        pnlMain.add(btnClear);
+        
+        btnCancel = new RoundedButton("Cancel", 10);
+        btnCancel.setForeground(new Color(115, 12, 12));
+        btnCancel.setFont(new Font("Montserrat", Font.BOLD, 12));
+        btnCancel.setFocusPainted(false);
+        btnCancel.setBorderPainted(false);
+        btnCancel.setBackground(Color.WHITE);
+        btnCancel.setBounds(144, 555, 90, 28);
+        btnCancel.addActionListener(this);
+        pnlMain.add(btnCancel);
+        
+        btnConfirm = new RoundedButton("Confirm", 10);
+        btnConfirm.setBounds(259, 555, 90, 28);
+        btnConfirm.setForeground(new Color(115, 12, 12));
+        btnConfirm.setBackground(Color.WHITE);
+        btnConfirm.setFont(new Font("Montserrat", Font.BOLD, 12));
+        btnConfirm.setBorderPainted(false);
+        btnConfirm.setFocusPainted(false);
+        btnConfirm.addActionListener(this);
+        pnlMain.add(btnConfirm);
 
         setLocationRelativeTo(null);
         setShape(new RoundRectangle2D.Float(0, 0, getBounds().width, getBounds().height, cornerRadius, cornerRadius));
         setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object objSource = e.getSource();
+        
+        if (objSource == btnClear) {
+            clearContent();
+        } else if (objSource == btnCancel) {
+            dispose();
+        } else if (objSource == btnConfirm) {
+            dispose();
+            MeetupConfirmation meetupConfirmation = new MeetupConfirmation();
+            meetupConfirmation.setVisible(true);
+        }
+    }
+    
+    public void clearContent() {
+        textField.setText("");
+        textArea.setText("");
+        toggleDownLocation.setSelectedIndex(0);
+        toggleDownTime.setSelectedIndex(0);
+        toggleDownPayment.setSelectedIndex(0);
     }
 }
