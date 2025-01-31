@@ -199,7 +199,6 @@ public class SellerProductListing extends JPanel implements ActionListener{
         productNameField.setForeground(new Color(149, 145, 145));
         productNameField.setBackground(new Color(241, 241, 241));
         productNameField.setBorder(null);
-        setupTextPlaceholder(productNameField, "Product Name");
         panelProdName.add(productNameField);
         scrollContentPanel.add(panelProdName);
  
@@ -234,7 +233,6 @@ public class SellerProductListing extends JPanel implements ActionListener{
         priceField.setForeground(new Color(149, 145, 145));
         priceField.setBackground(new Color(241, 241, 241));
         priceField.setBorder(null);
-        setupTextPlaceholder(priceField, "P100");
         panelPrice.add(priceField);
         scrollContentPanel.add(panelPrice);
         
@@ -465,13 +463,17 @@ public class SellerProductListing extends JPanel implements ActionListener{
     }
     
     private void setupTextFieldPlaceholder(JTextField textField, String placeholder) {
+    	
+    	Font textFieldFont = new Font("Montserrat", Font.PLAIN, 12); 
+        Font placeholderFont = new Font("Montserrat", Font.ITALIC, 12);
+        
         textField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 if (textField.getText().equals(placeholder)) {
                     textField.setText("");
                     textField.setForeground(Color.BLACK);
-                    textField.setFont(new Font("Monserrat", Font.PLAIN, 12));
+                    textField.setFont(textFieldFont);
                 }
             }
 
@@ -479,22 +481,29 @@ public class SellerProductListing extends JPanel implements ActionListener{
             public void focusLost(FocusEvent e) {
                 if (textField.getText().isEmpty()) {
                     textField.setText(placeholder);
-                    textField.setFont(new Font("Montserrat", Font.ITALIC, 12));
+                    textField.setFont(placeholderFont);
                     textField.setForeground(new Color(149, 145, 145));
                 }
             }
         });
-        textField.setForeground(Color.GRAY);
+        
+        textField.setForeground(new Color(149, 145, 145));
+        textField.setText(placeholder);
+        textField.setFont(placeholderFont);
     }
     
     private void setupTextAreaPlaceholder(JTextArea textArea, String placeholder) {
+    	
+    	Font textAreaFont = new Font("Montserrat", Font.PLAIN, 12); 
+        Font placeholderFont = new Font("Montserrat", Font.ITALIC, 12);
+    	
     	textArea.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 if (textArea.getText().equals(placeholder)) {
                 	textArea.setText("");
                 	textArea.setForeground(Color.BLACK);
-                	textArea.setFont(new Font("Monserrat", Font.PLAIN, 12));
+                	textArea.setFont(textAreaFont);
                 }
             }
 
@@ -502,12 +511,15 @@ public class SellerProductListing extends JPanel implements ActionListener{
             public void focusLost(FocusEvent e) {
                 if (textArea.getText().isEmpty()) {
                 	textArea.setText(placeholder);
-                	textArea.setFont(new Font("Montserrat", Font.ITALIC, 12));
+                	textArea.setFont(placeholderFont);
                     textArea.setForeground(new Color(149, 145, 145));
                 }
             }
         });
-    	textArea.setForeground(Color.GRAY);
+    	textArea.setForeground(new Color(149, 145, 145));
+    	textArea.setText(placeholder);
+        textArea.setFont(placeholderFont);
+    	
     }
     
     private void addMouseListenerToLabel(JLabel lblImage) {

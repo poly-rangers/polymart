@@ -81,7 +81,7 @@ public class BuyerStartupPanel extends JPanel implements ActionListener {
         add(lblStartupSubheader3);
 
         btnGoBack = new JButton("<html><u>Go Back</u></html>");
-        btnGoBack.setBounds(164, 580, 86, 20);
+        btnGoBack.setBounds(164, 578, 86, 13);
         btnGoBack.setBackground(Color.WHITE);
         btnGoBack.setForeground(new Color(0x730C0C));
         btnGoBack.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
