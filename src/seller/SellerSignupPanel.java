@@ -28,6 +28,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
     private JButton btnSignUp;
     private JButton btnSignIn;
     private JCheckBox chckbxTermsConditions;
+    private JFileChooser fileChooser;
     
     private UserSignup userSignup;
     private File selectedFile;
@@ -48,17 +49,7 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
         Image scaledImage = imgPolypupIcon.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
         panelLayout.putConstraint(SpringLayout.NORTH, startupImage, 24, SpringLayout.NORTH, this);
-        panelLayout.putConstraint(SpringLayout.WEST, startupImage, 16, SpringLayout.WEST, this);
-        
-        startupImage.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-            	CardLayout clLayout = (CardLayout) panelContent.getLayout();
-                clLayout.show(panelContent, "BuyerOrSeller");
-            }
-        });
-        
+        panelLayout.putConstraint(SpringLayout.WEST, startupImage, 16, SpringLayout.WEST, this);        
         add(startupImage);
         
      // Sign-up label
@@ -174,13 +165,28 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
+            	try {
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+						| UnsupportedLookAndFeelException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} //set Look and Feel to Windows
+                fileChooser = new JFileChooser();
+                try {
+					UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+						| UnsupportedLookAndFeelException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} //revert the Look and Feel back to the ugly Swing
                 fileChooser.setFileFilter(new FileNameExtensionFilter("PDF Files", "pdf")); // Filter for PDFs
                 int result = fileChooser.showOpenDialog(labelChooseFile);
 
                 if (result == JFileChooser.APPROVE_OPTION) {
                     selectedFile = fileChooser.getSelectedFile(); // Store the selected file
                     System.out.println("File selected: " + selectedFile.getAbsolutePath());
+                    labelChooseFile.setText("File chosen: "+selectedFile.getName());
                 } else {
                     System.out.println("No file selected.");
                 }
@@ -292,6 +298,18 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
     	btnSignIn.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0x730C0C)));
     	btnSignIn.addActionListener(this);
     	add(btnSignIn);
+    	
+    	startupImage.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	CardLayout clLayout = (CardLayout) panelContent.getLayout();
+                clLayout.show(panelContent, "BuyerOrSeller");
+                clearTextFields();
+                fileChooser.setSelectedFile(null);
+                selectedFile=null;
+            }
+        });
 
     }
 
@@ -470,6 +488,8 @@ public class SellerSignupPanel extends JPanel implements ActionListener {
         pwdFieldPassword.setText("Password");
         pwdFieldPassword.setForeground(Color.GRAY);
         pwdFieldPassword.setEchoChar((char) 0);  // Reset password echo char for the placeholder
+        
+        labelChooseFile.setText("Choose file or drop here");
     }
     
     private boolean isUsernameValid(String username) {

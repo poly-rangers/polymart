@@ -413,18 +413,19 @@ public class SellerProductListing extends JPanel implements ActionListener{
                 if (selectedCal.before(today)) {
                     JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
                     new CustomDialog(frame, "Time Travel??", "alam kong nagrerelapse ka pero you can't turn back the time:(", "awts gege");
-                    dateChooser.setDate(null);
+                    dateChooser.setCalendar(null);
                     return;
                 }
 
                 String formattedDate = dateFormat.format(selectedDate);
                 String existingText = meetUpField.getText();
+                if (existingText == null) existingText="";
 
                 // Check for duplicate dates
                 if (existingText.contains(formattedDate)) {
                 	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
                     new CustomDialog(frame, "Date is already taken", "buti pa yung date taken, e ikaw?!", "sorry ha");
-                    dateChooser.setDate(null);
+                    dateChooser.setCalendar(null);
                     return;
                 }
 
@@ -434,15 +435,15 @@ public class SellerProductListing extends JPanel implements ActionListener{
                 } else {
                     meetUpField.setText(formattedDate);
                 }
-
-                // Clear the date chooser for the next selection
-                dateChooser.setDate(null);
         } else if (objSourceEvent == timeCombo) {
         	String selectedTime = (String) timeCombo.getSelectedItem();
+            if (selectedTime==null) selectedTime = "";
 
             // Check if timeField already contains the selected time
             String currentText = timeField.getText();
-            if (currentText.contains(selectedTime)) {
+            if (currentText==null) currentText = "";
+            
+            if (selectedTime!=null && !selectedTime.isEmpty() && currentText.contains(selectedTime)) {
                 // Show error message and prevent duplicate addition
             	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 new CustomDialog(frame, "Opppsiee ", "taken na sha, sakin ka nalang tumesting", "ayaw");
@@ -526,7 +527,21 @@ public class SellerProductListing extends JPanel implements ActionListener{
 
             @Override
             public void mouseClicked(MouseEvent e) {
+            	try {
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+						| UnsupportedLookAndFeelException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} //set Look and Feel to Windows
                 JFileChooser fileChooser = new JFileChooser();
+                try {
+					UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+						| UnsupportedLookAndFeelException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} //revert the Look and Feel back to the ugly Swing
                 fileChooser.setFileFilter(new FileNameExtensionFilter("JPEG/PNG files", "jpg","jpeg","png")); // Filter for PDFs
                 int result = fileChooser.showOpenDialog(lblImage);
 
@@ -696,7 +711,24 @@ public class SellerProductListing extends JPanel implements ActionListener{
     }
     
     private void clearFields() {
-        // Reset text fields to their placeholder values
+    	// Reset text fields to their placeholder values
+    	for (JCheckBox cbLocation : cbLocations) {
+            cbLocation.setSelected(false);
+        }
+        
+        cbGCash.setSelected(false);
+        cbCash.setSelected(false);
+        
+        lblAddImage1.setIcon(null);
+        lblAddImage2.setIcon(null);
+        lblAddImage3.setIcon(null);
+        lblAddImage4.setIcon(null);
+        
+        imgFile1=null;
+        imgFile2=null;
+        imgFile3=null;
+        imgFile4=null;
+            	
         productNameField.setText("Product Name");
         productNameField.setForeground(Color.GRAY);
         
@@ -712,13 +744,9 @@ public class SellerProductListing extends JPanel implements ActionListener{
         meetUpField.setText("");
         timeField.setText("");
         
-        categoryCombo.setSelectedIndex(-1);
-        timeCombo.setSelectedIndex(-1);
+        if (categoryCombo!=null)categoryCombo.setSelectedIndex(-1);
+        if (timeCombo!=null) timeCombo.setSelectedIndex(-1);
         
-        for (JCheckBox cbLocation : cbLocations) {
-            cbLocation.setSelected(false);
-        }
-        cbGCash.setSelected(false);
-        cbCash.setSelected(false);
+        dateChooser.setCalendar(null);
     }
 }

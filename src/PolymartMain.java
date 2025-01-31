@@ -98,7 +98,7 @@ public class PolymartMain extends JFrame {
         contentPane.add(buyerDashboardMap, "BuyerDashboardMap");
         
         DashboardMap sellerDashboardMap = new DashboardMap(contentPane, "Seller");
-        contentPane.add(sellerDashboardMap, "DashboardMap"); 
+        contentPane.add(sellerDashboardMap, "SellerDashboardMap"); 
         
         DeleteAccountPanel deleteAccountPanel = new DeleteAccountPanel(contentPane);
         contentPane.add(deleteAccountPanel, "DeleteAccountPanel");
