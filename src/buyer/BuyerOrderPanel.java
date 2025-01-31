@@ -2,65 +2,65 @@ package buyer;
 
 import javax.swing.*;
 import misc.OrderListPanel;
+import misc.UserBaseTemplate;
+
 import java.awt.*;
 
-public class BuyerOrderPanel extends JPanel {
-    private static final long serialVersionUID = 1L;
+public class BuyerOrderPanel extends UserBaseTemplate {
+	private JButton btnActiveOrders, btnCompleteOrders;
+	private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-
+    
     public BuyerOrderPanel(JPanel contentPane) {
-    	this.contentPane = contentPane;
-        setBackground(Color.WHITE);
-        setBounds(100, 100, 414, 660);
-        setLayout(null);
+		super(contentPane, "buyer");
+		contentPanel.setBounds(0, 147, 416, 462);
+		headerPanel.setBounds(0, 74, 416, 75);
+	}
 
-        //Header Image
-        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_buyer.icon.png"));
-        Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
-        JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
-        startupImage.setBounds(16, 24, 150, 47);
-        add(startupImage);
-        
-        JLabel lblNewLabel = new JLabel("Your Orders");
-        lblNewLabel.setHorizontalAlignment(SwingConstants.TRAILING);
-        lblNewLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        lblNewLabel.setBounds(211, 51, 180, 50);
-        lblNewLabel.setFont(new Font("Montserrat", Font.BOLD, 25));
-        add(lblNewLabel);
-        
-        BuyerNavigationBar navBar = new BuyerNavigationBar(contentPane);
-        navBar.setBounds(0, 611, 416, 52);
-        add(navBar);
-        
-        navBar.btnHome.addActionListener(e -> switchPanel("BuyerDashboardPanel"));
-        navBar.btnMap.addActionListener(e -> switchPanel("BuyerDashboardMap"));
-        navBar.btnOrders.addActionListener(e -> System.out.println("Already on Orders Panel"));
-        navBar.btnProfile.addActionListener(e -> switchPanel("BuyerProfile"));
-        
-        JButton btnActiveOrders = new JButton("Active Orders");
-        btnActiveOrders.setBounds(186, 101, 95, 21);
+    protected void setPanelHeader() {
+    	contentPanel.removeAll();
+		headerPanel.setLayout(null);
+		
+    	JLabel lblYourOrders = new JLabel("Your Orders");
+        lblYourOrders.setHorizontalAlignment(SwingConstants.TRAILING);
+        lblYourOrders.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        lblYourOrders.setBounds(226, -13, 180, 50);
+        lblYourOrders.setFont(new Font("Montserrat", Font.BOLD, 25));
+        headerPanel.add(lblYourOrders);
+
+        btnActiveOrders = new JButton("Active Orders");
+        btnActiveOrders.setBounds(208, 38, 95, 21);
         btnActiveOrders.setBackground(Color.WHITE);
         btnActiveOrders.setForeground(Color.BLACK);
         btnActiveOrders.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
         btnActiveOrders.setFocusable(false);
         btnActiveOrders.setOpaque(false);
         btnActiveOrders.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(0x730C0C)));
-        add(btnActiveOrders);
+        headerPanel.add(btnActiveOrders);
 
-        JButton btnCompleteOrders = new JButton("Completed Orders");
+        btnCompleteOrders = new JButton("Completed Orders");
         btnCompleteOrders.setBackground(new Color(240, 240, 240));
-        btnCompleteOrders.setBounds(283, 101, 108, 21);
+        btnCompleteOrders.setBounds(298, 38, 108, 21);
         btnCompleteOrders.setForeground(Color.BLACK);
         btnCompleteOrders.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));
         btnCompleteOrders.setFocusable(false);
         btnCompleteOrders.setOpaque(false);
         btnCompleteOrders.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, new Color(0x730C0C)));
-        add(btnCompleteOrders);
-
+        headerPanel.add(btnCompleteOrders);
+        
+        revalidate();
+        repaint();
+    }
+    
+    public void customizeContentPanel() {
+    	this.contentPane = contentPane;
+    	contentPanel.removeAll();
+       
         // Create JLayeredPane for Active Orders and Completed Orders
         JLayeredPane layeredPane = new JLayeredPane();
-        layeredPane.setBounds(0, 149, 414, 462);
-        add(layeredPane);
+        layeredPane.setBounds(0, 0, 414, 458);
+        contentPanel.add(layeredPane);
+
         
         OrderListPanel activeOrdersPanel = new BuyerActiveOrders();
         activeOrdersPanel.setBounds(0, -19, 414, 500);
@@ -88,6 +88,8 @@ public class BuyerOrderPanel extends JPanel {
             activeOrdersPanel.setVisible(false);
         });
     }
+    
+    
     
     private void switchPanel(String panelName) {
         if (contentPane.getLayout() instanceof CardLayout) {

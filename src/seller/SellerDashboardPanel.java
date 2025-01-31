@@ -2,13 +2,14 @@ package seller;
 import misc.*;
 import misc.RoundedButton;
 import misc.SearchBar;
+import misc.UserBaseTemplate;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class SellerDashboardPanel extends JPanel implements ActionListener {
-
+public class SellerDashboardPanel extends UserBaseTemplate implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JButton btnAddProduct;
@@ -109,8 +110,8 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         btnAddProduct.setFocusable(true);
         btnAddProduct.setMinimumSize(new Dimension(130,10));
         
-        pnlHeader.add(lblMyProduct, BorderLayout.WEST);
-        pnlHeader.add(btnAddProduct, BorderLayout.EAST);
+        headerPanel.add(lblMyProduct, BorderLayout.WEST);
+        headerPanel.add(btnAddProduct, BorderLayout.EAST);
         
 	}
 	

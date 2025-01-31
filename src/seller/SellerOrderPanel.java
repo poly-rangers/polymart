@@ -5,12 +5,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.*;
-
 import misc.OrderListPanel;
+import misc.UserBaseTemplate;
 
-public class SellerOrderPanel extends JPanel {
+public class SellerOrderPanel extends UserBaseTemplate {
+	private JButton btnActiveOrders, btnCompleteOrders;
 	private JPanel contentPane;
-
 	private static final long serialVersionUID = 1L;
 
 	public SellerOrderPanel(JPanel contentPane) {
@@ -66,8 +66,8 @@ public class SellerOrderPanel extends JPanel {
 
         // Create JLayeredPane to switch between Active Orders and Completed Orders
         JLayeredPane layeredPane = new JLayeredPane();
-        layeredPane.setBounds(2, 132, 414, 469);
-        add(layeredPane);
+        layeredPane.setBounds(2, 0, 414, 469);
+        contentPanel.add(layeredPane);
             
         
         // Create objects for the order list panel
