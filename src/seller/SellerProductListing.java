@@ -60,8 +60,7 @@ public class SellerProductListing extends JPanel implements ActionListener{
         setLayout(null);
         
         productDatabase = new ProductDatabase();
-        productDatabase.createProductsTable();
-		
+        
         ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_seller.icon.png"));
         Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
@@ -382,9 +381,9 @@ public class SellerProductListing extends JPanel implements ActionListener{
 
         if (objSourceEvent == btnGoBack) {
             // Switch to Product Listing
+            clearFields();
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "SellerDashboardPanel");
-            clearFields();
         } else if (objSourceEvent == btnAddDate) {
 
         	SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -636,6 +635,10 @@ public class SellerProductListing extends JPanel implements ActionListener{
 
         // Try to save product to database
         try {
+        	productDatabase.saveUploadedImageForSeller(currentSellerUsername, imgFile1);
+        	productDatabase.saveUploadedImageForSeller(currentSellerUsername, imgFile2);
+        	productDatabase.saveUploadedImageForSeller(currentSellerUsername, imgFile3);
+        	productDatabase.saveUploadedImageForSeller(currentSellerUsername, imgFile4);
             productDatabase.addProduct(sellerHash, productName, productDesc, dblPrice, "In Stock");
 
             // Show success dialog ONLY if addProduct() succeeds
