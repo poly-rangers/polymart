@@ -8,10 +8,7 @@ import java.awt.event.*;
 public class SellerNavigationBar extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 2021409567929036389L;
-    JButton btnHome;
-	JButton btnMap;
-	JButton btnOrders;
-	JButton btnProfile;
+    public JButton btnHome, btnMap, btnOrders, btnProfile;
     JPanel contentPane;
 
     public SellerNavigationBar(JPanel contentPane) {

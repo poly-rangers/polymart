@@ -1,21 +1,22 @@
-package buyer;
+package seller;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import frames.Logout;
+import frames.MeetupConfirmation;
 import misc.PreferencesPanel;
 import misc.ProfilePanel;
 
 import java.awt.*;
 
 
-public class BuyerProfile extends JPanel {
+public class SellerProfile extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
 
-    public BuyerProfile(JPanel contentPane) {
+    public SellerProfile(JPanel contentPane) {
     	this.contentPane = contentPane;
     	
         setBackground(Color.WHITE);
@@ -23,7 +24,7 @@ public class BuyerProfile extends JPanel {
         setLayout(null);
 
         //Header Image
-        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_buyer.icon.png"));
+        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_seller.icon.png"));
         Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
         startupImage.setBounds(16, 24, 150, 47);
@@ -74,14 +75,14 @@ public class BuyerProfile extends JPanel {
         add(pic);
         
         
-        BuyerNavigationBar navBar = new BuyerNavigationBar(contentPane);
+        SellerNavigationBar navBar = new SellerNavigationBar(contentPane);
         navBar.setBounds(0, 611, 416, 52);
 
         add(navBar);
         
-        navBar.btnHome.addActionListener(e -> switchPanel("BuyerDashboardPanel"));
-        navBar.btnMap.addActionListener(e -> switchPanel("BuyerDashboardMap"));
-        navBar.btnOrders.addActionListener(e -> switchPanel("BuyerOrderPanel"));
+        navBar.btnHome.addActionListener(e -> switchPanel("SellerDashboardPanel"));
+        navBar.btnMap.addActionListener(e -> switchPanel("SellerDashboardMap"));
+        navBar.btnOrders.addActionListener(e -> switchPanel("SellerOrderPanel"));
         navBar.btnProfile.addActionListener(e -> System.out.println("Already on Profile Panel"));
        
     }

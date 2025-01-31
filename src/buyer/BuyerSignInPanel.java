@@ -175,8 +175,8 @@ public class BuyerSignInPanel extends JPanel implements ActionListener {
         if (isValid) {
             // Show success message
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            new CustomDialog(frame, "Login success!", "Welcome to the fam, baks! We're glad to have you here on Polymart <3 Feel free to scroll and explore our dashboard ^__^", "Thank you!");
-
+            new CustomDialog(frame, "Login success!", "Welcome to the fam, baks! We're glad to have you here on Polymart ^^ Feel free to scroll and explore our dashboard ^__^", "Thank you!");
+            clearTextFields();
             // Switch to DashboardPanel
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "BuyerDashboardPanel");

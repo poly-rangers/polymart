@@ -46,6 +46,9 @@ public class PolymartMain extends JFrame {
         
         EditProfile editProfile = new EditProfile(contentPane);
         contentPane.add(editProfile, "EditProfile");
+        
+        DeleteAccount deleteAccount = new DeleteAccount(contentPane);
+        contentPane.add(deleteAccount, "DeleteAccount");
 
         TermsConditionsPanel buyerTermsConditionsPanel = new TermsConditionsPanel(contentPane, "Buyer");
         TermsConditionsPanel sellerTermsConditionsPanel = new TermsConditionsPanel(contentPane, "Seller");
@@ -76,6 +79,7 @@ public class PolymartMain extends JFrame {
         ProductDetails productDetails = new ProductDetails(contentPane);
         SellerOrderPanel sellerOrderPanel = new SellerOrderPanel(contentPane);
         SellerProductReviews sellerProductReviews = new SellerProductReviews(contentPane);
+        SellerProfile sellerProfile = new SellerProfile(contentPane);
 
         contentPane.add(sellerStartupPanel, "SellerStartupPanel");
         contentPane.add(sellerSignupPanel, "SellerSignupPanel");
@@ -85,6 +89,7 @@ public class PolymartMain extends JFrame {
         contentPane.add(productDetails, "ProductDetails");
         contentPane.add(sellerOrderPanel, "SellerOrderPanel");
         contentPane.add(sellerProductReviews, "SellerProductReviews");
+        contentPane.add(sellerProfile, "SellerProfile");
 
         //General panels
         DashboardMap buyerDashboardMap = new DashboardMap(contentPane, "Buyer");
@@ -92,6 +97,10 @@ public class PolymartMain extends JFrame {
         
         DashboardMap sellerDashboardMap = new DashboardMap(contentPane, "Seller");
         contentPane.add(sellerDashboardMap, "DashboardMap"); 
+        
+        DeleteAccountPanel deleteAccountPanel = new DeleteAccountPanel(contentPane);
+        contentPane.add(deleteAccountPanel, "DeleteAccountPanel");
+
         
         // Navigation bar
         BuyerNavigationBar buyerNavigationBar = new BuyerNavigationBar(contentPane);
