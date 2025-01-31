@@ -14,15 +14,19 @@ public class TCandPP extends JPanel implements ActionListener {
     private JButton btnGoBack;
     private JPanel contentPane;
     private JScrollPane scrollPane;
+    private String userType;
+    String headerImagePath;
     
-    public TCandPP(JPanel contentPane) {
+    public TCandPP(JPanel contentPane, String userType) {
         this.contentPane = contentPane;
+        this.userType = userType;
 
         setBackground(Color.WHITE);
         setBounds(100, 100, 414, 660);
         setLayout(null);
 
-        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_buyer.icon.png"));
+        headerImagePath = (userType.equals("buyer")) ? "/polypup_buyer.icon.png" : "/polypup_seller.icon.png";
+        ImageIcon originalImage = new ImageIcon(this.getClass().getResource(headerImagePath));
         Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
         startupImage.setBounds(16, 24, 150, 47);
@@ -98,9 +102,13 @@ public class TCandPP extends JPanel implements ActionListener {
         Object objSourceEvent = actEvent.getSource();
 
         if (objSourceEvent == btnGoBack) {
-            // Switch to BuyerProfile
-            CardLayout clLayout = (CardLayout) contentPane.getLayout();
-            clLayout.show(contentPane, "BuyerProfile");
+        	if(userType.equals("buyer")) {
+	        	CardLayout clLayout = (CardLayout) contentPane.getLayout();
+	            clLayout.show(contentPane, "BuyerProfile");
+	        } else {
+	        	CardLayout clLayout = (CardLayout) contentPane.getLayout();
+	            clLayout.show(contentPane, "SellerProfile");
+	        }
         }
     }
 }

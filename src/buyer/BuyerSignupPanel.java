@@ -272,7 +272,7 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
         btnSignIn.addActionListener(this);
         btnSignIn.setBounds(142, 574, 140, 14); // Adjusted for null layout
         add(btnSignIn);
-    }
+
         startupImage.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -284,6 +284,7 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
                 selectedFile=null;
             }
         });
+    }
         
     private void setupTextFieldPlaceholder(JTextField textField, String placeholder) {
         textField.addFocusListener(new FocusAdapter() {

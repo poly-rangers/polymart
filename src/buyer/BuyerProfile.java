@@ -14,12 +14,14 @@ import java.awt.*;
 public class BuyerProfile extends UserBaseTemplate {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
+    private String userType;
 
-    public BuyerProfile(JPanel contentPane) {
+    public BuyerProfile(JPanel contentPane, String userType) {
     	super(contentPane, "buyer");
     	this.contentPane = contentPane;
+    	this.userType = userType;
     	contentPanel.setBounds(0, 202, 416, 407);
-    	headerPanel.setBounds(0, 74, 416, 133);	
+    	headerPanel.setBounds(0, 74, 416, 133);
     }
     
     protected void setPanelHeader() {

@@ -13,8 +13,11 @@ public class SetMeetUpFrame extends JDialog implements ActionListener {
     private JTextField textField;
     private RoundedButton btnClear, btnCancel, btnConfirm;
     private JTextArea textArea;
-    private String[] strLocations = {"Select a variation", "Lagoon", "Souvenir Shop", "Linear"};
-    private String[] strTime = {"Select a variation", "Oras ko", "Oras niya ❤"};
+    private String[] strLocations = {"1. Lagoon", "2. West Wing", "3. Dome", "4. East Wing", 
+			"5. South Wing", "6. Linear Park", "7. Charlie Building", "8. Grandstand", "9. Tennis Courtside",
+			"10. Souvenir Shop", "11. Gate Exit", "12. Gate Entrance"};
+    private String[] strTime = {"7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
+		    "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM"};
     private JComboBox<String> toggleDownLocation, toggleDownTime, toggleDownPayment;
 
     public SetMeetUpFrame() {
@@ -54,6 +57,7 @@ public class SetMeetUpFrame extends JDialog implements ActionListener {
         pnlMain.add(lblSetLocation);
         
         toggleDownLocation = new JComboBox<>(strLocations);
+        toggleDownLocation.setSelectedIndex(-1);
         toggleDownLocation.setBounds(28, 358, 140, 23);
         toggleDownLocation.setFont(new Font("Montserrat", Font.ITALIC, 10));
         pnlMain.add(toggleDownLocation);
@@ -66,6 +70,7 @@ public class SetMeetUpFrame extends JDialog implements ActionListener {
         pnlMain.add(lblSetTime);
 
         toggleDownTime = new JComboBox<>(strTime);
+        toggleDownTime.setSelectedIndex(-1);
         toggleDownTime.setBounds(28, 407, 140, 23);
         toggleDownTime.setFont(new Font("Montserrat", Font.ITALIC, 10));
         pnlMain.add(toggleDownTime);
@@ -83,9 +88,10 @@ public class SetMeetUpFrame extends JDialog implements ActionListener {
         lblSetPayment.setForeground(Color.WHITE);
         pnlMain.add(lblSetPayment);
 
-        String[] strPayment = {"Select a variation", "Cash", "GCash", "Maya"};
-        this.toggleDownPayment = new JComboBox<>(strPayment); // Fixed: Assign to class-level variable
+        String[] strPayment = {"Cash", "GCash", "Maya"};
+        this.toggleDownPayment = new JComboBox<>(strPayment);
         toggleDownPayment.setBounds(28, 456, 140, 23);
+        toggleDownPayment.setSelectedIndex(-1);
         toggleDownPayment.setFont(new Font("Montserrat", Font.ITALIC, 10));
         pnlMain.add(toggleDownPayment);
         toggleDownPayment.setFocusable(false);

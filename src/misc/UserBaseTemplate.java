@@ -44,7 +44,7 @@ public class UserBaseTemplate extends JPanel {
         if (userRole.equals("buyer")) {
             BuyerNavigationBar buyerNavBar = new BuyerNavigationBar(contentPane);
             buyerNavBar.btnHome.addActionListener(e -> switchPanel("BuyerDashboardPanel"));
-            buyerNavBar.btnMap.addActionListener(e -> System.out.println("Already on Dashboard Map"));
+            buyerNavBar.btnMap.addActionListener(e -> switchPanel("BuyerDashboardMap"));
             buyerNavBar.btnOrders.addActionListener(e -> switchPanel("BuyerOrderPanel"));
             buyerNavBar.btnProfile.addActionListener(e -> switchPanel("BuyerProfile"));
             buyerNavBar.setBounds(0, 611, 416, 52);
@@ -52,7 +52,7 @@ public class UserBaseTemplate extends JPanel {
         } else {
             SellerNavigationBar sellerNavBar = new SellerNavigationBar(contentPane);
             sellerNavBar.btnHome.addActionListener(e -> switchPanel("SellerDashboardPanel"));
-            sellerNavBar.btnMap.addActionListener(e -> System.out.println("Already on Dashboard Map"));
+            sellerNavBar.btnMap.addActionListener(e -> switchPanel("SellerDashboardMap"));
             sellerNavBar.btnOrders.addActionListener(e -> switchPanel("SellerOrderPanel"));
             sellerNavBar.btnProfile.addActionListener(e -> switchPanel("SellerProfile"));
             sellerNavBar.setBounds(0, 611, 416, 52);

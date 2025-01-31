@@ -3,6 +3,8 @@ package misc;
 import javax.swing.*;
 
 import buyer.BuyerNavigationBar;
+import seller.SellerNavigationBar;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -17,19 +19,45 @@ public class DeleteAccount extends JPanel {
     private RoundedButton btnDeleteAccount, btnCancel;
     private JButton btnGoBack;
 
-    public DeleteAccount(JPanel contentPane) {
+    public DeleteAccount(JPanel contentPane, String userType) {
     	this.contentPane = contentPane;
     	
         setBackground(Color.WHITE);
         setBounds(100, 100, 414, 660);
         setLayout(null);
 
-        //Header Image
-        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_buyer.icon.png"));
-        Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
-        JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
-        startupImage.setBounds(16, 24, 150, 47);
-        add(startupImage);
+        if (userType.equals("buyer")) {
+            ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_buyer.icon.png"));
+            Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
+            JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
+            startupImage.setBounds(16, 24, 150, 47);
+            add(startupImage);
+            
+            BuyerNavigationBar navBar = new BuyerNavigationBar(contentPane);
+            navBar.setBounds(0, 611, 416, 52);
+            add(navBar);
+            
+            navBar.btnHome.addActionListener(e -> switchPanel("BuyerDashboardPanel"));
+            navBar.btnMap.addActionListener(e -> switchPanel("BuyerDashboardMap"));
+            navBar.btnOrders.addActionListener(e -> switchPanel("BuyerOrderPanel"));
+            navBar.btnProfile.addActionListener(e -> switchPanel("BuyerProfile"));
+            
+        } else {
+            ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_seller.icon.png"));
+            Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
+            JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
+            startupImage.setBounds(16, 24, 150, 47);
+            add(startupImage);
+            
+            SellerNavigationBar navBar = new SellerNavigationBar(contentPane);
+            navBar.setBounds(0, 611, 416, 52);
+            add(navBar);
+            
+            navBar.btnHome.addActionListener(e -> switchPanel("SellerDashboardPanel"));
+            navBar.btnMap.addActionListener(e -> switchPanel("SellerDashboardMap"));
+            navBar.btnOrders.addActionListener(e -> switchPanel("SellerOrderPanel"));
+            navBar.btnProfile.addActionListener(e -> switchPanel("SellerProfile"));
+        }
         
         JPanel pnlHeader = new JPanel();
         pnlHeader.setLayout(new BoxLayout(pnlHeader, BoxLayout.X_AXIS));
@@ -45,7 +73,13 @@ public class DeleteAccount extends JPanel {
         btnGoBack.setBackground(Color.WHITE);
         btnGoBack.setFocusPainted(false);
         btnGoBack.setBorderPainted(false);
-        btnGoBack.addActionListener(e -> switchPanel("BuyerProfile"));
+        btnGoBack.addActionListener(e -> {
+            if (userType.equals("buyer")) {
+                switchPanel("BuyerProfile");
+            } else {
+                switchPanel("SellerProfile");
+            }
+        });
         pnlHeader.add(btnGoBack);
 
         add(pnlHeader);
@@ -100,18 +134,14 @@ public class DeleteAccount extends JPanel {
         btnCancel.setFocusPainted(false);
         btnCancel.setBackground(new Color(192, 192, 192));
         btnCancel.setBounds(103, 531, 195, 32);
-        btnCancel.addActionListener(e -> switchPanel("BuyerProfile"));
+        btnCancel.addActionListener(e -> {
+            if (userType.equals("buyer")) {
+                switchPanel("BuyerProfile");
+            } else {
+                switchPanel("SellerProfile");
+            }
+        });
         add(btnCancel);
-        
-        BuyerNavigationBar navBar = new BuyerNavigationBar(contentPane);
-        navBar.setBounds(0, 611, 416, 52);
-
-        add(navBar);
-        
-        navBar.btnHome.addActionListener(e -> switchPanel("BuyerDashboardPanel"));
-        navBar.btnMap.addActionListener(e -> switchPanel("BuyerMap"));
-        navBar.btnOrders.addActionListener(e -> switchPanel("BuyerOrderPanel"));
-        navBar.btnProfile.addActionListener(e -> System.out.println("Already on Profile Panel"));
        
     }
     

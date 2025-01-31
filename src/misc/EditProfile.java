@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 import buyer.BuyerNavigationBar;
 import misc.PreferencesPanel;
 import misc.ProfilePanel;
+import seller.SellerNavigationBar;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -22,36 +23,55 @@ public class EditProfile extends JPanel implements ActionListener {
     private RoundedButton btnSave;
     private JButton btnGoBack;
     private RoundedPanel panelFirst, panelLast, panelUser, panelEmail, panelPassword;
+    private String userType;
+
     
-    
-    public EditProfile(JPanel contentPane) {
+    public EditProfile(JPanel contentPane, String userType) {
     	this.contentPane = contentPane;
+    	this.userType = userType;
     	
         setBackground(Color.WHITE);
         setBounds(100, 100, 414, 660);
         setLayout(null);
 
-        //Header Image
-        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_buyer.icon.png"));
-        Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
-        JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
-        startupImage.setBounds(16, 24, 150, 47);
-        add(startupImage);
-        
+        // Set header image based on userType
+        if (userType.equals("buyer")) {
+            ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_buyer.icon.png"));
+            Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
+            JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
+            startupImage.setBounds(16, 24, 150, 47);
+            add(startupImage);
+            
+            BuyerNavigationBar navBar = new BuyerNavigationBar(contentPane);
+            navBar.setBounds(0, 611, 416, 52);
+            add(navBar);
+            
+            navBar.btnHome.addActionListener(e -> switchPanel("BuyerDashboardPanel"));
+            navBar.btnMap.addActionListener(e -> switchPanel("BuyerDashboardMap"));
+            navBar.btnOrders.addActionListener(e -> switchPanel("BuyerOrderPanel"));
+            navBar.btnProfile.addActionListener(e -> switchPanel("BuyerProfile"));
+            
+        } else if (userType.equals("seller")) {
+            ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_seller.icon.png"));
+            Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
+            JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
+            startupImage.setBounds(16, 24, 150, 47);
+            add(startupImage);
+            
+            SellerNavigationBar navBar = new SellerNavigationBar(contentPane);
+            navBar.setBounds(0, 611, 416, 52);
+            add(navBar);
+            
+            navBar.btnHome.addActionListener(e -> switchPanel("SellerDashboardPanel"));
+            navBar.btnMap.addActionListener(e -> switchPanel("SellerDashboardMap"));
+            navBar.btnOrders.addActionListener(e -> switchPanel("SellerOrderPanel"));
+            navBar.btnProfile.addActionListener(e -> switchPanel("SellerProfile"));
+        }
+
         ImageIcon productPic = new ImageIcon(this.getClass().getResource("/editprofile_placeholder.png"));
         JLabel pic = new JLabel(productPic);
         pic.setBounds(158, 134, 100, 100);
         add(pic);
-        
-        BuyerNavigationBar navBar = new BuyerNavigationBar(contentPane);
-        navBar.setBounds(0, 611, 416, 52);
-
-        add(navBar);
-        
-        navBar.btnHome.addActionListener(e -> switchPanel("BuyerDashboardPanel"));
-        navBar.btnMap.addActionListener(e -> switchPanel("BuyerMap"));
-        navBar.btnOrders.addActionListener(e -> switchPanel("BuyerOrderPanel"));
-        navBar.btnProfile.addActionListener(e -> System.out.println("Already on Profile Panel"));
         
         panelFirst = new RoundedPanel(15, new Color(241,241,241));
         panelFirst.setBounds(43, 267, 318, 24);
@@ -275,8 +295,13 @@ public class EditProfile extends JPanel implements ActionListener {
 	        clearTextField(txtUsername, "@username");
 	        clearTextField(txtEmail, "E-mail");
 	        clearPasswordField(pwdPassword, "Password");
-            CardLayout clLayout = (CardLayout) contentPane.getLayout();
-            clLayout.show(contentPane, "BuyerProfile");
+	        if (userType.equals("buyer")) {
+	            CardLayout clLayout = (CardLayout) contentPane.getLayout();
+	            clLayout.show(contentPane, "BuyerProfile");
+	        } else if (userType.equals("seller")) {
+	            CardLayout clLayout = (CardLayout) contentPane.getLayout();
+	            clLayout.show(contentPane, "SellerProfile");
+	        }
         }
 	}
 }

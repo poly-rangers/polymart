@@ -41,13 +41,13 @@ public class PolymartMain extends JFrame {
         ProfilePanel profilePanel = new ProfilePanel(contentPane);
         contentPane.add(profilePanel, "ProfilePanel");
         
-        TCandPP tcAndPP = new TCandPP(contentPane);
+        TCandPP tcAndPP = new TCandPP(contentPane, "buyer");
         contentPane.add(tcAndPP, "TCandPP");
         
-        EditProfile editProfile = new EditProfile(contentPane);
+        EditProfile editProfile = new EditProfile(contentPane, "buyer");
         contentPane.add(editProfile, "EditProfile");
         
-        DeleteAccount deleteAccount = new DeleteAccount(contentPane);
+        DeleteAccount deleteAccount = new DeleteAccount(contentPane, "buyer");
         contentPane.add(deleteAccount, "DeleteAccount");
 
         TermsConditionsPanel buyerTermsConditionsPanel = new TermsConditionsPanel(contentPane, "Buyer");
@@ -62,7 +62,7 @@ public class PolymartMain extends JFrame {
         BuyerSignInPanel buyerSignInPanel = new BuyerSignInPanel(contentPane);
         BuyerDashboardPanel buyerDashboardPanel = new BuyerDashboardPanel(contentPane);
         BuyerOrderPanel	buyerOrderPanel = new BuyerOrderPanel(contentPane);
-        BuyerProfile buyerProfile = new BuyerProfile(contentPane);
+        BuyerProfile buyerProfile = new BuyerProfile(contentPane, "buyer");
        
         contentPane.add(buyerBaseTemplate, "BuyerBaseTemplate");
         contentPane.add(buyerStartupPanel, "BuyerStartupPanel");
@@ -81,7 +81,7 @@ public class PolymartMain extends JFrame {
         ProductDetails productDetails = new ProductDetails(contentPane);
         SellerOrderPanel sellerOrderPanel = new SellerOrderPanel(contentPane, "user");
         SellerProductReviews sellerProductReviews = new SellerProductReviews(contentPane);
-        SellerProfile sellerProfile = new SellerProfile(contentPane);
+        SellerProfile sellerProfile = new SellerProfile(contentPane, "seller");
 
         contentPane.add(sellerStartupPanel, "SellerStartupPanel");
         contentPane.add(sellerSignupPanel, "SellerSignupPanel");
@@ -103,10 +103,12 @@ public class PolymartMain extends JFrame {
         DeleteAccountPanel deleteAccountPanel = new DeleteAccountPanel(contentPane);
         contentPane.add(deleteAccountPanel, "DeleteAccountPanel");
 
-        
         // Navigation bar
         BuyerNavigationBar buyerNavigationBar = new BuyerNavigationBar(contentPane);
         add(buyerNavigationBar, java.awt.BorderLayout.SOUTH); // Add navigation bar to bottom
+        
+        SellerNavigationBar sellerNavigationBar = new SellerNavigationBar(contentPane);
+        add(sellerNavigationBar, java.awt.BorderLayout.SOUTH); // Add navigation bar to bottom
 
         // Show the initial panel
         CardLayout clLayout = (CardLayout) contentPane.getLayout();
