@@ -461,8 +461,6 @@ public class SellerProductListing extends JPanel implements ActionListener{
                 new CustomDialog(parentFrame, "PAKIFILLUP LAHAT BEH", "baks! may kulang ka, make sure na may meron ka sa lahat", "ok");
         	} else {
                 saveProductToDatabase();
-        		JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                new CustomDialog(parentFrame, "Posting success", "ayarn! pasok ka na sa banga sis, papaldo ka na", "Proceed");
         	}
         }
     }
@@ -607,24 +605,55 @@ public class SellerProductListing extends JPanel implements ActionListener{
     private void saveProductToDatabase() {
         String productName = productNameField.getText();
         String productDesc = productDescArea.getText();
-        double dblPrice = Double.parseDouble(priceField.getText().replace("P", "")); // Remove "P" and parse as double
+        double dblPrice;
 
-        // Get the logged-in seller's username
+        try {
+            dblPrice = Double.parseDouble(priceField.getText().replace("P", ""));
+            if (dblPrice < 0) throw new NumberFormatException(); // Prevent negative prices
+        } catch (NumberFormatException z) {
+            // Show OPX error and STOP execution
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            new CustomDialog(parentFrame, 
+                    "OPX wrong number!", 
+                    "nhak presyo sha,,, invalid input ean aus ausan mo...", 
+                    "sorry nhay...");
+            return;
+        }
+
+        // If we reach here, dblPrice is valid
         String currentSellerUsername = UserSession.getLoggedInUsername();
-        
-        // Get the seller's hash based on the logged-in username
-        String sellerHash = productDatabase.getSellerHashByUsername(currentSellerUsername); 
+        String sellerHash = productDatabase.getSellerHashByUsername(currentSellerUsername);
 
-        // Check if sellerHash is retrieved successfully
-        if (sellerHash != null) {
-            // Save the product to the database using the seller's hash
-            productDatabase.addProduct(sellerHash, productName, productDesc, dblPrice, "In Stock"); 
-        } else {
-            // Handle the case where the sellerHash could not be found
-        	JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            new CustomDialog(parentFrame, "di ko mahanap seller baks", "may maling nangyari OMG!", "awch");        
+        // Validate seller hash
+        if (sellerHash == null) {
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            new CustomDialog(parentFrame, 
+                    "di ko mahanap seller baks", 
+                    "may maling nangyari OMG!", 
+                    "awch");
+            return; // Prevent further execution
+        }
+
+        // Try to save product to database
+        try {
+            productDatabase.addProduct(sellerHash, productName, productDesc, dblPrice, "In Stock");
+
+            // Show success dialog ONLY if addProduct() succeeds
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            new CustomDialog(parentFrame, 
+                    "Success!", 
+                    "yun oh! pasok sa banga ang sissy koh!?", 
+                    "true the fire");
+        } catch (Exception e) {
+            // Show database error dialog if saving fails
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            new CustomDialog(parentFrame, 
+                    "Database Error!", 
+                    "Product was not saved due to an error!", 
+                    "Retry");
         }
     }
+
 
     
     private boolean validatePost() {
@@ -682,5 +711,11 @@ public class SellerProductListing extends JPanel implements ActionListener{
         
         categoryCombo.setSelectedIndex(-1);
         timeCombo.setSelectedIndex(-1);
+        
+        for (JCheckBox cbLocation : cbLocations) {
+            cbLocation.setSelected(false);
+        }
+        cbGCash.setSelected(false);
+        cbCash.setSelected(false);
     }
 }

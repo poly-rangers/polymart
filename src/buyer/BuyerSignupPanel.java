@@ -438,7 +438,7 @@ public class BuyerSignupPanel extends JPanel implements ActionListener {
             	
                 JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
                 new CustomDialog(parentFrame, "Sign Up success", "ayarn! pasok ka na sa banga sis, pwede ka na mag log-in at mag-access sa dashboard", "Proceed");
-
+                clearTextFields();
                 CardLayout clLayout = (CardLayout) panelContent.getLayout();
                 clLayout.show(panelContent, "BuyerSignInPanel");
             }

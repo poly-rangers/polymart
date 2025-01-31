@@ -84,7 +84,7 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         add(navBar);
         
         navBar.btnHome.addActionListener(e -> System.out.println("Already on Dashboard Panel"));
-        navBar.btnMap.addActionListener(e -> switchPanel("DashboardMap"));
+        navBar.btnMap.addActionListener(e -> switchPanel("SellerDashboardMap"));
         navBar.btnOrders.addActionListener(e -> switchPanel("SellerOrderPanel"));
         navBar.btnProfile.addActionListener(e -> switchPanel("SellerProfile"));
         

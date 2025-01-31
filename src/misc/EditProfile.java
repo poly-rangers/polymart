@@ -68,8 +68,8 @@ public class EditProfile extends JPanel implements ActionListener {
         lblFirstName.setBounds(43, 245, 318, 24);
         add(lblFirstName);
         
-        txtFirstName = new JTextField();
-        setupTextFieldPlaceholder(txtFirstName, "kenny calvino");
+        txtFirstName = new JTextField("First Name");
+        setupTextFieldPlaceholder(txtFirstName, "First Name");
         txtFirstName.setFont(new Font("Montserrat", Font.PLAIN, 12));
         txtFirstName.setBounds(42, 271, 319, 20);
         add(txtFirstName);
@@ -82,8 +82,8 @@ public class EditProfile extends JPanel implements ActionListener {
         lblLastName.setBounds(44, 302, 318, 24);
         add(lblLastName);
         
-        txtLastName = new JTextField();
-        setupTextFieldPlaceholder(txtLastName, "satrue");
+        txtLastName = new JTextField("Last Name");
+        setupTextFieldPlaceholder(txtLastName, "Last Name");
         txtLastName.setFont(new Font("Montserrat", Font.PLAIN, 12));
         txtLastName.setColumns(10);
         txtLastName.setBounds(44, 325, 319, 20);
@@ -96,8 +96,8 @@ public class EditProfile extends JPanel implements ActionListener {
         lblUsername.setBounds(43, 356, 318, 24);
         add(lblUsername);
         
-        txtUsername = new JTextField();
-        setupTextFieldPlaceholder(txtUsername, "@kirisuaki");
+        txtUsername = new JTextField("@username");
+        setupTextFieldPlaceholder(txtUsername, "@username");
         txtUsername.setFont(new Font("Montserrat", Font.PLAIN, 12));
         txtUsername.setColumns(10);
         txtUsername.setBounds(43, 379, 319, 20);
@@ -110,8 +110,8 @@ public class EditProfile extends JPanel implements ActionListener {
         lblEmail.setBounds(43, 410, 318, 24);
         add(lblEmail);
         
-        txtEmail = new JTextField();
-        setupTextFieldPlaceholder(txtEmail, "kennyrogers@gmail.com");
+        txtEmail = new JTextField("E-mail");
+        setupTextFieldPlaceholder(txtEmail, "E-mail");
         txtEmail.setFont(new Font("Montserrat", Font.PLAIN, 12));
         txtEmail.setColumns(10);
         txtEmail.setBounds(43, 433, 319, 20);
@@ -215,12 +215,28 @@ public class EditProfile extends JPanel implements ActionListener {
         passwordField.setForeground(Color.GRAY);
         passwordField.setEchoChar((char) 0);
     }
+    
+    private void clearTextField(JTextField textField, String placeholder) {
+    	textField.setText(placeholder);
+    	textField.setForeground(Color.GRAY);
+    }
+    
+    private void clearPasswordField(JPasswordField pwdField, String placeholder) {
+    	pwdField.setText(placeholder);
+    	pwdField.setForeground(Color.GRAY);
+    	pwdField.setEchoChar((char) 0);
+    }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object objSourceEvent = e.getSource();
 		
 		if (objSourceEvent == btnGoBack) {
+	        clearTextField(txtFirstName, "First Name");
+	        clearTextField(txtLastName, "Last Name");
+	        clearTextField(txtUsername, "@username");
+	        clearTextField(txtEmail, "E-mail");
+	        clearPasswordField(pwdPassword, "Password");
             CardLayout clLayout = (CardLayout) contentPane.getLayout();
             clLayout.show(contentPane, "BuyerProfile");
         }
