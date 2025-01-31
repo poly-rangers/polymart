@@ -1,6 +1,5 @@
 package seller;
 
-import java.awt.CardLayout;
 import javax.swing.*;
 import java.awt.*;
 import misc.OrderListPanel;
@@ -23,7 +22,7 @@ public class SellerOrderPanel extends UserBaseTemplate{
 	 protected void setPanelHeader() {
 		 headerPanel.setLayout(null);
 		 	btnCompleteOrders = new JButton("Completed Orders");
-	        btnCompleteOrders.setBounds(305, 50, 101, 13);
+		 	btnCompleteOrders.setBounds(298, 38, 108, 21);
 	        headerPanel.add(btnCompleteOrders);
 	        btnCompleteOrders.setBackground(new Color(240, 240, 240));
 	        btnCompleteOrders.setForeground(Color.BLACK);
@@ -33,7 +32,7 @@ public class SellerOrderPanel extends UserBaseTemplate{
 	        btnCompleteOrders.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, new Color(0x730C0C)));
 	                
 	        btnActiveOrders = new JButton("Active Orders");
-	        btnActiveOrders.setBounds(225, 50, 75, 13);
+	        btnActiveOrders.setBounds(208, 38, 95, 21);
 	        headerPanel.add(btnActiveOrders);
 	        btnActiveOrders.setBackground(Color.WHITE);
 	        btnActiveOrders.setForeground(Color.BLACK);
@@ -43,9 +42,12 @@ public class SellerOrderPanel extends UserBaseTemplate{
 	        btnActiveOrders.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(0x730C0C)));
 	                
 	        JLabel lblMeetups = new JLabel("Meet Ups");
-	        lblMeetups.setBounds(22, 35, 122, 32);
-	        headerPanel.add(lblMeetups);
+	        lblMeetups.setHorizontalAlignment(SwingConstants.TRAILING);
+	        lblMeetups.setAlignmentX(Component.RIGHT_ALIGNMENT);
+	        lblMeetups.setBounds(226, 0, 180, 37);
 	        lblMeetups.setFont(new Font("Montserrat", Font.BOLD, 25));
+	        headerPanel.add(lblMeetups);
+
 	 }
 	
 	public void customizeContentPanel() {

@@ -37,7 +37,7 @@ public class AddActiveOrder extends JPanel {
         lblTotal.setForeground(Color.BLACK);
         add(lblTotal);
 
-        JButton btnDetails = new JButton("Details");
+        RoundedButton btnDetails = new RoundedButton("Details",15);
         btnDetails.setFont(new Font("Montserrat Medium", Font.PLAIN, 10));
         btnDetails.setBackground(new Color(0x730C0C));
         btnDetails.setForeground(Color.WHITE);

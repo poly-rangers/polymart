@@ -6,6 +6,8 @@ import misc.AddActiveOrder;
 import misc.OrderListPanel;
 
 public class BuyerActiveOrders extends OrderListPanel {
+	public BuyerActiveOrders() {
+	}
 	private static final long serialVersionUID = 1L;
 	
 	protected void createOrdersPanel() {

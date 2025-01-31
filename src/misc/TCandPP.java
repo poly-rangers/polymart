@@ -49,9 +49,9 @@ public class TCandPP extends JPanel implements ActionListener {
 
         // Terms & Conditions Label
         JLabel lblTermsHeader = new JLabel("<html><div style='text-align:center;'><b>Terms & Conditions<br>" +  "and Privacy Policy</b></html>");
-        lblTermsHeader.setBounds(16, 101, 380, 60);
+        lblTermsHeader.setBounds(16, 88, 380, 60);
         lblTermsHeader.setForeground(Color.BLACK);
-        lblTermsHeader.setFont(new Font("Montserrat Medium", Font.PLAIN, 20));
+        lblTermsHeader.setFont(new Font("Montserrat", Font.BOLD, 22));
         lblTermsHeader.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblTermsHeader);
 
@@ -77,10 +77,7 @@ public class TCandPP extends JPanel implements ActionListener {
         JPanel contentPanel = new JPanel();
         contentPanel.setBackground(Color.WHITE);
         contentPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // Flow layout to fix spacing
-        contentPanel.setBorder(new CompoundBorder(
-                new LineBorder(Color.GRAY, 1),  // Outer border
-                new EmptyBorder(15, 15, 15, 15) // Inner padding
-        ));
+        contentPanel.setBorder(null);
         contentPanel.add(lblImportContent);
 
         // Ensure content panel has the right size
@@ -92,7 +89,7 @@ public class TCandPP extends JPanel implements ActionListener {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setBounds(20, 172, 376, 462);
-        scrollPane.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1)); // Border around scrollPane
+        scrollPane.setBorder(null); // Border around scrollPane
         add(scrollPane);
     }
 
