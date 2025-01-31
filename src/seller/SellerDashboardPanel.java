@@ -9,56 +9,60 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class SellerDashboardPanel extends JPanel implements ActionListener {
+public class SellerDashboardPanel extends UserBaseTemplate implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JButton btnAddProduct;
 	private String[] arrLabels = {"Item Name", "Rating", "Review", "Status"};
 	private StatusButton state, state1, state2, state3;
 	private RoundedButton btnViewReview;
-	private JLabel lblItemName, lblRating, lblReview, lblStatus;
+	private JLabel lblRating, lblReview, lblStatus;
+	
+	public SellerDashboardPanel(JPanel contentPane, String strUserRole) {
+		super(contentPane, "seller");
+		this.contentPane = contentPane; 
+	}
 
-	public SellerDashboardPanel(JPanel contentPane) {
+	public void setPanelHeader() {
+		JLabel lblMyProduct = new JLabel("My Products");
+		lblMyProduct.setBounds(25, 29, 197, 59);
+        lblMyProduct.setForeground(new Color(0, 0, 0));
+        lblMyProduct.setFont(new Font("Montserrat", Font.BOLD, 25));
+        
+        btnAddProduct = new RoundedButton("Add a product", 10);
+        btnAddProduct.setBounds(267, 52, 126, 22);
+        btnAddProduct.addActionListener(this);
+        btnAddProduct.setFocusPainted(false);
+        btnAddProduct.setBorderPainted(false);
+        btnAddProduct.setFont(new Font("Montserrat", Font.BOLD | Font.ITALIC, 11));
+        btnAddProduct.setBackground(new Color(102, 0, 0));
+        btnAddProduct.setForeground(Color.WHITE);
+        btnAddProduct.setFocusable(true);
+        btnAddProduct.setMinimumSize(new Dimension(130,10));
+        headerPanel.setLayout(null);
+        headerPanel.add(lblMyProduct);
+        headerPanel.add(btnAddProduct);
+	}
+	
+	public void customizeContentPanel() {
 		this.contentPane = contentPane;
 
-		setBackground(Color.WHITE);
-        setBounds(100, 100, 414, 660);
-        
-        // Icon + title
-        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_seller.icon.png"));
-        Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
-        setLayout(null);
-        JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
-        startupImage.setBounds(16, 24, 150, 47);
-        add(startupImage);
-
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(22, 162, 382, 418);
+        scrollPane.setBounds(22, 22, 382, 418);
         scrollPane.setOpaque(false);
-       
-        lblItemName = new JLabel("Item Name");
-        lblItemName.setFont(new Font("Montserrat", Font.BOLD, 12));
-        lblItemName.setForeground(new Color(0x730C0C));
-        lblItemName.setBounds(23,146,88,15);
-        add(lblItemName);
         
-        lblRating = new JLabel("Rating");
-        lblRating.setFont(new Font("Montserrat", Font.BOLD, 12));
-        lblRating.setForeground(new Color(0x730C0C));
-        lblRating.setBounds(136,146,52,15);
-        add(lblRating);
+        String[] headerTitles = {"Item Name", "   Rating", "Review", "Status"};
+        JPanel tableTitlesPanel = new JPanel(new GridLayout(1, 4));
+        tableTitlesPanel.setBackground(new Color(255, 255, 255));
+        tableTitlesPanel.setBounds(23,0,406,22);
+        for(int i = 0; i < headerTitles.length; i++) {
+        	JLabel lblItemName = new JLabel(headerTitles[i]);
+	        lblItemName.setFont(new Font("Montserrat", Font.BOLD, 12));
+	        lblItemName.setForeground(new Color(0x730C0C));
+	        tableTitlesPanel.add(lblItemName);
+        }
         
-        lblReview = new JLabel("Review");
-        lblReview.setFont(new Font("Montserrat", Font.BOLD, 12));
-        lblReview.setForeground(new Color(0x730C0C));
-        lblReview.setBounds(225,146,60,15);
-        add(lblReview);
-        
-        lblStatus = new JLabel("Status");
-        lblStatus.setFont(new Font("Montserrat", Font.BOLD, 12));
-        lblStatus.setForeground(new Color(0x730C0C));
-        lblStatus.setBounds(330,146,60,15);
-        add(lblStatus);
+        contentPanel.add(tableTitlesPanel);
  
         JPanel scrollContentPanel = new JPanel();
         scrollContentPanel.setOpaque(true);
@@ -78,50 +82,8 @@ public class SellerDashboardPanel extends JPanel implements ActionListener {
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setColumnHeaderView(scrollContentPanel);
         scrollPane.getVerticalScrollBar().setUI(new CustomScrollBar());
-        add(scrollPane);
-        
-        SellerNavigationBar navBar = new SellerNavigationBar(scrollContentPanel);
-        navBar.setBounds(0, 611, 416, 52);
-        add(navBar);
-        
-        navBar.btnHome.addActionListener(e -> System.out.println("Already on Dashboard Panel"));
-        navBar.btnMap.addActionListener(e -> switchPanel("SellerDashboardMap"));
-        navBar.btnOrders.addActionListener(e -> switchPanel("SellerOrderPanel"));
-        navBar.btnProfile.addActionListener(e -> switchPanel("SellerProfile"));
-        
-        JPanel pnlHeader = new JPanel();
-        pnlHeader.setBounds(23, 111, 367, 24);
-        add(pnlHeader);
-        pnlHeader.setOpaque(true);
-        pnlHeader.setBackground(Color.WHITE);
-        pnlHeader.setLayout(new BorderLayout());
-        
-        JLabel lblMyProduct = new JLabel("My Products");
-        lblMyProduct.setForeground(new Color(0, 0, 0));
-        lblMyProduct.setFont(new Font("Montserrat", Font.BOLD, 19));
-        
-        btnAddProduct = new RoundedButton("Add a product", 10);
-        btnAddProduct.addActionListener(this);
-        btnAddProduct.setFocusPainted(false);
-        btnAddProduct.setBorderPainted(false);
-        btnAddProduct.setFont(new Font("Montserrat", Font.BOLD | Font.ITALIC, 11));
-        btnAddProduct.setBackground(new Color(102, 0, 0));
-        btnAddProduct.setForeground(Color.WHITE);
-        btnAddProduct.setFocusable(true);
-        btnAddProduct.setMinimumSize(new Dimension(130,10));
-        
-        pnlHeader.add(lblMyProduct, BorderLayout.WEST);
-        pnlHeader.add(btnAddProduct, BorderLayout.EAST);
-        
+        contentPanel.add(scrollPane);
 	}
-	
-	private void switchPanel(String panelName) {
-        if (contentPane.getLayout() instanceof CardLayout) {
-            ((CardLayout) contentPane.getLayout()).show(contentPane, panelName);
-        } else {
-            System.err.println("Error: contentPane is not using CardLayout!");
-        }
-    }
 	
 	@Override
     public void actionPerformed(ActionEvent actEvent) {
