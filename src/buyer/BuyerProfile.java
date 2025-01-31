@@ -6,81 +6,70 @@ import javax.swing.border.EmptyBorder;
 import frames.Logout;
 import misc.PreferencesPanel;
 import misc.ProfilePanel;
+import misc.UserBaseTemplate;
 
 import java.awt.*;
 
 
-public class BuyerProfile extends JPanel {
+public class BuyerProfile extends UserBaseTemplate {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
 
     public BuyerProfile(JPanel contentPane) {
+    	super(contentPane, "buyer");
     	this.contentPane = contentPane;
-    	
-        setBackground(Color.WHITE);
-        setBounds(100, 100, 414, 660);
-        setLayout(null);
-
-        //Header Image
-        ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_buyer.icon.png"));
-        Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
-        JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
-        startupImage.setBounds(16, 24, 150, 47);
-        add(startupImage);
+    	contentPanel.setBounds(0, 202, 416, 407);
+    	headerPanel.setBounds(0, 74, 416, 133);	
+    }
+    
+    protected void setPanelHeader() {
+    	headerPanel.setLayout(null);
 
         JLabel lblNewLabel = new JLabel("My Profile");
         lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
         lblNewLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        lblNewLabel.setBounds(177, 92, 193, 24);
-        lblNewLabel.setFont(new Font("Montserrat", Font.BOLD, 20));
-        add(lblNewLabel);
+        lblNewLabel.setBounds(210, 20, 145, 36);
+        lblNewLabel.setFont(new Font("Montserrat", Font.BOLD, 23));
+        headerPanel.add(lblNewLabel);
         
         JLabel lblName = new JLabel("Chris Piamonte");
         lblName.setHorizontalAlignment(SwingConstants.LEFT);
         lblName.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        lblName.setBounds(177, 127, 193, 24);
+        lblName.setBounds(210, 66, 130, 20);
         lblName.setFont(new Font("Montserrat", Font.BOLD, 16));
-        add(lblName);
+        headerPanel.add(lblName);
         
         JLabel lblUsername = new JLabel("@chrispiamontex");
         lblUsername.setHorizontalAlignment(SwingConstants.LEFT);
         lblUsername.setFont(new Font("Montserrat", Font.ITALIC, 16));
         lblUsername.setAlignmentX(1.0f);
-        lblUsername.setBounds(177, 151, 193, 24);
-        add(lblUsername);
+        lblUsername.setBounds(210, 85, 145, 20);
+        headerPanel.add(lblUsername);
         
-        ProfilePanel pnlProfile = new ProfilePanel(contentPane);
-        pnlProfile.setLocation(16, 217);
-        add(pnlProfile);
+        ImageIcon productPic = new ImageIcon(this.getClass().getResource("/accountpic_placeholder.png"));
+        JLabel pic = new JLabel(productPic);
+        pic.setBounds(60, 20, 90, 90);
+        headerPanel.add(pic);
+    }
+    
+    public void customizeContentPanel() {
+    	ProfilePanel pnlProfile = new ProfilePanel(contentPane);
+        pnlProfile.setLocation(28, 20);
+        contentPanel.add(pnlProfile);
     
         pnlProfile.btnChev1.addActionListener(e -> switchPanel("EditProfile"));
         pnlProfile.btnChev2.addActionListener(e -> switchPanel("TCandPP"));
         pnlProfile.btnChev3.addActionListener(e -> switchPanel("TCandPP"));
         
         PreferencesPanel pnlPreferences = new PreferencesPanel();
-        pnlPreferences.setLocation(16, 429);
-        add(pnlPreferences);
+        pnlPreferences.setLocation(28, 217);
+        contentPanel.add(pnlPreferences);
         
         pnlPreferences.btnPChev1.addActionListener(e -> switchPanel("DeleteAccount"));
         pnlPreferences.btnPChev2.addActionListener(e -> {
             Logout logoutFrame = new Logout();  
             logoutFrame.setVisible(true);
         });
-        
-        ImageIcon productPic = new ImageIcon(this.getClass().getResource("/accountpic_placeholder.png"));
-        JLabel pic = new JLabel(productPic);
-        pic.setBounds(53, 82, 100, 100);
-        add(pic);
-        
-        BuyerNavigationBar navBar = new BuyerNavigationBar(contentPane);
-        navBar.setBounds(0, 611, 416, 52);
-
-        add(navBar);
-        
-        navBar.btnHome.addActionListener(e -> switchPanel("BuyerDashboardPanel"));
-        navBar.btnMap.addActionListener(e -> switchPanel("BuyerDashboardMap"));
-        navBar.btnOrders.addActionListener(e -> switchPanel("BuyerOrderPanel"));
-        navBar.btnProfile.addActionListener(e -> System.out.println("Already on Profile Panel"));
     }
     
     private void switchPanel(String panelName) {

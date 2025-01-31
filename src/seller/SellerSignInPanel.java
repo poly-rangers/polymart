@@ -29,91 +29,87 @@ public class SellerSignInPanel extends JPanel implements ActionListener{
         
         setBackground(new Color(255, 255, 255));
         setBounds(100, 100, 414, 660);
-        SpringLayout signInPanelLayout = new SpringLayout();
-        setLayout(signInPanelLayout);
-        
+        setLayout(null); 
+
         // Icon next to header title
         ImageIcon originalImage = new ImageIcon(this.getClass().getResource("/polypup_seller.icon.png"));
         Image scaledImage = originalImage.getImage().getScaledInstance(150, 47, Image.SCALE_SMOOTH);
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
-        signInPanelLayout.putConstraint(SpringLayout.NORTH, startupImage, 24, SpringLayout.NORTH, this);
-        signInPanelLayout.putConstraint(SpringLayout.WEST, startupImage, 16, SpringLayout.WEST, this);
+        startupImage.setBounds(16, 24, 150, 47); 
         add(startupImage);
 
-        // Sign-up label
-        JLabel signInLabel = new JLabel("Sign In");
-        signInPanelLayout.putConstraint(SpringLayout.NORTH, signInLabel, 119, SpringLayout.NORTH, this);
-        signInPanelLayout.putConstraint(SpringLayout.WEST, signInLabel, 35, SpringLayout.WEST, this);
-        signInPanelLayout.putConstraint(SpringLayout.EAST, signInLabel, 166, SpringLayout.WEST, this);
+        // Sign-in label
+        JLabel signInLabel = new JLabel("Welcome back,");
         signInLabel.setForeground(Color.BLACK);
-        signInLabel.setFont(new Font("Montserrat SemiBold", Font.PLAIN, 24));
-        signInLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        signInLabel.setFont(new Font("Montserrat", Font.BOLD, 22));
+//        signInLabel.setHorizontalAlignment(SwingConstants.WEST);
+        signInLabel.setBounds(89, 99, 212, 30); 
         add(signInLabel);
         
+        JLabel signInUser = new JLabel("payaman!");
+        signInUser.setForeground(new Color(115, 12, 12));
+        signInUser.setFont(new Font("Montserrat", Font.ITALIC, 20));
+        signInUser.setBounds(89, 120, 166, 30); 
+        add(signInUser);
+        
+
+        // Username Field
         usernameField = new JTextField("Username");
         setupTextFieldPlaceholder(usernameField, "Username");
         usernameField.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
         usernameField.setForeground(new Color(192, 192, 192));
         usernameField.setFont(new Font("Montserrat", Font.PLAIN, 12));
-        signInPanelLayout.putConstraint(SpringLayout.NORTH, usernameField, 25, SpringLayout.SOUTH, signInLabel);
-        signInPanelLayout.putConstraint(SpringLayout.WEST, usernameField, 62, SpringLayout.WEST, this);
-        signInPanelLayout.putConstraint(SpringLayout.EAST, usernameField, -80, SpringLayout.EAST, this);
+        usernameField.setBounds(89, 170, 235, 20); 
         add(usernameField);
-        usernameField.setColumns(10);
-        
+
+        // Password Field
         passwordField = new JPasswordField("Password");
         passwordField.setColumns(10);
         passwordField.setFont(new Font("Montserrat", Font.PLAIN, 12));
         setupPasswordFieldPlaceholder(passwordField);
-        signInPanelLayout.putConstraint(SpringLayout.NORTH, passwordField, 20, SpringLayout.SOUTH, usernameField);
-        signInPanelLayout.putConstraint(SpringLayout.WEST, passwordField, 0, SpringLayout.WEST, usernameField);
-        signInPanelLayout.putConstraint(SpringLayout.EAST, passwordField, 0, SpringLayout.EAST, usernameField);
         passwordField.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+        passwordField.setBounds(89, 199, 235, 20); 
         add(passwordField);
-        
+
         // Add "Show Password" checkbox
         showPasswordCheckBox = new JCheckBox("Show Password");
-        signInPanelLayout.putConstraint(SpringLayout.NORTH, showPasswordCheckBox, 6, SpringLayout.SOUTH, passwordField);
-        signInPanelLayout.putConstraint(SpringLayout.WEST, showPasswordCheckBox, 58, SpringLayout.WEST, this);
         showPasswordCheckBox.setBackground(Color.WHITE);
         showPasswordCheckBox.setFont(new Font("Montserrat", Font.PLAIN, 12));
         showPasswordCheckBox.setFocusable(false);
         showPasswordCheckBox.setFocusPainted(false);
         showPasswordCheckBox.addActionListener(this);
+        showPasswordCheckBox.setBounds(89, 230, 235, 20); 
         add(showPasswordCheckBox);
-        
+
+        // Log In Button
         logInButton = new RoundedButton("Log In", 45);
-        signInPanelLayout.putConstraint(SpringLayout.NORTH, logInButton, 34, SpringLayout.SOUTH, showPasswordCheckBox);
-        signInPanelLayout.putConstraint(SpringLayout.WEST, logInButton, 71, SpringLayout.WEST, this);
-        signInPanelLayout.putConstraint(SpringLayout.SOUTH, logInButton, 76, SpringLayout.SOUTH, showPasswordCheckBox);
-        signInPanelLayout.putConstraint(SpringLayout.EAST, logInButton, -8, SpringLayout.EAST, usernameField);
         logInButton.setFont(new Font("Montserrat ExtraBold", Font.BOLD, 16));
         logInButton.setBorderPainted(false);
         logInButton.setBorder(new LineBorder(new Color(0, 0, 0)));
-        logInButton.setBackground(new Color(115, 12, 2));
+        logInButton.setBackground(new Color(115, 12, 12));
         logInButton.setForeground(new Color(255, 255, 255));
         logInButton.addActionListener(this);
+        logInButton.setBounds(89, 275, 235, 45);
         add(logInButton);
-        
+
+        // "New to Polymart?" Label
         JLabel newToPolymartLabel = new JLabel("New to Polymart?");
-        signInPanelLayout.putConstraint(SpringLayout.NORTH, newToPolymartLabel, 6, SpringLayout.SOUTH, logInButton);
-        signInPanelLayout.putConstraint(SpringLayout.WEST, newToPolymartLabel, 94, SpringLayout.WEST, this);
-        signInPanelLayout.putConstraint(SpringLayout.EAST, newToPolymartLabel, -202, SpringLayout.EAST, this);
-        newToPolymartLabel.setFont(new Font("Montserrat SemiBold", Font.BOLD, 12));
+        newToPolymartLabel.setFont(new Font("Montserrat SemiBold", Font.BOLD | Font.ITALIC, 12));
+        newToPolymartLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        newToPolymartLabel.setBounds(99, 331, 225, 20); 
         add(newToPolymartLabel);
-        
+
+        // Sign up here button
         signUpButton = new JButton("<html><u>Sign up here</u></html>");
         signUpButton.setOpaque(false);
         signUpButton.setFocusable(false);
         signUpButton.setFocusPainted(false);
         signUpButton.setBorderPainted(false);
         signUpButton.setContentAreaFilled(false);
-        signInPanelLayout.putConstraint(SpringLayout.NORTH, signUpButton, -1, SpringLayout.NORTH, newToPolymartLabel);
-        signInPanelLayout.putConstraint(SpringLayout.WEST, signUpButton, 6, SpringLayout.EAST, newToPolymartLabel);
-        signUpButton.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(128, 0, 0)));
         signUpButton.setForeground(new Color(128, 0, 0));
-        signUpButton.setFont(new Font("Montserrat SemiBold", Font.BOLD, 12));
+        signUpButton.setFont(new Font("Montserrat SemiBold", Font.BOLD, 11));
         signUpButton.addActionListener(this);
+        signUpButton.setBounds(89, 348, 235, 20); 
         add(signUpButton);
     }
     

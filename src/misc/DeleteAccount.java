@@ -53,8 +53,8 @@ public class DeleteAccount extends JPanel {
         JLabel lblTitle = new JLabel("Delete Account");
         lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
         lblTitle.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        lblTitle.setBounds(0, 99, 416, 24);
-        lblTitle.setFont(new Font("Montserrat", Font.BOLD, 16));
+        lblTitle.setBounds(0, 91, 416, 32);
+        lblTitle.setFont(new Font("Montserrat", Font.BOLD, 22));
         add(lblTitle);
         
         JLabel lblHeader = new JLabel("<html>Are you sure you want to delete your Polymart account?</html>");
@@ -83,24 +83,23 @@ public class DeleteAccount extends JPanel {
         lblDetails.setBounds(40, 243, 334, 228);
         add(lblDetails);
         
-        btnDeleteAccount = new RoundedButton("Delete Account", 15);
+        btnDeleteAccount = new RoundedButton("Delete Account", 45);
         btnDeleteAccount.setForeground(Color.WHITE);
         btnDeleteAccount.setFont(new Font("Montserrat", Font.BOLD, 12));
         btnDeleteAccount.setFocusable(false);
         btnDeleteAccount.setFocusPainted(false);
         btnDeleteAccount.setBackground(new Color(102, 0, 0));
-        btnDeleteAccount.setBounds(40, 482, 337, 30);
+        btnDeleteAccount.setBounds(103, 482, 195, 38);
         btnDeleteAccount.addActionListener(e -> switchPanel("DeleteAccountPanel"));
         add(btnDeleteAccount);
         
-        btnCancel = new RoundedButton("Cancel", 15);
-        btnCancel.setForeground(Color.BLACK);
+        btnCancel = new RoundedButton("Cancel", 45);
+        btnCancel.setForeground(new Color(128, 128, 128));
         btnCancel.setFont(new Font("Montserrat", Font.BOLD, 12));
         btnCancel.setFocusable(false);
         btnCancel.setFocusPainted(false);
-        btnCancel.setBorderPainted(false);
-        btnCancel.setBackground(Color.LIGHT_GRAY);
-        btnCancel.setBounds(40, 523, 337, 30);
+        btnCancel.setBackground(new Color(192, 192, 192));
+        btnCancel.setBounds(103, 531, 195, 32);
         btnCancel.addActionListener(e -> switchPanel("BuyerProfile"));
         add(btnCancel);
         

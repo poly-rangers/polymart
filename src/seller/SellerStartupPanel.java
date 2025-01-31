@@ -40,7 +40,7 @@ public class SellerStartupPanel extends JPanel implements ActionListener {
         lblStartupHeader3.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblStartupHeader3);
 
-        JLabel lblStartupSubheader1 = new JLabel("ready ka na ba magwaldas, te?");
+        JLabel lblStartupSubheader1 = new JLabel("ready ka na ba yumaman, te?");
         lblStartupSubheader1.setBounds(0, 420, 414, 30);
         lblStartupSubheader1.setHorizontalAlignment(SwingConstants.CENTER);
         lblStartupSubheader1.setForeground(Color.BLACK);
@@ -80,7 +80,7 @@ public class SellerStartupPanel extends JPanel implements ActionListener {
         add(lblStartupSubheader3);
 
         btnGoBack = new JButton("<html><u>Go Back</u></html>");
-        btnGoBack.setBounds(164, 580, 86, 20);
+        btnGoBack.setBounds(164, 578, 86, 13);
         btnGoBack.setBackground(Color.WHITE);
         btnGoBack.setForeground(new Color(0x730C0C));
         btnGoBack.setFont(new Font("Montserrat SemiBold", Font.ITALIC, 10));

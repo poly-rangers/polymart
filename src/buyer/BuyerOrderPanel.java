@@ -21,10 +21,10 @@ public class BuyerOrderPanel extends UserBaseTemplate {
     	contentPanel.removeAll();
 		headerPanel.setLayout(null);
 		
-    	JLabel lblYourOrders = new JLabel("Your Orders");
+    	JLabel lblYourOrders = new JLabel("My Orders");
         lblYourOrders.setHorizontalAlignment(SwingConstants.TRAILING);
         lblYourOrders.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        lblYourOrders.setBounds(226, -13, 180, 50);
+        lblYourOrders.setBounds(226, 0, 180, 37);
         lblYourOrders.setFont(new Font("Montserrat", Font.BOLD, 25));
         headerPanel.add(lblYourOrders);
 

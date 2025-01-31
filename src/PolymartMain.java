@@ -76,7 +76,7 @@ public class PolymartMain extends JFrame {
         SellerStartupPanel sellerStartupPanel = new SellerStartupPanel(contentPane);
         SellerSignupPanel sellerSignupPanel = new SellerSignupPanel(contentPane);
         SellerSignInPanel sellerSignInPanel = new SellerSignInPanel(contentPane);
-        SellerDashboardPanel sellerDashboardPanel = new SellerDashboardPanel(contentPane);
+        SellerDashboardPanel sellerDashboardPanel = new SellerDashboardPanel(contentPane, "user");
         SellerProductListing sellerProductListing = new SellerProductListing(contentPane);
         ProductDetails productDetails = new ProductDetails(contentPane);
         SellerOrderPanel sellerOrderPanel = new SellerOrderPanel(contentPane, "user");

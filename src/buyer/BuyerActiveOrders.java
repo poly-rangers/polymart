@@ -6,6 +6,8 @@ import misc.AddActiveOrder;
 import misc.OrderListPanel;
 
 public class BuyerActiveOrders extends OrderListPanel {
+	public BuyerActiveOrders() {
+	}
 	private static final long serialVersionUID = 1L;
 	
 	protected void createOrdersPanel() {
@@ -15,7 +17,7 @@ public class BuyerActiveOrders extends OrderListPanel {
         // Adding sample orders
         ordersPanel.add(new AddActiveOrder("01/10/25", "Cooie", "Lagoon", "10:30AM", 50.0));
         ordersPanel.add(new AddActiveOrder("01/10/25", "Cooie", "Lagoon", "10:30AM", 50.0));
-        ordersPanel.add(new AddActiveOrder("01/10/25", "Cooie", "Lagoon", "10:30AM", 50.0));
+        ordersPanel.add(new AddActiveOrder("01/10/25", "Crochet Shop", "Lagoon", "10:30AM", 50.0));
 
     }
 }

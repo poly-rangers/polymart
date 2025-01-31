@@ -17,14 +17,13 @@ public class EditProfile extends JPanel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JTextField txtFirstName;
-    private JTextField txtLastName;
-    private JTextField txtUsername;
-    private JTextField txtEmail;
+    private JTextField txtFirstName, txtLastName, txtUsername, txtEmail;
     private JPasswordField pwdPassword;
     private RoundedButton btnSave;
     private JButton btnGoBack;
-
+    private RoundedPanel panelFirst, panelLast, panelUser, panelEmail, panelPassword;
+    
+    
     public EditProfile(JPanel contentPane) {
     	this.contentPane = contentPane;
     	
@@ -38,17 +37,10 @@ public class EditProfile extends JPanel implements ActionListener {
         JLabel startupImage = new JLabel(new ImageIcon(scaledImage));
         startupImage.setBounds(16, 24, 150, 47);
         add(startupImage);
-
-        JLabel lblNewLabel = new JLabel("My Profile");
-        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        lblNewLabel.setBounds(0, 82, 416, 24);
-        lblNewLabel.setFont(new Font("Montserrat", Font.BOLD, 20));
-        add(lblNewLabel);
         
         ImageIcon productPic = new ImageIcon(this.getClass().getResource("/editprofile_placeholder.png"));
         JLabel pic = new JLabel(productPic);
-        pic.setBounds(159, 117, 100, 100);
+        pic.setBounds(158, 134, 100, 100);
         add(pic);
         
         BuyerNavigationBar navBar = new BuyerNavigationBar(contentPane);
@@ -61,19 +53,41 @@ public class EditProfile extends JPanel implements ActionListener {
         navBar.btnOrders.addActionListener(e -> switchPanel("BuyerOrderPanel"));
         navBar.btnProfile.addActionListener(e -> System.out.println("Already on Profile Panel"));
         
+        panelFirst = new RoundedPanel(15, new Color(241,241,241));
+        panelFirst.setBounds(43, 267, 318, 24);
+        
+        
+        panelLast = new RoundedPanel(15, new Color(241,241,241));
+        panelLast.setBounds(44, 325, 319, 24);
+        
+        panelUser = new RoundedPanel(15, new Color(241,241,241));
+        panelUser.setBounds(43, 379, 319, 24);
+        
+        
+        panelEmail = new RoundedPanel(15, new Color(241,241,241));
+        panelEmail.setBounds(43, 433, 319, 24);
+        
+        panelPassword = new RoundedPanel(15, new Color(241,241,241));
+        panelPassword.setBounds(44, 485, 318, 24);
+        
+
+        
         JLabel lblFirstName = new JLabel("First Name");
         lblFirstName.setHorizontalAlignment(SwingConstants.LEFT);
         lblFirstName.setFont(new Font("Montserrat", Font.BOLD, 14));
         lblFirstName.setAlignmentX(1.0f);
-        lblFirstName.setBounds(43, 245, 318, 24);
+        lblFirstName.setBounds(43, 244, 318, 24);
         add(lblFirstName);
         
         txtFirstName = new JTextField("First Name");
         setupTextFieldPlaceholder(txtFirstName, "First Name");
+        txtFirstName.setBackground(new Color(241,241,241));
+        txtFirstName.setBorder(null);
         txtFirstName.setFont(new Font("Montserrat", Font.PLAIN, 12));
-        txtFirstName.setBounds(42, 271, 319, 20);
-        add(txtFirstName);
-        txtFirstName.setColumns(10);
+        txtFirstName.setBounds(42, 280, 319, 20);
+        panelFirst.add(txtFirstName);
+        txtFirstName.setColumns(22);
+        add(panelFirst);
         
         JLabel lblLastName = new JLabel("Last Name");
         lblLastName.setHorizontalAlignment(SwingConstants.LEFT);
@@ -83,11 +97,15 @@ public class EditProfile extends JPanel implements ActionListener {
         add(lblLastName);
         
         txtLastName = new JTextField("Last Name");
+        txtLastName.setForeground(new Color(128, 128, 128));
         setupTextFieldPlaceholder(txtLastName, "Last Name");
+        txtLastName.setBackground(new Color(241,241,241));
+        txtLastName.setBorder(null);
         txtLastName.setFont(new Font("Montserrat", Font.PLAIN, 12));
-        txtLastName.setColumns(10);
+        txtLastName.setColumns(22);
         txtLastName.setBounds(44, 325, 319, 20);
-        add(txtLastName);
+        panelLast.add(txtLastName);
+        add(panelLast);
         
         JLabel lblUsername = new JLabel("Username");
         lblUsername.setHorizontalAlignment(SwingConstants.LEFT);
@@ -97,11 +115,16 @@ public class EditProfile extends JPanel implements ActionListener {
         add(lblUsername);
         
         txtUsername = new JTextField("@username");
+        txtUsername.setForeground(new Color(0, 0, 0));
         setupTextFieldPlaceholder(txtUsername, "@username");
+        txtUsername.setForeground(new Color(128, 128, 128));
         txtUsername.setFont(new Font("Montserrat", Font.PLAIN, 12));
-        txtUsername.setColumns(10);
+        txtUsername.setColumns(22);
+        txtUsername.setBackground(new Color(241,241,241));
+        txtUsername.setBorder(null);
+        panelUser.add(txtUsername);
         txtUsername.setBounds(43, 379, 319, 20);
-        add(txtUsername);
+        add(panelUser);
         
         JLabel lblEmail = new JLabel("E-mail");
         lblEmail.setHorizontalAlignment(SwingConstants.LEFT);
@@ -113,9 +136,13 @@ public class EditProfile extends JPanel implements ActionListener {
         txtEmail = new JTextField("E-mail");
         setupTextFieldPlaceholder(txtEmail, "E-mail");
         txtEmail.setFont(new Font("Montserrat", Font.PLAIN, 12));
-        txtEmail.setColumns(10);
+        txtEmail.setForeground(new Color(128, 128, 128));
+        txtEmail.setColumns(22);
         txtEmail.setBounds(43, 433, 319, 20);
-        add(txtEmail);
+        txtEmail.setBackground(new Color(241,241,241));
+        txtEmail.setBorder(null);
+        panelEmail.add(txtEmail);
+        add(panelEmail);
         
         JLabel lblPassword = new JLabel("Password");
         lblPassword.setHorizontalAlignment(SwingConstants.LEFT);
@@ -128,7 +155,12 @@ public class EditProfile extends JPanel implements ActionListener {
         setupPasswordFieldPlaceholder(pwdPassword);
         pwdPassword.setFont(new Font("Montserrat", Font.PLAIN, 12));
         pwdPassword.setBounds(44, 485, 318, 20);
-        add(pwdPassword);
+        pwdPassword.setBorder(null);
+        pwdPassword.setBackground(new Color(241,241,241));
+        pwdPassword.setColumns(22);
+        pwdPassword.setForeground(new Color(128, 128, 128));
+        panelPassword.add(pwdPassword);
+        add(panelPassword);
         
         btnSave = new RoundedButton("Save Changes", 15);
         btnSave.addActionListener(new ActionListener() {
@@ -146,7 +178,7 @@ public class EditProfile extends JPanel implements ActionListener {
         JPanel pnlHeader = new JPanel();
         pnlHeader.setLayout(new BoxLayout(pnlHeader, BoxLayout.X_AXIS));
         pnlHeader.setOpaque(true);
-        pnlHeader.setBounds(20, 91, 56, 32);
+        pnlHeader.setBounds(20, 91, 170, 32);
         pnlHeader.setBackground(Color.WHITE);
 
         ImageIcon ogGoBackIcon = new ImageIcon(this.getClass().getResource("/arrowbackicon.png"));
@@ -161,6 +193,12 @@ public class EditProfile extends JPanel implements ActionListener {
         pnlHeader.add(btnGoBack);
 
         add(pnlHeader);
+        
+                JLabel lblNewLabel = new JLabel("My Profile");
+                pnlHeader.add(lblNewLabel);
+                lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                lblNewLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
+                lblNewLabel.setFont(new Font("Montserrat", Font.BOLD, 20));
     }
     
     private void switchPanel(String panelName) {
@@ -189,7 +227,7 @@ public class EditProfile extends JPanel implements ActionListener {
                 }
             }
         });
-        textField.setForeground(Color.GRAY);
+        textField.setForeground(new Color(128, 128, 128));
     }
 
     private void setupPasswordFieldPlaceholder(JPasswordField passwordField) {
