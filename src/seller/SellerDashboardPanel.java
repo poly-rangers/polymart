@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class SellerDashboardPanel extends UserBaseTemplate implements ActionListener {
+public class SellerDashboardPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JButton btnAddProduct;
@@ -110,8 +110,8 @@ public class SellerDashboardPanel extends UserBaseTemplate implements ActionList
         btnAddProduct.setFocusable(true);
         btnAddProduct.setMinimumSize(new Dimension(130,10));
         
-        headerPanel.add(lblMyProduct, BorderLayout.WEST);
-        headerPanel.add(btnAddProduct, BorderLayout.EAST);
+        pnlHeader.add(lblMyProduct, BorderLayout.WEST);
+        pnlHeader.add(btnAddProduct, BorderLayout.EAST);
         
 	}
 	

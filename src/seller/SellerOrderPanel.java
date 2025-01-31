@@ -13,9 +13,9 @@ public class SellerOrderPanel extends UserBaseTemplate {
 	private JPanel contentPane;
 	private static final long serialVersionUID = 1L;
 
-	public SellerOrderPanel(JPanel contentPane) {
-		this.contentPane = contentPane;
-    	
+	public SellerOrderPanel(JPanel contentPane, String strUserRole) {
+		super(contentPane, "seller");
+		
         setBackground(Color.WHITE);
         setBounds(100, 100, 414, 660);
         setLayout(null);
